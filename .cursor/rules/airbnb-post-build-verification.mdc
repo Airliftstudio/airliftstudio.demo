@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+When the website is done building verify that the complete website is fullfilling all the Cursor rules.
+Especially important steps to verify:
+- Website looks good on mobile device
+- All the text is accurate compared to what is written in LISTING.md
+- Remove any mention of number of reviews.
+Make any changes you think are needed to fix identified issues.

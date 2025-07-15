@@ -1,0 +1,36 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Airbnb Domain and Branding Rule
+
+## Purpose
+Generate domain name suggestions and create unique branding elements for each property.
+
+## Domain Name Generation
+
+### Naming Strategy
+- **Property + Location**: `villazoribali.com`
+- **Type + Name + Location**: `luxuryvillazoribali.com`
+- **Descriptive Variations**: `villazoricanggu.com`, `zorivilla.com`
+- **Hyphenated Options**: `villa-zori-bali.com`
+- **Property Type Variations**: `zoriretreat.com`, `zoriresort.com`
+
+### Best Practices
+- Keep short and memorable (under 15 characters when possible)
+- Avoid numbers and special characters
+- Easy to spell and pronounce
+- Reflect property's brand and location
+
+### Domain Availability Check
+- Generate the best domain name for the airbnb listing
+- Use whois to check if the domain name is available to purchase
+- If not available then keep generating another variation of a domain name and check with whois until you find a domain name that is available to purchase
+
+## Favicon Creation
+- Set the emoji 🏝️ as favicon
+
+## Dependencies
+- Follows airbnb-project-structure.mdc
+- Informs airbnb-visual-design.mdc

@@ -1,0 +1,50 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Airbnb Listing Website Generator - Meta Orchestrator
+
+## Overview
+This meta rule coordinates the complete website generation process for a provided url of an Airbnb listing. The website should showcase the specific Airbnb listing. All individual rules MUST be applied together in sequence to create a professional, conversion-optimised website.
+
+## Required Rule Set
+When generating a website for an Airbnb listing, you MUST apply ALL of these rules in order:
+
+1. **airbnb-data-extraction.mdc** - Extract comprehensive listing information
+2. **airbnb-project-structure.mdc** - Create proper project organisation
+3. **airbnb-domain-branding.mdc** - Generate domain suggestions and branding
+4. **airbnb-visual-design.mdc** - Apply design philosophy and visual elements
+5. **airbnb-content-strategy.mdc** - Structure content and copy
+6. **airbnb-technical-implementation.mdc** - Handle technical requirements
+7. **airbnb-business-integration.mdc** - Add business offering sections
+8. **airbnb-attribution-footer.mdc** - Apply required attributions
+8. **airbnb-post-build-verification.mdc** - Verifying the website and fixing issues
+
+## Process Flow
+```
+Input: Airbnb URL
+├── Extract Data (rule 1)
+├── Create Structure (rule 2)
+├── Generate Branding (rule 3)
+├── Apply Design (rule 4)
+├── Write Content (rule 5)
+├── Implement Technical (rule 6)
+├── Add Business Section (rule 7)
+└── Apply Attribution (rule 8)
+└── Analyze and fix issues (rule 9)
+Output: Complete Professional Website
+```
+
+## Success Criteria
+- All 9 rules must be applied
+- Each rule's requirements must be fully satisfied
+- Final output should be a complete, professional website showcasing the Airbnb listing
+- Website should drive conversions to the Airbnb listing
+- Website should look good on mobile devices.
+
+## File Organisation
+All work MUST be contained within a property-specific folder named after the property (lowercase, with hyphens).
+
+## Quality Assurance
+The final website should make visitors think "I need to book this place" and provide a clear path to the Airbnb listing.
