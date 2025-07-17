@@ -634,175 +634,6 @@
         line-height: 1.6;
       }
 
-      /* Business Offering Section */
-      .business-offering {
-        padding: 100px 0;
-        background: linear-gradient(
-          135deg,
-          var(--primary-color),
-          var(--secondary-color)
-        );
-        color: var(--white);
-      }
-
-      .business-header {
-        text-align: center;
-        margin-bottom: 3rem;
-      }
-
-      .business-offering h2 {
-        font-family: "Playfair Display", serif;
-        font-size: 2.5rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
-      }
-
-      .business-intro {
-        font-size: 1.1rem;
-        line-height: 1.7;
-        margin-bottom: 2rem;
-        opacity: 0.95;
-      }
-
-      .important-notice {
-        background: rgba(255, 255, 255, 0.1);
-        padding: 1.5rem;
-        border-radius: 10px;
-        border-left: 4px solid #ffd700;
-        margin-bottom: 2rem;
-      }
-
-      .important-notice i {
-        color: #ffd700;
-        margin-right: 0.5rem;
-      }
-
-      .packages-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 2rem;
-        margin-bottom: 3rem;
-      }
-
-      .package-card {
-        background: var(--white);
-        color: var(--text-dark);
-        padding: 2rem;
-        border-radius: 15px;
-        box-shadow: var(--shadow-hover);
-        position: relative;
-        transition: transform 0.3s ease;
-      }
-
-      .package-card:hover {
-        transform: translateY(-5px);
-      }
-
-      .package-card.featured {
-        border: 3px solid var(--accent-color);
-        transform: scale(1.05);
-      }
-
-      .most-popular-badge {
-        position: absolute;
-        top: -15px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--accent-color);
-        color: var(--white);
-        padding: 0.5rem 1.5rem;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        font-weight: 600;
-      }
-
-      .package-header h3 {
-        font-family: "Playfair Display", serif;
-        font-size: 1.5rem;
-        color: var(--primary-color);
-        margin-bottom: 0.5rem;
-      }
-
-      .package-price {
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: var(--accent-color);
-        margin-bottom: 0.5rem;
-      }
-
-      .package-tagline {
-        color: var(--text-light);
-        font-style: italic;
-        margin-bottom: 1.5rem;
-      }
-
-      .package-features {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .feature {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.75rem;
-      }
-
-      .feature i {
-        color: var(--secondary-color);
-        font-size: 1.1rem;
-        margin-top: 0.1rem;
-        min-width: 16px;
-      }
-
-      .business-contact {
-        text-align: center;
-        margin-top: 3rem;
-      }
-
-      .business-contact h3 {
-        font-family: "Playfair Display", serif;
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .contact-info {
-        margin-bottom: 2rem;
-      }
-
-      .contact-info p {
-        margin-bottom: 0.5rem;
-        font-size: 1.1rem;
-      }
-
-      .contact-info a {
-        color: var(--white);
-        text-decoration: underline;
-      }
-
-      .contact-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        background: var(--accent-color);
-        color: var(--white);
-        padding: 1rem 2rem;
-        border: none;
-        border-radius: 50px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: var(--shadow);
-      }
-
-      .contact-button:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-hover);
-        background: #b8956d;
-      }
-
       /* Floating Business CTA */
       .floating-business-cta {
         position: fixed;
@@ -1336,42 +1167,117 @@
         align-items: flex-end;
         gap: 0.7rem;
       }
-      .floating-cta,
-      .floating-business-cta {
+      .floating-cta {
         margin: 0;
         position: static;
       }
-      .floating-business-cta {
-        animation: businessPulse 2.2s infinite;
-        background: #2d4a37;
-        color: #fff;
-        font-weight: 700;
-        border-radius: 50px;
-        box-shadow: 0 4px 15px rgba(45, 74, 55, 0.18);
-        padding: 0.8rem 1.5rem;
-        font-size: 1rem;
+      .biz-multiselect .multi-select-tag {
+        background: #f3e9d2;
+        color: #2c5530;
+        border-radius: 16px;
+        padding: 0.18em 0.9em 0.18em 0.7em;
+        margin-right: 0.3em;
+        margin-bottom: 0.2em;
         display: flex;
         align-items: center;
-        gap: 0.7em;
-        text-decoration: none;
-        border: none;
+        font-size: 0.98em;
+        box-shadow: 0 1px 4px rgba(44, 85, 48, 0.07);
+        border: 1px solid #e6e6e6;
+        font-weight: 500;
+      }
+      .biz-multiselect .multi-select-tag .remove-tag {
+        margin-left: 0.5em;
         cursor: pointer;
-        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        font-weight: bold;
+        color: #b8956d;
+        font-size: 1.1em;
       }
-      .floating-business-cta:hover {
-        background: #3a5d47;
+      .biz-order-btn {
+        display: block;
+        width: 100%;
+        background: #2c5530;
         color: #fff;
-        box-shadow: 0 6px 20px rgba(45, 74, 55, 0.22);
+        font-weight: 600;
+        font-size: 0.98rem;
+        border-radius: 24px;
+        padding: 0.55em 0;
+        text-decoration: none;
+        box-shadow: 0 2px 12px rgba(44, 85, 48, 0.1);
+        transition: background 0.18s;
+        border: none;
+        margin-top: 1em;
+        margin-bottom: 0.2em;
+        text-align: center;
       }
-      @keyframes businessPulse {
-        0%,
-        100% {
-          transform: scale(1);
-          box-shadow: 0 4px 15px rgba(45, 74, 55, 0.18);
+      .biz-order-btn:hover {
+        background: #3a5d47;
+      }
+
+      .biz-card {
+        position: relative;
+      }
+      .biz-discount-badge {
+        position: absolute;
+        top: -18px;
+        left: 18px;
+        background: #d32f2f;
+        color: #fff;
+        font-size: 0.95rem;
+        font-weight: 700;
+        padding: 0.4em 1.2em;
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(44, 85, 48, 0.13);
+        z-index: 2;
+        letter-spacing: 0.01em;
+        text-shadow: 0 2px 8px rgba(44, 85, 48, 0.08);
+        display: inline-block;
+        white-space: nowrap;
+      }
+      @media (max-width: 600px) {
+        .biz-discount-badge {
+          left: 10px;
+          top: -14px;
+          font-size: 0.89rem;
+          padding: 0.32em 0.9em;
         }
-        50% {
-          transform: scale(1.07);
-          box-shadow: 0 8px 32px rgba(45, 74, 55, 0.22);
+        #business-offering .biz-card {
+          padding-top: 2.5em !important;
+        }
+      }
+
+      .biz-discount-banner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(90deg, #d32f2f 0%, #c4a47c 100%);
+        color: #fff;
+        font-size: 1.13rem;
+        font-weight: 600;
+        border-radius: 18px;
+        box-shadow: 0 4px 18px rgba(44, 85, 48, 0.1);
+        padding: 1.1em 1.6em;
+        margin-bottom: 2.2em;
+        letter-spacing: 0.01em;
+        text-align: center;
+        gap: 0.8em;
+      }
+      .biz-discount-banner b {
+        color: #ffe066;
+        font-weight: 800;
+        text-shadow: 0 2px 8px rgba(44, 85, 48, 0.1);
+      }
+      .biz-discount-icon {
+        font-size: 1.5em;
+        margin-right: 0.3em;
+      }
+      @media (max-width: 600px) {
+        .biz-discount-banner {
+          font-size: 1.01rem;
+          padding: 0.8em 0.7em;
+          border-radius: 12px;
+        }
+        .biz-discount-icon {
+          font-size: 1.2em;
         }
       }
     </style>
@@ -1443,10 +1349,6 @@
 
     <!-- Floating CTA Group -->
     <div class="floating-cta-group">
-      <a href="#business-offering" class="floating-business-cta">
-        <i class="fas fa-globe"></i>
-        Want this website?
-      </a>
       <div class="floating-cta">
         <a
           href="https://www.airbnb.com/rooms/1370740317977312967"
@@ -1469,7 +1371,7 @@
               Step into a tranquil oasis where boundaries between nature and
               comfort blur. Villa Zori offers lush gardens, a private pool, and
               a modern open living design—your peaceful escape just minutes from
-              Canggu’s vibrant beaches and cafés.
+              Canggu's vibrant beaches and cafés.
             </p>
           </div>
           <div class="about-image image-content">
@@ -1774,145 +1676,840 @@
       </div>
     </section>
 
-    <!-- Business Integration Section -->
-    <section id="business-offering" class="business-offering">
-      <div class="container">
-        <div class="business-header">
-          <h2>Want This Website for Your Property?</h2>
-          <p class="business-intro">
-            Hi! I hope you like this demo. I love creating websites for
-            beautiful Airbnb properties. If you want to have this website
-            published with your own custom domain, I offer complete packages
-            designed specifically to make life easy for you.
-          </p>
-
-          <div class="important-notice">
-            <i class="fas fa-exclamation-triangle"></i>
-            <p>
-              <strong>IMPORTANT:</strong> This website is currently NOT publicly
-              accessible through Google or other search engines. It's a private
-              demonstration that will be deleted shortly unless purchased. To
-              make your property discoverable online and drive real bookings,
-              you need to secure your own domain and hosting.
-            </p>
+    <!-- BEGIN BUSINESS SECTION -->
+    <section
+      id="business-offering"
+      style="
+        background: linear-gradient(135deg, #f8f9fa 60%, #e6f0e6 100%);
+        padding: 64px 0 48px 0;
+        margin-top: 48px;
+      "
+    >
+      <div style="max-width: 900px; margin: 0 auto; padding: 0 16px">
+        <h2
+          style="
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem;
+            text-align: center;
+            margin-bottom: 0.5em;
+            color: #2c5530;
+          "
+        >
+          Want This Website for Your Property?
+        </h2>
+        <p
+          style="
+            text-align: center;
+            font-size: 1.1rem;
+            color: #444;
+            margin-bottom: 2.2em;
+          "
+        >
+          Hi! I love creating websites for beautiful Airbnb properties. Choose
+          your package and options below to see your fixed price—no hidden fees,
+          no surprises.
+        </p>
+        <div
+          id="biz-discount-banner"
+          style="max-width: 700px; margin: 0 auto 2.2em auto"
+        >
+          <div class="biz-discount-banner">
+            <span class="biz-discount-icon">🎉</span>
+            <span class="biz-discount-text"
+              >We are just starting and are offering <b>50% off</b> to our first
+              100 customers.</span
+            >
           </div>
         </div>
-
-        <div class="packages-grid">
-          <div class="package-card">
-            <div class="package-header">
-              <h3>Hands-On Package</h3>
-              <div class="package-price">Price of 2 nights stay</div>
-              <p class="package-tagline">
-                Perfect for technical hosts who want full control
-              </p>
-            </div>
-            <div class="package-features">
-              <div class="feature">
-                <i class="fas fa-check"></i>
-                <span>Custom website design tailored to your property</span>
-              </div>
-              <div class="feature">
-                <i class="fas fa-check"></i>
-                <span>Mobile optimization for all devices</span>
-              </div>
-              <div class="feature">
-                <i class="fas fa-check"></i>
-                <span>All source code ownership</span>
-              </div>
-              <div class="feature">
-                <i class="fas fa-check"></i>
-                <span>Technical guidance document for deployment</span>
-              </div>
-              <div class="feature">
-                <i class="fas fa-check"></i>
-                <span>Total freedom to modify and host anywhere</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="package-card featured">
-            <div class="most-popular-badge">Most Popular</div>
-            <div class="package-header">
-              <h3>Hands-Off Package</h3>
-              <div class="package-price">Price of 3 nights stay</div>
-              <p class="package-tagline">I take care of the launch for you</p>
-            </div>
-            <div class="package-features">
-              <div class="feature">
-                <i class="fas fa-check"></i>
-                <span>Everything in Hands-On Package</span>
-              </div>
-              <div class="feature">
-                <i class="fas fa-check"></i>
-                <span>Custom domain registration (villazori.com)</span>
-              </div>
-              <div class="feature">
-                <i class="fas fa-check"></i>
-                <span>Professional email setup (hello@villazori.com)</span>
-              </div>
-              <div class="feature">
-                <i class="fas fa-check"></i>
-                <span>1 full year of website hosting</span>
-              </div>
-              <div class="feature">
-                <i class="fas fa-rocket"></i>
-                <span>Launch in one click 🚀</span>
-              </div>
-              <div class="feature">
-                <i class="fas fa-check"></i>
-                <span>Complete setup handled for you</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="business-contact">
-          <h3>
-            Ready to give your property the professional online presence it
-            deserves?
-          </h3>
-          <div class="contact-info">
-            <p>
-              <strong>Email:</strong>
-              hello@dogoodairbnb.com
-            </p>
-            <p>
-              <strong>Website:</strong>
-              <a href="https://dogoodairbnb.com" target="_blank"
-                >https://dogoodairbnb.com</a
-              >
-            </p>
-          </div>
-
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLScYr-lpokldmKQn1lcZ7GwsMUWzfqndJ41-QD7yiuzPEzsVuA/viewform?usp=pp_url&entry.2022870313=domainname.com&entry.1556942181=hello@domainname.com&entry.616393419=Italian&entry.350908315=2+years+(%2B$29)"
-            class="contact-button"
+        <div
+          id="biz-calc-root"
+          style="
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            justify-content: center;
+            align-items: flex-start;
+          "
+        >
+          <!-- Hands-On Package Card -->
+          <div
+            id="biz-card-hands-on"
+            class="biz-card"
+            tabindex="0"
+            style="
+              flex: 1 1 320px;
+              min-width: 280px;
+              max-width: 370px;
+              background: #fff;
+              border-radius: 18px;
+              box-shadow: 0 4px 24px rgba(44, 85, 48, 0.08);
+              padding: 2.2em 1.5em 1.5em 1.5em;
+              border: 3px solid #e6e6e6;
+              transition: border 0.2s, box-shadow 0.2s;
+              outline: none;
+              position: relative;
+            "
           >
-            <span>Contact me to launch your site today!</span>
-          </a>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 0.7em;
+              "
+            >
+              <h3
+                style="
+                  font-size: 1.3rem;
+                  font-family: 'Playfair Display', serif;
+                  color: #2c5530;
+                  margin: 0;
+                "
+              >
+                Hands-On Package
+              </h3>
+              <span style="font-size: 1.2rem; font-weight: 700; color: #2c5530">
+                <span
+                  style="
+                    text-decoration: line-through;
+                    color: #888;
+                    font-size: 1.05rem;
+                    margin-right: 0.4em;
+                  "
+                  >$99</span
+                >
+                <span
+                  style="color: #d32f2f; font-size: 1.25rem; font-weight: 800"
+                  >$49</span
+                >
+              </span>
+            </div>
+            <div style="font-size: 0.98rem; color: #666; margin-bottom: 0.7em">
+              Perfect for tech-savvy hosts who want control
+            </div>
+            <ul
+              class="biz-features-list"
+              style="
+                margin-bottom: 1.1em;
+                padding-left: 0;
+                color: #2c5530;
+                font-size: 1.01rem;
+                list-style: none;
+              "
+            >
+              <li>
+                <i class="fas fa-check-circle biz-check"></i> Custom website
+                design tailored to your property
+              </li>
+              <li>
+                <i class="fas fa-check-circle biz-check"></i> Mobile
+                optimization for all devices
+              </li>
+              <li>
+                <i class="fas fa-check-circle biz-check"></i> Full source code
+                ownership
+              </li>
+              <li>
+                <i class="fas fa-check-circle biz-check"></i> Optimized
+                performance and SEO
+              </li>
+              <li>
+                <i class="fas fa-check-circle biz-check"></i> Technical guidance
+                for deployment
+              </li>
+              <li>
+                <i class="fas fa-check-circle biz-check"></i> Total freedom to
+                modify and host anywhere
+              </li>
+            </ul>
+            <div style="margin-bottom: 0.7em; font-weight: 600; color: #2c5530">
+              Extras:
+            </div>
+            <div style="margin-bottom: 0.5em">
+              <div class="biz-multiselect" id="biz-multiselect-hands-on"></div>
+              <div class="biz-translation-info">
+                First translation $29, each additional +$19
+              </div>
+            </div>
+            <div
+              id="biz-calc-details-hands-on"
+              class="biz-receipt"
+              style="margin-bottom: 0.7em; margin-top: 1.2em"
+            ></div>
+            <div
+              style="
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: #c4a47c;
+                margin-bottom: 0.5em;
+              "
+            >
+              Total: <span id="biz-calc-total-hands-on">$99</span>
+              <span
+                id="biz-calc-monthly-hands-on"
+                style="font-size: 1.05rem; color: #888; margin-left: 0.7em"
+              ></span>
+            </div>
+            <a
+              id="biz-calc-order-hands-on"
+              href="https://forms.gle/hands-on-form"
+              target="_blank"
+              class="biz-order-btn"
+              >Get Hands-On</a
+            >
+          </div>
+
+          <!-- Hands-Off Package Card -->
+          <div
+            id="biz-card-hands-off"
+            class="biz-card"
+            tabindex="0"
+            style="
+              flex: 1 1 320px;
+              min-width: 280px;
+              max-width: 370px;
+              background: #fff;
+              border-radius: 18px;
+              box-shadow: 0 4px 24px rgba(44, 85, 48, 0.08);
+              padding: 2.2em 1.5em 1.5em 1.5em;
+              border: 3px solid #e6e6e6;
+              position: relative;
+              transition: border 0.2s, box-shadow 0.2s;
+              outline: none;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 0.7em;
+              "
+            >
+              <h3
+                style="
+                  font-size: 1.3rem;
+                  font-family: 'Playfair Display', serif;
+                  color: #2c5530;
+                  margin: 0;
+                "
+              >
+                Hands-Off Package
+              </h3>
+              <span style="font-size: 1.2rem; font-weight: 700; color: #2c5530">
+                <span
+                  style="
+                    text-decoration: line-through;
+                    color: #888;
+                    font-size: 1.05rem;
+                    margin-right: 0.4em;
+                  "
+                  >$179</span
+                >
+                <span
+                  style="color: #d32f2f; font-size: 1.25rem; font-weight: 800"
+                  >$89</span
+                >
+              </span>
+            </div>
+            <span
+              style="
+                position: absolute;
+                top: -18px;
+                right: 18px;
+                background: #c4a47c;
+                color: #fff;
+                font-size: 0.95rem;
+                font-weight: 600;
+                padding: 0.4em 1.2em;
+                border-radius: 16px;
+                box-shadow: 0 2px 8px rgba(44, 85, 48, 0.1);
+              "
+              >Most Popular</span
+            >
+            <div style="font-size: 0.98rem; color: #666; margin-bottom: 0.7em">
+              Complete service – just sit back and relax
+            </div>
+            <ul
+              class="biz-features-list"
+              style="
+                margin-bottom: 1.1em;
+                padding-left: 0;
+                color: #2c5530;
+                font-size: 1.01rem;
+                list-style: none;
+              "
+            >
+              <li>
+                <i class="fas fa-check-circle biz-check"></i> Everything in
+                Hands-On Package
+              </li>
+              <li>
+                <i class="fas fa-check-circle biz-check"></i> Custom domain
+                registration
+              </li>
+              <li>
+                <i class="fas fa-check-circle biz-check"></i> Professional email
+                forwarding
+              </li>
+              <li>
+                <i class="fas fa-check-circle biz-check"></i> 1 year up-time
+                included
+              </li>
+              <li>
+                <i class="fas fa-check-circle biz-check"></i> Launched for you
+              </li>
+            </ul>
+            <div style="margin-bottom: 0.7em; font-weight: 600; color: #2c5530">
+              Extras:
+            </div>
+            <div style="margin-bottom: 0.5em">
+              <div class="biz-multiselect" id="biz-multiselect-hands-off"></div>
+              <div class="biz-translation-info">
+                First translation $29, each additional +$19
+              </div>
+            </div>
+            <div style="margin-bottom: 0.5em">
+              <label for="biz-years" style="font-size: 0.98rem; color: #444"
+                >Secure extra up-time:</label
+              ><br />
+              <select
+                id="biz-years"
+                style="
+                  width: 100%;
+                  margin-top: 0.3em;
+                  border-radius: 7px;
+                  border: 1px solid #c4a47c;
+                  padding: 0.3em;
+                "
+              >
+                <option value="1">1 year (included)</option>
+                <option value="2">2 years (+$39)</option>
+                <option value="3">3 years (+$78)</option>
+                <option value="4">4 years (+$117)</option>
+                <option value="5">5 years (+$156)</option>
+                <option value="6">6 years (+$195)</option>
+                <option value="7">7 years (+$234)</option>
+                <option value="8">8 years (+$273)</option>
+                <option value="9">9 years (+$312)</option>
+                <option value="10">10 years (+$351)</option>
+              </select>
+              <div style="font-size: 0.92rem; color: #888; margin-top: 0.2em">
+                Incl. Hosting, domain name, email
+              </div>
+            </div>
+            <div
+              id="biz-calc-details-hands-off"
+              class="biz-receipt"
+              style="margin-bottom: 0.7em; margin-top: 1.2em"
+            ></div>
+            <div
+              style="
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: #c4a47c;
+                margin-bottom: 0.5em;
+              "
+            >
+              Total: <span id="biz-calc-total-hands-off">$179</span>
+              <span
+                id="biz-calc-monthly-hands-off"
+                style="font-size: 1.05rem; color: #888; margin-left: 0.7em"
+              ></span>
+            </div>
+            <a
+              id="biz-calc-order-hands-off"
+              href="https://forms.gle/hands-off-form"
+              target="_blank"
+              class="biz-order-btn"
+              >Get Hands-Off</a
+            >
+          </div>
         </div>
+        <style>
+          #business-offering .biz-card {
+            transition: box-shadow 0.18s, border 0.18s;
+            box-shadow: 0 4px 24px rgba(44, 85, 48, 0.08);
+            border: 2px solid #e6e6e6;
+          }
+          #business-offering .biz-card:hover {
+            box-shadow: 0 8px 32px rgba(44, 85, 48, 0.13);
+            border: 2px solid #c4a47c;
+          }
+          #business-offering .biz-card.selected,
+          #business-offering .biz-card:focus {
+            border: 2px solid #e6e6e6;
+            box-shadow: 0 4px 24px rgba(44, 85, 48, 0.08);
+            outline: none;
+          }
+          .biz-multiselect {
+            position: relative;
+            background: #fff;
+            border-radius: 7px;
+            box-shadow: 0 2px 8px rgba(44, 85, 48, 0.06);
+            margin-top: 0.2em;
+          }
+          .biz-multiselect .multi-select-display {
+            border: none;
+            border-radius: 7px;
+            padding: 0.4em 0.7em;
+            background: #fff;
+            min-height: 2.2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3em;
+            align-items: center;
+            font-size: 1rem;
+            box-shadow: none;
+          }
+          .biz-multiselect .multi-select-display:focus {
+            outline: 2px solid #c4a47c;
+            outline-offset: 2px;
+          }
+          .biz-multiselect .multi-select-dropdown {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 110%;
+            background: #fff;
+            border: 1px solid #c4a47c;
+            border-radius: 7px;
+            box-shadow: 0 4px 16px rgba(44, 85, 48, 0.1);
+            z-index: 10;
+            max-height: 180px;
+            overflow-y: auto;
+            min-width: 100%;
+          }
+          .biz-multiselect .multi-select-option {
+            padding: 0.6em 1em;
+            cursor: pointer;
+            font-size: 1em;
+            color: #2c5530;
+            transition: background 0.13s;
+            background: #fff;
+          }
+          .biz-multiselect .multi-select-option:hover,
+          .biz-multiselect .multi-select-option.selected {
+            background: #e6f0e6;
+          }
+          .biz-check {
+            color: #3bb77e;
+            margin-right: 0.5em;
+            font-size: 1.1em;
+            vertical-align: -0.1em;
+          }
+          .biz-receipt {
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e6e6e6;
+            padding: 1em 1.1em;
+            font-size: 1.01rem;
+            color: #2c5530;
+            margin-bottom: 1em;
+            margin-top: 1.2em;
+            box-shadow: 0 2px 8px rgba(44, 85, 48, 0.04);
+          }
+          .biz-receipt-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px dashed #d2d2d2;
+            padding: 0.3em 0;
+            font-size: 1.01em;
+          }
+          .biz-receipt-line:last-child {
+            border-bottom: none;
+          }
+          .biz-receipt-flag {
+            margin-right: 0.5em;
+            font-size: 1.15em;
+            vertical-align: -0.1em;
+          }
+          .biz-receipt-label {
+            display: flex;
+            align-items: center;
+          }
+          .biz-translation-info {
+            font-size: 0.92rem;
+            color: #888;
+            margin-top: 0.2em;
+          }
+
+          #biz-years {
+            width: 100%;
+            margin-top: 0.3em;
+            border-radius: 7px;
+            border: 1px solid #c4a47c;
+            padding: 0.3em;
+            font-size: 0.98em;
+            height: 38px;
+          }
+          @media (max-width: 768px) {
+            #biz-calc-root {
+              flex-direction: column;
+              gap: 1.5rem;
+            }
+            .biz-translation-info {
+              font-size: 0.82rem;
+            }
+            #business-offering {
+              padding: 32px 0 24px 0;
+            }
+            #biz-calc-root {
+              gap: 0.7rem;
+            }
+            #business-offering .biz-card {
+              padding: 1.2em 0.7em 1em 0.7em;
+            }
+          }
+        </style>
+        <script>
+          (function () {
+            // State
+            let selectedPackage = "hands-on";
+            let langHandsOn = [];
+            let langHandsOff = [];
+            let years = 1;
+            const langList = [
+              { code: "en", name: "English", flag: "🇬🇧" },
+              { code: "fr", name: "French", flag: "🇫🇷" },
+              { code: "de", name: "German", flag: "🇩🇪" },
+              { code: "es", name: "Spanish", flag: "🇪🇸" },
+              { code: "it", name: "Italian", flag: "🇮🇹" },
+              { code: "id", name: "Indonesian", flag: "🇮🇩" },
+              { code: "pt", name: "Portuguese", flag: "🇵🇹" },
+              { code: "nl", name: "Dutch", flag: "🇳🇱" },
+              { code: "sv", name: "Swedish", flag: "🇸🇪" },
+              { code: "ru", name: "Russian", flag: "🇷🇺" },
+            ];
+            // Elements
+            const cardOn = document.getElementById("biz-card-hands-on");
+            const cardOff = document.getElementById("biz-card-hands-off");
+            const selYears = document.getElementById("biz-years");
+            // Multiselects
+            function createMultiSelect(containerId, selectedArr, onChange) {
+              const container = document.getElementById(containerId);
+              let open = false;
+              let selected = selectedArr;
+              // Create display
+              const display = document.createElement("div");
+              display.className = "multi-select-display";
+              display.tabIndex = 0;
+              container.appendChild(display);
+              // Dropdown
+              const dropdown = document.createElement("div");
+              dropdown.className = "multi-select-dropdown";
+              dropdown.style.display = "none";
+              container.appendChild(dropdown);
+              // Render
+              function render() {
+                // Display tags
+                display.innerHTML = "";
+                // Always show English as first, not removable
+                const enLang = langList.find((l) => l.code === "en");
+                if (enLang) {
+                  const tag = document.createElement("span");
+                  tag.className = "multi-select-tag";
+                  tag.innerHTML = `<span class='biz-receipt-flag'>${enLang.flag}</span>${enLang.name}`;
+                  display.appendChild(tag);
+                }
+                selected.forEach((code) => {
+                  if (code === "en") return; // skip, already shown
+                  const lang = langList.find((l) => l.code === code);
+                  const tag = document.createElement("span");
+                  tag.className = "multi-select-tag";
+                  tag.innerHTML = `<span class='biz-receipt-flag'>${lang.flag}</span>${lang.name}`;
+                  const remove = document.createElement("span");
+                  remove.className = "remove-tag";
+                  remove.textContent = "×";
+                  remove.onclick = (e) => {
+                    e.stopPropagation();
+                    selected = selected.filter((c) => c !== code);
+                    onChange(selected);
+                    render();
+                  };
+                  tag.appendChild(remove);
+                  display.appendChild(tag);
+                });
+                const placeholder = document.createElement("span");
+                placeholder.style.color = "#aaa";
+                placeholder.textContent = "Select translations...";
+                display.appendChild(placeholder);
+
+                // Dropdown options (exclude English)
+                dropdown.innerHTML = "";
+                langList.forEach((lang) => {
+                  if (lang.code === "en") return;
+                  const opt = document.createElement("div");
+                  opt.className =
+                    "multi-select-option" +
+                    (selected.includes(lang.code) ? " selected" : "");
+                  opt.innerHTML = `<span class='biz-receipt-flag'>${lang.flag}</span>${lang.name}`;
+                  opt.onclick = (e) => {
+                    e.stopPropagation();
+                    if (selected.includes(lang.code)) {
+                      selected = selected.filter((c) => c !== lang.code);
+                    } else {
+                      selected = [...selected, lang.code];
+                    }
+                    onChange(selected);
+                    render();
+                  };
+                  dropdown.appendChild(opt);
+                });
+              }
+              // Open/close logic
+              function openDropdown() {
+                open = true;
+                dropdown.style.display = "block";
+              }
+              function closeDropdown() {
+                open = false;
+                dropdown.style.display = "none";
+              }
+              display.onclick = (e) => {
+                open ? closeDropdown() : openDropdown();
+              };
+              display.onblur = () => setTimeout(closeDropdown, 120);
+              render();
+            }
+            // Create multiselects
+            createMultiSelect(
+              "biz-multiselect-hands-on",
+              langHandsOn,
+              (arr) => {
+                langHandsOn = arr;
+                updateCalc("hands-on");
+              }
+            );
+            createMultiSelect(
+              "biz-multiselect-hands-off",
+              langHandsOff,
+              (arr) => {
+                langHandsOff = arr;
+                updateCalc("hands-off");
+              }
+            );
+            // Card selection
+            function selectPackage(pkg) {
+              selectedPackage = pkg;
+              // No visual selection highlight
+            }
+            cardOn.addEventListener("click", () => selectPackage("hands-on"));
+            cardOff.addEventListener("click", () => selectPackage("hands-off"));
+            cardOn.addEventListener("keydown", (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                selectPackage("hands-on");
+              }
+            });
+            cardOff.addEventListener("keydown", (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                selectPackage("hands-off");
+              }
+            });
+            // Years
+            selYears.addEventListener("change", () => {
+              years = parseInt(selYears.value, 10);
+              updateCalc("hands-off");
+            });
+            // Calculation logic
+            function calcLangPrice(langs) {
+              if (!langs.length) return 0;
+              return 29 + (langs.length - 1) * 19;
+            }
+            function calcYearsPrice(yrs) {
+              return (yrs - 1) * 39;
+            }
+            function updateCalc(pkg) {
+              // Hands-On
+              if (!pkg || pkg === "hands-on") {
+                let total = 49 + calcLangPrice(langHandsOn);
+                let lines = [];
+                let langTotal = 0;
+                if (langHandsOn.length) {
+                  lines.push(
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-On package <span style='text-decoration:line-through;color:#888;margin-left:0.5em;'>$${99}</span> <span style='color:#d32f2f;font-weight:700;margin-left:0.3em;'>$${49}</span></span><span></span></div>`
+                  );
+                  langHandsOn.forEach((code, idx) => {
+                    if (code === "en") return;
+                    const lang = langList.find((l) => l.code === code);
+                    const price = langHandsOn.indexOf(code) === 0 ? 29 : 19;
+                    langTotal += price;
+                    lines.push(
+                      `<div class='biz-receipt-line'><span class='biz-receipt-label'><span class='biz-receipt-flag'>${lang.flag}</span>${lang.name}</span><span>$${price}</span></div>`
+                    );
+                  });
+                }
+                const receipt = document.getElementById(
+                  "biz-calc-details-hands-on"
+                );
+                if (lines.length) {
+                  receipt.style.display = "";
+                  receipt.innerHTML = lines.join("");
+                } else {
+                  receipt.style.display = "none";
+                  receipt.innerHTML = "";
+                }
+                document.getElementById(
+                  "biz-calc-total-hands-on"
+                ).textContent = `$${total}`;
+              }
+              // Hands-Off
+              if (!pkg || pkg === "hands-off") {
+                let total =
+                  89 + calcLangPrice(langHandsOff) + calcYearsPrice(years);
+                let lines = [];
+                let langTotal = 0;
+                if (langHandsOff.length || years > 1) {
+                  lines.push(
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-Off package <span style='text-decoration:line-through;color:#888;margin-left:0.5em;'>$${179}</span> <span style='color:#d32f2f;font-weight:700;margin-left:0.3em;'>$${89}</span></span><span></span></div>`
+                  );
+                }
+                if (langHandsOff.length) {
+                  langHandsOff.forEach((code) => {
+                    if (code === "en") return;
+                    const lang = langList.find((l) => l.code === code);
+                    const price = langHandsOff.indexOf(code) === 0 ? 29 : 19;
+                    langTotal += price;
+                    lines.push(
+                      `<div class='biz-receipt-line'><span class='biz-receipt-label'><span class='biz-receipt-flag'>${lang.flag}</span>${lang.name}</span><span>$${price}</span></div>`
+                    );
+                  });
+                }
+                if (years > 1) {
+                  lines.push(
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>${years} Year${
+                      years > 1 ? "s" : ""
+                    } Secured</span><span>$${calcYearsPrice(
+                      years
+                    )}</span></div>`
+                  );
+                }
+                const receipt = document.getElementById(
+                  "biz-calc-details-hands-off"
+                );
+                if (lines.length) {
+                  receipt.style.display = "";
+                  receipt.innerHTML = lines.join("");
+                } else {
+                  receipt.style.display = "none";
+                  receipt.innerHTML = "";
+                }
+                document.getElementById(
+                  "biz-calc-total-hands-off"
+                ).textContent = `$${total}`;
+                document.getElementById(
+                  "biz-calc-monthly-hands-off"
+                ).textContent = `(Just $${(total / (years * 12)).toFixed(
+                  2
+                )}/month)`;
+              }
+            }
+            // Initial state
+            selectPackage("hands-on");
+            updateCalc("hands-on");
+            updateCalc("hands-off");
+
+            // --- DYNAMIC GOOGLE FORM PREFILL FOR HANDS-OFF PACKAGE ---
+            function getSuggestedDomainAndEmail() {
+              // Get the last folder in the path before index.html
+              let path = window.location.pathname;
+              // Remove trailing slash if present
+              if (path.endsWith("/")) path = path.slice(0, -1);
+              // Remove index.html if present
+              if (path.endsWith("index.html")) path = path.slice(0, -10);
+              // Get last segment (folder)
+              const segments = path.split("/").filter(Boolean);
+              const folder = segments[segments.length - 1] || "property";
+              // Remove hyphens for domain
+              const domain = folder.replace(/-/g, "") + ".com";
+              const email = "hello@" + folder.replace(/-/g, "") + ".com";
+              return { domain, email };
+            }
+
+            function buildHandsOffOrderLink() {
+              const { domain, email } = getSuggestedDomainAndEmail();
+              const baseUrl =
+                "https://docs.google.com/forms/d/e/1FAIpQLScYr-lpokldmKQn1lcZ7GwsMUWzfqndJ41-QD7yiuzPEzsVuA/viewform?usp=pp_url";
+              const params = new URLSearchParams();
+              params.append("entry.2022870313", domain);
+              params.append("entry.1556942181", email);
+              // Always include English first
+              params.append("entry.616393419", "English");
+              if (langHandsOff && langHandsOff.length) {
+                langHandsOff.forEach((code) => {
+                  if (code === "en") return;
+                  const lang = langList.find((l) => l.code === code);
+                  if (lang) params.append("entry.616393419", lang.name);
+                });
+              }
+              if (years > 1) {
+                params.append(
+                  "entry.350908315",
+                  `${years} year${years > 1 ? "s" : ""}`
+                );
+              } else {
+                params.append("entry.350908315", `1 year (Included)`);
+              }
+              return `${baseUrl}&${params.toString()}`;
+            }
+
+            // Update order button href on click
+            const orderBtnOff = document.getElementById(
+              "biz-calc-order-hands-off"
+            );
+            if (orderBtnOff) {
+              orderBtnOff.addEventListener("click", function (e) {
+                this.href = buildHandsOffOrderLink();
+              });
+            }
+          })();
+        </script>
       </div>
     </section>
+    <!-- END BUSINESS SECTION -->
 
     <footer>
+      <div
+        class="footer-social"
+        style="
+          margin-bottom: 1.2rem;
+          display: flex;
+          justify-content: center;
+          gap: 1.5rem;
+          align-items: center;
+        "
+      >
+        <a
+          href="https://instagram.com/villazori"
+          target="_blank"
+          aria-label="Instagram"
+          style="color: #e6e6e6; font-size: 1.5rem; transition: color 0.2s"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a
+          href="https://wa.me/6281234567890"
+          target="_blank"
+          aria-label="WhatsApp"
+          style="color: #e6e6e6; font-size: 1.5rem; transition: color 0.2s"
+          ><i class="fab fa-whatsapp"></i
+        ></a>
+        <a
+          href="mailto:hello@villazori.com"
+          aria-label="Email"
+          style="color: #e6e6e6; font-size: 1.5rem; transition: color 0.2s"
+          ><i class="fas fa-envelope"></i
+        ></a>
+      </div>
       <p>© 2025 Villa Zori</p>
       <p>Your tropical escape in the heart of Canggu.</p>
       <small class="footer-attribution"
         >Website by
-        <a href="https://makeairbnbwebsites.com" target="_blank"
-          >makeairbnbwebsites.com</a
+        <a href="https://airliftstudios.com" target="_blank"
+          >airliftstudios.com</a
         ></small
       >
     </footer>
-
-    <!-- Floating Business CTA -->
-    <!-- <div class="floating-business-cta">
-      <a href="#business-offering" class="business-cta-button">
-        <i class="fas fa-globe"></i>
-        Want This Website?
-      </a>
-    </div> -->
 
     <script>
       // Smooth scrolling for navigation links
