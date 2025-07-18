@@ -237,21 +237,7 @@
             </div>
           </div>
         </div>
-        <!-- <div
-          id="biz-important-disclaimer"
-          class="biz-important-disclaimer-outer"
-        >
-          <div class="biz-important-disclaimer">
-            <span class="biz-disclaimer-icon" aria-hidden="true">⚠️</span>
-            <span class="biz-disclaimer-text"
-              ><b>IMPORTANT:</b> This website is currently NOT publicly
-              accessible through Google or other search engines. It's a demo
-              that will be deleted shortly unless purchased. To make your
-              property discoverable online and drive real bookings, you need to
-              secure your own domain and hosting.</span
-            >
-          </div>
-        </div> -->
+
         <style>
           * {
             margin: 0;
@@ -261,7 +247,6 @@
           .biz-section {
             background: linear-gradient(135deg, #f8f9fa 60%, #e6f0e6 100%);
             padding: 64px 0 48px 0;
-            margin-top: 48px;
             line-height: 1.6;
             overflow-x: hidden;
           }
@@ -543,7 +528,7 @@
             font-size: 1.1em;
             vertical-align: -0.1em;
             flex-shrink: 0;
-            margin-top: 0.1em;
+            margin-top: 0.2em;
           }
           .biz-order-btn {
             display: block;
@@ -600,31 +585,7 @@
             text-align: left;
             line-height: 1.4;
           }
-          .biz-important-disclaimer-outer {
-            max-width: 800px;
-            margin: 2.5em auto 1.5em auto;
-          }
-          .biz-important-disclaimer {
-            display: flex;
-            align-items: flex-start;
-            background: #f3e9d2;
-            color: #000000;
-            font-size: 1.04rem;
-            font-weight: 600;
-            border-radius: 14px;
-            box-shadow: 0 2px 10px rgba(196, 164, 124, 0.08);
-            padding: 1em 1.3em;
-            margin-bottom: 1.5em;
-            letter-spacing: 0.01em;
-            text-align: left;
-            gap: 0.9em;
-            border: 2px solid #ffe066;
-          }
-          .biz-disclaimer-icon {
-            font-size: 1.5em;
-            margin-top: 0.1em;
-            flex-shrink: 0;
-          }
+
           .biz-info-icon {
             cursor: pointer;
             position: relative;
@@ -696,7 +657,8 @@
             color: #666;
             font-weight: 400;
           }
-          @media (max-width: 600px) {
+
+          @media (max-width: 768px) {
             .biz-tooltip {
               min-width: 240px;
               max-width: 90vw;
@@ -715,9 +677,6 @@
             .biz-total-amount {
               font-size: 2.6rem;
             }
-          }
-
-          @media (max-width: 768px) {
             .biz-container {
               padding: 0 6px;
             }
@@ -729,14 +688,6 @@
               min-width: 280px;
               margin: 0;
               flex: auto;
-            }
-            .biz-important-disclaimer {
-              font-size: 0.97rem;
-              padding: 0.7em 0.7em;
-              border-radius: 10px;
-            }
-            .biz-disclaimer-icon {
-              font-size: 1.2em;
             }
           }
         </style>
@@ -893,7 +844,7 @@
                 let langTotal = 0;
                 if (langHandsOn.length) {
                   lines.push(
-                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-On package</span><span><span style='text-decoration:line-through;color:#888;margin-right:0.5em;'>$99</span><span class='biz-card-price-discount'>$49</span></span></div>`
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-On package</span><span><span class='biz-card-price-original'>$99</span><span class='biz-card-price-discount'>$49</span></span></div>`
                   );
                   langHandsOn.forEach((code, idx) => {
                     if (code === "en") return;
@@ -932,7 +883,7 @@
                 let langTotal = 0;
                 if (langHandsOff.length || years > 1) {
                   lines.push(
-                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-Off package</span><span><span style='text-decoration:line-through;color:#888;margin-right:0.5em;'>$179</span><span class='biz-card-price-discount'>$89</span></span></div>`
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-Off package</span><span><span>$179</span><span class='biz-card-price-discount'>$89</span></span></div>`
                   );
                 }
                 if (langHandsOff.length) {
