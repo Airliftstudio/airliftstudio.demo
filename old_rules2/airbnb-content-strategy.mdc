@@ -1,0 +1,69 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Airbnb Content Strategy Rule
+
+## Purpose
+Structure compelling content and copy that drives conversions to the Airbnb listing.
+
+## Essential Website Sections
+
+### 1. Hero Section
+- Stunning first impression with property's best feature
+- Full size image background with name and tagline of the property on top.
+- Include airbnb rating but not number of reviews
+- Highlight unique features and "Guest Favorite" & "Super Host" status
+- Include a more subtle text describing the size of the property like for example "4 guests - 2 bedroom - 3 bed - 2 bath" 
+- The background image should have some dark colored fade to make the white text clearly visible.
+- Should just be one single button that is a CTA "Check availability"
+- Text and buttons could have a slight blur backdrop to make them stand out more.
+- Make a special responsive design of the section for mobile screens.
+
+### 2. Overview Section
+- Include an image an a paragraph describing the property. It should have a fitting title. Title and paragraph to the left and image to the right on big screen and text followed by image on mobile. The text should be welcoming and describe the property without over-selling it.
+
+### 3. Visual Showcase
+- Gallery grid highlighting all the images of the property
+- Interactive hover effects
+- Show the collected category and alt text if applicable to describe each image.
+
+### 4. What Makes It Great
+- Key selling points and unique features
+- List down all the amenities in a airbnb style bullet list
+
+### 5. What Our Guests Say
+- Social proof with 5-star reviews from real guests
+- Include 2 of the most positive reviews in full with name, rating and written review
+- Include the rest of the reivews as smaller truncated items in a horizontal list. The items should include name, rating and one row of the written review truncated with ellipsis. The list should automatically scroll to the left seamlessly. Repeat all the reviews 4 times over to make the list seam endless. Loop the scrolling over and over again so that there is always reviews showing. Use mask-image with linear-gradiant to have a fade in and fade out effect for the left and right edge of the list.
+- Use exact quotes from extracted data
+- Include a badge for "Guest Favorite" if it has
+- Have a CTA that links to the airbnb review page: https://airbnb.com/rooms/[AIRBNB_ID]/reviews
+
+### 6. Location Highlights
+- Why this area is perfect for visitors
+- Include information gathered form the airbnb listing about nearby attractions and location
+- Nearby attractions with distances
+- Local experiences and recommendations
+
+## Content Writing Style
+
+### Tone Matching
+- **Match property's vibe**: Casual for beach house, sophisticated for luxury villa
+- **Authentic voice**: Don't oversell, be honest about what makes it special
+- **Professional yet approachable**: Build trust while staying personable
+
+### Writing Techniques
+- **Focus on benefits over features**: "Wake up to ocean views" vs "Has ocean view"
+- **Use sensory language**: Help visitors imagine the experience
+- **Create subtle urgency**: Time-sensitive or scarcity elements
+- **Accuracy first**: All content based on actual listing information
+
+### CTA Requirements
+- Have floting CTA button named "Check availability" that is visible when scrolled past the first hero section. Make sure it is visible even on small mobile screens.
+
+## Dependencies
+- Uses data from airbnb-data-extraction.mdc
+- Follows design from airbnb-visual-design.mdc
+- Guides airbnb-technical-implementation.mdc

@@ -23,7 +23,7 @@ Extract comprehensive information from Airbnb listings using Playwright for webs
 - Full property description
 - Key selling points and unique features
 
-### Images - IMPORTANT!
+### Images
 - Go to https://www.airbnb.se/rooms/[ID]?modal=PHOTO_TOUR_SCROLLABLE to see all the images
 - Collect all the photos url and their category name if the gallery has that (bedroom, exterior etc).
 - Collect a minimum 12 photos url in total and at least one from each category
@@ -56,4 +56,8 @@ Extract comprehensive information from Airbnb listings using Playwright for webs
 - Amenities list must be complete
 
 ## Output Format
-Save all extracted data in structured markdown format in LISTING.md within the project folder.
+Save all extracted data in structured markdown format in LISTING.md within the property folder.
+
+## Dependencies
+- Requires Playwright for web scraping
+- Must be followed by airbnb-project-structure.mdc

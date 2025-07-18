@@ -8,16 +8,12 @@ alwaysApply: true
 ## Purpose
 Define design philosophy and visual elements that capture each property's unique character and drive conversions.
 
-## Design Philosophy
-
-### Overall Feeling
-- **Aspirational**: Make visitors dream of staying here
-- **Authentic**: Reflect true character of property and location
-- **Premium**: Sophisticated and high-quality
-- **Inviting**: Warm and welcoming, not cold or corporate
-- **Trustworthy**: Professional and credible to build confidence
-
 ## Visual Style Principles
+- Keep the general design in the index.html
+- Use property-appropriate color schemes
+- Maintain consistent typography (Playfair Display + Inter)
+- Follow the same layout patterns and spacing
+- Keep the same animation and interaction patterns
 
 ### Color and Typography
 - Use colors and fonts that match property's personality
@@ -26,45 +22,11 @@ Define design philosophy and visual elements that capture each property's unique
 - High contrast for accessibility compliance
 - Text must be easily readable on all backgrounds
 
-### Interactive Elements
-- **Scroll-triggered animations** to reveal content elegantly
-- **Image hover effects** to engage visitors
-- **Smooth scrolling** between sections
-- **Dynamic elements** that respond to user interaction
-- **Loading optimizations** for great performance
-
-### Design Standards
-- Visually engaging with smooth interactions
-- Clean and uncluttered for easy navigation
-- Bold, unique, and creative - should stand out
-- Elegant and innovative animations throughout
-- Professional presentation that builds trust
-
 ### Icons
 - Use font awesome icons https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css
 
 ## Animation and Effects
-
-### Required Animations
-- Smooth scroll reveals for content sections
-- Hover effects on images and buttons
-- Elegant transitions between sections
-- Floating action button with subtle pulse
+- Smooth scroll reveals for all content
 
 ### Performance Considerations
-- Optimize animations for mobile devices
-- Ensure fast loading times
-- Use CSS transforms for smooth performance
-- Avoid animation overload - purposeful effects only
-
-## Responsive Design
-- Mobile-first approach
-- Beautiful on all device sizes
-- Touch-friendly interactions
-- Readable typography at all sizes
-- Optimized images for different screen densities
-
-## Dependencies
-- Uses branding from airbnb-domain-branding.mdc
-- Informs airbnb-content-strategy.mdc
-- Guides airbnb-technical-implementation.mdc
+- Ensure no duplicate css styles

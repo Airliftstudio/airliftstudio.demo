@@ -7,7 +7,6 @@ alwaysApply: true
 
 ## Overview
 This meta rule coordinates the complete website generation process for a provided url of an Airbnb listing. The website should showcase the specific Airbnb listing. All individual rules MUST be applied together in sequence to create a professional, conversion-optimised website.
-The website should be created inside the folder target/ using the existing target/index.html as template
 
 ## Required Rule Set
 When generating a website for an Airbnb listing, you MUST apply ALL of these rules in order:
@@ -17,7 +16,9 @@ When generating a website for an Airbnb listing, you MUST apply ALL of these rul
 3. **airbnb-domain-branding.mdc** - Generate domain suggestions and branding
 4. **airbnb-visual-design.mdc** - Apply design philosophy and visual elements
 5. **airbnb-content-strategy.mdc** - Structure content and copy
-6. **airbnb-post-build-verification.mdc** - Verifying the website and fixing issues
+6. **airbnb-technical-implementation.mdc** - Handle technical requirements
+7. **airbnb-attribution-footer.mdc** - Apply required attributions
+8. **airbnb-post-build-verification.mdc** - Verifying the website and fixing issues
 
 ## Process Flow
 ```
@@ -28,12 +29,13 @@ Input: Airbnb URL
 ├── Apply Design (rule 4)
 ├── Write Content (rule 5)
 ├── Implement Technical (rule 6)
-└── Analyze and fix issues (rule 6)
+└── Apply Attribution (rule 7)
+└── Analyze and fix issues (rule 8)
 Output: Complete Professional Website
 ```
 
 ## Success Criteria
-- All 6 rules must be applied
+- All 8 rules must be applied
 - Each rule's requirements must be fully satisfied
 - Final output should be a complete, professional website showcasing the Airbnb listing
 - Website should drive conversions to the Airbnb listing

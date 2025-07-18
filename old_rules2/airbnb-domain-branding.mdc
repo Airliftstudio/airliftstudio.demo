@@ -33,3 +33,7 @@ Generate domain name suggestions and create unique branding elements for each pr
 
 ## Rename project folder
 - Rename the project folder to the selected domain name suggestion hyphenated like example: villa-zori-bali
+
+## Dependencies
+- Follows airbnb-project-structure.mdc
+- Informs airbnb-visual-design.mdc

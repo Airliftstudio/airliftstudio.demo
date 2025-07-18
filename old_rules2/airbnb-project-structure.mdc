@@ -11,8 +11,9 @@ Create organized project structure for Airbnb website generation with proper fil
 ## Folder Creation Requirements
 
 ### Main Project Folder
-- Use the target/ folder as project folder for this airbnb listing
-- Rename the target folder with the airbnb listing ID
+- Create folder named after property (lowercase, with hyphens)
+- Example: `villa-zori-canggu/` or `serene-apartment-madrid/`
+- Use descriptive, SEO-friendly naming convention
 
 ### Required Files and Directories
 ```
@@ -25,14 +26,14 @@ property-name/
 
 ## File Organization Standards
 
-### Image Directory (`airbnb-id/images/`)
+### Image Directory (`property-name/images/`)
 - Download all images from the airbnb listing that was collected and save them with a descriptive name.
 - Make sure we download the hero image with url parameter "im_w" set to "im_w=2560"
 - Make sure the rest of the images are downloaded with "im_w=1440"
 
 ### Documentation Files
 - **LISTING.md**: Complete extracted data from Airbnb
-- **README.md**: Project documentation, domain suggestions
+- **README.md**: Project documentation, domain suggestions, pricing
 
 ### Naming Conventions
 - All filenames: lowercase with hyphens
@@ -41,4 +42,16 @@ property-name/
 - Image names should describe content clearly
 
 ## Work Scope Limitation
-**CRITICAL**: When building a new Airbnb website, you are ONLY allowed to edit and create files within this assigned property folder. Do not modify files outside this airbnb listings project directory.
+**CRITICAL**: When building a new Airbnb website, you are ONLY allowed to edit and create files within this property folder. Do not modify files outside the project directory.
+
+## File Creation Sequence
+1. Create main project folder
+2. Create `images/` subdirectory
+3. Create LISTING.md with extracted data from the airbnb listing
+4. Download and organize all property images
+5. Create README.md with project documentation
+6. Copy example/index.html to have that as a starting point for index.html in this project folder
+
+## Dependencies
+- Follows airbnb-data-extraction.mdc
+- Prepares for airbnb-domain-branding.mdc
