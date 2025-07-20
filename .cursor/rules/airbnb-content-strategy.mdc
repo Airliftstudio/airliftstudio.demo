@@ -12,7 +12,8 @@ Structure compelling content and copy that drives conversions to the Airbnb list
 - Follow the example in the index.html file
 - Maintain the same HTML structure, sections and CSS classes as the example project
 - Replace all content with new listing data from listing.md. Make sure property specific text from the example is kept.
-- Replace all images with the new images from this airbnb listing. Make sure all the images from the new airbnb listing are added to the gallery section.
+- Replace all images with the new images from this Airbnb listing. Make sure all the images from the new airbnb listing are added to the gallery section (see ### Gallery Section).
+- Make sure all links to Airbnb have the updated Airbnb ID (https://www.airbnb.com/rooms/[id])
 
 ## Content Writing Style
 
@@ -26,3 +27,34 @@ Structure compelling content and copy that drives conversions to the Airbnb list
 - **Use sensory language**: Help visitors imagine the experience
 - **Create subtle urgency**: Time-sensitive or scarcity elements
 - **Accuracy first**: All content based on actual listing information
+
+## Specific instructions for sectional content rewrite
+Instructions how to rewrite the html content from top to bottom section by section.
+
+### <head> tag
+- Replace the whole <title>
+- Replace all the content in the meta tags
+- Replace the application/ld+json content
+
+### <header> tag
+- Set the logo in the nav bar as a short name for the property. It should be same as the domain name but can be shortened to fit the navbar better. For example if the domain name is villazoribali then the logo text should be Villa Zori.
+Try to make it maximum two words.
+
+### Hero Section
+- Remove the badge-superhost and badge-guest-favorite if the airbnb listing does not have those badges
+
+### About Section
+- Update all the features. There should be 3 or 4 feature cards depending on how many features the Airbnb listing have to highlight
+- Replace all the amenities with new one from the Airbnb listing. Make sure there is one for each amenity in the Airbnb listing.
+
+### Gallery Section
+- Make sure all the images are replaced with the images from images/.
+- Remake the gallery grid so that it fits well with the new number of images in all screen sizes. See the @media (max-width: 1000px), @media (max-width: 800px), and @media (max-width: 600px) for the gallery-grid class.
+- The rules for the grid is as follows: The first two rows must always have a hero image to the left and a landscape image in the top right with 2 normal sized images under the landscape image. The rest of the grid should consist of normal size images. If there is empty grid area left use 1 portrait image if that exists and/or more landscape images to fill out the grid area fully. There should at least be 4 normal sized images in total. Never repeat the same image.
+
+### Reviews Section
+- Replace the two featured reviews with the most positive and longer written reviews. Make sure the two chosen reviews are about the same length.
+- Replace all the review-mini with the real reviews from the Airbnb listing.
+
+### Location Section
+- Rewrite this section and the reasons why this location is perfect. Use 3-5 reasons with appropriate icons.

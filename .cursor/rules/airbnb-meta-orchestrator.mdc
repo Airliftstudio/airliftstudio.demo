@@ -27,8 +27,7 @@ Input: Airbnb URL
 ├── Generate Branding (rule 3)
 ├── Apply Design (rule 4)
 ├── Write Content (rule 5)
-├── Implement Technical (rule 6)
-└── Analyze and fix issues (rule 6)
+└── Analyse and fix issues (rule 6)
 Output: Complete Professional Website
 ```
 
@@ -44,3 +43,6 @@ All work MUST be contained within a property-specific folder named after the pro
 
 ## Quality Assurance
 The final website should make visitors think "I need to book this place" and provide a clear path to the Airbnb listing.
+
+## Final step
+When the website is finished building open the index.html in the web browser.

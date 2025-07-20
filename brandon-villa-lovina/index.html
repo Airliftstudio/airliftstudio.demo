@@ -408,10 +408,17 @@
 
       .gallery-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1.5rem;
-        max-width: 1000px;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(5, 200px);
+        gap: 24px;
+        max-width: 1200px;
         margin: 0 auto;
+        grid-template-areas:
+          "hero hero landscape-1 landscape-1"
+          "hero hero normal-1 normal-2"
+          "portrait-1 normal-3 normal-4 normal-5"
+          "portrait-1 normal-6 normal-7 normal-8"
+          "landscape-2 landscape-2 normal-9 normal-10";
       }
 
       .gallery-item {
@@ -420,12 +427,76 @@
         overflow: hidden;
         cursor: pointer;
         transition: transform 0.3s ease;
-        height: 250px;
       }
 
-      .gallery-item.main {
-        grid-column: span 2;
-        height: 350px;
+      .gallery-item.hero {
+        grid-area: hero;
+        height: 424px;
+      }
+
+      .gallery-item.landscape-1 {
+        grid-area: landscape-1;
+        height: 200px;
+      }
+
+      .gallery-item.portrait-1 {
+        grid-area: portrait-1;
+        height: 424px;
+      }
+
+      .gallery-item.normal-1 {
+        grid-area: normal-1;
+        height: 200px;
+      }
+
+      .gallery-item.normal-2 {
+        grid-area: normal-2;
+        height: 200px;
+      }
+
+      .gallery-item.normal-3 {
+        grid-area: normal-3;
+        height: 200px;
+      }
+
+      .gallery-item.normal-4 {
+        grid-area: normal-4;
+        height: 200px;
+      }
+
+      .gallery-item.normal-5 {
+        grid-area: normal-5;
+        height: 200px;
+      }
+
+      .gallery-item.normal-6 {
+        grid-area: normal-6;
+        height: 200px;
+      }
+
+      .gallery-item.normal-7 {
+        grid-area: normal-7;
+        height: 200px;
+      }
+
+      .gallery-item.normal-8 {
+        grid-area: normal-8;
+        height: 200px;
+      }
+
+      .gallery-item.landscape-2 {
+        grid-area: landscape-2;
+        height: 200px;
+      }
+
+      .gallery-item.normal-9 {
+        grid-area: normal-9;
+        height: 200px;
+      }
+
+      .gallery-item.normal-10 {
+        grid-area: normal-10;
+        height: 200px;
       }
 
       .gallery-item img {
@@ -823,6 +894,71 @@
         align-items: center;
         height: 1.3rem;
       }
+      @media (max-width: 1000px) {
+        .gallery-grid {
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: repeat(7, 200px);
+          grid-template-areas:
+            "hero hero normal-1"
+            "hero hero normal-2"
+            "landscape-1 landscape-1 normal-3"
+            "normal-4 normal-5 normal-6"
+            "portrait-1 landscape-2 landscape-2"
+            "portrait-1 normal-7 normal-8"
+            "normal-9 normal-10 .";
+        }
+      }
+
+      @media (max-width: 800px) {
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: repeat(10, 200px);
+          grid-template-areas:
+            "hero hero"
+            "hero hero"
+            "landscape-1 landscape-1"
+            "portrait-1 normal-1"
+            "portrait-1 normal-2"
+            "normal-3 normal-4"
+            "landscape-2 landscape-2"
+            "normal-5 normal-6"
+            "normal-7 normal-8"
+            "normal-9 normal-10";
+        }
+      }
+
+      @media (max-width: 600px) {
+        .gallery-grid {
+          grid-template-columns: 1fr;
+          grid-template-rows: repeat(12, 200px);
+          grid-template-areas:
+            "hero"
+            "hero"
+            "landscape-1"
+            "normal-1"
+            "normal-2"
+            "portrait-1"
+            "portrait-1"
+            "portrait-1"
+            "normal-3"
+            "normal-4"
+            "landscape-2"
+            "normal-5"
+            "normal-6"
+            "normal-7"
+            "normal-8"
+            "normal-9"
+            "normal-10";
+        }
+
+        .gallery-item.hero {
+          height: 424px;
+        }
+
+        .gallery-item.portrait-1 {
+          height: 648px;
+        }
+      }
 
       /* Mobile Responsive */
       @media (max-width: 768px) {
@@ -920,14 +1056,7 @@
           grid-template-columns: 1fr;
         }
 
-        .gallery-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .gallery-item.main {
-          grid-column: span 1;
-          height: 250px;
-        }
+        /* Gallery responsive breakpoints */
 
         .about-section {
           padding: 2.5rem 0;
@@ -1103,7 +1232,10 @@
               <span class="star" data-idx="3">☆</span>
               <span class="star" data-idx="4">☆</span>
             </span>
-            <span id="hero-rating-value" class="fixed-rating">0.0</span>
+            <span id="hero-rating-animation-value" class="fixed-rating"
+              >0.0</span
+            >
+            <span id="airbnb-rating-value" style="display: none">4.95</span>
           </span>
         </div>
 
@@ -1254,84 +1386,95 @@
         </p>
 
         <div class="gallery-grid">
-          <div class="gallery-item main">
+          <div class="gallery-item hero">
             <img
               src="images/hero-bg.jpg"
               alt="Villa Zori main exterior view"
               loading="lazy"
             />
           </div>
-          <div class="gallery-item">
+          <div class="gallery-item landscape-1">
             <img
               src="images/pool-area.jpg"
               alt="Private pool area with tropical garden"
               loading="lazy"
             />
           </div>
-          <div class="gallery-item">
+          <div class="gallery-item normal-1">
             <img
-              src="images/interior.jpg"
+              src="images/interior2.jpg"
               alt="Comfortable living room interior"
               loading="lazy"
             />
           </div>
-          <div class="gallery-item">
+          <div class="gallery-item normal-2">
             <img
               src="images/bedroom.jpg"
               alt="Cozy bedroom with queen bed"
               loading="lazy"
             />
           </div>
-          <div class="gallery-item">
+          <div class="gallery-item portrait-1">
             <img
               src="images/exterior.jpg"
               alt="Villa exterior garden view"
               loading="lazy"
             />
           </div>
-          <div class="gallery-item">
-            <img
-              src="images/exterior2.jpg"
-              alt="Villa exterior view"
-              loading="lazy"
-            />
-          </div>
-          <div class="gallery-item">
+          <div class="gallery-item normal-3">
             <img src="images/kitchen.jpg" alt="Villa kitchen" loading="lazy" />
           </div>
-          <div class="gallery-item">
+          <div class="gallery-item normal-4">
             <img
               src="images/bathroom.jpg"
               alt="Villa bathroom"
               loading="lazy"
             />
           </div>
-          <div class="gallery-item">
+          <div class="gallery-item normal-5">
             <img
               src="images/bedroom2.jpg"
               alt="Villa bedroom 2"
               loading="lazy"
             />
           </div>
-          <div class="gallery-item">
+          <div class="gallery-item normal-6">
             <img
-              src="images/additional-photos.jpg"
-              alt="Villa additional photo"
+              src="images/exterior2.jpg"
+              alt="Villa exterior view"
               loading="lazy"
             />
           </div>
-          <div class="gallery-item">
+          <div class="gallery-item normal-7">
             <img
               src="images/livingroom.jpg"
               alt="Villa living room"
               loading="lazy"
             />
           </div>
-          <div class="gallery-item">
-            <img src="images/pool-area2.jpg" alt="Pool area 2" loading="lazy" />
-          </div>
-          <div class="gallery-item">
+          <div class="gallery-item normal-8">
             <img src="images/pool-view.jpg" alt="Pool view" loading="lazy" />
+          </div>
+          <div class="gallery-item landscape-2">
+            <img
+              src="images/additional-photos.jpg"
+              alt="Villa additional photo"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-9">
+            <img
+              src="images/hero-bg.jpg"
+              alt="Villa Zori additional view"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-10">
+            <img
+              src="images/interior3.jpg"
+              alt="Interior design"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>
@@ -1605,7 +1748,7 @@
       gsap.utils.toArray(".gallery-item").forEach((item, index) => {
         gsap.from(item, {
           duration: 0.8,
-          y: 30,
+          y: 50,
           opacity: 0,
           delay: index * 0.1,
           ease: "power2.out",
@@ -1619,11 +1762,13 @@
 
       // Animated star wave fill and rating count-up
       document.addEventListener("DOMContentLoaded", function () {
-        const ratingEl = document.getElementById("hero-rating-value");
+        const ratingEl = document.getElementById("hero-rating-animation-value");
         const starsEl = document.getElementById("hero-stars");
         if (ratingEl && starsEl) {
           const stars = Array.from(starsEl.querySelectorAll(".star"));
-          const airbnbRating = 5.0; // rating from the airbnb listing goes here
+          const airbnbRating = parseFloat(
+            document.getElementById("airbnb-rating-value").textContent
+          ); // rating from the airbnb listing goes here
           const duration = 400;
           const pulseDuration = 320;
           const delayBetween = 110;
@@ -1640,7 +1785,7 @@
             if (progress < 1) {
               requestAnimationFrame(animate);
             } else {
-              ratingEl.textContent = airbnbRating.toFixed(1);
+              ratingEl.textContent = formatRating(airbnbRating);
             }
           }
           setTimeout(() => requestAnimationFrame(animate), 400);
@@ -1657,6 +1802,16 @@
           });
         }
       });
+
+      function formatRating(airbnbRating) {
+        let rating = parseFloat(airbnbRating);
+        if (rating > 4.9) {
+          return 4.9; // Force cap
+        }
+
+        // Round UP to 1 decimal
+        return Math.round(airbnbRating * 10) / 10;
+      }
 
       // Dynamically populate reviews-scroll-track to always have 16 review-mini
       document.addEventListener("DOMContentLoaded", function () {

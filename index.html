@@ -3,67 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      Do Good Airbnb - Beautiful Websites. Better Bookings. Bigger Impact.
-    </title>
+    <title>Airlift Studio - Professional Airbnb Listing Websites</title>
     <meta
       name="description"
-      content="Custom Airbnb website builder supporting Indonesian orphanages. Get a stunning website for your property while helping children in need. Free demo, charity-driven model."
+      content="Transform your Airbnb listing with a professional custom website. Stand out from the competition with our specialized Airbnb website design service."
     />
     <meta
       name="keywords"
-      content="Airbnb website builder, charity donation, Indonesian orphanages, property landing page, custom web design, Bali charity"
-    />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>"
+      content="Airbnb website, vacation rental website, property listing website, Airbnb marketing"
     />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://dogoodairbnb.com" />
+    <!-- Open Graph Meta Tags -->
     <meta
       property="og:title"
-      content="Do Good Airbnb - Beautiful Websites. Better Bookings. Bigger Impact."
+      content="Airlift Studio - Professional Airbnb Listing Websites"
     />
     <meta
       property="og:description"
-      content="Custom Airbnb website builder supporting Indonesian orphanages. Get a stunning website for your property while helping children in need. Free demo, charity-driven model."
+      content="Transform your Airbnb listing with a professional custom website. Stand out from the competition."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://airliftstudio.com" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏝️</text></svg>"
     />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://dogoodairbnb.com" />
-    <meta
-      property="twitter:title"
-      content="Do Good Airbnb - Beautiful Websites. Better Bookings. Bigger Impact."
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
     />
-    <meta
-      property="twitter:description"
-      content="Custom Airbnb website builder supporting Indonesian orphanages. Get a stunning website for your property while helping children in need. Free demo, charity-driven model."
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
 
     <style>
-      /* Modern Design System */
-      :root {
-        --primary-color: #2c5282;
-        --secondary-color: #ed8936;
-        --accent-color: #38b2ac;
-        --text-dark: #2d3748;
-        --text-light: #4a5568;
-        --text-muted: #718096;
-        --background-light: #f7fafc;
-        --background-warm: #fdf8f0;
-        --white: #ffffff;
-        --sand: #f5f1eb;
-        --terracotta: #e07a5f;
-        --ocean: #3d5a80;
-        --gold: #f2cc8f;
-        --olive: #81b29a;
-        --shadow: rgba(0, 0, 0, 0.1);
-        --shadow-hover: rgba(0, 0, 0, 0.2);
-      }
-
       * {
         margin: 0;
         padding: 0;
@@ -71,11 +51,21 @@
       }
 
       body {
-        font-family: "Georgia", "Times New Roman", serif;
+        font-family: "Inter", sans-serif;
         line-height: 1.6;
-        color: var(--text-dark);
-        background-color: var(--white);
+        color: #333;
         overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Playfair Display", serif;
+        font-weight: 600;
+        line-height: 1.2;
       }
 
       .container {
@@ -86,16 +76,15 @@
 
       /* Header */
       header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
         z-index: 1000;
         padding: 1rem 0;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 10px var(--shadow);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
       }
 
       nav {
@@ -105,9 +94,10 @@
       }
 
       .logo {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: var(--primary-color);
+        font-family: "Playfair Display", serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2c3e50;
         text-decoration: none;
       }
 
@@ -119,632 +109,303 @@
 
       .nav-links a {
         text-decoration: none;
-        color: var(--text-dark);
+        color: #333;
         font-weight: 500;
         transition: color 0.3s ease;
       }
 
       .nav-links a:hover {
-        color: var(--primary-color);
-      }
-
-      .contact-btn {
-        background: var(--primary-color);
-        color: var(--white);
-        padding: 0.75rem 1.5rem;
-        border: none;
-        border-radius: 30px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        display: inline-block;
-      }
-
-      .contact-btn:hover {
-        background: var(--ocean);
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px var(--shadow);
+        color: #3498db;
       }
 
       /* Hero Section */
       .hero {
-        height: 100vh;
-        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-          url("images/beach_sunset_dark.jpg") center/cover;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 120px 0 80px;
         text-align: center;
-        color: var(--white);
         position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80")
+          center/cover;
+        opacity: 0.1;
+        z-index: 1;
       }
 
       .hero-content {
-        max-width: 800px;
-        padding: 2rem;
-        animation: fadeInUp 1s ease-out;
+        position: relative;
+        z-index: 2;
       }
 
       .hero h1 {
         font-size: 3.5rem;
-        margin-bottom: 1rem;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        margin-bottom: 1.5rem;
+        font-weight: 700;
       }
 
       .hero p {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
         margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
         opacity: 0.9;
       }
 
-      .hero-cta {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      .cta-primary {
-        background: var(--terracotta);
-        color: var(--white);
-        padding: 1rem 2rem;
-        border: none;
-        border-radius: 50px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-decoration: none;
+      .cta-button {
         display: inline-block;
-      }
-
-      .cta-primary:hover {
-        background: var(--secondary-color);
-        transform: translateY(-3px);
-        box-shadow: 0 10px 25px var(--shadow);
-      }
-
-      .cta-secondary {
-        background: transparent;
-        color: var(--white);
-        padding: 1rem 2rem;
-        border: 2px solid var(--white);
-        border-radius: 50px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
+        background: #e74c3c;
+        color: white;
+        padding: 15px 30px;
         text-decoration: none;
-        display: inline-block;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
       }
 
-      .cta-secondary:hover {
-        background: var(--white);
-        color: var(--text-dark);
+      .cta-button:hover {
+        background: #c0392b;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
       }
 
-      /* Sections */
-      .section {
-        padding: 5rem 0;
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s ease;
-      }
-
-      .section.visible {
-        opacity: 1;
-        transform: translateY(0);
+      /* Benefits Section */
+      .benefits {
+        padding: 80px 0;
+        background: #f8f9fa;
       }
 
       .section-title {
         text-align: center;
         font-size: 2.5rem;
-        color: var(--primary-color);
         margin-bottom: 3rem;
-        position: relative;
+        color: #2c3e50;
       }
 
-      .section-title::after {
-        content: "";
-        position: absolute;
-        bottom: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 3px;
-        background: var(--terracotta);
-      }
-
-      /* Story Section */
-      .story {
-        background: var(--background-warm);
-      }
-
-      .story-content {
+      .benefits-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
-        align-items: center;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
       }
 
-      .story-text {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        color: var(--text-light);
-      }
-
-      .story-image {
+      .benefit-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         text-align: center;
-        font-size: 8rem;
-        color: var(--primary-color);
+        transition: transform 0.3s ease;
+      }
+
+      .benefit-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .benefit-icon {
+        font-size: 3rem;
+        color: #3498db;
+        margin-bottom: 1rem;
+      }
+
+      .benefit-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #2c3e50;
+      }
+
+      .benefit-card p {
+        color: #666;
+        line-height: 1.6;
+      }
+
+      /* Why Choose Us Section */
+      .why-choose-us {
+        padding: 80px 0;
+        background: white;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.5rem;
+        background: #f8f9fa;
+        border-radius: 10px;
+        transition: background 0.3s ease;
+      }
+
+      .feature-item:hover {
+        background: #e9ecef;
+      }
+
+      .feature-icon {
+        font-size: 1.5rem;
+        color: #27ae60;
+        margin-top: 0.2rem;
+      }
+
+      .feature-content h4 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: #2c3e50;
+      }
+
+      .feature-content p {
+        color: #666;
+        font-size: 0.95rem;
       }
 
       /* Showcase Section */
       .showcase {
-        background: var(--white);
+        padding: 80px 0;
+        background: #f8f9fa;
       }
 
       .showcase-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 2rem;
-        margin-top: 2rem;
+        margin-top: 3rem;
       }
 
-      .showcase-item {
-        background: var(--background-light);
+      .showcase-card {
+        background: white;
         border-radius: 15px;
         overflow: hidden;
-        box-shadow: 0 5px 15px var(--shadow);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease;
       }
 
-      .showcase-item:hover {
+      .showcase-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 15px 30px var(--shadow-hover);
       }
 
-      .showcase-item img {
+      .showcase-image {
         width: 100%;
         height: 200px;
-        object-fit: cover;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 600;
       }
 
-      .showcase-info {
+      .showcase-content {
         padding: 1.5rem;
       }
 
-      .showcase-info h3 {
-        color: var(--primary-color);
+      .showcase-content h4 {
+        font-size: 1.3rem;
         margin-bottom: 0.5rem;
+        color: #2c3e50;
       }
 
-      .showcase-info p {
-        color: var(--text-light);
-        margin-bottom: 1rem;
-      }
-
-      .showcase-link {
-        color: var(--terracotta);
-        text-decoration: none;
-        font-weight: 600;
-        transition: color 0.3s ease;
-      }
-
-      .showcase-link:hover {
-        color: var(--secondary-color);
-      }
-
-      /* Package Section */
-      .package {
-        background: linear-gradient(
-            rgba(245, 241, 235, 0.95),
-            rgba(245, 241, 235, 0.95)
-          ),
-          url("images/villa_bedroom_day.jpg") center/cover;
-        background-attachment: fixed;
-      }
-
-      .package-content {
-        text-align: center;
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
-      .pricing-packages {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin: 3rem 0;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .pricing-card {
-        background: var(--white);
-        border-radius: 15px;
-        box-shadow: 0 5px 15px var(--shadow);
-        transition: transform 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .pricing-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px var(--shadow-hover);
-      }
-
-      .pricing-card.featured {
-        border: 2px solid var(--terracotta);
-        transform: scale(1.05);
-      }
-
-      .pricing-card.featured:hover {
-        transform: scale(1.05) translateY(-5px);
-      }
-
-      .featured-badge {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--terracotta);
-        color: var(--white);
-        padding: 0.5rem 1.5rem;
-        border-radius: 0 0 15px 15px;
-        font-weight: 600;
-        font-size: 0.9rem;
-      }
-
-      .pricing-header {
-        padding: 2rem 2rem 1rem;
-        text-align: center;
-      }
-
-      .pricing-card.featured .pricing-header {
-        padding-top: 3rem;
-      }
-
-      .pricing-header h3 {
-        color: var(--primary-color);
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .pricing-subtitle {
-        color: var(--text-light);
-        font-size: 0.9rem;
-        opacity: 0.8;
-      }
-
-      .pricing-features {
-        padding: 0 2rem;
-      }
-
-      .pricing-features ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      .pricing-features li {
-        padding: 0.5rem 0;
-        color: var(--text-light);
-        line-height: 1.4;
-      }
-
-      .pricing-price {
-        padding: 1.5rem 2rem;
-        text-align: center;
-        border-top: 1px solid var(--background-light);
-        margin-top: 1rem;
-      }
-
-      .price-amount {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: var(--primary-color);
-        margin-bottom: 0.5rem;
-      }
-
-      .price-details {
-        font-size: 0.9rem;
-        color: var(--text-light);
-        margin-bottom: 0.25rem;
-      }
-
-      .price-range {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-      }
-
-      .pricing-cta {
-        padding: 0 2rem 2rem;
-      }
-
-      .package-btn {
-        display: block;
-        width: 100%;
-        padding: 1rem;
-        background: var(--primary-color);
-        color: var(--white);
-        text-decoration: none;
-        border-radius: 10px;
-        font-weight: 600;
-        text-align: center;
-        transition: all 0.3s ease;
-      }
-
-      .package-btn:hover {
-        background: var(--ocean);
-        transform: translateY(-2px);
-      }
-
-      .featured-btn {
-        background: var(--terracotta);
-      }
-
-      .featured-btn:hover {
-        background: var(--secondary-color);
-      }
-
-      .pricing-note {
-        text-align: center;
-        margin-top: 2rem;
-        padding: 1.5rem;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        color: var(--text-light);
-      }
-
-      /* Advantages Section */
-      .advantages {
-        background: linear-gradient(
-            rgba(255, 255, 255, 0.9),
-            rgba(255, 255, 255, 0.9)
-          ),
-          url("images/pool_villa_day.jpg") center/cover;
-        background-attachment: fixed;
-      }
-
-      .advantages-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
-      }
-
-      .advantage-card {
-        background: var(--background-light);
-        padding: 2rem;
-        border-radius: 15px;
-        text-align: center;
-        transition: transform 0.3s ease;
-        box-shadow: 0 5px 15px var(--shadow);
-      }
-
-      .advantage-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px var(--shadow-hover);
-      }
-
-      .advantage-icon {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-      }
-
-      .advantage-card h3 {
-        color: var(--primary-color);
-        margin-bottom: 1rem;
-      }
-
-      /* Contact Section */
-      .contact {
-        background: linear-gradient(
-            rgba(253, 248, 240, 0.95),
-            rgba(253, 248, 240, 0.95)
-          ),
-          url("images/beach_view_day.jpg") center/cover;
-        background-attachment: fixed;
-        padding: 5rem 0;
-      }
-
-      .contact-content {
-        max-width: 700px;
-        margin: 0 auto;
-      }
-
-      .contact-form {
-        background: var(--white);
-        padding: 3rem;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-      }
-
-      .form-header {
-        text-align: center;
-        margin-bottom: 2.5rem;
-      }
-
-      .form-header h3 {
-        color: var(--primary-color);
-        font-size: 1.8rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .form-header p {
-        color: var(--text-light);
-        font-size: 1rem;
-        opacity: 0.8;
-      }
-
-      .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.5rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .form-group {
-        margin-bottom: 1.5rem;
-      }
-
-      .form-group label {
-        display: block;
-        margin-bottom: 0.75rem;
-        font-weight: 600;
-        color: var(--text-dark);
+      .showcase-content p {
+        color: #666;
         font-size: 0.95rem;
-        letter-spacing: 0.025em;
-      }
-
-      .form-group input,
-      .form-group textarea,
-      .form-group select {
-        width: 100%;
-        padding: 1rem 1.25rem;
-        border: 2px solid #e2e8f0;
-        border-radius: 12px;
-        font-size: 1rem;
-        font-family: inherit;
-        transition: all 0.3s ease;
-        background: #fafafa;
-        color: var(--text-dark);
-      }
-
-      .form-group input:focus,
-      .form-group textarea:focus,
-      .form-group select:focus {
-        outline: none;
-        border-color: var(--primary-color);
-        background: var(--white);
-        box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.1);
-        transform: translateY(-1px);
-      }
-
-      .form-group input::placeholder,
-      .form-group textarea::placeholder {
-        color: #a0aec0;
-        opacity: 1;
-      }
-
-      .form-group textarea {
-        resize: vertical;
-        min-height: 120px;
-      }
-
-      .form-group select {
-        cursor: pointer;
-        appearance: none;
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-        background-position: right 0.75rem center;
-        background-repeat: no-repeat;
-        background-size: 1.5em 1.5em;
-        padding-right: 2.5rem;
-      }
-
-      .form-actions {
-        margin-top: 2rem;
-        text-align: center;
-      }
-
-      .submit-btn {
-        background: linear-gradient(135deg, var(--primary-color), var(--ocean));
-        color: var(--white);
-        padding: 1.25rem 3rem;
-        border: none;
-        border-radius: 50px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        min-width: 200px;
-        box-shadow: 0 4px 15px rgba(44, 82, 130, 0.3);
-      }
-
-      .submit-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(44, 82, 130, 0.4);
-      }
-
-      .submit-btn:active {
-        transform: translateY(0);
-      }
-
-      .form-note {
-        margin-top: 2rem;
-        padding: 1.5rem;
-        background: rgba(44, 82, 130, 0.05);
-        border-radius: 12px;
-        border-left: 4px solid var(--primary-color);
-      }
-
-      .form-note h4 {
-        color: var(--primary-color);
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .form-note p {
-        color: var(--text-light);
-        font-size: 0.95rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .form-note p:last-child {
-        margin-bottom: 0;
-      }
-
-      /* Mobile Responsive */
-      @media (max-width: 768px) {
-        .contact-form {
-          padding: 2rem;
-        }
-
-        .form-row {
-          grid-template-columns: 1fr;
-          gap: 0;
-        }
-
-        .form-header h3 {
-          font-size: 1.5rem;
-        }
-
-        .submit-btn {
-          width: 100%;
-        }
       }
 
       /* Footer */
       footer {
-        background: var(--text-dark);
-        color: var(--white);
-        padding: 2rem 0;
-        text-align: center;
+        background: #2c3e50;
+        color: white;
+        padding: 60px 0 30px;
       }
 
       .footer-content {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 2rem;
+        margin-bottom: 2rem;
       }
 
       .footer-section h4 {
-        color: var(--gold);
+        font-size: 1.3rem;
         margin-bottom: 1rem;
+        color: #3498db;
       }
 
+      .footer-section p,
       .footer-section a {
-        color: var(--white);
+        color: #bdc3c7;
         text-decoration: none;
-        transition: color 0.3s ease;
+        line-height: 1.8;
       }
 
       .footer-section a:hover {
-        color: var(--gold);
+        color: #3498db;
+      }
+
+      .contact-info {
+        list-style: none;
+      }
+
+      .contact-info li {
+        margin-bottom: 0.5rem;
+      }
+
+      .contact-info i {
+        margin-right: 0.5rem;
+        color: #3498db;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #34495e;
+        padding-top: 2rem;
+        text-align: center;
+        color: #bdc3c7;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.1rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .benefits-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .showcase-grid {
+          grid-template-columns: 1fr;
+        }
       }
 
       /* Animations */
@@ -759,54 +420,13 @@
         }
       }
 
-      /* Responsive Design */
-      @media (max-width: 768px) {
-        .hero h1 {
-          font-size: 2.5rem;
-        }
-
-        .hero-cta {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .nav-links {
-          display: none;
-        }
-
-        .story-content {
-          grid-template-columns: 1fr;
-        }
-
-        .story-image {
-          font-size: 6rem;
-        }
-
-        .section-title {
-          font-size: 2rem;
-        }
-
-        .pricing-packages {
-          grid-template-columns: 1fr;
-          max-width: 100%;
-        }
-
-        .pricing-card.featured {
-          transform: none;
-        }
-
-        .pricing-card.featured:hover {
-          transform: translateY(-5px);
-        }
+      .fade-in-up {
+        animation: fadeInUp 0.6s ease-out;
       }
 
-      /* Accessibility */
-      @media (prefers-reduced-motion: reduce) {
-        * {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-        }
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
       }
     </style>
   </head>
@@ -814,439 +434,197 @@
     <!-- Header -->
     <header>
       <nav class="container">
-        <a href="#" class="logo">Do Good Airbnb</a>
+        <a href="#" class="logo">Airlift Studio</a>
         <ul class="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#story">About</a></li>
-          <li><a href="#showcase">Portfolio</a></li>
-          <li><a href="#package">Services</a></li>
+          <li><a href="#benefits">Benefits</a></li>
+          <li><a href="#why-choose-us">Why Choose Us</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#showcase">Showcase</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-        <a href="#contact" class="contact-btn">Get Your Website</a>
       </nav>
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="hero-content">
-        <h1>Do Good Airbnb</h1>
-        <p>
-          Beautiful Websites. Better Bookings. Bigger Impact. ❤️<br />
-          Get a stunning website for your Bali property while supporting
-          Indonesian orphanages - because beautiful websites should create
-          beautiful change
-        </p>
-        <div class="hero-cta">
-          <a href="#contact" class="cta-primary">Get Free Demo</a>
-          <a href="#showcase" class="cta-secondary">See Examples</a>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content fade-in-up">
+          <h1>Transform Your Airbnb Listing</h1>
+          <p>
+            Stand out from the competition with a professional custom website.
+            The most impactful, low-effort investment for your Airbnb brand.
+          </p>
+          <a href="#pricing" class="cta-button">Get Free Demo</a>
         </div>
       </div>
     </section>
 
-    <!-- Story Section -->
-    <section id="story" class="section story">
+    <!-- Benefits Section -->
+    <section id="benefits" class="benefits">
       <div class="container">
-        <h2 class="section-title">Hey, I'm Emil! ❤️</h2>
-        <div class="story-content">
-          <div class="story-text">
+        <h2 class="section-title">Why Invest in Your Own Website?</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card fade-in-up">
+            <div class="benefit-icon">
+              <i class="fas fa-star"></i>
+            </div>
+            <h3>Professional Branding</h3>
             <p>
-              Years ago, I fell in love with Bali - not just the island, but
-              with my beautiful wife there too. What started as a vacation
-              became a life-changing journey that opened my heart to the magic
-              of Indonesia and its incredible people.
-            </p>
-            <p>
-              During our time living in Bali, I stayed at dozens of breathtaking
-              villas, bamboo sanctuaries, and beachfront properties across the
-              island - from the mystical rice terraces of Ubud to the vibrant
-              surf breaks of Canggu. But more importantly, I fell in love with
-              the warmth, kindness, and resilience of the Indonesian people.
-            </p>
-            <p>
-              As someone with a passion for web design and entrepreneurship, I
-              realized I could combine my skills with my love for Bali to create
-              something meaningful. Why not help property owners showcase their
-              beautiful spaces while giving back to the community that gave me
-              so much?
-            </p>
-            <p>
-              <strong>This is my way of giving back.</strong> Every website
-              donation goes directly to supporting orphanages across Indonesia,
-              helping children who need it most. Your beautiful property gets
-              the website it deserves, and together we're making a real
-              difference in children's lives.
-            </p>
-            <p>
-              <strong>My promise:</strong> You get a free demo first, and your
-              donation creates positive change. It's business with a heart.
+              Create a premium, professional image that sets your property apart
+              from generic Airbnb listings. Build trust with potential guests
+              before they even contact you.
             </p>
           </div>
-          <div class="story-image">
-            <img
-              src="images/emil_and_wife.png"
-              alt="Emil and his wife in Bali"
-              style="
-                width: 100%;
-                height: 300px;
-                object-fit: cover;
-                border-radius: 15px;
-                box-shadow: 0 10px 30px var(--shadow);
-              "
-            />
+          <div class="benefit-card fade-in-up">
+            <div class="benefit-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Increased Bookings</h3>
+            <p>
+              Direct traffic to your own website means more control over your
+              booking process and potentially higher conversion rates than
+              relying solely on Airbnb's platform.
+            </p>
+          </div>
+          <div class="benefit-card fade-in-up">
+            <div class="benefit-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Platform Independence</h3>
+            <p>
+              Reduce dependency on Airbnb's algorithm changes and commission
+              structures. Your website is your own marketing asset that you
+              control completely.
+            </p>
+          </div>
+          <div class="benefit-card fade-in-up">
+            <div class="benefit-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3>Better Guest Experience</h3>
+            <p>
+              Provide detailed information, high-quality photos, and a seamless
+              browsing experience that showcases your property in the best
+              possible light.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-choose-us" class="why-choose-us">
+      <div class="container">
+        <h2 class="section-title">Why Choose Airlift Studio?</h2>
+        <div class="features-grid">
+          <div class="feature-item fade-in-up">
+            <div class="feature-icon">
+              <i class="fas fa-unlock"></i>
+            </div>
+            <div class="feature-content">
+              <h4>No Monthly Subscriptions</h4>
+              <p>
+                One-time payment, no lock-in contracts. You own everything after
+                handover, including your domain name.
+              </p>
+            </div>
+          </div>
+          <div class="feature-item fade-in-up">
+            <div class="feature-icon">
+              <i class="fas fa-tools"></i>
+            </div>
+            <div class="feature-content">
+              <h4>Full Service Setup</h4>
+              <p>
+                We handle everything from design to launch. No technical
+                knowledge required on your end.
+              </p>
+            </div>
+          </div>
+          <div class="feature-item fade-in-up">
+            <div class="feature-icon">
+              <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="feature-content">
+              <h4>Competitive Fixed Pricing</h4>
+              <p>
+                Transparent, upfront pricing with no hidden costs. Know exactly
+                what you're paying for.
+              </p>
+            </div>
+          </div>
+          <div class="feature-item fade-in-up">
+            <div class="feature-icon">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="feature-content">
+              <h4>Airbnb Specialists</h4>
+              <p>
+                We understand the unique needs of vacation rental owners and
+                create websites specifically optimized for this market.
+              </p>
+            </div>
+          </div>
+          <div class="feature-item fade-in-up">
+            <div class="feature-icon">
+              <i class="fas fa-thumbs-up"></i>
+            </div>
+            <div class="feature-content">
+              <h4>Proven Results</h4>
+              <p>
+                Positive testimonials from satisfied clients who have seen
+                increased bookings and professional image improvement.
+              </p>
+            </div>
+          </div>
+          <div class="feature-item fade-in-up">
+            <div class="feature-icon">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <div class="feature-content">
+              <h4>Fast Turnaround</h4>
+              <p>
+                Quick delivery times so you can start benefiting from your
+                professional website as soon as possible.
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Showcase Section -->
-    <section id="showcase" class="section showcase">
+    <section id="showcase" class="showcase">
       <div class="container">
-        <h2 class="section-title">Previous Projects</h2>
-        <p
-          style="
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--text-light);
-            font-size: 1.1rem;
-          "
-        >
-          Each website captures the unique spirit of its Bali location, from
-          Canggu's surf culture to Seminyak's beach elegance
-        </p>
+        <h2 class="section-title">Our Work</h2>
         <div class="showcase-grid">
-          <div class="showcase-item">
-            <img
-              src="villa-mercedes-canggu/images/hero-bg.jpg"
-              alt="Villa Mercedes"
-            />
-            <div class="showcase-info">
-              <h3>Villa Mercedes</h3>
+          <div class="showcase-card fade-in-up">
+            <div class="showcase-image">Coming Soon</div>
+            <div class="showcase-content">
+              <h4>Villa Zori Bali</h4>
               <p>
-                Luxury Mediterranean villa in Canggu, Bali. Mediterranean design
-                with modern features.
-              </p>
-              <a
-                href="villa-mercedes-canggu/index.html"
-                class="showcase-link"
-                target="_blank"
-                >View Website →</a
-              >
-            </div>
-          </div>
-          <div class="showcase-item">
-            <img
-              src="o-serendipity-bali/images/hero-bg.jpg"
-              alt="O Serendipity"
-            />
-            <div class="showcase-info">
-              <h3>O Serendipity</h3>
-              <p>
-                Luxury villa in Bali with private pool and tropical design.
-                Perfect for couples and families.
-              </p>
-              <a
-                href="o-serendipity-bali/index.html"
-                class="showcase-link"
-                target="_blank"
-                >View Website →</a
-              >
-            </div>
-          </div>
-          <div class="showcase-item">
-            <img
-              src="amaluna-villa-seminyak/images/hero-bg.jpg"
-              alt="AmaLuna Villa"
-            />
-            <div class="showcase-info">
-              <h3>AmaLuna Villa</h3>
-              <p>
-                Elegant villa in Seminyak with modern design and close to the
-                beach.
-              </p>
-              <a
-                href="amaluna-villa-seminyak/index.html"
-                class="showcase-link"
-                target="_blank"
-                >View Website →</a
-              >
-            </div>
-          </div>
-          <div class="showcase-item">
-            <img
-              src="maha-hati-mahajiva/images/hero-bg.jpg"
-              alt="Maha Hati Mahajiva"
-            />
-            <div class="showcase-info">
-              <h3>Maha Hati Mahajiva</h3>
-              <p>
-                Traditional Balinese villa with bamboo architecture and natural
-                design.
-              </p>
-              <a
-                href="maha-hati-mahajiva/index.html"
-                class="showcase-link"
-                target="_blank"
-                >View Website →</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Package Section -->
-    <section id="package" class="section package">
-      <div class="container">
-        <div class="package-content">
-          <h2 class="section-title">Choose Your Package</h2>
-          <p
-            style="
-              text-align: center;
-              margin-bottom: 3rem;
-              font-size: 1.1rem;
-              color: var(--text-light);
-            "
-          >
-            Get your FREE demo first, then choose the package that works best
-            for you
-          </p>
-
-          <div class="pricing-packages">
-            <!-- Hands-On Package -->
-            <div class="pricing-card">
-              <div class="pricing-header">
-                <h3>Hands-On</h3>
-                <p class="pricing-subtitle">Perfect for tech-savvy hosts</p>
-              </div>
-              <div class="pricing-features">
-                <ul>
-                  <li>✅ Custom website tailored to your property</li>
-                  <li>✅ Mobile-optimized for all devices</li>
-                  <li>✅ Complete source code ownership</li>
-                  <li>✅ Documentation for future maintenance</li>
-                  <li>✅ Host anywhere you want</li>
-                  <li>✅ Modify however you like</li>
-                  <li>✅ Total freedom & control</li>
-                </ul>
-              </div>
-              <div class="pricing-price">
-                <div class="price-amount">2 Nights Stay</div>
-                <div class="price-details">
-                  Donation to Indonesian orphanages
-                </div>
-                <div class="price-range">($100 - $800 USD)</div>
-              </div>
-              <div class="pricing-cta">
-                <a href="#contact" class="package-btn">Get Free Demo</a>
-              </div>
-            </div>
-
-            <!-- Hands-Off Package -->
-            <div class="pricing-card featured">
-              <div class="featured-badge">Most Popular</div>
-              <div class="pricing-header">
-                <h3>Hands-Off</h3>
-                <p class="pricing-subtitle">Launch in one click 🚀</p>
-              </div>
-              <div class="pricing-features">
-                <ul>
-                  <li>✅ Everything in Hands-On package</li>
-                  <li>✅ Custom domain registration</li>
-                  <li>✅ Professional email setup</li>
-                  <li>✅ 1 year hosting included</li>
-                  <li>✅ Complete setup & launch</li>
-                  <li>✅ Sit back and relax!</li>
-                </ul>
-              </div>
-              <div class="pricing-price">
-                <div class="price-amount">3 Nights Stay</div>
-                <div class="price-details">
-                  Donation to Indonesian orphanages
-                </div>
-                <div class="price-range">($200 - $1,000 USD)</div>
-              </div>
-              <div class="pricing-cta">
-                <a href="#contact" class="package-btn featured-btn"
-                  >Get Free Demo</a
-                >
-              </div>
-            </div>
-          </div>
-
-          <div class="pricing-note">
-            <p>
-              💚 <strong>Feel-Good Factor:</strong> Your donation supports
-              orphanages across Indonesia while getting you an incredible
-              website. Plus, your listing gets featured on our fundraising page
-              for extra exposure!
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Advantages Section -->
-    <section id="advantages" class="section advantages">
-      <div class="container">
-        <h2 class="section-title">Why This Feels So Good ❤️</h2>
-        <div class="advantages-grid">
-          <div class="advantage-card">
-            <div class="advantage-icon">💝</div>
-            <h3>Feel-Good Factor</h3>
-            <p>
-              Your donation helps Indonesian orphanages while getting you an
-              amazing website. Plus, your listing gets featured on our
-              fundraising page for extra visibility!
-            </p>
-          </div>
-          <div class="advantage-card">
-            <div class="advantage-icon">🎁</div>
-            <h3>Zero-Risk Demo</h3>
-            <p>
-              Get your FREE custom demo first, then decide. No upfront costs, no
-              contracts, no pressure. Just pure value delivered to your inbox.
-            </p>
-          </div>
-          <div class="advantage-card">
-            <div class="advantage-icon">⚡</div>
-            <h3>Pure Custom Code</h3>
-            <p>
-              Clean, fast, unique code that's yours forever. No WordPress bloat,
-              no unstable tools, no limitations, just digital perfection.
-            </p>
-          </div>
-          <div class="advantage-card">
-            <div class="advantage-icon">🗝️</div>
-            <h3>Total Freedom</h3>
-            <p>
-              You own EVERYTHING. Code, files, accounts - all yours. Want
-              changes? Do it yourself or hire anyone. No vendor lock-in, ever.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section contact">
-      <div class="container">
-        <h2 class="section-title">Get Your Free Website Demo</h2>
-        <p
-          style="
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--text-light);
-            font-size: 1.1rem;
-          "
-        >
-          Ready to showcase your Bali property with a stunning website? Let's
-          bring your paradise to life online while supporting Indonesian
-          children. No upfront costs, no risk – just professional results.
-        </p>
-        <div class="contact-content">
-          <div class="contact-form">
-            <div class="form-header">
-              <p>
-                Tell us about your property and we'll create your custom demo
-                within 72 hours
+                Luxury villa website showcasing stunning ocean views and premium
+                amenities.
               </p>
             </div>
-
-            <form
-              id="contactform"
-              action="https://formsubmit.io/send/dogoodairbnb@gmail.com"
-              method="POST"
-            >
-              <input name="_formsubmit_id" type="text" style="display: none" />
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="name">Full Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Enter your full name"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="email">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="your@email.com"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="airbnb-link">Airbnb Property Link</label>
-                <input
-                  type="url"
-                  id="airbnb-link"
-                  name="airbnb-link"
-                  placeholder="https://www.airbnb.com/rooms/..."
-                  required
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="color-theme">Design Preference</label>
-                <select id="color-theme" name="color-theme">
-                  <option value="">Choose a design vibe</option>
-                  <option value="tropical">Tropical Paradise</option>
-                  <option value="zen">Zen & Minimalist</option>
-                  <option value="luxury">Luxury & Elegant</option>
-                  <option value="rustic">Rustic & Natural</option>
-                  <option value="modern">Modern & Sleek</option>
-                  <option value="surprise">Surprise Me!</option>
-                </select>
-              </div>
-
-              <!-- TODO HÄÄÄÄR  lägg till fält jag vill ha för att hjälp kunder cusomize... som jag kan mata rakt in i prompten...-->
-              <!-- TODO de kan få välja vibes. color -->
-              <!-- TODO beghöver förenkla min master prompt.. den är för lång... vitkiga saker försvinner? be AI korta ner delar som inte behövs se vad vi kan komma fram till-->
-              <!-- TODO sen ta fram exakt vilka sections som behöver vara med... testa ha utan menu bar kanske... det är onödigt... fult.. ha bara en floating CTA button upptill. Book/check avaibliblity -->
-              <!-- <! -- testa olika versioner av master prompten.. ha kvar den jag har nusåklart... -->
-              <!-- TODO PÅ demo sidan ska pricing vara med... testa förtydligar pricing till specifikt prislapp och ha finstilt hur jag räknat "equivilant 3 nights stay" -->
-              <div class="form-group">
-                <label for="extra-content">Special Features & Highlights</label>
-                <textarea
-                  id="extra-content"
-                  name="extra-content"
-                  placeholder="What makes your property unique? Special amenities, experiences, local attractions, or anything you'd like to highlight..."
-                ></textarea>
-              </div>
-
-              <div class="form-actions">
-                <button type="submit" class="submit-btn">
-                  Get My Free Demo Website
-                </button>
-              </div>
-            </form>
-
-            <div class="form-note">
-              <h4>What happens next?</h4>
+          </div>
+          <div class="showcase-card fade-in-up">
+            <div class="showcase-image">Coming Soon</div>
+            <div class="showcase-content">
+              <h4>Treehouse Retreat</h4>
               <p>
-                <strong>Step 1:</strong> We'll create your custom demo website
-                within 72 hours
+                Unique treehouse accommodation website highlighting the natural
+                experience.
               </p>
+            </div>
+          </div>
+          <div class="showcase-card fade-in-up">
+            <div class="showcase-image">Coming Soon</div>
+            <div class="showcase-content">
+              <h4>Beachfront Villa</h4>
               <p>
-                <strong>Step 2:</strong> You'll receive a link to review your
-                demo
-              </p>
-              <p>
-                <strong>Step 3:</strong> Love it? Choose your package and help
-                Indonesian orphanages
-              </p>
-              <p>
-                <em
-                  >No upfront costs, no contracts, just pure value delivered to
-                  your inbox!</em
-                >
+                Modern beachfront property website with emphasis on location and
+                luxury.
               </p>
             </div>
           </div>
@@ -1255,21 +633,39 @@
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer id="contact">
       <div class="container">
         <div class="footer-content">
           <div class="footer-section">
-            <h4>© 2025 Do Good Airbnb</h4>
-            <p>Beautiful Websites. Better Bookings. Bigger Impact. ❤️</p>
+            <h4>Airlift Studio</h4>
+            <p>
+              Specialized in creating professional websites for Airbnb listings.
+              We help property owners stand out and increase their bookings with
+              custom, conversion-optimized websites.
+            </p>
           </div>
           <div class="footer-section">
-            <h4>Contact</h4>
-            <p>Email: hello@dogoodairbnb.com</p>
+            <h4>Contact Information</h4>
+            <ul class="contact-info">
+              <li><i class="fas fa-envelope"></i> hello@airliftstudio.com</li>
+              <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+              <li><i class="fas fa-map-marker-alt"></i> Bali, Indonesia</li>
+            </ul>
           </div>
           <div class="footer-section">
-            <h4>Supporting Indonesian Orphanages</h4>
-            <p>Every website donation helps children in need</p>
+            <h4>Quick Links</h4>
+            <ul class="contact-info">
+              <li><a href="#benefits">Benefits</a></li>
+              <li><a href="#why-choose-us">Why Choose Us</a></li>
+              <li><a href="#showcase">Showcase</a></li>
+            </ul>
           </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2024 Airlift Studio. All rights reserved. | Professional
+            Airbnb Listing Websites
+          </p>
         </div>
       </div>
     </footer>
@@ -1289,24 +685,27 @@
         });
       });
 
-      // Intersection Observer for animations
+      // Add fade-in animation on scroll
       const observerOptions = {
-        root: null,
-        rootMargin: "0px",
         threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
       };
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
           }
         });
       }, observerOptions);
 
-      // Observe all sections
-      document.querySelectorAll(".section").forEach((section) => {
-        observer.observe(section);
+      // Observe all elements with fade-in-up class
+      document.querySelectorAll(".fade-in-up").forEach((el) => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(30px)";
+        el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        observer.observe(el);
       });
 
       // Header background on scroll
@@ -1318,23 +717,6 @@
           header.style.background = "rgba(255, 255, 255, 0.95)";
         }
       });
-
-      // Form submission with formsubmit.io
-      document
-        .querySelector("#contactform")
-        .addEventListener("submit", function (e) {
-          // Let the form submit naturally to formsubmit.io
-          const submitBtn = document.querySelector(".submit-btn");
-          submitBtn.textContent = "Sending...";
-          submitBtn.disabled = true;
-
-          // Show success message after a brief delay (form will redirect)
-          setTimeout(() => {
-            alert(
-              "🎉 Thank you for choosing to do good! I'll create your FREE demo and get back to you within 48 hours. Together we'll make your property shine while helping Indonesian children! ❤️"
-            );
-          }, 100);
-        });
     </script>
   </body>
 </html>
