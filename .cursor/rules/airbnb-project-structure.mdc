@@ -6,29 +6,28 @@ alwaysApply: true
 # Airbnb Project Structure Rule
 
 ## Purpose
-Create organized project structure for Airbnb website generation with proper file hierarchy.
+Keep a correct project file structure for the Airbnb website project.
 
 ## Folder Creation Requirements
 
 ### Main Project Folder
-- Use the target/ folder as project folder for this airbnb listing
-- Rename the target folder with the airbnb listing ID
+- Copy the target/ folder and rename it to the Airbnb listing ID
+- Use the new folder as project folder for this Airbnb listing
 
-### Required Files and Directories
+### Files and Directories
+- The copied folder should have this file structure
 ```
 property-name/
 ├── index.html          # Main website file
-├── images/             # Downloaded property images from airbnb
-├── LISTING.md          # All extracted Airbnb data
+├── images/             # Downloaded property images from the Airbnb listing
+├── LISTING.md          # For saving all the extracted Airbnb data
 └── README.md           # Project documentation
 ```
 
 ## File Organization Standards
 
 ### Image Directory (`airbnb-id/images/`)
-- Download all images from the airbnb listing that was collected and save them with a descriptive name.
-- Make sure we download the hero image with url parameter "im_w" set to "im_w=2560"
-- Make sure the rest of the images are downloaded with "im_w=1440"
+- IMPORTANT: Download all 12 images from the airbnb listing that was collected in listing.md and name them after their alt text and include either "landscape" or "portrait" in the image file name depending on if the image is in portrait or landscape aspect ratio.
 
 ### Documentation Files
 - **LISTING.md**: Complete extracted data from Airbnb
@@ -41,4 +40,4 @@ property-name/
 - Image names should describe content clearly
 
 ## Work Scope Limitation
-**CRITICAL**: When building a new Airbnb website, you are ONLY allowed to edit and create files within this assigned property folder. Do not modify files outside this airbnb listings project directory.
+**CRITICAL**: When building a new Airbnb website, you are ONLY allowed to edit and create files within this assigned property folder. Do not modify files outside this Airbnb listings project directory.

@@ -9,11 +9,12 @@ alwaysApply: true
 Structure compelling content and copy that drives conversions to the Airbnb listing.
 
 ## Website content
-- Follow the example in the index.html file
-- Maintain the same HTML structure, sections and CSS classes as the example project
-- Replace all content with new listing data from listing.md. Make sure property specific text from the example is kept.
-- Replace all images with the new images from this Airbnb listing. Make sure all the images from the new airbnb listing are added to the gallery section (see ### Gallery Section).
+- The current index.html in the project folder is an example of a website for an another Airbnb listing. Read the index.html file to understand its structure.
+- Make changes directly in the index.html to replace the content with the new Airbnb listing data from listing.md.
+- Make sure no property specific text from the original example is kept.
+- Replace all images with the new images from this Airbnb listing. Make sure all the images from the new Airbnb listing are added to the gallery section (see ### Gallery Section).
 - Make sure all links to Airbnb have the updated Airbnb ID (https://www.airbnb.com/rooms/[id])
+- Only include the name of the location on the website if it is included in this list of locations: Canggu,Lovina,Ubud,Sanur,Uluwatu,Seminyak,Kintamani,Bali. If it is not included do not mention the adress or name of the location or just use the regional name instead, like Bali. Or use the vibe in the location name, like "Perfect beachfront location", "Perfect jungle location", "Perfect peaceful location".
 
 ## Content Writing Style
 
@@ -44,17 +45,21 @@ Try to make it maximum two words.
 - Remove the badge-superhost and badge-guest-favorite if the airbnb listing does not have those badges
 
 ### About Section
-- Update all the features. There should be 3 or 4 feature cards depending on how many features the Airbnb listing have to highlight
-- Replace all the amenities with new one from the Airbnb listing. Make sure there is one for each amenity in the Airbnb listing.
+- Set the about-image to the second image 
+- Update all the features. There should be 3 or 4 feature cards depending on how many features the Airbnb listing have to highlight. Make sure every feature has an appropriate icon. If unsure about if the icon exists use fa-star.
+- Replace all the amenities with new one from the Airbnb listing. Make sure there is one for each amenity in the Airbnb listing and that every amenity item has an appropriate icon. If unsure about if the icon exists use fa-check.
 
 ### Gallery Section
-- Make sure all the images are replaced with the images from images/.
-- Remake the gallery grid so that it fits well with the new number of images in all screen sizes. See the @media (max-width: 1000px), @media (max-width: 800px), and @media (max-width: 600px) for the gallery-grid class.
-- The rules for the grid is as follows: The first two rows must always have a hero image to the left and a landscape image in the top right with 2 normal sized images under the landscape image. The rest of the grid should consist of normal size images. If there is empty grid area left use 1 portrait image if that exists and/or more landscape images to fill out the grid area fully. There should at least be 4 normal sized images in total. Never repeat the same image.
+- Make sure all the images are replaced with the new images from images/. Do not use any duplicate images in the gallery grid.
+- If there is an image that is market as "portrait" in its file name use that image as the portrait-1 image.
+- Only use images marked as "landscape" for landscape-1 and landscape-2 in the gallery grid.
 
 ### Reviews Section
-- Replace the two featured reviews with the most positive and longer written reviews. Make sure the two chosen reviews are about the same length.
-- Replace all the review-mini with the real reviews from the Airbnb listing.
+- Replace the two featured reviews with the most positive and longer written reviews. Make sure the two chosen reviews are about the same in length. preferably between 60-80 words.
+- Remove the current review-mini div:s and add a new review-mini for each extra review in the new Airbnb listing. There should be maximum 16 review-mini.
 
 ### Location Section
 - Rewrite this section and the reasons why this location is perfect. Use 3-5 reasons with appropriate icons.
+
+### Footer
+- Only include WhatsApp and Instagram if they were supplied to you in the prompt together with the Airbnb listing url. If no contact information is supplied in the prompt then only include email that should be hello@[suggested-domain-name].com

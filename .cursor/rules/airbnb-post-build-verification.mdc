@@ -3,9 +3,9 @@ description:
 globs: 
 alwaysApply: true
 ---
-When the website is done building verify that the complete website is fullfilling all the Cursor rules.
+When the website is done building verify that the complete website is fulfilling all the Cursor rules.
 Especially important steps to verify:
-- Website looks good on mobile device
 - All the text is accurate compared to what is written in LISTING.md
-- No data from the example/index.html has been kept unless it is the same as the new airbnb listing
+- No remaining information or images from the original example listing unless it is the same as the new Airbnb listing
+- The image gallery looks good on all screen sizes.
 Make any changes you think are needed to fix identified issues.
