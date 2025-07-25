@@ -16,23 +16,19 @@ Extract comprehensive information from Airbnb listings using Playwright for webs
 - Property summary/tagline
 - Capacity: guests, bedrooms, bathrooms, beds
 - Rating
-- Price per night (add check-in/check-out dates to get pricing)
 
 ### Property Features
 - Complete amenities list
 - Full property description
 - Key selling points and unique features
 
-### Extract Images - IMPORTANT!
-- Collect the hero image from the airbnb listings front page. It is the <img> with id="FMP-target".
-- Go to https://www.airbnb.se/rooms/[ID]?modal=PHOTO_TOUR_SCROLLABLE to see all the images
+### Extract Images
+- Collect the hero image from the Airbnb listings front page. It is the <img> with id="FMP-target".
+- Go to https://www.airbnb.se/rooms/[ID]?modal=PHOTO_TOUR_SCROLLABLE to see all the images.
 - IMPORTANT: You must collect exactly 12 different images (including the hero image) and at least one from each category if there is categories.
-- The hero image will be in this gallery so do not select that one again. You can see in the image urls that the jpeg file name must be unique ex: "5b422777-6598-4547-a70c-b78d5a15652d.jpeg".
-- For each image collect the image url.
-- Make sure the hero image url has the image url parameter "im_w" set to "im_w=1920"
-- The rest of the images should have the "im_w" set to "im_w=720"
+- For each image collect the image url (this has to be unique even compared to the hero image).
 - Also collect the alt text from the image tag along with the image url. Also note if the image is in portrait or landscape aspect ratio by checking the width and height of the image. This should later be used to name the image file and describe the images in our design.
-- All the collected images data should be written to the listing.md including their url, alt text, and portrait/landscape aspect ratio
+- All the collected images data should be written to the listing.md including their url, alt text, and portrait/landscape aspect ratio.
 
 ### Social Proof
 - "Guest Favourite" badge or similar status indicators
@@ -63,4 +59,4 @@ Extract comprehensive information from Airbnb listings using Playwright for webs
 Save all extracted data in structured markdown format in LISTING.md within the project folder.
 
 ## Verification
-- When the listing.md if finished. Verify that there are 12 unique images there. If there is not then go back to the ###Extract Images step and try again.
+- When the listing.md is finished. Verify that there are 12 unique images there. If there is not then go back to the "Extract Images" step and try again.
