@@ -42,12 +42,14 @@ Instructions how to rewrite the html content from top to bottom section by secti
 Try to make it maximum two words.
 
 ### Hero Section
-- Remove the badge-superhost and badge-guest-favorite if the airbnb listing does not have those badges
+- Remove the badge-superhost and badge-guest-favorite if the Airbnb listing does not have those badges.
+- Come up with a good tagline for the hero-subtitle based on the Airbnb listing. Do not use abbreviations like "w/" etc.
 
 ### About Section
 - Set the about-image to the second image 
 - Update all the features. There should be 3 or 4 feature cards depending on how many features the Airbnb listing have to highlight. Make sure every feature has an appropriate icon. If unsure about if the icon exists use fa-star.
-- Replace all the amenities with new one from the Airbnb listing. Make sure there is one for each amenity in the Airbnb listing and that every amenity item has an appropriate icon. If unsure about if the icon exists use fa-check.
+- Replace all the amenities with new one from the Airbnb listing. Make sure there is one for each amenity in the Airbnb listing.
+- Every amenity item must have an appropriate icon. If unsure about if the icon exists use fa-check or a more general icon.
 
 ### Gallery Section
 - Make sure all the images are replaced with the new images from images/. Do not use any duplicate images in the gallery grid.
@@ -55,7 +57,11 @@ Try to make it maximum two words.
 - Only use images marked as "landscape" for landscape-1 and landscape-2 in the gallery grid.
 
 ### Reviews Section
-- Replace the two featured reviews with the most positive and longer written reviews. Make sure the two chosen reviews are about the same in length. preferably between 60-80 words.
+- Replace the two featured reviews with two very positive reviews following these criteria:
+	- Both reviews must be between 60-100 words
+	- Reviews must be within 20 words of each other
+	- Count words manually: "This is a test" = 4 words
+	- Choose complementary perspectives (e.g., location vs. amenities)
 - Remove the current review-mini div:s and add a new review-mini for each extra review in the new Airbnb listing. There should be maximum 16 review-mini.
 
 ### Location Section
