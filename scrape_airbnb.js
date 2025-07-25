@@ -23,6 +23,21 @@ function getAspect(width, height) {
   return "square";
 }
 
+function updateImwParam(url, value) {
+  try {
+    const u = new URL(url);
+    u.searchParams.set("im_w", value);
+    return u.toString();
+  } catch (e) {
+    // fallback for non-standard URLs
+    if (url.includes("im_w=")) {
+      return url.replace(/im_w=\d+/, `im_w=${value}`);
+    }
+    // if no im_w param, just append
+    return url + (url.includes("?") ? "&" : "?") + `im_w=${value}`;
+  }
+}
+
 async function scrape() {
   if (
     !process.argv[2] ||
@@ -41,7 +56,7 @@ async function scrape() {
   const listingId = getListingId(AIRBNB_URL);
 
   console.log("Launching browser...");
-  const runWithoutOpeningBrowser = false;
+  const runWithoutOpeningBrowser = true;
 
   const browser = await chromium.launch({ headless: runWithoutOpeningBrowser });
   const page = await browser.newPage();
@@ -160,18 +175,20 @@ async function scrape() {
 
   // Hero images
   const heroImages = await page.evaluate(() => {
-    function updateImwParam(url, value) {
+    function removeImwParam(url) {
       try {
         const u = new URL(url);
-        u.searchParams.set("im_w", value);
+        u.searchParams.delete("im_w");
         return u.toString();
       } catch (e) {
         // fallback for non-standard URLs
-        if (url.includes("im_w=")) {
-          return url.replace(/im_w=\d+/, `im_w=${value}`);
-        }
-        // if no im_w param, just append
-        return url + (url.includes("?") ? "&" : "?") + `im_w=${value}`;
+        return url
+          .replace(/([&?])im_w=\d+(&)?/, (match, p1, p2) => {
+            if (p1 === "?" && !p2) return "";
+            if (p2) return p1;
+            return "";
+          })
+          .replace(/[?&]$/, "");
       }
     }
     return Array.from(document.querySelectorAll("picture img")).map((img) => {
@@ -181,11 +198,8 @@ async function scrape() {
       let width = img.width || img.naturalWidth || img.getAttribute("width");
       let height =
         img.height || img.naturalHeight || img.getAttribute("height");
-      let src = img.src;
+      let src = removeImwParam(img.src);
       const isHero = img.id === "FMP-target";
-      if (isHero) {
-        src = updateImwParam(src, "1920");
-      }
       return { src, alt, width, height, isHero, mustUse: true };
     });
   });
@@ -309,18 +323,20 @@ async function scrape() {
 
   // Extract images from the gallery, including category if present
   const images = await page.evaluate(() => {
-    function updateImwParam(url, value) {
+    function removeImwParam(url) {
       try {
         const u = new URL(url);
-        u.searchParams.set("im_w", value);
+        u.searchParams.delete("im_w");
         return u.toString();
       } catch (e) {
         // fallback for non-standard URLs
-        if (url.includes("im_w=")) {
-          return url.replace(/im_w=\d+/, `im_w=${value}`);
-        }
-        // if no im_w param, just append
-        return url + (url.includes("?") ? "&" : "?") + `im_w=${value}`;
+        return url
+          .replace(/([&?])im_w=\d+(&)?/, (match, p1, p2) => {
+            if (p1 === "?" && !p2) return "";
+            if (p2) return p1;
+            return "";
+          })
+          .replace(/[?&]$/, "");
       }
     }
     // Helper to get width/height
@@ -346,8 +362,7 @@ async function scrape() {
           let alt = img.getAttribute("alt") || "";
           if (!alt && button) alt = button.getAttribute("aria-label") || "";
           const { width, height } = getImgSize(img);
-          const src = updateImwParam(img.src, "720");
-
+          const src = removeImwParam(img.src);
           return {
             src,
             alt,
@@ -369,7 +384,7 @@ async function scrape() {
           let alt = img.getAttribute("alt") || "";
           if (!alt && button) alt = button.getAttribute("aria-label") || "";
           const { width, height } = getImgSize(img);
-          const src = updateImwParam(img.src, "720");
+          const src = removeImwParam(img.src);
           return {
             src,
             alt,
@@ -387,14 +402,30 @@ async function scrape() {
   console.log("Extracted images: ", images.length);
 
   // Combine heroImages and images (allImages), ensuring uniqueness by src
-  // uniqueImages should include all heroImages, plus all images not already in heroImages (by src)
   // Exclude the last image from images (allImages)
   const imagesExclLast = images.slice(0, -1);
-  const heroSrcs = new Set(heroImages.map((img) => img.src));
-  const uniqueImages = [
-    ...heroImages,
-    ...imagesExclLast.filter((img) => !heroSrcs.has(img.src)),
-  ];
+
+  // Create a map of hero images by URL for quick lookup
+  const heroImageMap = new Map();
+  heroImages.forEach((heroImg) => {
+    heroImageMap.set(heroImg.src, heroImg);
+  });
+
+  // Process imagesExclLast and update hero properties if they match hero images
+  const uniqueImages = imagesExclLast.map((img) => {
+    const heroMatch = heroImageMap.get(img.src);
+    // This image matches a hero image, update its properties
+    return {
+      ...img,
+      src: updateImwParam(
+        img.src,
+        !!heroMatch && heroMatch.isHero ? "1920" : "720"
+      ),
+      isHero: !!heroMatch && heroMatch.isHero,
+      mustUse: !!heroMatch && heroMatch.mustUse,
+    };
+  });
+
   console.log(uniqueImages);
 
   // --- Markdown Output ---
