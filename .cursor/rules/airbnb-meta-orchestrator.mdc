@@ -26,6 +26,9 @@ Input: Airbnb URL
 Output: Complete Professional Website
 ```
 
+## usage
+Apply these rules every time there is an Airbnb url in the prompt.
+
 ## Success Criteria
 - All 4 rules must be applied
 - Each rule's requirements must be fully satisfied
