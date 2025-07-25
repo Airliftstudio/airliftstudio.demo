@@ -1,21 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const { chromium } = require("playwright");
-const fetch = (...args) =>
-  import("node-fetch").then((mod) => mod.default(...args));
 
 const TARGET_DIR = "target";
-
-// async function downloadImage(url, filename) {
-//   const res = await fetch(url);
-//   if (!res.ok) throw new Error(`Failed to download ${url}`);
-//   const dest = fs.createWriteStream(filename);
-//   await new Promise((resolve, reject) => {
-//     res.body.pipe(dest);
-//     res.body.on("error", reject);
-//     dest.on("finish", resolve);
-//   });
-// }
 
 function getAspect(width, height) {
   if (width > height) return "landscape";

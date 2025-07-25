@@ -1,0 +1,65 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Airbnb Content Strategy Rule
+
+## Purpose
+Structure compelling content and copy that drives conversions to the Airbnb listing.
+
+## Website content
+- The current index.html in the project folder is an example of a website for an another Airbnb listing. Read the index.html file to understand its structure.
+- Make changes directly in the index.html to replace the content with the new Airbnb listing data from listing.md.
+- Make sure no property specific text from the original example is kept.
+- Replace all images with the new images from this Airbnb listing. Make sure all the images from the new Airbnb listing are added to the gallery section (see ### Gallery Section).
+- Make sure all links to Airbnb have the updated Airbnb ID (https://www.airbnb.com/rooms/[id])
+- Only include the name of the location on the website if it is included in this list of locations: Canggu,Lovina,Ubud,Sanur,Uluwatu,Seminyak,Kintamani,Bali. If it is not included do not mention the adress or name of the location or just use the regional name instead, like Bali. Or use the vibe in the location name, like "Perfect beachfront location", "Perfect jungle location", "Perfect peaceful location".
+
+## Content Writing Style
+
+### Tone Matching
+- **Match property's vibe**: Casual for beach house, sophisticated for luxury villa
+- **Authentic voice**: Don't oversell, be honest about what makes it special
+- **Professional yet approachable**: Build trust while staying personable
+
+### Writing Techniques
+- **Focus on benefits over features**: "Wake up to ocean views" vs "Has ocean view"
+- **Use sensory language**: Help visitors imagine the experience
+- **Create subtle urgency**: Time-sensitive or scarcity elements
+- **Accuracy first**: All content based on actual listing information
+
+## Specific instructions for sectional content rewrite
+Instructions how to rewrite the html content from top to bottom section by section.
+
+### <head> tag
+- Replace the whole <title>
+- Replace all the content in the meta tags
+- Replace the application/ld+json content
+
+### <header> tag
+- Set the logo in the nav bar as a short name for the property. It should be same as the domain name but can be shortened to fit the navbar better. For example if the domain name is villazoribali then the logo text should be Villa Zori.
+Try to make it maximum two words.
+
+### Hero Section
+- Remove the badge-superhost and badge-guest-favorite if the airbnb listing does not have those badges
+
+### About Section
+- Set the about-image to the second image 
+- Update all the features. There should be 3 or 4 feature cards depending on how many features the Airbnb listing have to highlight. Make sure every feature has an appropriate icon. If unsure about if the icon exists use fa-star.
+- Replace all the amenities with new one from the Airbnb listing. Make sure there is one for each amenity in the Airbnb listing and that every amenity item has an appropriate icon. If unsure about if the icon exists use fa-check.
+
+### Gallery Section
+- Make sure all the images are replaced with the new images from images/. Do not use any duplicate images in the gallery grid.
+- If there is an image that is market as "portrait" in its file name use that image as the portrait-1 image.
+- Only use images marked as "landscape" for landscape-1 and landscape-2 in the gallery grid.
+
+### Reviews Section
+- Replace the two featured reviews with the most positive and longer written reviews. Make sure the two chosen reviews are about the same in length. preferably between 60-80 words.
+- Remove the current review-mini div:s and add a new review-mini for each extra review in the new Airbnb listing. There should be maximum 16 review-mini.
+
+### Location Section
+- Rewrite this section and the reasons why this location is perfect. Use 3-5 reasons with appropriate icons.
+
+### Footer
+- Only include WhatsApp and Instagram if they were supplied to you in the prompt together with the Airbnb listing url. If no contact information is supplied in the prompt then only include email that should be hello@[suggested-domain-name].com
