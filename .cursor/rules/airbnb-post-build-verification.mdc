@@ -3,9 +3,19 @@ description:
 globs: 
 alwaysApply: true
 ---
-When the website is done building verify that the complete website is fulfilling all the Cursor rules.
-Especially important steps to verify:
-- All the text is accurate compared to what is written in LISTING.md
-- No remaining information or images from the original example listing unless it is the same as the new Airbnb listing
-- The image gallery looks good on all screen sizes.
-Make any changes you think are needed to fix identified issues.
+## Content Verification Checklist
+Before finalizing the website, verify these specific elements:
+
+### Reviews Section Verification
+- [ ] Main review cards updated with actual guest reviews
+- [ ] ALL review-mini elements replaced with actual guest reviews
+- [ ] No remaining names from original example (check for: Aiyyad, Laurence, Sameera, Kaitlin, Celine, Caroline, Shawn, Sandaka)
+- [ ] Review avatars match actual guest names
+- [ ] Review content matches actual guest feedback from LISTING.md exactly
+
+### Content Accuracy Verification
+- [ ] All text content matches LISTING.md exactly or in other words.
+- [ ] No placeholder text or example content remains
+- [ ] All images replaced with actual listing images
+- [ ] All links point to correct Airbnb listing ID
+- [ ] Contact information updated correctly

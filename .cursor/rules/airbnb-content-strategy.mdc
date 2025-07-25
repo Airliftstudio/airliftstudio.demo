@@ -62,10 +62,15 @@ Try to make it maximum two words.
 	- Reviews must be within 20 words of each other
 	- Count words manually: "This is a test" = 4 words
 	- Choose complementary perspectives (e.g., location vs. amenities)
-- Remove the current review-mini div:s and add a new review-mini for each extra review in the new Airbnb listing. There should be maximum 16 review-mini.
+- **CRITICAL**: Remove ALL current review-mini div:s and add a new review-mini for each review in the new Airbnb listing. There should be maximum 16 review-mini elements.
+- **VERIFICATION STEP**: After updating reviews, verify that NO review-mini elements contain names or content from the original example listing.
 
 ### Location Section
 - Rewrite this section and the reasons why this location is perfect. Use 3-5 reasons with appropriate icons.
 
 ### Footer
 - Only include WhatsApp and Instagram if they were supplied to you in the prompt together with the Airbnb listing url. If no contact information is supplied in the prompt then only include email that should be hello@[suggested-domain-name].com
+
+## Language Translations
+- This rule is only applicable if the user requested the website to be translated into other languages in the prompt. 
+- Se the example in index.html for how the site supports translations to French. Add translations to the other requested languages and remove the one for French if that is not one of the requested languages.

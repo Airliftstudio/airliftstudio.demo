@@ -10,7 +10,8 @@ Extract comprehensive information from Airbnb listings and organise project file
 
 ## Extract data
 - Run the following command with the provided Airbnb url:
-node scrape_airbnb.js "[AIRBNB_URL]"
+node scrape_airbnb.js "[AIRBNB_URL]" "[LANGUAGES]"
+- The [LANGUAGES] parameter should only be included if the user requested for the website to be translated. 
 - This script will extract all the necessary information from the Airbnb listing that we will use later when creating the website.
 
 ## File structure

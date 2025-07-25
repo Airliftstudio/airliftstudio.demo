@@ -35,6 +35,7 @@ async function scrape() {
     );
   }
   const AIRBNB_URL = process.argv[2];
+  const LANGUAGES = process.argv[3] ? process.argv[3].split(",") : null;
   function getListingId(url) {
     const match = url.match(/\/rooms\/(\d+)/);
     return match ? match[1] : "listing";
@@ -424,8 +425,8 @@ async function scrape() {
   md += `**Summary:** ${summary}\n`;
   // md += `**Location:** ${fullLocation}\n`;
   md += `**Capacity:** ${capacityText}\n`;
-  md += `**Superhost:** ${isSuperhost}\n`;
-  md += `**Guest favorite:** ${isGuestFavorite}\n`;
+  md += `**badge-superhost:** ${isSuperhost}\n`;
+  md += `**badge-guest-favorite:** ${isGuestFavorite}\n`;
   md += `**Overall rating:** ${overallRating}\n`;
   md += `\n## Highlights\n`;
   for (const highlight of highlights) {
@@ -476,8 +477,17 @@ async function scrape() {
       const entries = fs.readdirSync(src, { withFileTypes: true });
 
       for (const entry of entries) {
+        if (LANGUAGES && entry.name == "index.html") {
+          continue;
+        } else if (!LANGUAGES && entry.name == "index_lang.html") {
+          continue;
+        }
+
         const srcPath = path.join(src, entry.name);
-        const destPath = path.join(dest, entry.name);
+        const destPath = path.join(
+          dest,
+          entry.name.replace("index_lang.html", "index.html")
+        );
 
         if (entry.isDirectory()) {
           fs.mkdirSync(destPath, { recursive: true });
