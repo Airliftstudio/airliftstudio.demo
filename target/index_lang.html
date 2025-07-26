@@ -783,11 +783,11 @@
         font-size: 0.92rem;
       }
 
-      .reviews-section {
+      .reviews {
         padding: 5rem 0;
         background: var(--background-light);
       }
-      .reviews-section .section-title {
+      .reviews .section-title {
         margin-bottom: 1.5rem;
       }
       .reviews-featured {
@@ -889,7 +889,7 @@
           transform: translateX(-320%);
         }
       }
-      .about-section {
+      .about {
         padding: 5rem 0;
         background: #f8f9fa;
       }
@@ -1145,13 +1145,9 @@
         .highlights {
           grid-template-columns: 1fr;
         }
-
-        /* Gallery responsive breakpoints */
-
-        .about-section {
+        .about {
           padding: 2.5rem 0;
         }
-
         .about-content {
           grid-template-columns: 1fr;
           gap: 2rem;
@@ -1425,7 +1421,7 @@
     </div>
 
     <!-- About Section -->
-    <section id="about" class="about-section">
+    <section id="about" class="about">
       <div class="container">
         <div class="about-content">
           <div class="about-text">
@@ -1672,7 +1668,7 @@
     </section>
 
     <!-- Reviews Section -->
-    <section id="reviews" class="reviews-section">
+    <section id="reviews" class="reviews">
       <div class="container">
         <h2 class="section-title" data-translate="reviews.title">
           What Our Guests Say
@@ -2376,6 +2372,19 @@
         localStorage.setItem("preferredLanguage", lang);
       }
 
+      // Get language from URL parameter
+      function getLanguageFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get("language");
+      }
+
+      // Update URL with language parameter
+      function updateURLWithLanguage(lang) {
+        const url = new URL(window.location);
+        url.searchParams.set("language", lang);
+        window.history.replaceState({}, "", url);
+      }
+
       // Language switcher functionality
       function initLanguageSwitcher() {
         const languageBtn = document.getElementById("languageBtn");
@@ -2400,6 +2409,7 @@
               e.stopPropagation();
               const lang = option.getAttribute("data-lang");
               translatePage(lang);
+              updateURLWithLanguage(lang);
               languageBtn.classList.remove("active");
               languageDropdown.classList.remove("show");
             });
@@ -2411,11 +2421,20 @@
         // Initialize language switcher
         initLanguageSwitcher();
 
-        // Load saved language preference
+        // Check for language in URL first, then localStorage
+        const urlLanguage = getLanguageFromURL();
         const savedLanguage = localStorage.getItem("preferredLanguage");
-        if (savedLanguage && translations[savedLanguage]) {
-          translatePage(savedLanguage);
+
+        let languageToUse = "en"; // default
+
+        if (urlLanguage && translations[urlLanguage]) {
+          languageToUse = urlLanguage;
+          updateURLWithLanguage(urlLanguage); // Ensure URL is updated
+        } else if (savedLanguage && translations[savedLanguage]) {
+          languageToUse = savedLanguage;
         }
+
+        translatePage(languageToUse);
 
         animateHeroStarsAndRating();
         populateReviews();
