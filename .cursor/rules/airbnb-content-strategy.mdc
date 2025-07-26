@@ -42,7 +42,7 @@ Instructions how to rewrite the html content from top to bottom section by secti
 Try to make it maximum two words.
 
 ### Hero Section
-- Remove the badge-superhost and badge-guest-favorite if the Airbnb listing does not have those badges.
+- Comment out the badge-superhost and badge-guest-favorite if the Airbnb listing does not have those badges.
 - Come up with a good tagline for the hero-subtitle based on the Airbnb listing. Do not use abbreviations like "w/" etc.
 
 ### About Section

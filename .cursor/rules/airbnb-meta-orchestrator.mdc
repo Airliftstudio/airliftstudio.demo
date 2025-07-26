@@ -6,15 +6,15 @@ alwaysApply: true
 # Airbnb Listing Website Generator - Meta Orchestrator
 
 ## Overview
-This meta rule coordinates the complete website generation process for a provided url of an Airbnb listing. The website should showcase the specific Airbnb listing. All individual rules MUST be applied together in sequence.
+This meta rule coordinates the complete website generation process for a provided url of an Airbnb listing. The website should showcase the specific Airbnb listing. All individual rules MUST be applied together in sequence. Proceed with all steps without stopping.
 
 ## Required Rule Set
 When generating a website for an Airbnb listing, you MUST apply ALL of these rules in order:
 
 1. **airbnb-data-extraction.mdc** - Extract comprehensive listing information and structure project folder
-3. **airbnb-domain-branding.mdc** - Generate domain suggestions and branding
-4. **airbnb-content-strategy.mdc** - Structure content and copy
-5. **airbnb-post-build-verification.mdc** - Verifying the website and fixing issues
+2. **airbnb-domain-branding.mdc** - Generate domain suggestions and branding
+3. **airbnb-content-strategy.mdc** - Structure content and copy
+4. **airbnb-post-build-verification.mdc** - Verifying the website and fixing issues
 
 ## Process Flow
 ```
@@ -33,5 +33,7 @@ Apply these rules every time there is an Airbnb url in the prompt.
 - All 4 rules must be applied
 - Each rule's requirements must be fully satisfied
 
-## Final step
-When the website is finished building open the index.html in the web browser.
+## Final steps
+1. Run the following command with the current project index.html:
+node inject_biz.js [PROJECT_FOLDER/index.html]
+2. When the website is finished building open the index.html in the web browser.

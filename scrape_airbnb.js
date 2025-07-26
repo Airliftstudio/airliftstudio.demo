@@ -479,7 +479,10 @@ async function scrape() {
       for (const entry of entries) {
         if (LANGUAGES && entry.name == "index.html") {
           continue;
-        } else if (!LANGUAGES && entry.name == "index_lang.html") {
+        } else if (
+          !LANGUAGES &&
+          (entry.name == "index_lang.html" || entry.name == "lang.css")
+        ) {
           continue;
         }
 

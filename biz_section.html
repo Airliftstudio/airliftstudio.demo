@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Credits Copy Start -->
+    <!--
+    ═══════════════════════════════════════════════════════════════════════════════
+    Built with ❤️ for the Airbnb community | © 2025 airliftStudios.com
+
+    📧 Get Your Free Demo Website today:
+    Visit: https://airliftstudios.com
+    ═══════════════════════════════════════════════════════════════════════════════
+    -->
+    <!-- Credits Copy End -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
 
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏝️</text></svg>"
-    />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta http-equiv="Content-Language" content="en" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    />
+    <!-- Include other css to test interactions with -->
+    <link rel="stylesheet" href="target/css/fonts-local.css" />
+    <link rel="stylesheet" href="target/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="target/css/styles.css" />
+    <link rel="stylesheet" href="target/css/lang.css" />
 
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -247,7 +249,7 @@
           .biz-section {
             background: linear-gradient(135deg, #f8f9fa 60%, #e6f0e6 100%);
             padding: 64px 0 48px 0;
-            line-height: 1.6;
+            line-height: 1.4;
             overflow-x: hidden;
           }
           .biz-section::before {
@@ -256,7 +258,7 @@
             top: 100px;
             right: 20px;
             font-size: 1.2rem;
-            color: rgba(44, 85, 48, 0.15);
+            color: rgba(44, 85, 48, 0.25);
             font-weight: bold;
             pointer-events: none;
             z-index: 9999;
@@ -299,7 +301,6 @@
             box-shadow: 0 4px 18px rgba(44, 85, 48, 0.1);
             padding: 1.1em 1.6em;
             margin-bottom: 2.2em;
-            letter-spacing: 0.01em;
             text-align: center;
             gap: 0.8em;
           }
@@ -352,12 +353,6 @@
             font-size: 1.2rem;
             font-weight: 700;
             color: #2c5530;
-          }
-          .biz-card-price-original {
-            text-decoration: line-through;
-            color: #888;
-            font-size: 1.05rem;
-            margin-right: 0.4em;
           }
 
           .biz-card-badge {
@@ -450,6 +445,7 @@
           .biz-receipt-label {
             display: flex;
             align-items: center;
+            font-size: 0.8rem;
           }
           .biz-multiselect {
             position: relative;
@@ -468,7 +464,7 @@
             flex-wrap: wrap;
             gap: 0.3em;
             align-items: center;
-            font-size: 1rem;
+            font-size: 0.8rem;
             box-shadow: none;
           }
           .biz-multiselect .multi-select-display:focus {
@@ -567,23 +563,21 @@
             width: 100%;
           }
           .biz-total-label {
-            font-size: 1.05rem;
+            font-size: 0.8rem;
             color: #888;
             font-weight: 500;
           }
           .biz-total-amount {
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             color: #2c5530;
             font-weight: 800;
-            letter-spacing: 0.02em;
           }
 
           .biz-smallprint {
             font-size: 0.6rem;
-            color: #adadad;
+            color: #989898;
             margin-top: 0.5em;
             text-align: left;
-            line-height: 1.4;
           }
 
           .biz-info-icon {
@@ -610,7 +604,6 @@
             max-width: 320px;
             z-index: 100;
             white-space: normal;
-            line-height: 1.5;
             pointer-events: none;
           }
           .biz-info-icon:focus .biz-tooltip,
@@ -639,14 +632,13 @@
           .biz-card-price-original {
             text-decoration: line-through;
             color: #888;
-            font-size: 1.2rem;
             font-weight: 500;
+            margin-right: 0.4em;
           }
           .biz-card-price-discount {
             color: #2c5530;
             font-size: 2.8rem;
             font-weight: 800;
-            letter-spacing: 0.02em;
           }
           .biz-price-smallprint {
             font-size: 0.7rem;
@@ -883,7 +875,7 @@
                 let langTotal = 0;
                 if (langHandsOff.length || years > 1) {
                   lines.push(
-                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-Off package</span><span><span>$179</span><span class='biz-card-price-discount'>$89</span></span></div>`
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-Off package</span><span><span class="biz-card-price-original">$179</span><span class='biz-card-price-discount'>$89</span></span></div>`
                   );
                 }
                 if (langHandsOff.length) {

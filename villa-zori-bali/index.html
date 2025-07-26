@@ -1,0 +1,2786 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--
+    ═══════════════════════════════════════════════════════════════════════════════
+    Built with ❤️ for the Airbnb community | © 2025 airliftStudios.com
+
+    📧 Get Your Free Demo Website today:
+    Visit: https://airliftstudios.com
+    ═══════════════════════════════════════════════════════════════════════════════
+    -->
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta http-equiv="Content-Language" content="en" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏝️</text></svg>"
+    />
+
+    <link rel="stylesheet" href="css/fonts-local.css" />
+    <link rel="stylesheet" href="css/fontawesome.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/lang.css" />
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <title>
+      Villa Zori - 2BR Villa with Private Pool in Canggu, Bali | 5min to Beach,
+      Superhost, Guest Favorite
+    </title>
+    <meta
+      name="description"
+      content="Book Villa Zori, a peaceful 2-bedroom villa in Canggu, Bali. Private pool, tropical garden, superhost, guest favorite, 4 minutes from beaches. Perfect for families and remote work. See real guest reviews!"
+    />
+    <meta
+      name="keywords"
+      content="Villa Zori, Canggu villa, Bali villa, private pool, superhost, guest favorite, family villa, remote work, peaceful villa, tropical garden, airbnb, book villa, best villa Canggu, vacation rental, Bali accommodation"
+    />
+    <link rel="canonical" href="https://villazoribali.com/" />
+    <meta
+      property="og:title"
+      content="Villa Zori - 2BR Villa with Private Pool in Canggu, Bali | 5min to Beach, Superhost, Guest Favorite"
+    />
+    <meta
+      property="og:description"
+      content="Book Villa Zori, a peaceful 2-bedroom villa in Canggu, Bali. Private pool, tropical garden, superhost, guest favorite, 4 minutes from beaches. Perfect for families and remote work. See real guest reviews!"
+    />
+
+    <meta property="og:url" content="https://villazoribali.com/" />
+    <meta
+      property="og:image"
+      content="https://villazoribali.com/images/hero-bg.jpg"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LodgingBusiness",
+        "name": "Villa Zori",
+        "description": "Peaceful 2BR Villa in Canggu, Bali. Private pool, tropical garden, superhost, guest favorite, 4 minutes from beaches. Perfect for families and remote work.",
+        "image": "https://villazoribali.com/images/hero-bg.jpg",
+        "url": "https://villazoribali.com/",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Canggu",
+          "addressRegion": "Bali",
+          "addressCountry": "Indonesia"
+        },
+        "keywords": "Villa Zori, Canggu villa, Bali villa, private pool, superhost, guest favorite, family villa, remote work, peaceful villa, tropical garden, airbnb, book villa, best villa Canggu, vacation rental, Bali accommodation",
+        "amenityFeature": [
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Private Pool",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Tropical Garden",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "High-Speed WiFi",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Air Conditioning",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Full Kitchen",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Free Parking",
+            "value": true
+          }
+        ],
+        "starRating": {
+          "@type": "Rating",
+          "ratingValue": "5.0"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "reviewCount": "12"
+        },
+        "email": "hello@villazoribali.com"
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <nav class="container">
+        <a href="#hero" class="logo">Villa Zori</a>
+        <ul class="nav-links">
+          <li class="hide-mobile">
+            <a href="#about" data-translate="nav.about">About</a>
+          </li>
+          <li><a href="#gallery" data-translate="nav.gallery">Gallery</a></li>
+          <li class="hide-mobile-sm">
+            <a href="#reviews" data-translate="nav.reviews">Reviews</a>
+          </li>
+          <li class="hide-mobile">
+            <a href="#location" data-translate="nav.location">Location</a>
+          </li>
+          <li>
+            <div class="language-switcher">
+              <button class="language-btn" id="languageBtn">
+                <span id="currentLang">EN</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="language-dropdown" id="languageDropdown">
+                <div class="language-option active" data-lang="en">
+                  <span class="language-flag">🇬🇧</span>
+                  English
+                </div>
+                <div class="language-option" data-lang="id">
+                  <span class="language-flag">🇮🇩</span>
+                  Bahasa Indonesia
+                </div>
+                <div class="language-option" data-lang="es">
+                  <span class="language-flag">🇪🇸</span>
+                  Español
+                </div>
+                <div class="language-option" data-lang="it">
+                  <span class="language-flag">🇮🇹</span>
+                  Italiano
+                </div>
+                <div class="language-option" data-lang="de">
+                  <span class="language-flag">🇩🇪</span>
+                  Deutsch
+                </div>
+                <div class="language-option" data-lang="fr">
+                  <span class="language-flag">🇫🇷</span>
+                  Français
+                </div>
+                <div class="language-option" data-lang="ru">
+                  <span class="language-flag">🇷🇺</span>
+                  Русский
+                </div>
+                <div class="language-option" data-lang="zh">
+                  <span class="language-flag">🇨🇳</span>
+                  中文
+                </div>
+                <div class="language-option" data-lang="ko">
+                  <span class="language-flag">🇰🇷</span>
+                  한국어
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-bg-dark"></div>
+      <div class="hero-content">
+        <div class="hero-badges">
+          <span class="badge badge-superhost"
+            ><i class="fas fa-user-shield"></i>
+            <span data-translate="badges.superhost">Superhost</span></span
+          >
+          <span class="badge badge-guest-favorite"
+            ><i class="fas fa-heart"></i>
+            <span data-translate="badges.guest_favorite"
+              >Guest Favorite</span
+            ></span
+          >
+        </div>
+        <h1>Villa Zori</h1>
+        <div>
+          <span class="soft-rating-badge">
+            <span class="stars" id="hero-stars">
+              <span class="star" data-idx="0">☆</span>
+              <span class="star" data-idx="1">☆</span>
+              <span class="star" data-idx="2">☆</span>
+              <span class="star" data-idx="3">☆</span>
+              <span class="star" data-idx="4">☆</span>
+            </span>
+            <span id="hero-rating-animation-value" class="fixed-rating"
+              >0.0</span
+            >
+            <span id="airbnb-rating-value">4.95</span>
+          </span>
+        </div>
+
+        <div class="hero-details-row">
+          <span class="hero-details">
+            <span class="hero-detail-item"
+              ><span data-translate="hero.guests">4 guests</span></span
+            >
+            <span class="hero-dot">•</span>
+            <span class="hero-detail-item"
+              ><span data-translate="hero.bedrooms">2 bedrooms</span></span
+            >
+            <span class="hero-dot">•</span>
+            <span class="hero-detail-item"
+              ><span data-translate="hero.beds">2 beds</span></span
+            >
+            <span class="hero-dot">•</span>
+            <span class="hero-detail-item"
+              ><span data-translate="hero.baths">2 baths</span></span
+            >
+          </span>
+        </div>
+        <div class="hero-subtitle" data-translate="hero.subtitle">
+          Peaceful 2-Bedroom Villa with Private Pool in Canggu, Bali
+        </div>
+
+        <a
+          href="https://www.airbnb.com/rooms/1370740317977312967"
+          class="cta-button"
+          target="_blank"
+        >
+          <i class="fas fa-calendar-check"></i>
+          <span data-translate="hero.cta">Check Availability</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Floating CTA -->
+    <div class="floating-cta">
+      <a
+        href="https://www.airbnb.com/rooms/1370740317977312967"
+        class="cta-button"
+        target="_blank"
+      >
+        <i class="fas fa-calendar-check"></i>
+        <span data-translate="hero.cta">Check Availability</span>
+      </a>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h3 class="text-content" data-translate="about.title">
+              Your Peaceful Oasis in Canggu
+            </h3>
+            <p class="text-content" data-translate="about.description">
+              Looking for a place where you can breathe without missing the buzz
+              of Bali life? This peaceful villa strikes the perfect balance:
+              tucked away in nature, yet just 4 minutes by scooter from Canggu's
+              beaches, cafés, and vibrant energy.
+            </p>
+          </div>
+          <div class="about-image image-content">
+            <img
+              src="images/image-landscape-1.jpg"
+              alt="Villa Zori living room"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-swimming-pool"></i>
+            <h4 data-translate="features.pool.title">Private Pool & Garden</h4>
+            <p data-translate="features.pool.description">
+              A tranquil escape with private pool, tropical garden, and serene
+              vibes for ultimate relaxation.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <i class="fas fa-wifi"></i>
+            <h4 data-translate="features.wifi.title">Work-Friendly Setup</h4>
+            <p data-translate="features.wifi.description">
+              Fast WiFi and two desks for focus and flow—perfect for remote work
+              or streaming.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <i class="fas fa-utensils"></i>
+            <h4 data-translate="features.kitchen.title">
+              Fully Equipped Kitchen
+            </h4>
+            <p data-translate="features.kitchen.description">
+              Total comfort with fully equipped kitchen, AC in every room, and
+              all essentials included.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <h4 data-translate="features.location.title">Prime Location</h4>
+            <p data-translate="features.location.description">
+              Access roads and private parking with easy access to everything
+              Canggu has to offer.
+            </p>
+          </div>
+        </div>
+
+        <div class="amenities-section">
+          <h3 class="text-content" data-translate="amenities.title">
+            Amenities
+          </h3>
+          <div class="amenities-grid">
+            <div class="amenity-item">
+              <i class="fas fa-swimming-pool"></i>
+              <span data-translate="amenities.pool">Pool</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-wifi"></i>
+              <span data-translate="amenities.wifi">WiFi</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-laptop"></i>
+              <span data-translate="amenities.workspace"
+                >Dedicated workspace</span
+              >
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-car"></i>
+              <span data-translate="amenities.parking">Free parking</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-snowflake"></i>
+              <span data-translate="amenities.ac">Air conditioning</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-utensils"></i>
+              <span data-translate="amenities.kitchen">Kitchen</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-door-open"></i>
+              <span data-translate="amenities.patio">Private patio</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-key"></i>
+              <span data-translate="amenities.checkin">Self check-in</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-bed"></i>
+              <span data-translate="amenities.beds">2 queen beds</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-shower"></i>
+              <span data-translate="amenities.bathroom">2 bathrooms</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-coffee"></i>
+              <span data-translate="amenities.coffee">Coffee maker</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-umbrella-beach"></i>
+              <span data-translate="amenities.beach">Beach essentials</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+      <div class="container">
+        <h2 class="section-title" data-translate="gallery.title">
+          Discover Villa Zori
+        </h2>
+        <p
+          class="section-subtitle text-content"
+          data-translate="gallery.subtitle"
+        >
+          Experience the beauty and comfort of our peaceful retreat
+        </p>
+
+        <div class="gallery-grid">
+          <div class="gallery-item hero">
+            <img
+              src="images/hero-bg.jpg"
+              alt="Villa Zori pool area"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item landscape-1">
+            <img
+              src="images/image-landscape-1.jpg"
+              alt="Villa Zori living room"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-1">
+            <img
+              src="images/image-normal-1.jpg"
+              alt="Villa Zori kitchen"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-2">
+            <img
+              src="images/image-normal-2.jpg"
+              alt="Villa Zori bedroom 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item portrait-1">
+            <img
+              src="images/image-portrait-1.jpg"
+              alt="Villa Zori pool view"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-3">
+            <img
+              src="images/image-normal-3.jpg"
+              alt="Villa Zori bedroom 2"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-4">
+            <img
+              src="images/image-normal-4.jpg"
+              alt="Villa Zori bathroom 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-5">
+            <img
+              src="images/image-normal-5.jpg"
+              alt="Villa Zori bathroom 2"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-6">
+            <img
+              src="images/image-normal-6.jpg"
+              alt="Villa Zori living room view"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-7">
+            <img
+              src="images/image-normal-7.jpg"
+              alt="Villa Zori kitchen area"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-8">
+            <img
+              src="images/image-normal-8.jpg"
+              alt="Villa Zori bedroom 1 view"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item landscape-2">
+            <img
+              src="images/image-landscape-2.jpg"
+              alt="Villa Zori living room"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-9">
+            <img
+              src="images/image-normal-9.jpg"
+              alt="Villa Zori bedroom 2 view"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-10">
+            <img
+              src="images/image-normal-10.jpg"
+              alt="Villa Zori pool area"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews">
+      <div class="container">
+        <h2 class="section-title" data-translate="reviews.title">
+          What Our Guests Say
+        </h2>
+        <div class="reviews-featured">
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-avatar">O</div>
+              <div class="review-info">
+                <h4>Oscar</h4>
+                <div class="review-stars">★★★★★</div>
+              </div>
+            </div>
+            <p>
+              "If you want to stay in the center of Canggu but in a quiet and
+              peaceful place at night, then this villa is perfect for you. A
+              very cozy place with 2 bdr, a beautiful garden with a large pool,
+              perfect for 4 people. Very close to restaurants and bars, and just
+              a few minutes from the beach. The host is super kind and helpful!
+              When we come back to Canggu, we'll definitely stay here again."
+            </p>
+          </div>
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-avatar">R</div>
+              <div class="review-info">
+                <h4>Regine</h4>
+                <div class="review-stars">★★★★★</div>
+              </div>
+            </div>
+            <p>
+              "My friends and I had such a wonderful stay at this villa. The
+              place itself is beautiful, clean and super comfortable. Our host
+              was amazing! Always available to help with any questions and
+              concerns. If you're looking for a peaceful yet convenient spot in
+              Canggu, this is the place! We can't wait to return!"
+            </p>
+          </div>
+        </div>
+        <div class="reviews-scroll-container">
+          <div class="reviews-scroll-track" id="reviews-scroll-track">
+            <div class="review-mini" data-reviewer="Tanyapon">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">T</div>
+                <div>
+                  <h5>Tanyapon</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "I felt so peaceful when stay at Villa Zori. everything so
+                great, so clean and comfortable. not far from Canggu beach, that
+                is so good. can't wait to return again. Thank you so much a host
+                to welcomed, so kindly and helped me a lot."
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Julien">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">J</div>
+                <div>
+                  <h5>Julien</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Nice villa with pool. The place is spotless and roomy. The
+                kitchen is well-organised and has everything you need. The hosts
+                are responsive and take care of your needs. I wholeheartedly
+                recommend this place. I will come back!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Rema">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">R</div>
+                <div>
+                  <h5>Rema</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Had a peaceful and beautiful stay at this villa! The space was
+                clean, cozy, and surrounded by nature. Loved the pool, the calm
+                vibes, and how everything was well-prepared. Perfect for
+                relaxing and recharging. Would definitely come back!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Sarah">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">S</div>
+                <div>
+                  <h5>Sarah</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "We enjoyed our stay at Villa Zori. Ale was a great host and
+                went way beyond to help us book a driver and tour guide. He was
+                always responsive to my queries and always willing to help.
+                Looking forward to going back in the future. :)"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Eva">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">E</div>
+                <div>
+                  <h5>Eva</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "I had a happy and comfortable trip. The host texted me
+                immediately, so I was able to communicate quickly. The kitchen
+                bed and the pool were all clean. A couple of minutes away from
+                the supermarket, a beach shop. They were all convenient
+                transportation locations."
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Anne">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">A</div>
+                <div>
+                  <h5>Anne</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Everything was perfect! and it was an incredible host who
+                welcomed us and helped us a lot. We definitely recommend Villa
+                Zori, as everything was in the best order ☺️"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Jack">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">J</div>
+                <div>
+                  <h5>Jack</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Amazing spot to get some sun and touch some grass! Thanks for
+                everything"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Devina">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">D</div>
+                <div>
+                  <h5>Devina</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Super kind host!! Best location in Canggu. Worth every penny 😊
+                Will be back soon"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Adel">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">A</div>
+                <div>
+                  <h5>Adel</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Comfortable and clean villa spacious car park big swimming pool
+                big comfortable room and very helpful host. Strategic villa
+                location. Highly recommended!!! Very satisfied staying here"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Sista">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">S</div>
+                <div>
+                  <h5>Sista</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Unforgettable stay at Villa Zori! Alessandro has thought of
+                everything: airport transfers and rental scooters ready upon
+                arrival. The villa is very clean, with attention to detail and
+                equipped with every comfort. A/C in every room."
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="text-content reviews-cta">
+          <a
+            href="https://www.airbnb.com/rooms/1370740317977312967/reviews"
+            target="_blank"
+            class="cta-button"
+          >
+            <span data-translate="reviews.read_all"
+              >Read All Reviews on Airbnb</span
+            >
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="location">
+      <div class="container">
+        <h2 class="section-title" data-translate="location.title">
+          Perfect Canggu Location
+        </h2>
+
+        <div class="section-content">
+          <div>
+            <p class="text-content" data-translate="location.description">
+              Your peaceful oasis in the heart of Canggu. Escape to a serene
+              retreat, perfectly located just minutes from Canggu's best cafés,
+              restaurants, beach clubs, and gyms. Everything you need is right
+              at your doorstep!
+            </p>
+            <div class="location-highlights">
+              <div class="location-item">
+                <i class="fas fa-motorcycle"></i>
+                <div>
+                  <h4 data-translate="location.beaches.title">
+                    4 minutes to Canggu beaches
+                  </h4>
+                  <p data-translate="location.beaches.description">
+                    Quick scooter ride to world-class surf spots and beach clubs
+                  </p>
+                </div>
+              </div>
+              <div class="location-item">
+                <i class="fas fa-utensils"></i>
+                <div>
+                  <h4 data-translate="location.restaurants.title">
+                    Nearby highlights
+                  </h4>
+                  <p data-translate="location.restaurants.description">
+                    La Brisa, Nirvana, Wanderlust, Sandbar & Oldman's all within
+                    5 minutes
+                  </p>
+                </div>
+              </div>
+              <div class="location-item">
+                <i class="fas fa-shopping-cart"></i>
+                <div>
+                  <h4 data-translate="location.stores.title">
+                    Top beach clubs nearby
+                  </h4>
+                  <p data-translate="location.stores.description">
+                    Atlas, Café del Mar, and Finns just 10 minutes away
+                  </p>
+                </div>
+              </div>
+              <div class="location-item">
+                <i class="fas fa-car"></i>
+                <div>
+                  <h4 data-translate="location.parking.title">
+                    Yoga studios close by
+                  </h4>
+                  <p data-translate="location.parking.description">
+                    The Canggu Studio and Samadi just 2-5 minutes away
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="business-offering" class="biz-section">
+      <div class="biz-container">
+        <h2 class="biz-heading">Want This Website for Your Property?</h2>
+        <p class="biz-subheading">
+          Hi there! We specialize in creating stunning websites for exceptional
+          Airbnb properties, and we’re excited to share this demo we designed
+          just for you. If you’d like to make it yours, check out our packages
+          below. The site will be delivered exactly as shown here, with the
+          exception of removing this section and the demo watermark.
+        </p>
+
+        <div id="biz-discount-banner" class="biz-discount-banner-outer">
+          <div class="biz-discount-banner">
+            <span class="biz-discount-text"
+              >We are just starting and are offering <b>50% off</b> to our first
+              100 customers!</span
+            >
+          </div>
+        </div>
+        <div id="biz-calc-root" class="biz-calc-root">
+          <!-- Hands-On Package Card -->
+          <div class="biz-card">
+            <div class="biz-card-header">
+              <h3 class="biz-card-title">Hands-On Package</h3>
+            </div>
+            <div class="biz-card-desc">
+              Perfect for tech-savvy hosts who want control
+            </div>
+            <div class="biz-card-price-block">
+              <div class="biz-price-line">
+                <span class="biz-card-price-original">$99.00</span>
+              </div>
+              <div class="biz-price-line">
+                <span class="biz-card-price-discount">$49.00</span>
+                <span class="biz-price-smallprint"
+                  >Fixed price, no monthly fees</span
+                >
+              </div>
+            </div>
+            <ul class="biz-features-list">
+              <li>
+                <i class="fas fa-check biz-check"></i> Custom website design
+                tailored to your property
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i> Mobile optimization for
+                all devices
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i> Full source code
+                ownership
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i> Optimized performance and
+                SEO
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i> Technical guidance for
+                deployment
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i> Total freedom to modify
+                and host anywhere
+              </li>
+            </ul>
+            <div class="biz-card-extras-label">Extra Services</div>
+            <div class="biz-card-extras-block">
+              <div class="biz-multiselect" id="biz-multiselect-hands-on"></div>
+              <div class="biz-smallprint">
+                First translation $29, each additional +$19
+              </div>
+            </div>
+            <div id="biz-calc-details-hands-on" class="biz-receipt"></div>
+            <div class="biz-total-col" id="biz-total-col-hands-on">
+              <div class="biz-total-row">
+                <span class="biz-total-label">Total one-time payment</span>
+                <span id="biz-calc-total-hands-on" class="biz-total-amount"
+                  >$49.00</span
+                >
+              </div>
+              <span
+                id="biz-calc-monthly-hands-on"
+                class="biz-monthly-row"
+              ></span>
+            </div>
+            <a
+              id="biz-calc-order-hands-on"
+              href="https://forms.gle/hands-on-form"
+              target="_blank"
+              class="biz-order-btn"
+              >Get Hands-On</a
+            >
+            <div class="biz-smallprint">
+              Final payment for Indonesian listings will be made in Indonesian
+              Rupiah (Rp) at the current exchange rate.
+            </div>
+          </div>
+
+          <!-- Hands-Off Package Card -->
+          <div class="biz-card biz-card-featured">
+            <div class="biz-card-header">
+              <h3 class="biz-card-title">Hands-Off Package</h3>
+              <span class="biz-card-badge">Most Popular</span>
+            </div>
+            <div class="biz-card-desc">
+              Complete service – just sit back and relax
+            </div>
+            <div class="biz-card-price-block">
+              <div class="biz-price-line">
+                <span class="biz-card-price-original">$179.00</span>
+              </div>
+              <div class="biz-price-line">
+                <span class="biz-card-price-discount">$89.00</span>
+                <span class="biz-price-smallprint"
+                  >Fixed price, no monthly fees</span
+                >
+              </div>
+            </div>
+            <ul class="biz-features-list">
+              <li>
+                <i class="fas fa-check biz-check"></i> Everything in Hands-On
+                Package
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i
+                ><span id="suggested-domain"
+                  >Custom domain name registration</span
+                >
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i
+                ><span id="suggested-email">Professional email forwarding</span>
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i> 1 year up-time included
+              </li>
+              <li><i class="fas fa-check biz-check"></i> Launched for you</li>
+            </ul>
+            <div class="biz-card-extras-label">Extra Services</div>
+            <div class="biz-card-extras-block">
+              <div class="biz-multiselect" id="biz-multiselect-hands-off"></div>
+              <div class="biz-smallprint">
+                First translation $29, each additional +$19
+              </div>
+            </div>
+            <div class="biz-card-extras-note">
+              <label for="biz-years" class="biz-years-label"
+                >Secure extra up-time
+                <span
+                  class="biz-info-icon"
+                  aria-label="More info about extra up-time"
+                  role="button"
+                >
+                  <i class="fas fa-info-circle"></i>
+                  <span class="biz-tooltip" role="tooltip">
+                    Domain names cannot be bought permanently—they are only
+                    leased on a yearly basis. This extra service pays upfront to
+                    secure your domain name and hosting to ensure your website
+                    stays online for the selected period. After the selected
+                    period ends you will lose ownership of your domain name
+                    unless extended beforehand by yourself. Our trusted service
+                    provider partner is
+                    <b>Cloudflare</b>.
+                  </span>
+                </span> </label
+              ><br />
+              <select id="biz-years" class="biz-years-select">
+                <option value="1">1 year (included)</option>
+                <option value="2">2 years (+$39)</option>
+                <option value="3">3 years (+$78)</option>
+                <option value="4">4 years (+$117)</option>
+                <option value="5">5 years (+$156)</option>
+                <option value="6">6 years (+$195)</option>
+                <option value="7">7 years (+$234)</option>
+                <option value="8">8 years (+$273)</option>
+                <option value="9">9 years (+$312)</option>
+                <option value="10">10 years (+$351)</option>
+              </select>
+              <div class="biz-smallprint">
+                Includes domain name, hosting, and email forwarding.
+              </div>
+            </div>
+            <div id="biz-calc-details-hands-off" class="biz-receipt"></div>
+            <div class="biz-total-col" id="biz-total-col-hands-off">
+              <div class="biz-total-row">
+                <span class="biz-total-label">Total one-time payment</span>
+                <span id="biz-calc-total-hands-off" class="biz-total-amount"
+                  >$89.00</span
+                >
+              </div>
+              <span
+                id="biz-calc-monthly-hands-off"
+                class="biz-price-smallprint"
+              ></span>
+            </div>
+            <a
+              id="biz-calc-order-hands-off"
+              href="https://forms.gle/hands-off-form"
+              target="_blank"
+              class="biz-order-btn"
+              >Get Hands-Off</a
+            >
+            <div class="biz-smallprint">
+              Final payment for Indonesian listings will be made in Indonesian
+              Rupiah (Rp) at the current exchange rate.
+            </div>
+          </div>
+        </div>
+
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+          .biz-section {
+            background: linear-gradient(135deg, #f8f9fa 60%, #e6f0e6 100%);
+            padding: 64px 0 48px 0;
+            line-height: 1.4;
+            overflow-x: hidden;
+          }
+          .biz-section::before {
+            content: "DEMO SITE";
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            font-size: 1.2rem;
+            color: rgba(44, 85, 48, 0.25);
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 9999;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(44, 85, 48, 0.2);
+          }
+          .biz-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px;
+          }
+          .biz-heading {
+            font-family: "Playfair Display", serif;
+            font-size: 2.3rem;
+            text-align: center;
+            margin-bottom: 0.5em;
+            color: #2c5530;
+          }
+          .biz-subheading {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #444;
+            margin-bottom: 2.2em;
+          }
+          .biz-discount-banner-outer {
+            max-width: 700px;
+            margin: 0 auto 2.2em auto;
+          }
+          .biz-discount-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2c5530;
+            color: #fff;
+            font-size: 1.13rem;
+            font-weight: 600;
+            border-radius: 18px;
+            box-shadow: 0 4px 18px rgba(44, 85, 48, 0.1);
+            padding: 1.1em 1.6em;
+            margin-bottom: 2.2em;
+            text-align: center;
+            gap: 0.8em;
+          }
+          .biz-discount-banner b {
+            color: #ffeb3b;
+            font-weight: 800;
+            text-shadow: 0 2px 8px rgba(44, 85, 48, 0.1);
+          }
+          .biz-calc-root {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            gap: 1.5rem;
+          }
+          .biz-card {
+            flex: 1 1 340px;
+            min-width: 360px;
+            max-width: 400px;
+            margin: 0 1.2rem 1.5rem 1.2rem;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(44, 85, 48, 0.08);
+            padding: 2.2em 1.5em 1.5em 1.5em;
+            border: 3px solid #ffffff;
+            transition: border 0.2s, box-shadow 0.2s;
+            outline: none;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1.5em;
+          }
+          .biz-card-featured {
+            border: 3px solid #c4a47c;
+          }
+          .biz-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.7em;
+          }
+          .biz-card-title {
+            font-size: 1.3rem;
+            font-family: "Playfair Display", serif;
+            color: #2c5530;
+            margin: 0;
+          }
+          .biz-card-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c5530;
+          }
+
+          .biz-card-badge {
+            position: absolute;
+            top: -18px;
+            right: 18px;
+            background: #c4a47c;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 0.4em 1.2em;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(44, 85, 48, 0.1);
+          }
+          .biz-card-desc {
+            font-size: 0.98rem;
+            color: #666;
+            margin-bottom: 0.7em;
+          }
+          .biz-features-list {
+            margin-bottom: 1.1em;
+            padding-left: 0;
+            color: #2c5530;
+            font-size: 1.01rem;
+            list-style: none;
+          }
+          .biz-features-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.5em;
+          }
+          .biz-card-extras-label {
+            margin-bottom: 0.7em;
+            font-weight: 600;
+            color: #2c5530;
+          }
+          .biz-card-extras-block {
+            margin-bottom: 0.5em;
+          }
+          .biz-card-extras-note {
+            font-size: 0.92rem;
+            color: #888;
+            margin-top: 0.2em;
+            margin-bottom: 0.5em;
+          }
+          .biz-years-label {
+            font-size: 0.98rem;
+            color: #444;
+          }
+          .biz-years-select {
+            width: 100%;
+            margin-top: 0.3em;
+            border-radius: 7px;
+            border: 1px solid #c4a47c;
+            padding: 0.3em;
+            font-size: 0.98em;
+            height: 38px;
+          }
+          .biz-receipt {
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e6e6e6;
+            padding: 1em 1.1em;
+            font-size: 1.01rem;
+            color: #2c5530;
+            box-shadow: 0 2px 8px rgba(44, 85, 48, 0.04);
+            margin-top: 0.5em;
+            margin-bottom: 0.7em;
+          }
+          .biz-receipt-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px dashed #d2d2d2;
+            padding: 0.3em 0;
+            font-size: 1.01em;
+          }
+          .biz-receipt-line .biz-card-price-discount {
+            font-size: inherit;
+            font-weight: 800;
+          }
+          .biz-receipt-line:last-child {
+            border-bottom: none;
+          }
+          .biz-receipt-flag {
+            margin-right: 0.5em;
+            font-size: 1.15em;
+            vertical-align: -0.1em;
+          }
+          .biz-receipt-label {
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+          }
+          .biz-multiselect {
+            position: relative;
+            background: #fff;
+            border-radius: 7px;
+            box-shadow: 0 2px 8px rgba(44, 85, 48, 0.06);
+            margin-top: 0.2em;
+          }
+          .biz-multiselect .multi-select-display {
+            border: none;
+            border-radius: 7px;
+            padding: 0.4em 0.7em;
+            background: #fff;
+            min-height: 2.2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3em;
+            align-items: center;
+            font-size: 0.8rem;
+            box-shadow: none;
+          }
+          .biz-multiselect .multi-select-display:focus {
+            outline: 2px solid #c4a47c;
+            outline-offset: 2px;
+          }
+          .biz-multiselect .multi-select-dropdown {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 110%;
+            background: #fff;
+            border: 1px solid #c4a47c;
+            border-radius: 7px;
+            box-shadow: 0 4px 16px rgba(44, 85, 48, 0.1);
+            z-index: 10;
+            max-height: 180px;
+            overflow-y: auto;
+            min-width: 100%;
+          }
+          .biz-multiselect .multi-select-option {
+            padding: 0.6em 1em;
+            cursor: pointer;
+            font-size: 1em;
+            color: #2c5530;
+            transition: background 0.13s;
+            background: #fff;
+          }
+          .biz-multiselect .multi-select-option:hover,
+          .biz-multiselect .multi-select-option.selected {
+            background: #e6f0e6;
+          }
+          .biz-multiselect .multi-select-tag {
+            background: #f3e9d2;
+            color: #2c5530;
+            border-radius: 16px;
+            padding: 0.18em 0.9em 0.18em 0.7em;
+            margin-right: 0.3em;
+            margin-bottom: 0.2em;
+            display: flex;
+            align-items: center;
+            font-size: 0.98em;
+            box-shadow: 0 1px 4px rgba(44, 85, 48, 0.07);
+            border: 1px solid #e6e6e6;
+            font-weight: 500;
+          }
+          .biz-multiselect .multi-select-tag .remove-tag {
+            margin-left: 0.5em;
+            cursor: pointer;
+            font-weight: bold;
+            color: #b8956d;
+            font-size: 1.1em;
+          }
+          .biz-check {
+            color: #2c5530;
+            margin-right: 0.5em;
+            font-size: 1.1em;
+            vertical-align: -0.1em;
+            flex-shrink: 0;
+            margin-top: 0.2em;
+          }
+          .biz-order-btn {
+            display: block;
+            width: 100%;
+            background: #2c5530;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.98rem;
+            border-radius: 24px;
+            padding: 0.55em 0;
+            text-decoration: none;
+            box-shadow: 0 2px 12px rgba(44, 85, 48, 0.1);
+            transition: background 0.18s;
+            border: none;
+            margin-top: 1em;
+            margin-bottom: 0.2em;
+            text-align: center;
+          }
+          .biz-order-btn:hover {
+            background: #3a5d47;
+          }
+          .biz-total-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #c4a47c;
+            margin-bottom: 0.5em;
+            width: 100%;
+          }
+          .biz-total-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+          }
+          .biz-total-label {
+            font-size: 0.8rem;
+            color: #888;
+            font-weight: 500;
+          }
+          .biz-total-amount {
+            font-size: 2.6rem;
+            color: #2c5530;
+            font-weight: 800;
+          }
+
+          .biz-smallprint {
+            font-size: 0.6rem;
+            color: #989898;
+            margin-top: 0.5em;
+            text-align: left;
+          }
+
+          .biz-info-icon {
+            cursor: pointer;
+            position: relative;
+          }
+          .biz-info-icon i {
+            vertical-align: middle;
+          }
+          .biz-tooltip {
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 120%;
+            /* transform: translateX(-50%); */
+            background: #f3f7f5;
+            color: #000000;
+            border: 1px solid #c4a47c;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(44, 85, 48, 0.1);
+            padding: 1em 1.2em;
+            font-size: 0.98em;
+            min-width: 260px;
+            max-width: 320px;
+            z-index: 100;
+            white-space: normal;
+            pointer-events: none;
+          }
+          .biz-info-icon:focus .biz-tooltip,
+          .biz-info-icon:hover .biz-tooltip {
+            display: block;
+            pointer-events: auto;
+          }
+          .biz-tooltip b {
+            color: #c4a47c;
+            font-weight: 600;
+          }
+          .biz-card-price-block {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin: 0.7em 0 1.1em 0;
+            border-bottom: 1px solid #e6e6e6;
+            padding-bottom: 1.1em;
+          }
+          .biz-price-line {
+            display: flex;
+            align-items: baseline;
+            gap: 0.2em;
+            width: 100%;
+          }
+          .biz-card-price-original {
+            text-decoration: line-through;
+            color: #888;
+            font-weight: 500;
+            margin-right: 0.4em;
+          }
+          .biz-card-price-discount {
+            color: #2c5530;
+            font-size: 2.8rem;
+            font-weight: 800;
+          }
+          .biz-price-smallprint {
+            font-size: 0.7rem;
+            color: #666;
+          }
+          .biz-total-col .biz-price-smallprint {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 400;
+          }
+
+          @media (max-width: 768px) {
+            .biz-tooltip {
+              min-width: 240px;
+              max-width: 90vw;
+              font-size: 0.8em;
+              left: -60px;
+              transform: none;
+            }
+            .biz-card-price-block {
+              flex-direction: column;
+              align-items: flex-start;
+            }
+            .biz-card-price-original {
+              font-size: 1.1rem;
+            }
+            .biz-card-price-discount,
+            .biz-total-amount {
+              font-size: 2.6rem;
+            }
+            .biz-container {
+              padding: 0 6px;
+            }
+            #business-offering {
+              padding: 32px 0 24px 0;
+            }
+            .biz-card {
+              padding: 2em 1em 1em 1em;
+              min-width: 280px;
+              margin: 0;
+              flex: auto;
+            }
+          }
+        </style>
+        <script>
+          (function () {
+            // State
+            let selectedPackage = "hands-on";
+            let langHandsOn = [];
+            let langHandsOff = [];
+            let years = 1;
+            const langList = [
+              { code: "en", name: "English", flag: "🇬🇧" },
+              { code: "fr", name: "French", flag: "🇫🇷" },
+              { code: "de", name: "German", flag: "🇩🇪" },
+              { code: "es", name: "Spanish", flag: "🇪🇸" },
+              { code: "it", name: "Italian", flag: "🇮🇹" },
+              { code: "id", name: "Indonesian", flag: "🇮🇩" },
+              { code: "pt", name: "Portuguese", flag: "🇵🇹" },
+              { code: "nl", name: "Dutch", flag: "🇳🇱" },
+              { code: "sv", name: "Swedish", flag: "🇸🇪" },
+              { code: "ru", name: "Russian", flag: "🇷🇺" },
+            ];
+            // Elements
+            const cardOn = document.getElementById("biz-card-hands-on");
+            const cardOff = document.getElementById("biz-card-hands-off");
+            const selYears = document.getElementById("biz-years");
+            // Multiselects
+            function createMultiSelect(containerId, selectedArr, onChange) {
+              const container = document.getElementById(containerId);
+              let open = false;
+              let selected = selectedArr;
+              // Create display
+              const display = document.createElement("div");
+              display.className = "multi-select-display";
+              container.appendChild(display);
+              // Dropdown
+              const dropdown = document.createElement("div");
+              dropdown.className = "multi-select-dropdown";
+              dropdown.style.display = "none";
+              container.appendChild(dropdown);
+              // Render
+              function render() {
+                // Display tags
+                display.innerHTML = "";
+                // Always show English as first, not removable
+                const enLang = langList.find((l) => l.code === "en");
+                if (enLang) {
+                  const tag = document.createElement("span");
+                  tag.className = "multi-select-tag";
+                  tag.innerHTML = `<span class='biz-receipt-flag'>${enLang.flag}</span>${enLang.name}`;
+                  display.appendChild(tag);
+                }
+                selected.forEach((code) => {
+                  if (code === "en") return; // skip, already shown
+                  const lang = langList.find((l) => l.code === code);
+                  const tag = document.createElement("span");
+                  tag.className = "multi-select-tag";
+                  tag.innerHTML = `<span class='biz-receipt-flag'>${lang.flag}</span>${lang.name}`;
+                  const remove = document.createElement("span");
+                  remove.className = "remove-tag";
+                  remove.textContent = "×";
+                  remove.onclick = (e) => {
+                    e.stopPropagation();
+                    selected = selected.filter((c) => c !== code);
+                    onChange(selected);
+                    render();
+                  };
+                  tag.appendChild(remove);
+                  display.appendChild(tag);
+                });
+                const placeholder = document.createElement("span");
+                placeholder.style.color = "#aaa";
+                placeholder.textContent = "Select translations...";
+                display.appendChild(placeholder);
+
+                // Dropdown options (exclude English)
+                dropdown.innerHTML = "";
+                langList.forEach((lang) => {
+                  if (lang.code === "en") return;
+                  const opt = document.createElement("div");
+                  opt.className =
+                    "multi-select-option" +
+                    (selected.includes(lang.code) ? " selected" : "");
+                  opt.innerHTML = `<span class='biz-receipt-flag'>${lang.flag}</span>${lang.name}`;
+                  opt.onclick = (e) => {
+                    e.stopPropagation();
+                    if (selected.includes(lang.code)) {
+                      selected = selected.filter((c) => c !== lang.code);
+                    } else {
+                      selected = [...selected, lang.code];
+                    }
+                    onChange(selected);
+                    render();
+                  };
+                  dropdown.appendChild(opt);
+                });
+              }
+              // Open/close logic
+              function openDropdown() {
+                open = true;
+                dropdown.style.display = "block";
+              }
+              function closeDropdown() {
+                open = false;
+                dropdown.style.display = "none";
+              }
+              display.onclick = (e) => {
+                open ? closeDropdown() : openDropdown();
+              };
+              display.onblur = () => setTimeout(closeDropdown, 120);
+              render();
+            }
+            // Create multiselects
+            createMultiSelect(
+              "biz-multiselect-hands-on",
+              langHandsOn,
+              (arr) => {
+                langHandsOn = arr;
+                updateCalc("hands-on");
+              }
+            );
+            createMultiSelect(
+              "biz-multiselect-hands-off",
+              langHandsOff,
+              (arr) => {
+                langHandsOff = arr;
+                updateCalc("hands-off");
+              }
+            );
+            // Card selection
+            function selectPackage(pkg) {
+              selectedPackage = pkg;
+              // No visual selection highlight
+            }
+
+            // Years
+            selYears.addEventListener("change", () => {
+              years = parseInt(selYears.value, 10);
+              updateCalc("hands-off");
+            });
+            // Calculation logic
+            function calcLangPrice(langs) {
+              if (!langs.length) return 0;
+              return 29 + (langs.length - 1) * 19;
+            }
+            function calcYearsPrice(yrs) {
+              return (yrs - 1) * 39;
+            }
+            function updateCalc(pkg) {
+              // Hands-On
+              if (!pkg || pkg === "hands-on") {
+                let total = 49 + calcLangPrice(langHandsOn);
+                let lines = [];
+                let langTotal = 0;
+                if (langHandsOn.length) {
+                  lines.push(
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-On package</span><span><span class='biz-card-price-original'>$99</span><span class='biz-card-price-discount'>$49</span></span></div>`
+                  );
+                  langHandsOn.forEach((code, idx) => {
+                    if (code === "en") return;
+                    const lang = langList.find((l) => l.code === code);
+                    const price = langHandsOn.indexOf(code) === 0 ? 29 : 19;
+                    langTotal += price;
+                    lines.push(
+                      `<div class='biz-receipt-line'><span class='biz-receipt-label'><span class='biz-receipt-flag'>${lang.flag}</span>${lang.name}</span><span>$${price}</span></div>`
+                    );
+                  });
+                }
+                const receipt = document.getElementById(
+                  "biz-calc-details-hands-on"
+                );
+                const totalCol = document.getElementById(
+                  "biz-total-col-hands-on"
+                );
+                if (lines.length) {
+                  receipt.style.display = "";
+                  receipt.innerHTML = lines.join("");
+                  if (totalCol) totalCol.style.display = "flex";
+                } else {
+                  receipt.style.display = "none";
+                  receipt.innerHTML = "";
+                  if (totalCol) totalCol.style.display = "none";
+                }
+                document.getElementById(
+                  "biz-calc-total-hands-on"
+                ).textContent = `$${total.toFixed(2)}`;
+              }
+              // Hands-Off
+              if (!pkg || pkg === "hands-off") {
+                let total =
+                  89 + calcLangPrice(langHandsOff) + calcYearsPrice(years);
+                let lines = [];
+                let langTotal = 0;
+                if (langHandsOff.length || years > 1) {
+                  lines.push(
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-Off package</span><span><span class="biz-card-price-original">$179</span><span class='biz-card-price-discount'>$89</span></span></div>`
+                  );
+                }
+                if (langHandsOff.length) {
+                  langHandsOff.forEach((code) => {
+                    if (code === "en") return;
+                    const lang = langList.find((l) => l.code === code);
+                    const price = langHandsOff.indexOf(code) === 0 ? 29 : 19;
+                    langTotal += price;
+                    lines.push(
+                      `<div class='biz-receipt-line'><span class='biz-receipt-label'><span class='biz-receipt-flag'>${lang.flag}</span>${lang.name}</span><span>$${price}</span></div>`
+                    );
+                  });
+                }
+                if (years > 1) {
+                  lines.push(
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>${years} Year${
+                      years > 1 ? "s" : ""
+                    } Secured</span><span>$${calcYearsPrice(
+                      years
+                    )}</span></div>`
+                  );
+                }
+                const receipt = document.getElementById(
+                  "biz-calc-details-hands-off"
+                );
+                const totalCol = document.getElementById(
+                  "biz-total-col-hands-off"
+                );
+                if (lines.length) {
+                  receipt.style.display = "";
+                  receipt.innerHTML = lines.join("");
+                  if (totalCol) totalCol.style.display = "flex";
+                } else {
+                  receipt.style.display = "none";
+                  receipt.innerHTML = "";
+                  if (totalCol) totalCol.style.display = "none";
+                }
+                document.getElementById(
+                  "biz-calc-total-hands-off"
+                ).textContent = `$${total.toFixed(2)}`;
+                document.getElementById(
+                  "biz-calc-monthly-hands-off"
+                ).textContent =
+                  total > 0
+                    ? `Works out at only $${(total / (years * 12)).toFixed(
+                        2
+                      )}/month`
+                    : "";
+              }
+            }
+            // Initial state
+            updateCalc("hands-on");
+            updateCalc("hands-off");
+
+            // --- DYNAMIC GOOGLE FORM PREFILL FOR HANDS-OFF PACKAGE ---
+            function getSuggestedDomainAndEmail() {
+              // Get the folder name that contains the HTML file
+              let path = window.location.pathname;
+              // Remove trailing slash if present
+              if (path.endsWith("/")) path = path.slice(0, -1);
+              // Split path into segments
+              const segments = path.split("/").filter(Boolean);
+              // If the last segment ends with .html, get the second-to-last segment (the folder)
+              // Otherwise, get the last segment
+              let folder;
+              if (segments[segments.length - 1].match(/\.html$/)) {
+                folder = segments[segments.length - 2] || "property";
+              } else {
+                folder = segments[segments.length - 1] || "property";
+              }
+              // Remove hyphens for domain
+              const domain = folder.replace(/-/g, "") + ".com";
+              const email = "hello@" + folder.replace(/-/g, "") + ".com";
+              return { domain, email };
+            }
+
+            function buildHandsOffOrderLink() {
+              const { domain, email } = getSuggestedDomainAndEmail();
+              const baseUrl =
+                "https://docs.google.com/forms/d/e/1FAIpQLScYr-lpokldmKQn1lcZ7GwsMUWzfqndJ41-QD7yiuzPEzsVuA/viewform?usp=pp_url";
+              const params = new URLSearchParams();
+              params.append("entry.2022870313", domain);
+              params.append("entry.1556942181", email);
+              // Always include English first
+              params.append("entry.616393419", "English");
+              if (langHandsOff && langHandsOff.length) {
+                langHandsOff.forEach((code) => {
+                  if (code === "en") return;
+                  const lang = langList.find((l) => l.code === code);
+                  if (lang) params.append("entry.616393419", lang.name);
+                });
+              }
+              if (years > 1) {
+                params.append(
+                  "entry.350908315",
+                  `${years} year${years > 1 ? "s" : ""}`
+                );
+              } else {
+                params.append("entry.350908315", `1 year (Included)`);
+              }
+              return `${baseUrl}&${params.toString()}`;
+            }
+
+            // Update order button href on click
+            const orderBtnOff = document.getElementById(
+              "biz-calc-order-hands-off"
+            );
+            if (orderBtnOff) {
+              orderBtnOff.addEventListener("click", function (e) {
+                this.href = buildHandsOffOrderLink();
+              });
+            }
+
+            // Update suggested domain and email in the features list
+            function updateSuggestedDomainAndEmail() {
+              const { domain, email } = getSuggestedDomainAndEmail();
+              const domainSpan = document.getElementById("suggested-domain");
+              const emailSpan = document.getElementById("suggested-email");
+
+              if (domainSpan) {
+                domainSpan.innerHTML = `Custom domain name registration<br><span style="font-size: 0.9em; color: #666;">(example: ${domain})</span>`;
+              }
+              if (emailSpan) {
+                emailSpan.innerHTML = `Professional email forwarding<br><span style="font-size: 0.9em; color: #666;">(example: ${email})</span>`;
+              }
+            }
+
+            // Call this function when the page loads
+            document.addEventListener(
+              "DOMContentLoaded",
+              updateSuggestedDomainAndEmail
+            );
+          })();
+        </script>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-social">
+        <a
+          href="https://instagram.com/villa_zori/"
+          target="_blank"
+          aria-label="Instagram"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a href="mailto:hello@villazoribali.com" aria-label="Email"
+          ><i class="fas fa-envelope"></i
+        ></a>
+      </div>
+      <p>© 2025 Villa Zori</p>
+      <p data-translate="footer.tagline">
+        Your peaceful escape in the heart of Canggu.
+      </p>
+      <small class="footer-attribution"
+        >Website by
+        <a href="https://airliftstudios.com" target="_blank"
+          >airliftstudios.com</a
+        ></small
+      >
+    </footer>
+
+    <script>
+      // Translation System
+      const translations = {
+        en: {
+          nav: {
+            about: "About",
+            gallery: "Gallery",
+            reviews: "Reviews",
+            location: "Location",
+          },
+          badges: {
+            superhost: "Superhost",
+            guest_favorite: "Guest Favorite",
+          },
+          hero: {
+            guests: "4 guests",
+            bedrooms: "2 bedrooms",
+            beds: "2 beds",
+            baths: "2 baths",
+            subtitle:
+              "Peaceful 2-Bedroom Villa with Private Pool in Canggu, Bali",
+            cta: "Check Availability",
+          },
+          about: {
+            title: "Your Peaceful Oasis in Canggu",
+            description:
+              "Looking for a place where you can breathe without missing the buzz of Bali life? This peaceful villa strikes the perfect balance: tucked away in nature, yet just 4 minutes by scooter from Canggu's beaches, cafés, and vibrant energy.",
+          },
+          features: {
+            pool: {
+              title: "Private Pool & Garden",
+              description:
+                "A tranquil escape with private pool, tropical garden, and serene vibes for ultimate relaxation.",
+            },
+            wifi: {
+              title: "Work-Friendly Setup",
+              description:
+                "Fast WiFi and two desks for focus and flow—perfect for remote work or streaming.",
+            },
+            kitchen: {
+              title: "Fully Equipped Kitchen",
+              description:
+                "Total comfort with fully equipped kitchen, AC in every room, and all essentials included.",
+            },
+            location: {
+              title: "Prime Location",
+              description:
+                "Access roads and private parking with easy access to everything Canggu has to offer.",
+            },
+          },
+          amenities: {
+            title: "Amenities",
+            pool: "Pool",
+            wifi: "WiFi",
+            workspace: "Dedicated workspace",
+            parking: "Free parking",
+            ac: "Air conditioning",
+            kitchen: "Kitchen",
+            patio: "Private patio",
+            checkin: "Self check-in",
+            beds: "2 queen beds",
+            bathroom: "2 bathrooms",
+            coffee: "Coffee maker",
+            beach: "Beach essentials",
+          },
+          gallery: {
+            title: "Discover Villa Zori",
+            subtitle:
+              "Experience the beauty and comfort of our peaceful retreat",
+          },
+          reviews: {
+            title: "What Our Guests Say",
+            read_all: "Read All Reviews on Airbnb",
+          },
+          location: {
+            title: "Perfect Canggu Location",
+            description:
+              "Your peaceful oasis in the heart of Canggu. Escape to a serene retreat, perfectly located just minutes from Canggu's best cafés, restaurants, beach clubs, and gyms. Everything you need is right at your doorstep!",
+            beaches: {
+              title: "4 minutes to Canggu beaches",
+              description:
+                "Quick scooter ride to world-class surf spots and beach clubs",
+            },
+            restaurants: {
+              title: "Nearby highlights",
+              description:
+                "La Brisa, Nirvana, Wanderlust, Sandbar & Oldman's all within 5 minutes",
+            },
+            stores: {
+              title: "Top beach clubs nearby",
+              description:
+                "Atlas, Café del Mar, and Finns just 10 minutes away",
+            },
+            parking: {
+              title: "Yoga studios close by",
+              description: "The Canggu Studio and Samadi just 2-5 minutes away",
+            },
+          },
+          footer: {
+            tagline: "Your peaceful escape in the heart of Canggu.",
+          },
+        },
+        id: {
+          nav: {
+            about: "Tentang",
+            gallery: "Galeri",
+            reviews: "Ulasan",
+            location: "Lokasi",
+          },
+          badges: {
+            superhost: "Superhost",
+            guest_favorite: "Favorit Tamu",
+          },
+          hero: {
+            guests: "4 tamu",
+            bedrooms: "2 kamar tidur",
+            beds: "2 tempat tidur",
+            baths: "2 kamar mandi",
+            subtitle:
+              "Villa 2 Kamar Tidur yang Damai dengan Kolam Renang Pribadi di Canggu, Bali",
+            cta: "Cek Ketersediaan",
+          },
+          about: {
+            title: "Oasis Damai Anda di Canggu",
+            description:
+              "Mencari tempat di mana Anda bisa bernapas tanpa kehilangan semangat kehidupan Bali? Villa yang damai ini menawarkan keseimbangan sempurna: tersembunyi di alam, namun hanya 4 menit dengan skuter dari pantai, kafe, dan energi Canggu yang bersemangat.",
+          },
+          features: {
+            pool: {
+              title: "Kolam Renang & Taman Pribadi",
+              description:
+                "Pelarian yang tenang dengan kolam renang pribadi, taman tropis, dan suasana damai untuk relaksasi maksimal.",
+            },
+            wifi: {
+              title: "Setup Ramah Kerja",
+              description:
+                "WiFi cepat dan dua meja kerja untuk fokus dan produktivitas—sempurna untuk kerja jarak jauh atau streaming.",
+            },
+            kitchen: {
+              title: "Dapur Lengkap",
+              description:
+                "Kenyamanan total dengan dapur lengkap, AC di setiap kamar, dan semua kebutuhan tersedia.",
+            },
+            location: {
+              title: "Lokasi Strategis",
+              description:
+                "Akses jalan dan parkir pribadi dengan kemudahan akses ke semua yang ditawarkan Canggu.",
+            },
+          },
+          amenities: {
+            title: "Fasilitas",
+            pool: "Kolam renang",
+            wifi: "WiFi",
+            workspace: "Ruang kerja khusus",
+            parking: "Parkir gratis",
+            ac: "AC",
+            kitchen: "Dapur",
+            patio: "Teras pribadi",
+            checkin: "Check-in mandiri",
+            beds: "2 tempat tidur queen",
+            bathroom: "2 kamar mandi",
+            coffee: "Mesin kopi",
+            beach: "Perlengkapan pantai",
+          },
+          gallery: {
+            title: "Jelajahi Villa Zori",
+            subtitle: "Rasakan keindahan dan kenyamanan retret damai kami",
+          },
+          reviews: {
+            title: "Apa Kata Tamu Kami",
+            read_all: "Baca Semua Ulasan di Airbnb",
+          },
+          location: {
+            title: "Lokasi Canggu yang Sempurna",
+            description:
+              "Oasis damai Anda di jantung Canggu. Melarikan diri ke retret yang tenang, lokasi sempurna hanya beberapa menit dari kafe, restoran, beach club, dan gym terbaik Canggu. Semua yang Anda butuhkan ada di depan pintu!",
+            beaches: {
+              title: "4 menit ke pantai Canggu",
+              description:
+                "Perjalanan cepat dengan skuter ke spot selancar kelas dunia dan beach club",
+            },
+            restaurants: {
+              title: "Sorotan terdekat",
+              description:
+                "La Brisa, Nirvana, Wanderlust, Sandbar & Oldman's semua dalam 5 menit",
+            },
+            stores: {
+              title: "Beach club teratas di dekatnya",
+              description: "Atlas, Café del Mar, dan Finns hanya 10 menit",
+            },
+            parking: {
+              title: "Studio yoga dekat",
+              description: "The Canggu Studio dan Samadi hanya 2-5 menit",
+            },
+          },
+          footer: {
+            tagline: "Pelarian damai Anda di jantung Canggu.",
+          },
+        },
+        es: {
+          nav: {
+            about: "Acerca de",
+            gallery: "Galería",
+            reviews: "Reseñas",
+            location: "Ubicación",
+          },
+          badges: {
+            superhost: "Superhost",
+            guest_favorite: "Favorito de los huéspedes",
+          },
+          hero: {
+            guests: "4 huéspedes",
+            bedrooms: "2 habitaciones",
+            beds: "2 camas",
+            baths: "2 baños",
+            subtitle:
+              "Villa de 2 Habitaciones Tranquila con Piscina Privada en Canggu, Bali",
+            cta: "Verificar Disponibilidad",
+          },
+          about: {
+            title: "Tu Oasis Tranquilo en Canggu",
+            description:
+              "¿Buscas un lugar donde puedas respirar sin perder el bullicio de la vida de Bali? Esta villa tranquila ofrece el equilibrio perfecto: escondida en la naturaleza, pero a solo 4 minutos en moto de las playas, cafés y la energía vibrante de Canggu.",
+          },
+          features: {
+            pool: {
+              title: "Piscina y Jardín Privados",
+              description:
+                "Un escape tranquilo con piscina privada, jardín tropical y vibraciones serenas para la máxima relajación.",
+            },
+            wifi: {
+              title: "Configuración Amigable para el Trabajo",
+              description:
+                "WiFi rápido y dos escritorios para enfoque y flujo—perfecto para trabajo remoto o streaming.",
+            },
+            kitchen: {
+              title: "Cocina Completamente Equipada",
+              description:
+                "Comodidad total con cocina completamente equipada, aire acondicionado en cada habitación y todos los elementos esenciales incluidos.",
+            },
+            location: {
+              title: "Ubicación Privilegiada",
+              description:
+                "Acceso por carretera y estacionamiento privado con fácil acceso a todo lo que Canggu tiene para ofrecer.",
+            },
+          },
+          amenities: {
+            title: "Comodidades",
+            pool: "Piscina",
+            wifi: "WiFi",
+            workspace: "Espacio de trabajo dedicado",
+            parking: "Estacionamiento gratuito",
+            ac: "Aire acondicionado",
+            kitchen: "Cocina",
+            patio: "Patio privado",
+            checkin: "Check-in automático",
+            beds: "2 camas queen",
+            bathroom: "2 baños",
+            coffee: "Cafetera",
+            beach: "Artículos de playa",
+          },
+          gallery: {
+            title: "Descubre Villa Zori",
+            subtitle:
+              "Experimenta la belleza y comodidad de nuestro retiro tranquilo",
+          },
+          reviews: {
+            title: "Lo que Dicen Nuestros Huéspedes",
+            read_all: "Leer Todas las Reseñas en Airbnb",
+          },
+          location: {
+            title: "Ubicación Perfecta en Canggu",
+            description:
+              "Tu oasis tranquilo en el corazón de Canggu. Escapa a un retiro sereno, perfectamente ubicado a solo minutos de los mejores cafés, restaurantes, beach clubs y gimnasios de Canggu. ¡Todo lo que necesitas está a tu alcance!",
+            beaches: {
+              title: "4 minutos a las playas de Canggu",
+              description:
+                "Viaje rápido en moto a spots de surf de clase mundial y beach clubs",
+            },
+            restaurants: {
+              title: "Destacados cercanos",
+              description:
+                "La Brisa, Nirvana, Wanderlust, Sandbar & Oldman's todos a 5 minutos",
+            },
+            stores: {
+              title: "Beach clubs principales cerca",
+              description: "Atlas, Café del Mar y Finns a solo 10 minutos",
+            },
+            parking: {
+              title: "Estudios de yoga cerca",
+              description: "The Canggu Studio y Samadi a solo 2-5 minutos",
+            },
+          },
+          footer: {
+            tagline: "Tu escape tranquilo en el corazón de Canggu.",
+          },
+        },
+        it: {
+          nav: {
+            about: "Chi Siamo",
+            gallery: "Galleria",
+            reviews: "Recensioni",
+            location: "Posizione",
+          },
+          badges: {
+            superhost: "Superhost",
+            guest_favorite: "Preferito dagli ospiti",
+          },
+          hero: {
+            guests: "4 ospiti",
+            bedrooms: "2 camere da letto",
+            beds: "2 letti",
+            baths: "2 bagni",
+            subtitle:
+              "Villa Tranquilla di 2 Camere con Piscina Privata a Canggu, Bali",
+            cta: "Verifica Disponibilità",
+          },
+          about: {
+            title: "Il Tuo Oasi Tranquillo a Canggu",
+            description:
+              "Cerchi un posto dove puoi respirare senza perdere il brusio della vita di Bali? Questa villa tranquilla offre l'equilibrio perfetto: nascosta nella natura, ma a soli 4 minuti in scooter dalle spiagge, caffè e l'energia vibrante di Canggu.",
+          },
+          features: {
+            pool: {
+              title: "Piscina e Giardino Privati",
+              description:
+                "Un rifugio tranquillo con piscina privata, giardino tropicale e vibrazioni serene per il massimo relax.",
+            },
+            wifi: {
+              title: "Setup Adatto al Lavoro",
+              description:
+                "WiFi veloce e due scrivanie per concentrazione e produttività—perfetto per lavoro remoto o streaming.",
+            },
+            kitchen: {
+              title: "Cucina Completamente Attrezzata",
+              description:
+                "Comfort totale con cucina completamente attrezzata, aria condizionata in ogni stanza e tutti gli elementi essenziali inclusi.",
+            },
+            location: {
+              title: "Posizione Privilegiata",
+              description:
+                "Accesso stradale e parcheggio privato con facile accesso a tutto ciò che Canggu ha da offrire.",
+            },
+          },
+          amenities: {
+            title: "Servizi",
+            pool: "Piscina",
+            wifi: "WiFi",
+            workspace: "Spazio di lavoro dedicato",
+            parking: "Parcheggio gratuito",
+            ac: "Aria condizionata",
+            kitchen: "Cucina",
+            patio: "Patio privato",
+            checkin: "Check-in autonomo",
+            beds: "2 letti queen",
+            bathroom: "2 bagni",
+            coffee: "Macchina del caffè",
+            beach: "Essenziali per la spiaggia",
+          },
+          gallery: {
+            title: "Scopri Villa Zori",
+            subtitle:
+              "Sperimenta la bellezza e il comfort del nostro rifugio tranquillo",
+          },
+          reviews: {
+            title: "Cosa Dicono i Nostri Ospiti",
+            read_all: "Leggi Tutte le Recensioni su Airbnb",
+          },
+          location: {
+            title: "Posizione Perfetta a Canggu",
+            description:
+              "Il tuo oasi tranquillo nel cuore di Canggu. Fuggi in un rifugio sereno, perfettamente posizionato a soli minuti dai migliori caffè, ristoranti, beach club e palestre di Canggu. Tutto ciò che ti serve è a portata di mano!",
+            beaches: {
+              title: "4 minuti alle spiagge di Canggu",
+              description:
+                "Viaggio veloce in scooter verso spot di surf di classe mondiale e beach club",
+            },
+            restaurants: {
+              title: "Punti di interesse nelle vicinanze",
+              description:
+                "La Brisa, Nirvana, Wanderlust, Sandbar & Oldman's tutti entro 5 minuti",
+            },
+            stores: {
+              title: "Beach club principali nelle vicinanze",
+              description: "Atlas, Café del Mar e Finns a soli 10 minuti",
+            },
+            parking: {
+              title: "Studi di yoga nelle vicinanze",
+              description: "The Canggu Studio e Samadi a soli 2-5 minuti",
+            },
+          },
+          footer: {
+            tagline: "La tua fuga tranquilla nel cuore di Canggu.",
+          },
+        },
+        de: {
+          nav: {
+            about: "Über uns",
+            gallery: "Galerie",
+            reviews: "Bewertungen",
+            location: "Standort",
+          },
+          badges: {
+            superhost: "Superhost",
+            guest_favorite: "Gastfavorit",
+          },
+          hero: {
+            guests: "4 Gäste",
+            bedrooms: "2 Schlafzimmer",
+            beds: "2 Betten",
+            baths: "2 Badezimmer",
+            subtitle:
+              "Ruhige 2-Schlafzimmer-Villa mit Privatpool in Canggu, Bali",
+            cta: "Verfügbarkeit prüfen",
+          },
+          about: {
+            title: "Deine ruhige Oase in Canggu",
+            description:
+              "Suchen Sie einen Ort, an dem Sie atmen können, ohne den Trubel des Bali-Lebens zu verpassen? Diese ruhige Villa bietet die perfekte Balance: versteckt in der Natur, aber nur 4 Minuten mit dem Roller von Canggus Stränden, Cafés und lebendiger Energie entfernt.",
+          },
+          features: {
+            pool: {
+              title: "Privatpool & Garten",
+              description:
+                "Eine ruhige Flucht mit Privatpool, tropischem Garten und friedlichen Vibes für ultimative Entspannung.",
+            },
+            wifi: {
+              title: "Arbeitsfreundliches Setup",
+              description:
+                "Schnelles WiFi und zwei Schreibtische für Fokus und Flow—perfekt für Remote-Arbeit oder Streaming.",
+            },
+            kitchen: {
+              title: "Vollausgestattete Küche",
+              description:
+                "Totaler Komfort mit vollausgestatteter Küche, Klimaanlage in jedem Zimmer und allen wichtigen Dingen inklusive.",
+            },
+            location: {
+              title: "Privilegierte Lage",
+              description:
+                "Straßenzugang und privater Parkplatz mit einfachem Zugang zu allem, was Canggu zu bieten hat.",
+            },
+          },
+          amenities: {
+            title: "Ausstattung",
+            pool: "Pool",
+            wifi: "WiFi",
+            workspace: "Dedizierter Arbeitsbereich",
+            parking: "Kostenloser Parkplatz",
+            ac: "Klimaanlage",
+            kitchen: "Küche",
+            patio: "Privater Patio",
+            checkin: "Self-Check-in",
+            beds: "2 Queen-Betten",
+            bathroom: "2 Badezimmer",
+            coffee: "Kaffeemaschine",
+            beach: "Strandausstattung",
+          },
+          gallery: {
+            title: "Entdecke Villa Zori",
+            subtitle:
+              "Erlebe die Schönheit und den Komfort unseres ruhigen Rückzugsorts",
+          },
+          reviews: {
+            title: "Was unsere Gäste sagen",
+            read_all: "Alle Bewertungen auf Airbnb lesen",
+          },
+          location: {
+            title: "Perfekte Lage in Canggu",
+            description:
+              "Deine ruhige Oase im Herzen von Canggu. Flüchte in einen friedlichen Rückzugsort, perfekt gelegen nur wenige Minuten von Canggus besten Cafés, Restaurants, Beach Clubs und Fitnessstudios entfernt. Alles, was du brauchst, ist direkt vor der Tür!",
+            beaches: {
+              title: "4 Minuten zu Canggus Stränden",
+              description:
+                "Schnelle Rollerfahrt zu erstklassigen Surfspots und Beach Clubs",
+            },
+            restaurants: {
+              title: "Nahegelegene Highlights",
+              description:
+                "La Brisa, Nirvana, Wanderlust, Sandbar & Oldman's alle innerhalb von 5 Minuten",
+            },
+            stores: {
+              title: "Top Beach Clubs in der Nähe",
+              description:
+                "Atlas, Café del Mar und Finns nur 10 Minuten entfernt",
+            },
+            parking: {
+              title: "Yoga-Studios in der Nähe",
+              description:
+                "The Canggu Studio und Samadi nur 2-5 Minuten entfernt",
+            },
+          },
+          footer: {
+            tagline: "Deine ruhige Flucht im Herzen von Canggu.",
+          },
+        },
+        zh: {
+          nav: {
+            about: "关于我们",
+            gallery: "画廊",
+            reviews: "评价",
+            location: "位置",
+          },
+          badges: {
+            superhost: "超赞房东",
+            guest_favorite: "房客最爱",
+          },
+          hero: {
+            guests: "4位房客",
+            bedrooms: "2间卧室",
+            beds: "2张床",
+            baths: "2间浴室",
+            subtitle: "长谷宁静双卧室别墅，带私人泳池，巴厘岛",
+            cta: "查看可订状态",
+          },
+          about: {
+            title: "您在长谷的宁静绿洲",
+            description:
+              "寻找一个既能呼吸新鲜空气又不会错过巴厘岛生活活力的地方？这座宁静的别墅提供了完美的平衡：隐藏在自然中，但距离长谷的海滩、咖啡馆和充满活力的能量仅4分钟摩托车车程。",
+          },
+          features: {
+            pool: {
+              title: "私人泳池和花园",
+              description:
+                "拥有私人泳池、热带花园和宁静氛围的宁静避风港，让您获得极致放松。",
+            },
+            wifi: {
+              title: "适合工作的设置",
+              description:
+                "快速WiFi和两张办公桌，专注高效—完美适合远程工作或流媒体观看。",
+            },
+            kitchen: {
+              title: "设备齐全的厨房",
+              description:
+                "全面舒适，配备齐全的厨房，每个房间都有空调，包含所有必需品。",
+            },
+            location: {
+              title: "优越位置",
+              description: "道路通达和私人停车位，轻松前往长谷的所有景点。",
+            },
+          },
+          amenities: {
+            title: "设施",
+            pool: "泳池",
+            wifi: "WiFi",
+            workspace: "专用工作空间",
+            parking: "免费停车",
+            ac: "空调",
+            kitchen: "厨房",
+            patio: "私人露台",
+            checkin: "自助入住",
+            beds: "2张大床",
+            bathroom: "2间浴室",
+            coffee: "咖啡机",
+            beach: "海滩用品",
+          },
+          gallery: {
+            title: "探索佐里别墅",
+            subtitle: "体验我们宁静度假胜地的美丽和舒适",
+          },
+          reviews: {
+            title: "客人评价",
+            read_all: "在爱彼迎上查看所有评价",
+          },
+          location: {
+            title: "长谷完美位置",
+            description:
+              "您在长谷中心的宁静绿洲。逃离到宁静的度假胜地，完美地位于距离长谷最好的咖啡馆、餐厅、海滩俱乐部和健身房仅几分钟路程。您需要的一切都在家门口！",
+            beaches: {
+              title: "距离长谷海滩4分钟",
+              description: "快速摩托车前往世界级冲浪点和海滩俱乐部",
+            },
+            restaurants: {
+              title: "附近亮点",
+              description:
+                "La Brisa、Nirvana、Wanderlust、Sandbar & Oldman's都在5分钟内",
+            },
+            stores: {
+              title: "附近顶级海滩俱乐部",
+              description: "Atlas、Café del Mar和Finns仅10分钟路程",
+            },
+            parking: {
+              title: "附近瑜伽工作室",
+              description: "The Canggu Studio和Samadi仅2-5分钟路程",
+            },
+          },
+          footer: {
+            tagline: "您在长谷中心的宁静避风港。",
+          },
+        },
+        ko: {
+          nav: {
+            about: "소개",
+            gallery: "갤러리",
+            reviews: "리뷰",
+            location: "위치",
+          },
+          badges: {
+            superhost: "슈퍼호스트",
+            guest_favorite: "게스트 선호",
+          },
+          hero: {
+            guests: "게스트 4명",
+            bedrooms: "침실 2개",
+            beds: "침대 2개",
+            baths: "욕실 2개",
+            subtitle: "발리 창구의 프라이빗 풀이 있는 평화로운 2베드룸 빌라",
+            cta: "예약 가능 여부 확인",
+          },
+          about: {
+            title: "창구에서의 평화로운 오아시스",
+            description:
+              "발리 생활의 활기를 놓치지 않으면서도 숨 쉴 수 있는 곳을 찾고 계신가요? 이 평화로운 빌라는 완벽한 균형을 제공합니다: 자연 속에 숨어있지만 창구의 해변, 카페, 활기찬 에너지까지 스쿠터로 단 4분 거리입니다.",
+          },
+          features: {
+            pool: {
+              title: "프라이빗 풀 & 정원",
+              description:
+                "프라이빗 풀, 열대 정원, 평화로운 분위기로 궁극적인 휴식을 위한 고요한 탈출구.",
+            },
+            wifi: {
+              title: "업무 친화적 설정",
+              description:
+                "빠른 WiFi와 집중과 흐름을 위한 두 개의 책상—원격 근무나 스트리밍에 완벽합니다.",
+            },
+            kitchen: {
+              title: "완비된 주방",
+              description:
+                "완비된 주방, 모든 방의 에어컨, 모든 필수품이 포함된 완전한 편안함.",
+            },
+            location: {
+              title: "프리미엄 위치",
+              description:
+                "도로 접근과 프라이빗 주차장으로 창구가 제공하는 모든 것에 쉽게 접근할 수 있습니다.",
+            },
+          },
+          amenities: {
+            title: "편의시설",
+            pool: "수영장",
+            wifi: "WiFi",
+            workspace: "전용 작업 공간",
+            parking: "무료 주차",
+            ac: "에어컨",
+            kitchen: "주방",
+            patio: "프라이빗 파티오",
+            checkin: "셀프 체크인",
+            beds: "퀸 사이즈 침대 2개",
+            bathroom: "욕실 2개",
+            coffee: "커피 머신",
+            beach: "해변 필수품",
+          },
+          gallery: {
+            title: "빌라 조리 탐험",
+            subtitle: "우리의 평화로운 휴양지의 아름다움과 편안함을 경험하세요",
+          },
+          reviews: {
+            title: "게스트들의 이야기",
+            read_all: "에어비앤비에서 모든 리뷰 보기",
+          },
+          location: {
+            title: "창구의 완벽한 위치",
+            description:
+              "창구 중심부의 평화로운 오아시스. 창구 최고의 카페, 레스토랑, 비치 클럽, 체육관에서 단 몇 분 거리에 완벽하게 위치한 고요한 휴양지로 탈출하세요. 필요한 모든 것이 문 앞에 있습니다!",
+            beaches: {
+              title: "창구 해변까지 4분",
+              description:
+                "세계적인 서핑 스팟과 비치 클럽까지 빠른 스쿠터 여행",
+            },
+            restaurants: {
+              title: "주변 하이라이트",
+              description:
+                "La Brisa, Nirvana, Wanderlust, Sandbar & Oldman's 모두 5분 내",
+            },
+            stores: {
+              title: "주변 최고 비치 클럽",
+              description: "Atlas, Café del Mar, Finns 단 10분 거리",
+            },
+            parking: {
+              title: "주변 요가 스튜디오",
+              description: "The Canggu Studio와 Samadi 단 2-5분 거리",
+            },
+          },
+          footer: {
+            tagline: "창구 중심부의 평화로운 탈출구.",
+          },
+        },
+        fr: {
+          nav: {
+            about: "À propos",
+            gallery: "Galerie",
+            reviews: "Avis",
+            location: "Emplacement",
+          },
+          badges: {
+            superhost: "Superhost",
+            guest_favorite: "Favori des voyageurs",
+          },
+          hero: {
+            guests: "4 voyageurs",
+            bedrooms: "2 chambres",
+            beds: "2 lits",
+            baths: "2 salles de bain",
+            subtitle:
+              "Villa paisible de 2 chambres avec piscine privée à Canggu, Bali",
+            cta: "Vérifier la disponibilité",
+          },
+          about: {
+            title: "Votre oasis paisible à Canggu",
+            description:
+              "Vous cherchez un endroit où vous pouvez respirer sans manquer l'effervescence de la vie balinaise ? Cette villa paisible offre l'équilibre parfait : cachée dans la nature, mais à seulement 4 minutes en scooter des plages, cafés et de l'énergie vibrante de Canggu.",
+          },
+          features: {
+            pool: {
+              title: "Piscine et jardin privés",
+              description:
+                "Un refuge paisible avec piscine privée, jardin tropical et ambiance sereine pour une relaxation ultime.",
+            },
+            wifi: {
+              title: "Configuration adaptée au travail",
+              description:
+                "WiFi rapide et deux bureaux pour la concentration et la productivité—parfait pour le télétravail ou le streaming.",
+            },
+            kitchen: {
+              title: "Cuisine entièrement équipée",
+              description:
+                "Confort total avec cuisine entièrement équipée, climatisation dans chaque pièce et tous les essentiels inclus.",
+            },
+            location: {
+              title: "Emplacement privilégié",
+              description:
+                "Accès routier et parking privé avec accès facile à tout ce que Canggu a à offrir.",
+            },
+          },
+          amenities: {
+            title: "Équipements",
+            pool: "Piscine",
+            wifi: "WiFi",
+            workspace: "Espace de travail dédié",
+            parking: "Parking gratuit",
+            ac: "Climatisation",
+            kitchen: "Cuisine",
+            patio: "Patio privé",
+            checkin: "Arrivée autonome",
+            beds: "2 lits queen",
+            bathroom: "2 salles de bain",
+            coffee: "Machine à café",
+            beach: "Essentiels de plage",
+          },
+          gallery: {
+            title: "Découvrez Villa Zori",
+            subtitle:
+              "Découvrez la beauté et le confort de notre refuge paisible",
+          },
+          reviews: {
+            title: "Ce que disent nos voyageurs",
+            read_all: "Lire tous les avis sur Airbnb",
+          },
+          location: {
+            title: "Emplacement parfait à Canggu",
+            description:
+              "Votre oasis paisible au cœur de Canggu. Évadez-vous dans un refuge serein, parfaitement situé à quelques minutes des meilleurs cafés, restaurants, beach clubs et salles de sport de Canggu. Tout ce dont vous avez besoin est à portée de main !",
+            beaches: {
+              title: "4 minutes des plages de Canggu",
+              description:
+                "Trajet rapide en scooter vers des spots de surf de classe mondiale et des beach clubs",
+            },
+            restaurants: {
+              title: "Points d'intérêt à proximité",
+              description:
+                "La Brisa, Nirvana, Wanderlust, Sandbar & Oldman's tous à 5 minutes",
+            },
+            stores: {
+              title: "Meilleurs beach clubs à proximité",
+              description:
+                "Atlas, Café del Mar et Finns à seulement 10 minutes",
+            },
+            parking: {
+              title: "Studios de yoga à proximité",
+              description:
+                "The Canggu Studio et Samadi à seulement 2-5 minutes",
+            },
+          },
+          footer: {
+            tagline: "Votre évasion paisible au cœur de Canggu.",
+          },
+        },
+        ru: {
+          nav: {
+            about: "О нас",
+            gallery: "Галерея",
+            reviews: "Отзывы",
+            location: "Расположение",
+          },
+          badges: {
+            superhost: "Суперхост",
+            guest_favorite: "Избранное гостей",
+          },
+          hero: {
+            guests: "4 гостя",
+            bedrooms: "2 спальни",
+            beds: "2 кровати",
+            baths: "2 ванные",
+            subtitle:
+              "Спокойная вилла с 2 спальнями и частным бассейном в Чангу, Бали",
+            cta: "Проверить доступность",
+          },
+          about: {
+            title: "Ваш спокойный оазис в Чангу",
+            description:
+              "Ищете место, где можно дышать, не теряя суеты жизни на Бали? Эта спокойная вилла предлагает идеальный баланс: спрятана в природе, но всего в 4 минутах на скутере от пляжей, кафе и яркой энергии Чангу.",
+          },
+          features: {
+            pool: {
+              title: "Частный бассейн и сад",
+              description:
+                "Спокойное убежище с частным бассейном, тропическим садом и безмятежной атмосферой для максимального расслабления.",
+            },
+            wifi: {
+              title: "Рабочее пространство",
+              description:
+                "Быстрый WiFi и два рабочих стола для концентрации и продуктивности—идеально для удаленной работы или стриминга.",
+            },
+            kitchen: {
+              title: "Полностью оборудованная кухня",
+              description:
+                "Полный комфорт с полностью оборудованной кухней, кондиционером в каждой комнате и всеми необходимыми вещами.",
+            },
+            location: {
+              title: "Привилегированное расположение",
+              description:
+                "Дорожный доступ и частная парковка с легким доступом ко всему, что предлагает Чангу.",
+            },
+          },
+          amenities: {
+            title: "Удобства",
+            pool: "Бассейн",
+            wifi: "WiFi",
+            workspace: "Выделенное рабочее пространство",
+            parking: "Бесплатная парковка",
+            ac: "Кондиционер",
+            kitchen: "Кухня",
+            patio: "Частная терраса",
+            checkin: "Самостоятельное прибытие",
+            beds: "2 кровати размера queen",
+            bathroom: "2 ванные",
+            coffee: "Кофемашина",
+            beach: "Пляжные принадлежности",
+          },
+          gallery: {
+            title: "Откройте для себя Виллу Зори",
+            subtitle: "Познайте красоту и комфорт нашего спокойного убежища",
+          },
+          reviews: {
+            title: "Что говорят наши гости",
+            read_all: "Читать все отзывы на Airbnb",
+          },
+          location: {
+            title: "Идеальное расположение в Чангу",
+            description:
+              "Ваш спокойный оазис в сердце Чангу. Сбегите в безмятежное убежище, идеально расположенное всего в нескольких минутах от лучших кафе, ресторанов, пляжных клубов и спортзалов Чангу. Все, что вам нужно, находится под рукой!",
+            beaches: {
+              title: "4 минуты до пляжей Чангу",
+              description:
+                "Быстрая поездка на скутере к мировым сёрф-спотам и пляжным клубам",
+            },
+            restaurants: {
+              title: "Близлежащие достопримечательности",
+              description:
+                "La Brisa, Nirvana, Wanderlust, Sandbar & Oldman's все в пределах 5 минут",
+            },
+            stores: {
+              title: "Лучшие пляжные клубы поблизости",
+              description: "Atlas, Café del Mar и Finns всего в 10 минутах",
+            },
+            parking: {
+              title: "Студии йоги поблизости",
+              description: "The Canggu Studio и Samadi всего в 2-5 минутах",
+            },
+          },
+          footer: {
+            tagline: "Ваш спокойный побег в сердце Чангу.",
+          },
+        },
+      };
+
+      let currentLanguage = "en";
+
+      function translatePage(lang) {
+        currentLanguage = lang;
+        const langData = translations[lang];
+
+        if (!langData) return;
+
+        // Update all elements with data-translate attribute
+        document.querySelectorAll("[data-translate]").forEach((element) => {
+          const key = element.getAttribute("data-translate");
+          const keys = key.split(".");
+          let value = langData;
+
+          for (const k of keys) {
+            if (value && value[k]) {
+              value = value[k];
+            } else {
+              value = null;
+              break;
+            }
+          }
+
+          if (value) {
+            element.textContent = value;
+          }
+        });
+
+        // Update language button
+        const currentLangSpan = document.getElementById("currentLang");
+        if (currentLangSpan) {
+          currentLangSpan.textContent = lang.toUpperCase();
+        }
+
+        // Update active language option
+        document.querySelectorAll(".language-option").forEach((option) => {
+          option.classList.remove("active");
+        });
+        document.querySelector(`[data-lang="${lang}"]`).classList.add("active");
+
+        // Update HTML lang attribute
+        document.documentElement.lang = lang;
+
+        // Save language preference
+        localStorage.setItem("preferredLanguage", lang);
+      }
+
+      // Get language from URL parameter
+      function getLanguageFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get("language");
+      }
+
+      // Update URL with language parameter
+      function updateURLWithLanguage(lang) {
+        const url = new URL(window.location);
+        url.searchParams.set("language", lang);
+        window.history.replaceState({}, "", url);
+      }
+
+      // Language switcher functionality
+      function initLanguageSwitcher() {
+        const languageBtn = document.getElementById("languageBtn");
+        const languageDropdown = document.getElementById("languageDropdown");
+
+        if (languageBtn && languageDropdown) {
+          languageBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            languageBtn.classList.toggle("active");
+            languageDropdown.classList.toggle("show");
+          });
+
+          // Close dropdown when clicking outside
+          document.addEventListener("click", () => {
+            languageBtn.classList.remove("active");
+            languageDropdown.classList.remove("show");
+          });
+
+          // Language option clicks
+          document.querySelectorAll(".language-option").forEach((option) => {
+            option.addEventListener("click", (e) => {
+              e.stopPropagation();
+              const lang = option.getAttribute("data-lang");
+              translatePage(lang);
+              updateURLWithLanguage(lang);
+              languageBtn.classList.remove("active");
+              languageDropdown.classList.remove("show");
+            });
+          });
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize language switcher
+        initLanguageSwitcher();
+
+        // Check for language in URL first, then localStorage
+        const urlLanguage = getLanguageFromURL();
+        const savedLanguage = localStorage.getItem("preferredLanguage");
+
+        let languageToUse = "en"; // default
+
+        if (urlLanguage && translations[urlLanguage]) {
+          languageToUse = urlLanguage;
+          updateURLWithLanguage(urlLanguage); // Ensure URL is updated
+        } else if (savedLanguage && translations[savedLanguage]) {
+          languageToUse = savedLanguage;
+        }
+
+        translatePage(languageToUse);
+      });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
