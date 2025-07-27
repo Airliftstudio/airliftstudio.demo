@@ -1,7 +1,7 @@
 # _redirects
 / /en/ 301
 /en/* /index.html 200
-/fr/* /villa-lespoir-bali/index.html 200
+/villa-lespoir-bali/fr/* /villa-lespoir-bali/index.html 200
 /id/* /index.html 200
 /es/* /index.html 200
 /it/* /index.html 200
