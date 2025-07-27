@@ -10,7 +10,7 @@ Structure compelling content and copy that drives conversions to the Airbnb list
 
 ## Website content
 - The current index.html in the project folder is an example of a website for an another Airbnb listing. Read the index.html file to understand its structure.
-- Make changes directly in the index.html to replace the content with the new Airbnb listing data from listing.md.
+- Make changes directly in the index.html to replace the content with the new Airbnb listing data from listing.md section by section by following the specific instructions here.
 - Make sure no property specific text from the original example is kept.
 - Replace all images with the new images from this Airbnb listing. Make sure all the images from the new Airbnb listing are added to the gallery section (see ### Gallery Section).
 - Make sure all links to Airbnb have the updated Airbnb ID (https://www.airbnb.com/rooms/[id])
@@ -30,7 +30,7 @@ Structure compelling content and copy that drives conversions to the Airbnb list
 - **Accuracy first**: All content based on actual listing information
 
 ## Specific instructions for sectional content rewrite
-Instructions how to rewrite the html content from top to bottom section by section.
+Instructions how to rewrite the html content from top to bottom section by section. Do not try to update the whole index.html in one go. Use these rules and go section by section.
 
 ### <head> tag
 - Replace the whole <title>
