@@ -1,2 +1,7 @@
 # _redirects
 /villa-lespoir-bali/it/* /villa-lespoir-bali/ 200
+
+/villa-lespoir-bali/css/* /villa-lespoir-bali/css/:splat 200
+/villa-lespoir-bali/js/* /villa-lespoir-bali/js/:splat 200
+/villa-lespoir-bali/images/* /villa-lespoir-bali/images/:splat 200
+/villa-lespoir-bali/webfonts/* /villa-lespoir-bali/webfonts/:splat 200
