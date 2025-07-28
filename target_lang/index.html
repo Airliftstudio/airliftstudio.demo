@@ -53,7 +53,12 @@
       content="https://villazori.com/images/hero-bg.jpg"
     />
 
-    <script type="application/ld+json">
+    <!-- Hreflang tags for international SEO -->
+    <link rel="alternate" hreflang="en" href="https://villazori.com/en/" />
+    <link rel="alternate" hreflang="fr" href="https://villazori.com/fr/" />
+    <link rel="alternate" hreflang="x-default" href="https://villazori.com/" />
+
+    <script type="application/ld+json" id="structured-data">
       {
         "@context": "https://schema.org",
         "@type": "LodgingBusiness",
@@ -869,6 +874,35 @@
           footer: {
             tagline: "Your tropical escape in the heart of Canggu.",
           },
+          meta: {
+            locale: "en_US",
+            language: "English",
+            title:
+              "Villa Zori - Luxury 2BR Villa in Canggu, Bali | Private Pool, Superhost, Guest Favorite",
+            description:
+              "Book Villa Zori, a 5-star rated 2-bedroom villa in Canggu, Bali. Private pool, tropical garden, superhost, guest favorite, 4 minutes from beaches. Perfect for families and remote work. See real guest reviews!",
+            keywords:
+              "Villa Zori, Canggu villa, Bali villa, private pool, superhost, guest favorite, family villa, remote work, luxury villa, tropical garden, airbnb, book villa, best villa Canggu, vacation rental, Bali accommodation",
+            og_title:
+              "Villa Zori - Luxury 2BR Villa in Canggu, Bali | Private Pool, Superhost, Guest Favorite",
+            og_description:
+              "Book Villa Zori, a 5-star rated 2-bedroom villa in Canggu, Bali. Private pool, tropical garden, superhost, guest favorite, 4 minutes from beaches. Perfect for families and remote work. See real guest reviews!",
+          },
+          structuredData: {
+            description:
+              "Luxury 2BR Villa in Canggu, Bali. Private pool, tropical garden, superhost, guest favorite, 4 minutes from beaches. Perfect for families and remote work.",
+            addressCountry: "Indonesia",
+            keywords:
+              "Villa Zori, Canggu villa, Bali villa, private pool, superhost, guest favorite, family villa, remote work, luxury villa, tropical garden, airbnb, book villa, best villa Canggu, vacation rental, Bali accommodation",
+            amenityNames: [
+              "Private Pool",
+              "Tropical Garden",
+              "High-Speed WiFi",
+              "Air Conditioning",
+              "Full Kitchen",
+              "Free Parking",
+            ],
+          },
         },
         fr: {
           nav: {
@@ -967,10 +1001,138 @@
           footer: {
             tagline: "Votre échappée tropicale au cœur de Canggu.",
           },
+          meta: {
+            locale: "fr_FR",
+            language: "French",
+            title:
+              "Villa Zori - Villa de luxe 2 chambres à Canggu, Bali | Piscine privée, Superhost, Favori des voyageurs",
+            description:
+              "Réservez Villa Zori, une villa 2 chambres 5 étoiles à Canggu, Bali. Piscine privée, jardin tropical, superhost, favori des voyageurs, 4 minutes des plages. Parfait pour les familles et le télétravail. Voir les vrais avis clients !",
+            keywords:
+              "Villa Zori, villa Canggu, villa Bali, piscine privée, superhost, favori des voyageurs, villa familiale, télétravail, villa de luxe, jardin tropical, airbnb, réserver villa, meilleure villa Canggu, location de vacances, hébergement Bali",
+            og_title:
+              "Villa Zori - Villa de luxe 2 chambres à Canggu, Bali | Piscine privée, Superhost, Favori des voyageurs",
+            og_description:
+              "Réservez Villa Zori, une villa 2 chambres 5 étoiles à Canggu, Bali. Piscine privée, jardin tropical, superhost, favori des voyageurs, 4 minutes des plages. Parfait pour les familles et le télétravail. Voir les vrais avis clients !",
+          },
+          structuredData: {
+            description:
+              "Villa de luxe 2 chambres à Canggu, Bali. Piscine privée, jardin tropical, superhost, favori des voyageurs, 4 minutes des plages. Parfait pour les familles et le télétravail.",
+            addressCountry: "Indonésie",
+            keywords:
+              "Villa Zori, villa Canggu, villa Bali, piscine privée, superhost, favori des voyageurs, villa familiale, télétravail, villa de luxe, jardin tropical, airbnb, réserver villa, meilleure villa Canggu, location de vacances, hébergement Bali",
+            amenityNames: [
+              "Piscine privée",
+              "Jardin tropical",
+              "WiFi haute vitesse",
+              "Climatisation",
+              "Cuisine complète",
+              "Parking gratuit",
+            ],
+          },
         },
       };
 
       let currentLanguage = "en";
+      let supportedLanguages = Object.keys(translations);
+
+      // Update meta tags based on language
+      function updateMetaTags(lang) {
+        const langData = translations[lang];
+        if (!langData || !langData.meta) return;
+
+        const meta = langData.meta;
+
+        // Update title
+        document.title = meta.title;
+
+        // Update meta description
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute("content", meta.description);
+
+        // Update meta keywords
+        const metaKeywords = document.querySelector('meta[name="keywords"]');
+        if (metaKeywords) metaKeywords.setAttribute("content", meta.keywords);
+
+        // Update og:title
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) ogTitle.setAttribute("content", meta.og_title);
+
+        // Update og:description
+        const ogDesc = document.querySelector(
+          'meta[property="og:description"]'
+        );
+        if (ogDesc) ogDesc.setAttribute("content", meta.og_description);
+
+        // Update og:url with language code
+        const ogUrl = document.querySelector('meta[property="og:url"]');
+        if (ogUrl) {
+          let baseUrl = ogUrl
+            .getAttribute("content")
+            .replace(/\/[a-z]{2}\/?$/, "");
+          baseUrl = baseUrl.replace(/\/$/, "");
+          const langUrl = lang === "en" ? `${baseUrl}/` : `${baseUrl}/${lang}/`;
+          ogUrl.setAttribute("content", langUrl);
+        }
+        const languageMeta = document.querySelector('meta[name="language"]');
+        if (languageMeta) {
+          languageMeta.setAttribute("content", meta.language);
+        }
+        const ogLocale = document.querySelector('meta[property="og:locale"]');
+        if (ogLocale) {
+          ogLocale.setAttribute("content", meta.locale);
+        }
+        const contentLanguage = document.querySelector(
+          'meta[http-equiv="Content-Language"]'
+        );
+        if (contentLanguage) {
+          contentLanguage.setAttribute("content", lang);
+        }
+      }
+
+      // Update structured data based on language
+      function updateStructuredData(lang) {
+        const langData = translations[lang];
+        if (!langData || !langData.structuredData) {
+          console.warn("No structured data found for language:", lang);
+          return;
+        }
+
+        const scriptElement = document.getElementById("structured-data");
+        if (!scriptElement) return;
+
+        try {
+          // Parse the existing structured data
+          const existingData = JSON.parse(scriptElement.textContent);
+
+          // Update only the fields that change
+          existingData.description = langData.structuredData.description;
+          existingData.address.addressCountry =
+            langData.structuredData.addressCountry;
+          existingData.keywords = langData.structuredData.keywords;
+          existingData.amenityFeature =
+            langData.structuredData.amenityNames.map((name) => ({
+              "@type": "LocationFeatureSpecification",
+              name: name,
+              value: true,
+            }));
+
+          // Update URL to match language
+          let baseUrl = existingData.url.replace(/\/[a-z]{2}\/?$/, "");
+          baseUrl = baseUrl.replace(/\/$/, "");
+          existingData.url =
+            lang === "en" ? `${baseUrl}/` : `${baseUrl}/${lang}/`;
+
+          // Update the script content
+          scriptElement.textContent = JSON.stringify(existingData, null, 2);
+          console.log(
+            "Structured data updated successfully for language:",
+            lang
+          );
+        } catch (error) {
+          console.warn("Error updating structured data:", error);
+        }
+      }
 
       function translatePage(lang) {
         currentLanguage = lang;
@@ -1013,6 +1175,12 @@
         // Update HTML lang attribute
         document.documentElement.lang = lang;
 
+        // Update meta tags
+        updateMetaTags(lang);
+
+        // Update structured data
+        updateStructuredData(lang);
+
         // Save language preference
         localStorage.setItem("preferredLanguage", lang);
       }
@@ -1023,7 +1191,9 @@
         console.log("Current path:", path); // Debug log
 
         // More flexible regex that handles various path formats
-        const langMatch = path.match(/^\/(en|fr)(\/.*)?$/);
+        const langMatch = path.match(
+          new RegExp(`^/(${supportedLanguages.join("|")})(\/.*)?$`)
+        );
         console.log("Language match:", langMatch); // Debug log
         const result = langMatch ? langMatch[1] : null;
         console.log("Detected language:", result); // Debug log
@@ -1037,11 +1207,14 @@
         const currentHash = window.location.hash;
 
         // Remove any existing language prefix
-        const pathWithoutLang = currentPath.replace(/^\/(en|fr)(\/.*)?$/, "/");
+        const pathWithoutLang = currentPath.replace(
+          new RegExp(`^/(${supportedLanguages.join("|")})(\/.*)?$`),
+          "/"
+        );
 
         // If we're switching to a language, add the prefix
         if (lang && lang !== "en") {
-          const newPath = `/${lang}${
+          const newPath = `/${lang}/${
             pathWithoutLang === "/" ? "" : pathWithoutLang
           }`;
           window.history.replaceState(
