@@ -282,7 +282,7 @@ function initLang() {
   initLanguageSwitcher();
 
   // Update hreflang tags for current URL structure
-  updateHreflangTags();
+  // updateHreflangTags();
 
   // Check for language in URL path first, then localStorage
   const urlLanguage = getLanguageFromURL();
