@@ -1020,8 +1020,14 @@
       // Get language from URL path
       function getLanguageFromURL() {
         const path = window.location.pathname;
-        const langMatch = path.match(/^\/(en|fr)(\/|$)/);
-        return langMatch ? langMatch[1] : null;
+        console.log("Current path:", path); // Debug log
+
+        // More flexible regex that handles various path formats
+        const langMatch = path.match(/^\/(en|fr)(\/.*)?$/);
+        console.log("Language match:", langMatch); // Debug log
+        const result = langMatch ? langMatch[1] : null;
+        console.log("Detected language:", result); // Debug log
+        return result;
       }
 
       // Update URL with language path
@@ -1031,7 +1037,7 @@
         const currentHash = window.location.hash;
 
         // Remove any existing language prefix
-        const pathWithoutLang = currentPath.replace(/^\/(en|fr)(\/|$)/, "/");
+        const pathWithoutLang = currentPath.replace(/^\/(en|fr)(\/.*)?$/, "/");
 
         // If we're switching to a language, add the prefix
         if (lang && lang !== "en") {
@@ -1100,15 +1106,22 @@
         const urlLanguage = getLanguageFromURL();
         const savedLanguage = localStorage.getItem("preferredLanguage");
 
+        console.log("URL Language:", urlLanguage); // Debug log
+        console.log("Saved Language:", savedLanguage); // Debug log
+
         let languageToUse = "en"; // default
 
         if (urlLanguage && translations[urlLanguage]) {
           languageToUse = urlLanguage;
+          console.log("Using URL language:", languageToUse); // Debug log
           // Don't update URL here as it's already correct
         } else if (savedLanguage && translations[savedLanguage]) {
           languageToUse = savedLanguage;
+          console.log("Using saved language:", languageToUse); // Debug log
           // Update URL to reflect the saved language preference
           updateURLWithLanguage(savedLanguage);
+        } else {
+          console.log("Using default language:", languageToUse); // Debug log
         }
 
         translatePage(languageToUse);
