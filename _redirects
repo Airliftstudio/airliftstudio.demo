@@ -1,16 +1,12 @@
-# _redirects for villa-lespoir-bali subfolder
+# _redirects for subdirectory language handling
 
-
-#Detta behöver replikeras i ett final post build script så vi har rätt folder name..
-#Kan jag bara köra target_lang/fr/* /target_lang/:splat 200 ?? eller måste varje subfolder redirectas..
-# target_lang/_redirects
-##default
-/target_lang/* /target_lang/index.html 200 
-##fr
-/target_lang/fr/* /target_lang/:splat 200
-/target_lang/en/* /target_lang/:splat 200
-
-
+# Villa Lestari Ubud redirects
 /villa-lestari-ubud/* /villa-lestari-ubud/index.html 200 
-/villa-lestari-ubud/es/* /villa-lestari-ubud/:splat 200
+/villa-lestari-ubud/en/* /villa-lestari-ubud/:splat 200
 /villa-lestari-ubud/sv/* /villa-lestari-ubud/:splat 200
+/villa-lestari-ubud/es/* /villa-lestari-ubud/:splat 200
+
+# Target language redirects (for reference)
+/target_lang/* /target_lang/index.html 200 
+/target_lang/en/* /target_lang/:splat 200
+/target_lang/fr/* /target_lang/:splat 200

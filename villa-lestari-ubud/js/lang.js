@@ -13,6 +13,31 @@ function loadTranslations() {
   initLang();
 }
 
+// Update hreflang tags for subdirectory deployment
+function updateHreflangTags() {
+  const currentPath = window.location.pathname;
+  const segments = currentPath
+    .split("/")
+    .filter((segment) => segment.length > 0);
+
+  // Remove language code from segments to get base path
+  const baseSegments = segments.filter(
+    (segment) => !supportedLanguages.includes(segment)
+  );
+  const basePath = baseSegments.length > 0 ? `/${baseSegments.join("/")}` : "";
+
+  // Update hreflang tags
+  const hreflangTags = document.querySelectorAll("link[hreflang]");
+  hreflangTags.forEach((tag) => {
+    const lang = tag.getAttribute("hreflang");
+    if (lang === "x-default") {
+      tag.setAttribute("href", `${window.location.origin}${basePath}/`);
+    } else {
+      tag.setAttribute("href", `${window.location.origin}${basePath}/${lang}/`);
+    }
+  });
+}
+
 // Update meta tags based on language
 function updateMetaTags(lang) {
   const langData = translations[lang];
@@ -155,54 +180,62 @@ function translatePage(lang) {
   localStorage.setItem("preferredLanguage", lang);
 }
 
-// Get language from URL path
+// Get language from URL path - Fixed for subdirectory deployment
 function getLanguageFromURL() {
   const path = window.location.pathname;
   console.log("Current path:", path); // Debug log
 
-  // More flexible regex that handles various path formats
-  const langMatch = path.match(
-    new RegExp(`^/(${supportedLanguages.join("|")})(\/.*)?$`)
-  );
-  console.log("Language match:", langMatch); // Debug log
-  const result = langMatch ? langMatch[1] : null;
-  console.log("Detected language:", result); // Debug log
-  return result;
+  // Split the path into segments
+  const segments = path.split("/").filter((segment) => segment.length > 0);
+
+  // Check if the last segment is a language code
+  if (segments.length > 0) {
+    const lastSegment = segments[segments.length - 1];
+    if (supportedLanguages.includes(lastSegment)) {
+      console.log("Detected language from URL:", lastSegment); // Debug log
+      return lastSegment;
+    }
+  }
+
+  console.log("No language detected from URL, using default"); // Debug log
+  return null;
 }
 
-// Update URL with language path
+// Update URL with language path - Fixed for subdirectory deployment
 function updateURLWithLanguage(lang) {
   const currentPath = window.location.pathname;
   const currentSearch = window.location.search;
   const currentHash = window.location.hash;
 
-  // Remove any existing language prefix
-  const pathWithoutLang = currentPath.replace(
-    new RegExp(`^/(${supportedLanguages.join("|")})(\/.*)?$`),
-    "/"
+  // Split the path into segments
+  const segments = currentPath
+    .split("/")
+    .filter((segment) => segment.length > 0);
+
+  // Remove any existing language code from the end
+  const segmentsWithoutLang = segments.filter(
+    (segment) => !supportedLanguages.includes(segment)
   );
 
+  let newPath;
+
+  if (lang === "en") {
+    // For English, don't add language code
+    newPath =
+      segmentsWithoutLang.length > 0
+        ? `/${segmentsWithoutLang.join("/")}/`
+        : "/";
+  } else {
+    // For other languages, add language code at the end
+    newPath =
+      segmentsWithoutLang.length > 0
+        ? `/${segmentsWithoutLang.join("/")}/${lang}/`
+        : `/${lang}/`;
+  }
+
   try {
-    // If we're switching to a language, add the prefix
-    if (lang && lang !== "en") {
-      const newPath = `/${lang}/${
-        pathWithoutLang === "/" ? "" : pathWithoutLang
-      }`;
-      window.history.replaceState(
-        {},
-        "",
-        newPath + currentSearch + currentHash
-      );
-    } else {
-      // For English (default), remove the language prefix
-      // Ensure we don't end up with double slashes
-      const cleanPath = pathWithoutLang === "/" ? "/" : pathWithoutLang;
-      window.history.replaceState(
-        {},
-        "",
-        cleanPath + currentSearch + currentHash
-      );
-    }
+    window.history.replaceState({}, "", newPath + currentSearch + currentHash);
+    console.log("Updated URL to:", newPath + currentSearch + currentHash); // Debug log
   } catch (error) {
     console.error("Error updating URL with language:", error);
   }
@@ -248,6 +281,9 @@ function initLanguageSwitcher() {
 function initLang() {
   initLanguageSwitcher();
 
+  // Update hreflang tags for current URL structure
+  updateHreflangTags();
+
   // Check for language in URL path first, then localStorage
   const urlLanguage = getLanguageFromURL();
   const savedLanguage = localStorage.getItem("preferredLanguage");
@@ -265,7 +301,6 @@ function initLang() {
     languageToUse = savedLanguage;
     console.log("Using saved language:", languageToUse); // Debug log
     // Update URL to reflect the saved language preference
-
     updateURLWithLanguage(savedLanguage);
   } else {
     console.log("Using default language:", languageToUse); // Debug log
