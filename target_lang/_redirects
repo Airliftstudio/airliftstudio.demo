@@ -1,5 +1,17 @@
-/en/* /index.html 200
+##default
+/* /index.html 200
+##fr
 /fr/* /index.html 200
-/en /index.html 200
 /fr /index.html 200
-/* /index.html 200 
+/fr/webfonts/* /webfonts/:splat 200
+/fr/images/* /images/:splat 200
+/fr/js/* /js/:splat 200
+/fr/css/* /css/:splat 200
+
+##en
+/en/* /index.html 200
+/en /index.html 200
+/en/webfonts/* /webfonts/:splat 200
+/en/images/* /images/:splat 200
+/en/js/* /js/:splat 200
+/en/css/* /css/:splat 200
