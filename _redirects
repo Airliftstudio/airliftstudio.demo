@@ -10,3 +10,7 @@
 /target_lang/fr/* /target_lang/:splat 200
 /target_lang/en/* /target_lang/:splat 200
 
+
+/villa-lestari-ubud/* /villa-lestari-ubud/index.html 200 
+/villa-lestari-ubud/es/* /villa-lestari-ubud/:splat 200
+/villa-lestari-ubud/sv/* /villa-lestari-ubud/:splat 200
