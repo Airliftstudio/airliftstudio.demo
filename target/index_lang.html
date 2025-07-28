@@ -1048,6 +1048,11 @@
             languageDropdown.classList.remove("show");
           });
 
+          // Prevent scroll events from bubbling up to the main page
+          languageDropdown.addEventListener("wheel", (e) => {
+            e.stopPropagation();
+          });
+
           // Language option clicks
           document.querySelectorAll(".language-option").forEach((option) => {
             option.addEventListener("click", (e) => {

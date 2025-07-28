@@ -82,6 +82,7 @@ nav {
   display: flex;
   list-style: none;
   gap: 2.2rem;
+  align-items: center;
 }
 .nav-links a {
   text-decoration: none;
@@ -804,9 +805,6 @@ footer {
   .hide-mobile {
     display: none;
   }
-  nav {
-    padding: 0.4rem 0.7rem 0.4rem 0.7rem !important;
-  }
   .logo {
     font-size: 1.2rem;
   }
@@ -905,5 +903,8 @@ footer {
   }
   .features-grid {
     grid-template-columns: 1fr;
+  }
+  .hide-mobile-sm {
+    display: none;
   }
 }

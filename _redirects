@@ -94,7 +94,7 @@
 /villa-lespoir-bali/tr/images/* /villa-lespoir-bali/images/:splat 200
 /villa-lespoir-bali/vi/images/* /villa-lespoir-bali/images/:splat 200
 
-# Fonts (if you have webfonts folder)
+# Fonts
 /villa-lespoir-bali/en/webfonts/* /villa-lespoir-bali/webfonts/:splat 200
 /villa-lespoir-bali/fr/webfonts/* /villa-lespoir-bali/webfonts/:splat 200
 /villa-lespoir-bali/it/webfonts/* /villa-lespoir-bali/webfonts/:splat 200
