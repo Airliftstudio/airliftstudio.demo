@@ -115,3 +115,26 @@
 /villa-lespoir-bali/th/webfonts/* /villa-lespoir-bali/webfonts/:splat 200
 /villa-lespoir-bali/tr/webfonts/* /villa-lespoir-bali/webfonts/:splat 200
 /villa-lespoir-bali/vi/webfonts/* /villa-lespoir-bali/webfonts/:splat 200
+
+
+#Detta behöver replikeras i ett final post build script så vi har rätt folder name..
+#Kan jag bara köra target_lang/fr/* /target_lang/:splat 200 ?? eller måste varje subfolder redirectas..
+# target_lang/_redirects
+##default
+target_lang/* /target_lang/index.html 200 
+##fr
+target_lang/fr/* /target_lang/index.html 200
+target_lang/fr /target_lang/index.html 200
+/target_lang/fr/webfonts/* /target_lang/webfonts/:splat 200
+/target_lang/fr/images/* /target_lang/images/:splat 200
+/target_lang/fr/js/* /target_lang/js/:splat 200
+/target_lang/fr/css/* /target_lang/css/:splat 200
+
+##en
+target_lang/en/* /target_lang/index.html 200
+target_lang/en /target_lang/index.html 200
+/target_lang/en/webfonts/* /target_lang/webfonts/:splat 200
+/target_lang/en/images/* /target_lang/images/:splat 200
+/target_lang/en/js/* /target_lang/js/:splat 200
+/target_lang/en/css/* /target_lang/css/:splat 200
+

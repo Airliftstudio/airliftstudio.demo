@@ -1017,17 +1017,42 @@
         localStorage.setItem("preferredLanguage", lang);
       }
 
-      // Get language from URL parameter
+      // Get language from URL path
       function getLanguageFromURL() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get("language");
+        const path = window.location.pathname;
+        const langMatch = path.match(/^\/(en|fr)(\/|$)/);
+        return langMatch ? langMatch[1] : null;
       }
 
-      // Update URL with language parameter
+      // Update URL with language path
       function updateURLWithLanguage(lang) {
-        const url = new URL(window.location);
-        url.searchParams.set("language", lang);
-        window.history.replaceState({}, "", url);
+        const currentPath = window.location.pathname;
+        const currentSearch = window.location.search;
+        const currentHash = window.location.hash;
+
+        // Remove any existing language prefix
+        const pathWithoutLang = currentPath.replace(/^\/(en|fr)(\/|$)/, "/");
+
+        // If we're switching to a language, add the prefix
+        if (lang && lang !== "en") {
+          const newPath = `/${lang}${
+            pathWithoutLang === "/" ? "" : pathWithoutLang
+          }`;
+          window.history.replaceState(
+            {},
+            "",
+            newPath + currentSearch + currentHash
+          );
+        } else {
+          // For English (default), remove the language prefix
+          // Ensure we don't end up with double slashes
+          const cleanPath = pathWithoutLang === "/" ? "/" : pathWithoutLang;
+          window.history.replaceState(
+            {},
+            "",
+            cleanPath + currentSearch + currentHash
+          );
+        }
       }
 
       // Language switcher functionality
@@ -1071,7 +1096,7 @@
         // Initialize language switcher
         initLanguageSwitcher();
 
-        // Check for language in URL first, then localStorage
+        // Check for language in URL path first, then localStorage
         const urlLanguage = getLanguageFromURL();
         const savedLanguage = localStorage.getItem("preferredLanguage");
 
@@ -1079,9 +1104,11 @@
 
         if (urlLanguage && translations[urlLanguage]) {
           languageToUse = urlLanguage;
-          updateURLWithLanguage(urlLanguage); // Ensure URL is updated
+          // Don't update URL here as it's already correct
         } else if (savedLanguage && translations[savedLanguage]) {
           languageToUse = savedLanguage;
+          // Update URL to reflect the saved language preference
+          updateURLWithLanguage(savedLanguage);
         }
 
         translatePage(languageToUse);
