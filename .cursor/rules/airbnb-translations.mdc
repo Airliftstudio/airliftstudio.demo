@@ -1,0 +1,17 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Airbnb Content Translations Rule
+
+## Purpose
+To implement fully translated content and meta data.
+
+## Usage
+This rule is only applicable if the user requested the website to be translated into other languages in the prompt.
+
+## Translation process
+- Se the example in index.html and /js/translations.js for how the site supports translations to French. Add translations to the other requested languages and remove the one for French if that is not one of the requested languages.
+- Start by adding all the requested languages to the language-switcher in the <header> inside the index.html.
+- Next update the /js/translations.js with translations for all the requested languages.

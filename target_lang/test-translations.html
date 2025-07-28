@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Translation Test</title>
+  </head>
+  <body>
+    <h1>Translation System Test</h1>
+
+    <div>
+      <button onclick="testTranslation('en')">Test English</button>
+      <button onclick="testTranslation('fr')">Test French</button>
+    </div>
+
+    <div id="test-content">
+      <h2 data-translate="nav.about">About</h2>
+      <p data-translate="hero.subtitle">
+        Luxury 2-Bedroom Villa in Canggu, Bali
+      </p>
+      <p data-translate="about.title">Your Private Paradise in Canggu</p>
+    </div>
+
+    <div id="debug-info"></div>
+
+    <script src="js/lang.js"></script>
+    <script>
+      function testTranslation(lang) {
+        console.log("Testing translation for:", lang);
+        console.log("Available translations:", translations);
+        console.log("Supported languages:", supportedLanguages);
+
+        if (translations[lang]) {
+          translatePage(lang);
+          document.getElementById(
+            "debug-info"
+          ).innerHTML = `<p>Switched to ${lang}. Current language: ${currentLanguage}</p>`;
+        } else {
+          document.getElementById(
+            "debug-info"
+          ).innerHTML = `<p>Translation for ${lang} not found!</p>`;
+        }
+      }
+
+      // Override console.log to show in page
+      const originalLog = console.log;
+      console.log = function (...args) {
+        originalLog.apply(console, args);
+        const debugDiv = document.getElementById("debug-info");
+        debugDiv.innerHTML += `<p>${args.join(" ")}</p>`;
+      };
+    </script>
+  </body>
+</html>

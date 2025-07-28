@@ -14,7 +14,8 @@ When generating a website for an Airbnb listing, you MUST apply ALL of these rul
 1. **airbnb-data-extraction.mdc** - Extract comprehensive listing information and structure project folder
 2. **airbnb-domain-branding.mdc** - Generate domain suggestions and branding
 3. **airbnb-content-strategy.mdc** - Structure content and copy
-4. **airbnb-post-build-verification.mdc** - Verifying the website and fixing issues
+4. **airbnb-translations.mdc** - Adding language translations
+5. **airbnb-post-build-verification.mdc** - Verifying the website and fixing issues
 
 ## Process Flow
 ```
@@ -22,7 +23,8 @@ Input: Airbnb URL
 ├── Extract Data (rule 1)
 ├── Generate Domain name (rule 2)
 ├── Write Content (rule 3)
-└── Analyse and fix issues (rule 4)
+├── Add translations if requested (rule 4)
+└── Analyse and fix issues (rule 5)
 Output: Complete Professional Website
 ```
 
@@ -30,7 +32,7 @@ Output: Complete Professional Website
 Apply these rules every time there is an Airbnb url in the prompt.
 
 ## Success Criteria
-- All 4 rules must be applied
+- All 5 rules must be applied
 - Each rule's requirements must be fully satisfied
 
 ## Final steps

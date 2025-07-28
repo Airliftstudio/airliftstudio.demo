@@ -21,7 +21,11 @@ node scrape_airbnb.js "[AIRBNB_URL]" "[LANGUAGES]"
 Airbnb-id/
 ├── index.html          # Main website file that contains another example Airbnb listing
 ├── images/             # Folder to store downloaded images
+├── css/             	# Folder containing style files
+├── js/             	# Folder containing javascript files
+├── webfonts/           # Folder containing fonts
 ├── LISTING.md          # Containing all the extracted data from the Airbnb listing
+├── _redirects          # Clouflare redirect config used if the site multiple languages
 ```
 
 ## Download images

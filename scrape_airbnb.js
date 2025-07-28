@@ -3,6 +3,7 @@ const path = require("path");
 const { chromium } = require("playwright");
 
 const TARGET_DIR = "target";
+const TARGET_DIR_LANG = "target_lang";
 
 function getAspect(width, height) {
   if (width > height) return "landscape";
@@ -477,20 +478,8 @@ async function scrape() {
       const entries = fs.readdirSync(src, { withFileTypes: true });
 
       for (const entry of entries) {
-        if (LANGUAGES && entry.name == "index.html") {
-          continue;
-        } else if (
-          !LANGUAGES &&
-          (entry.name == "index_lang.html" || entry.name == "lang.css")
-        ) {
-          continue;
-        }
-
         const srcPath = path.join(src, entry.name);
-        const destPath = path.join(
-          dest,
-          entry.name.replace("index_lang.html", "index.html")
-        );
+        const destPath = path.join(dest, entry.name);
 
         if (entry.isDirectory()) {
           fs.mkdirSync(destPath, { recursive: true });
@@ -501,7 +490,7 @@ async function scrape() {
       }
     }
 
-    copyDir(TARGET_DIR, destDir);
+    copyDir(LANGUAGES ? TARGET_DIR_LANG : TARGET_DIR, destDir);
     console.log(`Copied 'target' folder to '${destDir}'`);
   } else {
     console.log(`Folder '${destDir}' already exists, not copying.`);

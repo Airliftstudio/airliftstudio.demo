@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Credits Copy Start -->
     <!--
     ═══════════════════════════════════════════════════════════════════════════════
     Built with ❤️ for the Airbnb community | © 2025 airliftStudios.com
@@ -10,7 +9,7 @@
     Visit: https://airliftstudios.com
     ═══════════════════════════════════════════════════════════════════════════════
     -->
-    <!-- Credits Copy End -->
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta property="og:type" content="website" />
@@ -20,17 +19,765 @@
     <meta name="language" content="English" />
     <meta http-equiv="Content-Language" content="en" />
 
-    <!-- Include other css to test interactions with -->
-    <link rel="stylesheet" href="target/css/fonts-local.css" />
-    <link rel="stylesheet" href="target/css/fontawesome.min.css" />
-    <link rel="stylesheet" href="target/css/styles.css" />
-    <link rel="stylesheet" href="target/css/lang.css" />
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏝️</text></svg>"
+    />
+
+    <link rel="stylesheet" href="css/fonts-local.css" />
+    <link rel="stylesheet" href="css/fontawesome.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/lang.css" />
 
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <title>
+      Villa Lestari - Japanese-Styled Haven in Ubud, Bali | Private Pool, Valley
+      Views, Superhost
+    </title>
+    <meta
+      name="description"
+      content="Book Villa Lestari, a 4.8-star rated Japanese-styled villa in Ubud, Bali. Private pool, valley views, superhost, peaceful sanctuary. Perfect for families and relaxation. See real guest reviews!"
+    />
+    <meta
+      name="keywords"
+      content="Villa Lestari, Ubud villa, Bali villa, Japanese-styled villa, private pool, valley views, superhost, family villa, peaceful retreat, luxury villa, airbnb, book villa, best villa Ubud, vacation rental, Bali accommodation"
+    />
+    <link rel="canonical" href="https://villalestariubud.com/" />
+    <meta
+      property="og:title"
+      content="Villa Lestari - Japanese-Styled Haven in Ubud, Bali | Private Pool, Valley Views, Superhost"
+    />
+    <meta
+      property="og:description"
+      content="Book Villa Lestari, a 4.8-star rated Japanese-styled villa in Ubud, Bali. Private pool, valley views, superhost, peaceful sanctuary. Perfect for families and relaxation. See real guest reviews!"
+    />
+
+    <meta property="og:url" content="https://villalestariubud.com/" />
+    <meta
+      property="og:image"
+      content="https://villalestariubud.com/images/hero-bg.jpg"
+    />
+
+    <!-- Hreflang tags for international SEO -->
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://villalestariubud.com/en/"
+    />
+    <link
+      rel="alternate"
+      hreflang="sv"
+      href="https://villalestariubud.com/sv/"
+    />
+    <link
+      rel="alternate"
+      hreflang="es"
+      href="https://villalestariubud.com/es/"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://villalestariubud.com/"
+    />
+
+    <script type="application/ld+json" id="structured-data">
+      {
+        "@context": "https://schema.org",
+        "@type": "LodgingBusiness",
+        "name": "Villa Lestari",
+        "description": "Japanese-styled 2BR Villa in Ubud, Bali. Private pool, valley views, superhost, peaceful sanctuary. Perfect for families and relaxation.",
+        "image": "https://villalestariubud.com/images/hero-bg.jpg",
+        "url": "https://villalestariubud.com/",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Ubud",
+          "addressRegion": "Bali",
+          "addressCountry": "Indonesia"
+        },
+        "keywords": "Villa Lestari, Ubud villa, Bali villa, Japanese-styled villa, private pool, valley views, superhost, family villa, peaceful retreat, luxury villa, airbnb, book villa, best villa Ubud, vacation rental, Bali accommodation",
+        "amenityFeature": [
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Private Pool",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Valley Views",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "High-Speed WiFi",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Air Conditioning",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Full Kitchen",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Free Parking",
+            "value": true
+          }
+        ],
+        "starRating": {
+          "@type": "Rating",
+          "ratingValue": "4.8"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "25"
+        },
+        "email": "hello@villalestariubud.com"
+      }
+    </script>
   </head>
+
   <body>
+    <!-- Header -->
+    <header>
+      <nav class="container">
+        <a href="#hero" class="logo">Villa Lestari</a>
+        <ul class="nav-links">
+          <li class="hide-mobile">
+            <a href="#about" data-translate="nav.about">About</a>
+          </li>
+          <li><a href="#gallery" data-translate="nav.gallery">Gallery</a></li>
+          <li class="hide-mobile-sm">
+            <a href="#reviews" data-translate="nav.reviews">Reviews</a>
+          </li>
+          <li class="hide-mobile">
+            <a href="#location" data-translate="nav.location">Location</a>
+          </li>
+          <li>
+            <div class="language-switcher">
+              <button class="language-btn" id="languageBtn">
+                <span id="currentLang">EN</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="language-dropdown" id="languageDropdown">
+                <div class="language-option active" data-lang="en">
+                  <span class="language-flag">🇬🇧</span>
+                  English
+                </div>
+                <div class="language-option" data-lang="sv">
+                  <span class="language-flag">🇸🇪</span>
+                  Svenska
+                </div>
+                <div class="language-option" data-lang="es">
+                  <span class="language-flag">🇪🇸</span>
+                  Español
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-bg-dark"></div>
+      <div class="hero-content">
+        <div class="hero-badges">
+          <span class="badge badge-superhost"
+            ><i class="fas fa-user-shield"></i>
+            <span data-translate="badges.superhost">Superhost</span></span
+          >
+          <!-- <span class="badge badge-guest-favorite"
+            ><i class="fas fa-heart"></i>
+            <span data-translate="badges.guest_favorite"
+              >Guest Favorite</span
+            ></span
+          > -->
+        </div>
+        <h1>Villa Lestari</h1>
+        <div>
+          <span class="soft-rating-badge">
+            <span class="stars" id="hero-stars">
+              <span class="star" data-idx="0">☆</span>
+              <span class="star" data-idx="1">☆</span>
+              <span class="star" data-idx="2">☆</span>
+              <span class="star" data-idx="3">☆</span>
+              <span class="star" data-idx="4">☆</span>
+            </span>
+            <span id="hero-rating-animation-value" class="fixed-rating"
+              >0.0</span
+            >
+            <span id="airbnb-rating-value">4.8</span>
+          </span>
+        </div>
+
+        <div class="hero-details-row">
+          <span class="hero-details">
+            <span class="hero-detail-item"
+              ><span data-translate="hero.guests">4 guests</span></span
+            >
+            <span class="hero-dot">•</span>
+            <span class="hero-detail-item"
+              ><span data-translate="hero.bedrooms">2 bedrooms</span></span
+            >
+            <span class="hero-dot">•</span>
+            <span class="hero-detail-item"
+              ><span data-translate="hero.beds">2 beds</span></span
+            >
+            <span class="hero-dot">•</span>
+            <span class="hero-detail-item"
+              ><span data-translate="hero.baths">2 baths</span></span
+            >
+          </span>
+        </div>
+        <div class="hero-subtitle" data-translate="hero.subtitle">
+          Japanese-Styled Haven in Ubud, Bali
+        </div>
+
+        <a
+          href="https://www.airbnb.com/rooms/896638227140987337"
+          class="cta-button"
+          target="_blank"
+        >
+          <i class="fas fa-calendar-check"></i>
+          <span data-translate="hero.cta">Check Availability</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Floating CTA -->
+    <div class="floating-cta">
+      <a
+        href="https://www.airbnb.com/rooms/896638227140987337"
+        class="cta-button"
+        target="_blank"
+      >
+        <i class="fas fa-calendar-check"></i>
+        <span data-translate="hero.cta">Check Availability</span>
+      </a>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h3 class="text-content" data-translate="about.title">
+              Your Peaceful Sanctuary in Ubud
+            </h3>
+            <p class="text-content" data-translate="about.description">
+              Immerse yourself in tranquility at Villa Lestari, a modern
+              Japanese-styled sanctuary in Payangan, Ubud. Enjoy breathtaking
+              valley views from two serene bedrooms, unwind in a cozy living
+              area, and cook up a storm in a fully equipped kitchen. Dive into
+              the stunning pool overlooking the valley for a unique blend of
+              luxury and nature.
+            </p>
+          </div>
+          <div class="about-image image-content">
+            <img
+              src="images/image-landscape-1.jpg"
+              alt="Villa Lestari interior design"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-swimming-pool"></i>
+            <h4 data-translate="features.pool.title">
+              Private Pool & Valley Views
+            </h4>
+            <p data-translate="features.pool.description">
+              Stunning swimming pool overlooking the valley with breathtaking
+              panoramic views for ultimate relaxation.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <i class="fas fa-wifi"></i>
+            <h4 data-translate="features.wifi.title">
+              High-Speed WiFi & Workspace
+            </h4>
+            <p data-translate="features.wifi.description">
+              Fast 94 Mbps internet and dedicated workspace—perfect for remote
+              work or streaming.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <i class="fas fa-utensils"></i>
+            <h4 data-translate="features.kitchen.title">
+              Fully Equipped Kitchen
+            </h4>
+            <p data-translate="features.kitchen.description">
+              Modern kitchen with all appliances, cookware, and dining
+              essentials included.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <i class="fas fa-snowflake"></i>
+            <h4 data-translate="features.ac.title">Air Conditioning</h4>
+            <p data-translate="features.ac.description">
+              Split type ductless AC system in every room for comfort in
+              tropical weather.
+            </p>
+          </div>
+        </div>
+
+        <div class="amenities-section">
+          <h3 class="text-content" data-translate="amenities.title">
+            Amenities
+          </h3>
+          <div class="amenities-grid">
+            <div class="amenity-item">
+              <i class="fas fa-swimming-pool"></i>
+              <span data-translate="amenities.pool">Private outdoor pool</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-wifi"></i>
+              <span data-translate="amenities.wifi">Fast WiFi 94 Mbps</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-laptop"></i>
+              <span data-translate="amenities.workspace"
+                >Dedicated workspace</span
+              >
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-car"></i>
+              <span data-translate="amenities.parking">Free parking</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-snowflake"></i>
+              <span data-translate="amenities.ac">Air conditioning</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-utensils"></i>
+              <span data-translate="amenities.kitchen">Full kitchen</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-door-open"></i>
+              <span data-translate="amenities.patio"
+                >Private patio or balcony</span
+              >
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-key"></i>
+              <span data-translate="amenities.checkin">Self check-in</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-bed"></i>
+              <span data-translate="amenities.beds"
+                >2 bedrooms, 2 bathrooms</span
+              >
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-broom"></i>
+              <span data-translate="amenities.cleaning"
+                >Cleaning available</span
+              >
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-mountain"></i>
+              <span data-translate="amenities.valley">Valley views</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-coffee"></i>
+              <span data-translate="amenities.breakfast"
+                >Breakfast included</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+      <div class="container">
+        <h2 class="section-title" data-translate="gallery.title">
+          Discover Villa Lestari
+        </h2>
+        <p
+          class="section-subtitle text-content"
+          data-translate="gallery.subtitle"
+        >
+          Experience the beauty and comfort of our peaceful retreat
+        </p>
+
+        <div class="gallery-grid">
+          <div class="gallery-item hero">
+            <img
+              src="images/hero-bg.jpg"
+              alt="Villa Lestari main exterior view"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item landscape-1">
+            <img
+              src="images/image-landscape-1.jpg"
+              alt="Villa Lestari living room with Japanese styling"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-1">
+            <img
+              src="images/image-normal-1.jpg"
+              alt="Dining area with valley views"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-2">
+            <img
+              src="images/image-normal-2.jpg"
+              alt="Bedroom 1 with valley views"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item portrait-1">
+            <img
+              src="images/image-portrait-1.jpg"
+              alt="Villa Lestari living room interior"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-3">
+            <img
+              src="images/image-normal-3.jpg"
+              alt="Bedroom 2 with comfortable bed"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-4">
+            <img
+              src="images/image-normal-4.jpg"
+              alt="Stunning pool with valley views"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-5">
+            <img
+              src="images/image-normal-5.jpg"
+              alt="Bathroom with modern amenities"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-6">
+            <img
+              src="images/image-normal-6.jpg"
+              alt="Bathroom interior design"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-7">
+            <img
+              src="images/image-normal-7.jpg"
+              alt="Bathroom with outdoor shower"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-8">
+            <img
+              src="images/image-normal-8.jpg"
+              alt="Backyard with valley views"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item landscape-2">
+            <img
+              src="images/image-landscape-2.jpg"
+              alt="Villa Lestari exterior with Japanese styling"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-9">
+            <img
+              src="images/image-normal-9.jpg"
+              alt="Backyard garden area"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-10">
+            <img
+              src="images/image-normal-10.jpg"
+              alt="Interior design"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews">
+      <div class="container">
+        <h2 class="section-title" data-translate="reviews.title">
+          What Our Guests Say
+        </h2>
+        <div class="reviews-featured">
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-avatar">W</div>
+              <div class="review-info">
+                <h4>William</h4>
+                <div class="review-stars">★★★★★</div>
+              </div>
+            </div>
+            <p>
+              "This Air B&B was by far one of the nicest I've ever stayed in. It
+              was private. The outdoor shower was great. The beds are
+              comfortable. The pool is huge. I would 100% recommend this spot to
+              anyone looking for some privacy in a very cool Air B&B. Please
+              remember you are staying in the middle of the jungle essentially
+              in Ubud, there are occasional bugs in all of Ubud. That is part of
+              the nature. And the sunken pit where the TV is was amazing. The
+              bathrooms were also huge and water pressure was great. Most
+              importantly the ACs worked great as well. Don't pass this Air B&B
+              up if you have the opportunity to stay here."
+            </p>
+          </div>
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-avatar">F</div>
+              <div class="review-info">
+                <h4>Filippo Tobia</h4>
+                <div class="review-stars">★★★★★</div>
+              </div>
+            </div>
+            <p>
+              "I had an amazing stay at this Airbnb! The design of the space was
+              absolutely stunning—tastefully decorated with a perfect balance of
+              modern elegance and cozy charm. Every detail, from the carefully
+              chosen furniture to the artistic touches on the walls, contributed
+              to a welcoming and stylish atmosphere. It truly felt like a home
+              away from home. As for cleanliness, the place was spotless. The
+              floors, countertops, and bathroom were all immaculate, and the
+              linens smelled fresh and looked well-maintained. It's clear the
+              hosts put a lot of care into ensuring everything was pristine. I
+              felt completely at ease and comfortable throughout my stay. Would
+              highly recommend this Airbnb to anyone looking for a beautiful,
+              clean, and comfortable place to stay!"
+            </p>
+          </div>
+        </div>
+        <div class="reviews-scroll-container">
+          <div class="reviews-scroll-track" id="reviews-scroll-track">
+            <div class="review-mini" data-reviewer="Giorgi">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">G</div>
+                <div>
+                  <h5>Giorgi</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Great villa, just as described! The place was clean,
+                comfortable, and had everything we needed. The host was very
+                responsive and helpful throughout our stay. We really enjoyed
+                our time here – highly recommend"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Artitaya">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">A</div>
+                <div>
+                  <h5>Artitaya</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Absolutely loved this place! Although it's a bit far from the
+                city center, the peaceful atmosphere and beautiful villa made it
+                well worth it. The property looks just like the photos on the
+                website. The host was incredibly helpful and responsive—when we
+                had an issue with the bathroom door, she came all the way out to
+                fix it promptly. Truly appreciated the great service!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Avneet">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">A</div>
+                <div>
+                  <h5>Avneet</h5>
+                  <div class="review-stars">★★★★☆</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Overall this villa is great and big enough for 4 adults or a
+                small family. Pool was nice with a view of palm trees and a mini
+                jungle. Host responded instantly and check in was smooth. Even
+                bedrooms were nice and tidy, everything looked very
+                aesthetically. Alot of bugs come in, sliding doors are not fully
+                sealed. And the rooster screams all day next door 😔."
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Stefan">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">S</div>
+                <div>
+                  <h5>Stefan</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Our host is kind. Simple cleaning and simple breakfast will
+                provide. All in all is good. However, Indonesia is a bugs
+                country. If you afraid or annoying the small bugs and bug one
+                please choose the hotel."
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Jassas">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">J</div>
+                <div>
+                  <h5>Jassas</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "A great villa usually has a combination of factors. Things like
+                design, amenities, and service quality."
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Philip">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">P</div>
+                <div>
+                  <h5>Philip</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "We had a very nice stay and will be back. the villa was very
+                clean and the staff communicated well."
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Jakob">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">J</div>
+                <div>
+                  <h5>Jakob</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "The scenic view from the open space terrace, pool, but also
+                from the kitchen window created a very unique atmosphere. Just
+                what we were looking for and what we dreamt of! Before and
+                during our stay we had effective contact with Ratna through
+                Whats app, and she helped to setup a chef for dinner and massage
+                in the house. Further, with Grab app you also have a lot of
+                flexibility for getting around, ordering food, etc."
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Louise">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">L</div>
+                <div>
+                  <h5>Louise</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Loved Villa Lestari beautiful setting and lovely villa. A
+                little further out than I would have liked but it was a peaceful
+                relaxing stay. Kadek our driver was lovely, happy to take us
+                wherever we wanted to go, staff were lovely too."
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="text-content reviews-cta">
+          <a
+            href="https://www.airbnb.com/rooms/896638227140987337/reviews"
+            target="_blank"
+            class="cta-button"
+          >
+            <span data-translate="reviews.read_all"
+              >Read All Reviews on Airbnb</span
+            >
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="location">
+      <div class="container">
+        <h2 class="section-title" data-translate="location.title">
+          Perfect Ubud Location
+        </h2>
+
+        <div class="section-content">
+          <div>
+            <p class="text-content" data-translate="location.description">
+              Villa Lestari is located in the serene Payangan area of Ubud,
+              offering a peaceful sanctuary away from the hustle and bustle, yet
+              perfectly positioned for exploring everything Ubud has to offer.
+            </p>
+            <div class="location-highlights">
+              <div class="location-item">
+                <i class="fas fa-mountain"></i>
+                <div>
+                  <h4 data-translate="location.valley.title">
+                    Breathtaking valley views
+                  </h4>
+                  <p data-translate="location.valley.description">
+                    Panoramic views of the surrounding valley from every room
+                  </p>
+                </div>
+              </div>
+              <div class="location-item">
+                <i class="fas fa-leaf"></i>
+                <div>
+                  <h4 data-translate="location.rice_terraces.title">
+                    Close to rice terraces
+                  </h4>
+                  <p data-translate="location.rice_terraces.description">
+                    Easy access to Tegallalang and other famous rice terraces
+                  </p>
+                </div>
+              </div>
+              <div class="location-item">
+                <i class="fas fa-utensils"></i>
+                <div>
+                  <h4 data-translate="location.restaurants.title">
+                    Local restaurants nearby
+                  </h4>
+                  <p data-translate="location.restaurants.description">
+                    Authentic Balinese dining and international cuisine options
+                  </p>
+                </div>
+              </div>
+              <div class="location-item">
+                <i class="fas fa-car"></i>
+                <div>
+                  <h4 data-translate="location.parking.title">
+                    Free private parking
+                  </h4>
+                  <p data-translate="location.parking.description">
+                    Easy arrival by car with secure private parking
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="business-offering" class="biz-section">
       <div class="biz-container">
         <h2 class="biz-heading">Want This Website for Your Property?</h2>
@@ -1051,5 +1798,27 @@
         </script>
       </div>
     </section>
+
+    <footer>
+      <div class="footer-social">
+        <a href="mailto:hello@villalestariubud.com" aria-label="Email"
+          ><i class="fas fa-envelope"></i
+        ></a>
+      </div>
+      <p>© 2025 Villa Lestari</p>
+      <p data-translate="footer.tagline">
+        Your peaceful sanctuary in the heart of Ubud.
+      </p>
+      <small class="footer-attribution"
+        >Website by
+        <a href="https://airliftstudios.com" target="_blank"
+          >airliftstudios.com</a
+        ></small
+      >
+    </footer>
+
+    <script src="js/translations.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/lang.js"></script>
   </body>
 </html>
