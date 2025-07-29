@@ -63,6 +63,57 @@ function insertCreditsContent(targetFilePath, creditsContent) {
   try {
     let content = fs.readFileSync(targetFilePath, "utf8");
 
+    // Check if credits content already exists
+    const creditsStartComment = "<!-- Credits Copy Start -->";
+    const creditsEndComment = "<!-- Credits Copy End -->";
+
+    // Also check for the actual credits content pattern
+    // Look for the credits block pattern (the long line of box-drawing characters)
+    const creditsContentPattern = "Built with ❤️ for the Airbnb community";
+
+    const existingCreditsStart = content.indexOf(creditsStartComment);
+    const existingCreditsEnd = content.indexOf(creditsEndComment);
+    const existingCreditsPattern = content.indexOf(creditsContentPattern);
+
+    // Remove all existing credits content first
+    let cleanedContent = content;
+    let removedAny = false;
+
+    // Remove content with comment markers
+    if (existingCreditsStart !== -1 && existingCreditsEnd !== -1) {
+      console.log(
+        `🔄 Removing existing credits content from ${targetFilePath}...`
+      );
+      const beforeCredits = cleanedContent.substring(0, existingCreditsStart);
+      const afterCredits = cleanedContent.substring(
+        existingCreditsEnd + creditsEndComment.length
+      );
+      cleanedContent = beforeCredits + afterCredits.replace(/^\s*\n\s*/, "\n");
+      removedAny = true;
+    }
+
+    // Remove content without comment markers (fallback)
+    if (!removedAny && existingCreditsPattern !== -1) {
+      console.log(
+        `🔄 Removing existing credits content from ${targetFilePath}...`
+      );
+      const creditsBlockStart = cleanedContent.lastIndexOf(
+        "<!--",
+        existingCreditsPattern
+      );
+      const creditsBlockEnd =
+        cleanedContent.indexOf("-->", existingCreditsPattern) + 3;
+
+      if (creditsBlockStart !== -1 && creditsBlockEnd !== -1) {
+        const beforeCredits = cleanedContent.substring(0, creditsBlockStart);
+        const afterCredits = cleanedContent.substring(creditsBlockEnd);
+        cleanedContent =
+          beforeCredits + afterCredits.replace(/^\s*\n\s*/, "\n");
+      }
+    }
+
+    content = cleanedContent;
+
     // Find the head tag
     const headStartTag = "<head>";
     const headIndex = content.indexOf(headStartTag);
@@ -77,8 +128,10 @@ function insertCreditsContent(targetFilePath, creditsContent) {
     const beforeHead = content.substring(0, headEndIndex);
     const afterHead = content.substring(headEndIndex);
 
+    // Clean up whitespace and ensure proper formatting
+    const trimmedAfterHead = afterHead.replace(/^\s*\n\s*/, "\n");
     const newContent =
-      beforeHead + "\n    " + creditsContent + "\n    " + afterHead;
+      beforeHead + "\n    " + creditsContent + "\n    " + trimmedAfterHead;
 
     // Write the modified content back to the file
     fs.writeFileSync(targetFilePath, newContent, "utf8");
@@ -95,6 +148,30 @@ function insertCreditsContent(targetFilePath, creditsContent) {
 function insertBusinessSection(targetFilePath, businessSection) {
   try {
     let content = fs.readFileSync(targetFilePath, "utf8");
+
+    // Check if business section already exists
+    const businessSectionStart =
+      '<section id="business-offering" class="biz-section">';
+    const businessSectionEnd = "</section>";
+
+    const existingBusinessStart = content.indexOf(businessSectionStart);
+    const existingBusinessEnd = content.indexOf(
+      businessSectionEnd,
+      existingBusinessStart
+    );
+
+    if (existingBusinessStart !== -1 && existingBusinessEnd !== -1) {
+      console.log(
+        `🔄 Removing existing business section from ${targetFilePath}...`
+      );
+      // Remove existing business section
+      const beforeBusiness = content.substring(0, existingBusinessStart);
+      const afterBusiness = content.substring(
+        existingBusinessEnd + businessSectionEnd.length
+      );
+      // Clean up whitespace after removal
+      content = beforeBusiness + afterBusiness.replace(/^\s*\n\s*/, "\n");
+    }
 
     // Find the footer tag
     const footerIndex = content.indexOf("<footer>");
