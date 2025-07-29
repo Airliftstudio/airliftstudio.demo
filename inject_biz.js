@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const fs = require("fs");
-const path = require("path");
 
 function extractCreditsContent(bizSectionPath) {
   try {
@@ -125,8 +124,8 @@ function insertBusinessSection(targetFilePath, businessSection) {
 function main() {
   const args = process.argv.slice(2);
 
-  if (args.length !== 1) {
-    console.log("Usage: node insert_business_section.js <target_html_file>");
+  if (args.length < 1) {
+    console.log("Usage: node inject_biz.js <target_html_file>");
     console.log("");
     console.log("This script will:");
     console.log("1. Extract the credits content from biz_section.html");
@@ -138,9 +137,10 @@ function main() {
     );
     console.log("4. Insert it before the <footer> tag in the target HTML file");
     console.log("");
-    console.log(
-      "Example: node insert_business_section.js villa-lespoir-bali/index.html"
-    );
+    console.log("Examples:");
+    console.log("  node inject_biz.js villa-lestari-ubud/index.html");
+    console.log("  node inject_biz.js villa-zori-bali/index.html");
+    console.log("  node inject_biz.js villa-lespoir-bali/index.html");
     process.exit(1);
   }
 
@@ -172,7 +172,7 @@ function main() {
   insertBusinessSection(targetFile, businessSection);
 
   console.log(
-    "🎉 Done! The credits content and business section have been added to your HTML file."
+    "🎉 Done! The credits content and business section have been added."
   );
 }
 

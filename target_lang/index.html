@@ -3,27 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en_US" />
-
     <meta name="robots" content="index, follow" />
     <meta name="language" content="English" />
     <meta http-equiv="Content-Language" content="en" />
-
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏝️</text></svg>"
-    />
-
-    <link rel="stylesheet" href="css/fonts-local.css" />
-    <link rel="stylesheet" href="css/fontawesome.min.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/lang.css" />
-
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <title>
       Villa Zori - Luxury 2BR Villa in Canggu, Bali | Private Pool, Superhost,
@@ -38,6 +20,10 @@
       content="Villa Zori, Canggu villa, Bali villa, private pool, superhost, guest favorite, family villa, remote work, luxury villa, tropical garden, airbnb, book villa, best villa Canggu, vacation rental, Bali accommodation"
     />
     <link rel="canonical" href="https://villazori.com/" />
+
+    <!-- Open Graph / Social Meta -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
     <meta
       property="og:title"
       content="Villa Zori - Luxury 2BR Villa in Canggu, Bali | Private Pool, Superhost, Guest Favorite"
@@ -46,18 +32,25 @@
       property="og:description"
       content="Book Villa Zori, a 5-star rated 2-bedroom villa in Canggu, Bali. Private pool, tropical garden, superhost, guest favorite, 4 minutes from beaches. Perfect for families and remote work. See real guest reviews!"
     />
-
     <meta property="og:url" content="https://villazori.com/" />
     <meta
       property="og:image"
       content="https://villazori.com/images/hero-bg.jpg"
     />
 
-    <!-- Hreflang tags for international SEO -->
-    <link rel="alternate" hreflang="en" href="https://villazori.com/en/" />
-    <link rel="alternate" hreflang="fr" href="https://villazori.com/fr/" />
-    <link rel="alternate" hreflang="x-default" href="https://villazori.com/" />
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏝️</text></svg>"
+    />
 
+    <!-- Stylesheets: fonts first, then icons, then main styles, then lang -->
+    <link rel="stylesheet" href="css/fonts-local.css" />
+    <link rel="stylesheet" href="css/fontawesome.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/lang.css" />
+
+    <!-- Structured Data -->
     <script type="application/ld+json" id="structured-data">
       {
         "@context": "https://schema.org",
@@ -117,6 +110,12 @@
         "email": "hello@villazori.com"
       }
     </script>
+
+    <!-- Hreflang tags for international SEO -->
+
+    <!-- GSAP: defer loading to after critical CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   </head>
 
   <body>
@@ -145,10 +144,6 @@
                 <div class="language-option active" data-lang="en">
                   <span class="language-flag">🇬🇧</span>
                   English
-                </div>
-                <div class="language-option" data-lang="fr">
-                  <span class="language-flag">🇫🇷</span>
-                  Français
                 </div>
               </div>
             </div>
@@ -524,148 +519,7 @@
           </div>
         </div>
         <div class="reviews-scroll-container">
-          <div class="reviews-scroll-track" id="reviews-scroll-track">
-            <div class="review-mini" data-reviewer="Aiyyad">
-              <div class="review-mini-header">
-                <div class="review-mini-avatar">A</div>
-                <div>
-                  <h5>Aiyyad</h5>
-                  <div class="review-stars">★★★★★</div>
-                </div>
-              </div>
-              <p class="review-mini-text">
-                "Probably the most peaceful place in Bali! Everything about this
-                house was perfect starting . The helpful staff that are always
-                checking on you to see if you need anything. Couldn't ask for
-                more. Just don't book this place if you're scared of lizards
-                spiders and tiny critters. 10/10 stay and definitely will be
-                back here. Thanks team"
-              </p>
-            </div>
-            <div class="review-mini" data-reviewer="Laurence">
-              <div class="review-mini-header">
-                <div class="review-mini-avatar">L</div>
-                <div>
-                  <h5>Laurence</h5>
-                  <div class="review-stars">★★★★★</div>
-                </div>
-              </div>
-              <p class="review-mini-text">
-                "We truly had the most amazing stay here, the surroundings,
-                property and staff are the definition of perfection. We felt
-                right at home immediately and leaving it was very sad, Couldn't
-                recommend this place enough!!"
-              </p>
-            </div>
-            <div class="review-mini" data-reviewer="Sameera">
-              <div class="review-mini-header">
-                <div class="review-mini-avatar">S</div>
-                <div>
-                  <h5>Sameera</h5>
-                  <div class="review-stars">★★★★★</div>
-                </div>
-              </div>
-              <p class="review-mini-text">
-                "wow wow wow, incredible. The place was incredible, clean,
-                homey, sound of the river, the staff, everything was top notch.
-                we had a slight inconvenience and they were like we will give
-                you a free massage. restaurants were all near and you can order
-                to your villa. the staff were so kind and they reply to you
-                within minutes. they also gave us birds to free into nature as
-                part of the mahjiva rituals. loved it and would recommend it to
-                my family. thank you so much guys."
-              </p>
-            </div>
-            <div class="review-mini" data-reviewer="Kaitlin">
-              <div class="review-mini-header">
-                <div class="review-mini-avatar">K</div>
-                <div>
-                  <h5>Kaitlin</h5>
-                  <div class="review-stars">★★★★★</div>
-                </div>
-              </div>
-              <p class="review-mini-text">
-                "Great place! Really peaceful and in a lovely location with
-                nearby cafes/warungs. The staff were attentive and lovely. You
-                can order food through them from local restaurants and it was
-                delicious. Location is Grab and gojek friendly. Would
-                recommend!"
-              </p>
-            </div>
-            <div class="review-mini" data-reviewer="Celine">
-              <div class="review-mini-header">
-                <div class="review-mini-avatar">C</div>
-                <div>
-                  <h5>Celine</h5>
-                  <div class="review-stars">★★★★★</div>
-                </div>
-              </div>
-              <p class="review-mini-text">
-                "INCREDIBLE stay! I loved everything about this bamboo house.
-                It's deeply immersed into nature and follows a very open
-                concept, except for the bedroom which is completely closed off
-                and has AC thankfully. The view is stunning, the pool was
-                amazing. But most of all service was outstanding. 5 Star Hotel
-                level, constant availability, order delivery into villa and
-                security during the night. I can really recommend this airbnb,
-                its an experience."
-              </p>
-            </div>
-            <div class="review-mini" data-reviewer="Caroline">
-              <div class="review-mini-header">
-                <div class="review-mini-avatar">C</div>
-                <div>
-                  <h5>Caroline</h5>
-                  <div class="review-stars">★★★★★</div>
-                </div>
-              </div>
-              <p class="review-mini-text">
-                "This is our favorite stay in Bali, it was magical, peaceful,
-                jungle-esque!! Apart from the beauty of the surrounding area and
-                the Airbnb which can speak for itself, the staff has the highest
-                standard of service!!! I felt well taken care of, and we even
-                had our favorite meal in bali here that I only found by chance
-                because of the staff."
-              </p>
-            </div>
-            <div class="review-mini" data-reviewer="Shawn">
-              <div class="review-mini-header">
-                <div class="review-mini-avatar">S</div>
-                <div>
-                  <h5>Shawn</h5>
-                  <div class="review-stars">★★★★★</div>
-                </div>
-              </div>
-              <p class="review-mini-text">
-                "Probably one of the best exotic Airbnb's I've stayed at. Regret
-                I only managed to book a night here. Place was spotless, the
-                people in charge, Sri & Agus were very helpful. Place is a
-                little outskirt but it's to get away from the buzz of life. A
-                minimum of 2 nights stay is a must to enjoy this place."
-              </p>
-            </div>
-            <div class="review-mini" data-reviewer="Sandaka">
-              <div class="review-mini-header">
-                <div class="review-mini-avatar">S</div>
-                <div>
-                  <h5>Sandaka</h5>
-                  <div class="review-stars">★★★★★</div>
-                </div>
-              </div>
-              <p class="review-mini-text">
-                "Mahajiva Hotel in Bali is a gem! The location is perfect,
-                offering easy access to beautiful spots and local attractions,
-                making our stay incredibly convenient. The staff went above and
-                beyond with their hospitality, always friendly and attentive,
-                making us feel truly welcome. The rooms and common areas were
-                spotless, reflecting a high standard of cleanliness and
-                attention to detail. If you're looking for a place that combines
-                a great location, wonderful service, and a clean, cozy
-                environment, I highly recommend Mahajiva Hotel. Can't wait to
-                visit again!"
-              </p>
-            </div>
-          </div>
+          <div class="reviews-scroll-track" id="reviews-scroll-track"></div>
         </div>
         <div class="text-content reviews-cta">
           <a
