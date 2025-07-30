@@ -23,16 +23,20 @@ function addDefaultTranslations(projectPath) {
       return;
     }
 
-    // Parse the translations object - fix any syntax issues
+    // Parse the translations object using Function constructor (safer than eval)
     let translationsStr = translationsMatch[1];
     // Fix common syntax issues
     translationsStr = translationsStr.replace(/,\s*};$/, "};");
     translationsStr = translationsStr.replace(/,\s*,\s*};$/, "};");
 
-    // Convert double quotes to single quotes for eval
-    translationsStr = translationsStr.replace(/"/g, "'");
+    // Escape apostrophes and quotes properly
+    translationsStr = translationsStr.replace(/'/g, "\\'");
+    translationsStr = translationsStr.replace(/"/g, '\\"');
 
-    const translations = eval("(" + translationsStr + ")");
+    // Convert back to single quotes for the function constructor
+    translationsStr = translationsStr.replace(/\\"/g, "'");
+
+    const translations = new Function("return " + translationsStr)();
 
     // Add default values to each language
     for (const [langCode, langData] of Object.entries(translations)) {

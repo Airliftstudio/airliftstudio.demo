@@ -198,6 +198,176 @@ function insertBusinessSection(targetFilePath, businessSection) {
   }
 }
 
+function injectReviewsFromJson(targetFilePath) {
+  try {
+    // Determine the directory of the target file
+    const targetDir = targetFilePath.substring(
+      0,
+      targetFilePath.lastIndexOf("/")
+    );
+    const listingJsonPath = `${targetDir}/listing.json`;
+
+    // Check if listing.json exists
+    if (!fs.existsSync(listingJsonPath)) {
+      console.log(
+        `⚠️  listing.json not found at ${listingJsonPath}, skipping review injection`
+      );
+      return;
+    }
+
+    console.log(`📖 Reading reviews from ${listingJsonPath}...`);
+    const listingData = JSON.parse(fs.readFileSync(listingJsonPath, "utf8"));
+
+    if (!listingData.reviews || !Array.isArray(listingData.reviews)) {
+      console.log(
+        `⚠️  No reviews found in listing.json, skipping review injection`
+      );
+      return;
+    }
+
+    // Read the target HTML file
+    let content = fs.readFileSync(targetFilePath, "utf8");
+
+    // Extract the two featured reviewers to exclude them
+    const featuredReviewers = [];
+    // Match reviewer names in <h4> tags inside the featured reviews
+    const featuredReviewsMatch = [];
+    const featuredReviewH4Regex =
+      /<div class="review-card">[\s\S]*?<h4>([^<]+)<\/h4>/g;
+    let match;
+    while ((match = featuredReviewH4Regex.exec(content)) !== null) {
+      featuredReviewsMatch.push(match[1]);
+    }
+    if (featuredReviewsMatch) {
+      featuredReviewers.push(
+        ...featuredReviewsMatch.map((match) =>
+          match.replace('data-reviewer="', "").replace('"', "")
+        )
+      );
+    }
+
+    console.log(
+      `📝 Found ${listingData.reviews.length} total reviews, excluding ${featuredReviewers.length} featured reviewers`
+    );
+
+    // Filter out reviews that are already featured
+    const availableReviews = listingData.reviews.filter(
+      (review) => !featuredReviewers.includes(review.reviewer)
+    );
+
+    // Filter to only include 5-star reviews
+    const fiveStarReviews = availableReviews.filter(
+      (review) => review.rating === 5
+    );
+
+    // Take maximum 16 reviews
+    const reviewsToAdd = fiveStarReviews.slice(0, 16);
+
+    if (reviewsToAdd.length === 0) {
+      console.log(
+        `⚠️  No 5-star reviews available after filtering, skipping review injection`
+      );
+      return;
+    }
+
+    console.log(
+      `📝 Found ${fiveStarReviews.length} 5-star reviews, adding ${reviewsToAdd.length} reviews`
+    );
+
+    // Generate review HTML elements
+    const reviewElements = reviewsToAdd
+      .map((review) => {
+        const firstLetter = review.reviewer.charAt(0).toUpperCase();
+        const stars = "★".repeat(review.rating || 5);
+
+        return `                <div class="review-mini" data-reviewer="${review.reviewer}">
+                  <div class="review-mini-header">
+                    <div class="review-mini-avatar">${firstLetter}</div>
+                    <div>
+                      <h5>${review.reviewer}</h5>
+                      <div class="review-stars">${stars}</div>
+                    </div>
+                  </div>
+                  <p class="review-mini-text">
+                    "${review.text}"
+                  </p>
+                </div>`;
+      })
+      .join("\n");
+
+    // Find the reviews-scroll-track div
+    const scrollTrackStart = '<div id="reviews-scroll-track">';
+    const scrollTrackEnd = "</div>";
+
+    const scrollTrackStartIndex = content.indexOf(scrollTrackStart);
+    if (scrollTrackStartIndex === -1) {
+      console.log(
+        `⚠️  reviews-scroll-track div not found, skipping review injection`
+      );
+      return;
+    }
+
+    const scrollTrackEndIndex = content.indexOf(
+      scrollTrackEnd,
+      scrollTrackStartIndex
+    );
+    if (scrollTrackEndIndex === -1) {
+      console.log(
+        `⚠️  reviews-scroll-track div end not found, skipping review injection`
+      );
+      return;
+    }
+
+    // Check if there are already mini reviews in the scroll track
+    const existingContent = content.substring(
+      scrollTrackStartIndex + scrollTrackStart.length,
+      scrollTrackEndIndex
+    );
+    const hasExistingReviews = existingContent.includes("review-mini");
+
+    if (hasExistingReviews) {
+      console.log(
+        `🔄 Removing existing mini reviews from reviews-scroll-track...`
+      );
+      const beforeScrollTrack = content.substring(
+        0,
+        scrollTrackStartIndex + scrollTrackStart.length
+      );
+      const afterScrollTrack = content.substring(scrollTrackEndIndex);
+      content =
+        beforeScrollTrack +
+        "\n" +
+        reviewElements +
+        "\n              " +
+        afterScrollTrack;
+    } else {
+      // Insert new reviews
+      const beforeScrollTrack = content.substring(
+        0,
+        scrollTrackStartIndex + scrollTrackStart.length
+      );
+      const afterScrollTrack = content.substring(scrollTrackEndIndex);
+      content =
+        beforeScrollTrack +
+        "\n" +
+        reviewElements +
+        "\n              " +
+        afterScrollTrack;
+    }
+
+    // Write the modified content back to the file
+    fs.writeFileSync(targetFilePath, content, "utf8");
+
+    console.log(
+      `✅ Successfully injected ${reviewsToAdd.length} mini reviews into ${targetFilePath}`
+    );
+  } catch (error) {
+    console.error("Error injecting reviews:", error.message);
+    // Don't exit process, just log the error and continue
+    console.log("Continuing with other operations...");
+  }
+}
+
 function main() {
   const args = process.argv.slice(2);
 
@@ -248,8 +418,11 @@ function main() {
   console.log(`📝 Inserting business section into ${targetFile}...`);
   insertBusinessSection(targetFile, businessSection);
 
+  console.log(`📖 Injecting reviews from listing.json into ${targetFile}...`);
+  injectReviewsFromJson(targetFile);
+
   console.log(
-    "🎉 Done! The credits content and business section have been added."
+    "🎉 Done! The credits content, business section, and reviews have been added."
   );
 }
 

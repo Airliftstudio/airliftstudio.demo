@@ -118,6 +118,7 @@ function populateReviews() {
   const track = document.getElementById("reviews-scroll-track");
   if (track) {
     const unique = Array.from(track.querySelectorAll(".review-mini"));
+    if (unique.length === 0) return;
     const total = 16;
     // Remove all but the unique reviews
     track.innerHTML = "";

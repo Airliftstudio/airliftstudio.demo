@@ -14,8 +14,6 @@ When generating a website for an Airbnb listing, you MUST apply ALL of these rul
 1. **airbnb-data-extraction.mdc** - Extract comprehensive listing information and structure project folder
 2. **airbnb-domain-branding.mdc** - Generate domain suggestions and branding
 3. **airbnb-content-strategy.mdc** - Structure content and copy
-4. **airbnb-translations.mdc** - Adding language translations
-5. **airbnb-post-build-verification.mdc** - Verifying the website and fixing issues
 
 ## Process Flow
 ```
@@ -23,8 +21,6 @@ Input: Airbnb URL
 ├── Extract Data (rule 1)
 ├── Generate Domain name (rule 2)
 ├── Write Content (rule 3)
-├── Add translations if requested (rule 4)
-└── Analyse and fix issues (rule 5)
 Output: Complete Professional Website
 ```
 
@@ -32,10 +28,14 @@ Output: Complete Professional Website
 Apply these rules every time there is an Airbnb url in the prompt.
 
 ## Success Criteria
-- All 5 rules must be applied
+- All 3 rules must be applied
 - Each rule's requirements must be fully satisfied
 
 ## Final steps
-1. Run the following command with the current project index.html:
+1. If the user requested the website to be translated into other languages then follow these steps.
+1a. Run this command to generate translations base: cd.. && node translation_workflow.js generate [PROJECT_FOLDER] [COMMA_SEPERATED_LANGUAGE_CODES]
+1b. Fill out the empty string translations in the newly created [PROJECT_FOLDER]/js/translations.js
+1c. Run: node translation_workflow.js add-defaults [PROJECT_FOLDER] [COMMA_SEPERATED_LANGUAGE_CODES]
+2. Run the following command with the current project index.html:
 node inject_biz.js [PROJECT_FOLDER/index.html]
-2. When the website is finished building open the index.html in the web browser.
+3. When the website is finished building open the index.html in the web browser.

@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { chromium } = require("playwright");
+const LANGUAGE_DEFINITIONS = require("./language_definitions.js");
 
 const TARGET_DIR = "target";
 const TARGET_DIR_LANG = "target_lang";
@@ -37,6 +38,25 @@ async function scrape() {
   }
   const AIRBNB_URL = process.argv[2];
   const LANGUAGES = process.argv[3] ? process.argv[3].split(",") : null;
+
+  // Validate languages if provided
+  if (LANGUAGES) {
+    const availableLanguages = Object.keys(LANGUAGE_DEFINITIONS);
+    const invalidLanguages = LANGUAGES.filter(
+      (lang) => !availableLanguages.includes(lang)
+    );
+
+    if (invalidLanguages.length > 0) {
+      console.error(
+        `Error: Invalid language codes provided: ${invalidLanguages.join(", ")}`
+      );
+      console.error(`Available languages: ${availableLanguages.join(", ")}`);
+      process.exit(1);
+    }
+
+    console.log(`Validated languages: ${LANGUAGES.join(", ")}`);
+  }
+
   function getListingId(url) {
     const match = url.match(/\/rooms\/(\d+)/);
     return match ? match[1] : "listing";
@@ -504,6 +524,161 @@ async function scrape() {
   const listingMdPath = path.join(destDir, "LISTING.md");
   fs.writeFileSync(listingMdPath, md, "utf8");
   console.log(`Scraping complete! Data saved to ${listingMdPath}`);
+
+  // --- Generate JSON file ---
+  console.log("Generating structured JSON file...");
+
+  // Extract capacity details
+  const capacityMatch = capacityText.match(
+    /(\d+)\s+guests?.*?(\d+)\s+bedrooms?.*?(\d+)\s+beds?.*?(\d+)\s+baths?/i
+  );
+  const capacity = capacityMatch
+    ? {
+        guests: parseInt(capacityMatch[1]),
+        bedrooms: parseInt(capacityMatch[2]),
+        beds: parseInt(capacityMatch[3]),
+        baths: parseInt(capacityMatch[4]),
+      }
+    : null;
+
+  // Extract amenities as a flat list
+  const allAmenities = [];
+  amenitiesStructured.forEach((category) => {
+    if (
+      category.category &&
+      category.category.trim().toLowerCase() !== "not included"
+    ) {
+      category.items.forEach((item) => {
+        allAmenities.push(item.trim());
+      });
+    }
+  });
+
+  // Extract badges
+  const badges = [];
+  if (isSuperhost) badges.push("superhost");
+  if (isGuestFavorite) badges.push("guest_favorite");
+
+  // Process reviews for JSON
+  const processedReviews = reviews.map((review) => ({
+    reviewer: review.name,
+    rating: parseInt(review.rating) || 0,
+    text: review.reviewText,
+  }));
+
+  // Process images for JSON
+  const processedImages = uniqueImages.map((img) => ({
+    src: img.src,
+    alt: img.alt,
+    width: parseInt(img.width) || 0,
+    height: parseInt(img.height) || 0,
+    aspect: getAspect(img.width, img.height),
+    category: img.category || "",
+    isHero: img.isHero,
+    mustUse: img.mustUse,
+  }));
+
+  // Create structured JSON object
+  const jsonData = {
+    id: listingId,
+    url: AIRBNB_URL,
+    title: title,
+    summary: summary,
+    capacity: capacity,
+    amenities: allAmenities,
+    badges: badges,
+    rating: overallRating,
+    reviews: processedReviews,
+    images: processedImages,
+    highlights: highlights,
+    scraped_at: new Date().toISOString(),
+  };
+
+  // Write JSON file
+  const jsonPath = path.join(destDir, "listing.json");
+  fs.writeFileSync(jsonPath, JSON.stringify(jsonData, null, 2), "utf8");
+  console.log(`JSON data saved to ${jsonPath}`);
+
+  // --- Modify index.html based on listing.json data ---
+  console.log("Modifying index.html based on listing data...");
+
+  const indexHtmlPath = path.join(destDir, "index.html");
+  if (fs.existsSync(indexHtmlPath)) {
+    let htmlContent = fs.readFileSync(indexHtmlPath, "utf8");
+
+    // 1. Update the rating value
+    const ratingElement = htmlContent.match(
+      /<span[^>]*id="airbnb-rating-value"[^>]*>([^<]*)<\/span>/
+    );
+    if (ratingElement) {
+      htmlContent = htmlContent.replace(
+        /<span[^>]*id="airbnb-rating-value"[^>]*>([^<]*)<\/span>/,
+        `<span id="airbnb-rating-value">${overallRating}</span>`
+      );
+      console.log(`✅ Updated rating to ${overallRating}`);
+    }
+
+    // 2. Comment out badge elements based on badges array
+    const hasSuperhost = badges.includes("superhost");
+    const hasGuestFavorite = badges.includes("guest_favorite");
+
+    // Handle superhost badge
+    const superhostBadge = htmlContent.match(
+      /<div[^>]*class="[^"]*badge-superhost[^"]*"[^>]*>[\s\S]*?<\/div>/
+    );
+    if (superhostBadge && !hasSuperhost) {
+      htmlContent = htmlContent.replace(
+        /(<div[^>]*class="[^"]*badge-superhost[^"]*"[^>]*>[\s\S]*?<\/div>)/,
+        `<!-- $1 -->`
+      );
+      console.log(`✅ Commented out superhost badge (not found in badges)`);
+    }
+
+    // Handle guest favorite badge
+    const guestFavoriteBadge = htmlContent.match(
+      /<div[^>]*class="[^"]*badge-guest-favorite[^"]*"[^>]*>[\s\S]*?<\/div>/
+    );
+    if (guestFavoriteBadge && !hasGuestFavorite) {
+      htmlContent = htmlContent.replace(
+        /(<div[^>]*class="[^"]*badge-guest-favorite[^"]*"[^>]*>[\s\S]*?<\/div>)/,
+        `<!-- $1 -->`
+      );
+      console.log(
+        `✅ Commented out guest favorite badge (not found in badges)`
+      );
+    }
+
+    // Update all Airbnb links to use the correct listing ID
+    // Replace any occurrence of the old Airbnb room URL with the new one
+    // Match all Airbnb room links (with or without trailing slash, with or without /reviews etc)
+    // Match any Airbnb room URL with optional trailing path segments (e.g., /reviews, /calendar, etc.)
+    const airbnbUrlFlexibleRegex =
+      /https:\/\/www\.airbnb\.com\/rooms\/\d+(\/[a-zA-Z0-9_-]+)?\/?/g;
+    htmlContent = htmlContent.replace(airbnbUrlFlexibleRegex, (match) => {
+      // Extract any trailing path after the room ID (e.g., /reviews, /calendar)
+      const trailingPathMatch = match.match(/\/rooms\/\d+(\/[a-zA-Z0-9_-]+)?/);
+      let trailingPath = "";
+      if (trailingPathMatch && trailingPathMatch[1]) {
+        trailingPath = trailingPathMatch[1];
+      }
+      // Always add trailing slash for base URL, but not for extra path
+      if (trailingPath) {
+        return `https://www.airbnb.com/rooms/${listingId}${trailingPath}`;
+      } else {
+        return `https://www.airbnb.com/rooms/${listingId}/`;
+      }
+    });
+    console.log(`✅ Updated all Airbnb links to use ID ${listingId}`);
+
+    // Write the modified HTML back to the file
+    fs.writeFileSync(indexHtmlPath, htmlContent, "utf8");
+    console.log(`✅ Successfully modified ${indexHtmlPath}`);
+  } else {
+    console.log(
+      `⚠️  index.html not found at ${indexHtmlPath}, skipping modifications`
+    );
+  }
+
   await browser.close();
 }
 

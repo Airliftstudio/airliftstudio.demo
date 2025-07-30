@@ -10,9 +10,11 @@ function generateTranslations(projectPath, languageCodes = []) {
     return;
   }
 
+  // If translations.js does not exist, create an empty file to start with
   if (!fs.existsSync(translationsPath)) {
-    console.error(`Translations.js not found at ${translationsPath}`);
-    return;
+    fs.mkdirSync(path.dirname(translationsPath), { recursive: true });
+    fs.writeFileSync(translationsPath, "window.TRANSLATIONS = {};\n", "utf8");
+    console.log(`Created new translations.js at ${translationsPath}`);
   }
 
   // Read the HTML file
@@ -151,9 +153,6 @@ function generateTranslations(projectPath, languageCodes = []) {
     meta,
     structuredData,
   };
-
-  // Read existing translations file to extract non-English language objects
-  const existingTranslations = fs.readFileSync(translationsPath, "utf8");
 
   // Ensure 'en' is always included in language codes
   const allLanguageCodes = [

@@ -62,21 +62,6 @@ Try to make it maximum two words.
 	- Reviews must be within 20 words of each other
 	- Count words manually: "This is a test" = 4 words
 	- Choose complementary perspectives (e.g., location vs. amenities)
-- Add up to 16 review-mini elements inside the reviews-scroll-track div. A review-mini element looks like this:
-```
-<div class="review-mini" data-reviewer="[reviewer]">
-	<div class="review-mini-header">
-		<div class="review-mini-avatar">[First letter of reviewer]</div>
-		<div>
-			<h5>[reviewer]</h5>
-			<div class="review-stars">★★★★★</div>
-		</div>
-	</div>
-	<p class="review-mini-text">
-	"[Copy of written review]"
-	</p>
-</div>
-```
 
 ### Location Section
 - Rewrite this section and the reasons why this location is perfect. Use 3-5 reasons with appropriate icons.
