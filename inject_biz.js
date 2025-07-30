@@ -255,13 +255,8 @@ function injectReviewsFromJson(targetFilePath) {
       (review) => !featuredReviewers.includes(review.reviewer)
     );
 
-    // Filter to only include 5-star reviews
-    const fiveStarReviews = availableReviews.filter(
-      (review) => review.rating === 5
-    );
-
     // Take maximum 16 reviews
-    const reviewsToAdd = fiveStarReviews.slice(0, 16);
+    const reviewsToAdd = availableReviews.slice(0, 16);
 
     if (reviewsToAdd.length === 0) {
       console.log(
@@ -271,7 +266,7 @@ function injectReviewsFromJson(targetFilePath) {
     }
 
     console.log(
-      `📝 Found ${fiveStarReviews.length} 5-star reviews, adding ${reviewsToAdd.length} reviews`
+      `📝 Found ${availableReviews.length} 5-star reviews, adding ${reviewsToAdd.length} reviews`
     );
 
     // Generate review HTML elements
