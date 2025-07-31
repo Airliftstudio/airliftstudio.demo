@@ -193,9 +193,9 @@ function updateURLWithLanguage(lang) {
   try {
     // If we're switching to a language, add the prefix
     if (lang && lang !== "en") {
-      const newPath = `/${lang}${
+      const newPath = `${
         pathWithoutLang === "/" ? "" : pathWithoutLang
-      }`;
+      }/${lang}`;
       window.history.replaceState(
         {},
         "",
