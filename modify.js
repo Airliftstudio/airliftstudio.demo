@@ -53,6 +53,62 @@ function getListingId(url) {
   return match ? match[1] : "listing";
 }
 
+// Function to remove console.log calls from JavaScript files
+function removeConsoleLogsFromJSFiles(destDir) {
+  const jsDir = path.join(destDir, "js");
+
+  if (!fs.existsSync(jsDir)) {
+    console.log(
+      `⚠️  JS directory not found at ${jsDir}, skipping console.log removal`
+    );
+    return;
+  }
+
+  const jsFiles = fs.readdirSync(jsDir).filter((file) => file.endsWith(".js"));
+
+  if (jsFiles.length === 0) {
+    console.log(`⚠️  No JavaScript files found in ${jsDir}`);
+    return;
+  }
+
+  let totalRemoved = 0;
+
+  jsFiles.forEach((file) => {
+    const filePath = path.join(jsDir, file);
+    let content = fs.readFileSync(filePath, "utf8");
+
+    // Count console.log statements before removal
+    const consoleLogMatches = content.match(/console\.log\([^)]*\);?/g) || [];
+    const initialCount = consoleLogMatches.length;
+
+    // Remove console.log calls (including multi-line ones)
+    // This regex matches console.log with any content inside parentheses, including nested parentheses
+    const consoleLogRegex = /console\.log\([^)]*(?:\([^)]*\)[^)]*)*\);?/g;
+    content = content.replace(consoleLogRegex, "");
+
+    // Also remove empty lines that might be left after console.log removal
+    content = content.replace(/\n\s*\n\s*\n/g, "\n\n");
+
+    // Count how many were removed
+    const finalMatches = content.match(/console\.log\([^)]*\);?/g) || [];
+    const removedCount = initialCount - finalMatches.length;
+
+    if (removedCount > 0) {
+      fs.writeFileSync(filePath, content, "utf8");
+      console.log(`✅ Removed ${removedCount} console.log calls from ${file}`);
+      totalRemoved += removedCount;
+    }
+  });
+
+  if (totalRemoved > 0) {
+    console.log(
+      `✅ Total: Removed ${totalRemoved} console.log calls from ${jsFiles.length} JavaScript files`
+    );
+  } else {
+    console.log(`ℹ️  No console.log calls found in JavaScript files`);
+  }
+}
+
 async function modify() {
   if (
     !process.argv[2] ||
@@ -182,6 +238,10 @@ async function modify() {
       `⚠️  index.html not found at ${indexHtmlPath}, skipping modifications`
     );
   }
+
+  // Remove console.log calls from JavaScript files
+  console.log("Removing console.log calls from JavaScript files...");
+  removeConsoleLogsFromJSFiles(destDir);
 
   console.log(`✅ Modification complete!`);
 }
