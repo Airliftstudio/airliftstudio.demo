@@ -222,11 +222,110 @@ async function modify() {
         .map((lang) => lang.trim())
         .filter((lang) => lang);
 
-      if (languageCodes.length > 0) {
+      if (languageCodes.length > 1) {
         htmlContent = updateLanguageDropdown(htmlContent, languageCodes);
         console.log(
           `✅ Updated language dropdown with: ${languageCodes.join(", ")}`
         );
+      }
+    }
+
+    // Update hero capacity row with data from listing.json
+    if (listingData.capacity) {
+      // Parse capacity string (e.g., "4 guests  -  2 bedrooms  -  2 beds  -  2.5 baths")
+      const capacityItems = listingData.capacity
+        .split(/\s*-\s*/) // Split by dash with optional spaces
+        .map((item) => item.trim())
+        .filter((item) => item.length > 0);
+
+      if (capacityItems.length > 0) {
+        // Check if language codes are provided (translation mode)
+        const hasLanguageCodes =
+          process.argv[3] &&
+          process.argv[3].split(",").filter((lang) => lang.trim()).length > 1;
+
+        // Generate the capacity HTML
+        let capacityHtml;
+        console.log("Translation mode---------------" + process.argv[3]);
+
+        if (hasLanguageCodes) {
+          console.log("Translation mode---------------");
+          // Translation mode: use data-translate attributes
+          capacityHtml = capacityItems
+            .map((item, index) => {
+              // Generate translation key based on the item content
+              // Extract all words from the item (e.g., "parking spaces" from "2 parking spaces")
+              const words = item.toLowerCase().split(/\s+/);
+
+              // Filter out numbers and common words, keep only meaningful words
+              const meaningfulWords = words.filter((word) => {
+                // Remove numbers, articles, and common words
+                return (
+                  !/^\d+(\.\d+)?$/.test(word) && // Remove numbers like "2", "2.5"
+                  !["a", "an", "the", "of", "with"].includes(word)
+                ); // Remove common words
+              });
+
+              // Handle special cases for common items
+              let translateKey = "";
+              if (meaningfulWords.includes("guest")) {
+                translateKey = "hero.guests";
+              } else if (meaningfulWords.includes("bedroom")) {
+                translateKey = "hero.bedrooms";
+              } else if (meaningfulWords.includes("bed")) {
+                translateKey = "hero.beds";
+              } else if (meaningfulWords.includes("bath")) {
+                translateKey = "hero.baths";
+              } else {
+                // For custom items, concatenate all meaningful words
+                const cleanWords = meaningfulWords.map((word) =>
+                  word.replace(/s$/, "")
+                ); // Remove trailing 's' for singular
+                translateKey = `hero.${cleanWords.join("")}`;
+              }
+
+              const itemHtml = `<span class="hero-capacity-item">
+              <span data-translate="${translateKey}">${item}</span>
+            </span>`;
+
+              // Add dot separator between items (but not after the last item)
+              return index < capacityItems.length - 1
+                ? itemHtml + '<span class="hero-dot">•</span>'
+                : itemHtml;
+            })
+            .join("");
+        } else {
+          // Non-translation mode: simple HTML without data-translate
+          capacityHtml = capacityItems
+            .map((item, index) => {
+              const itemHtml = `<span class="hero-capacity-item">${item}</span>`;
+              // Add dot separator between items (but not after the last item)
+              return index < capacityItems.length - 1
+                ? itemHtml + '<span class="hero-dot">•</span>'
+                : itemHtml;
+            })
+            .join("");
+        }
+
+        // Replace the hero capacity row content
+        const heroCapacityRegex =
+          /<div class="hero-capacity-row">[\s\S]*?<\/div>/;
+        const newHeroCapacity = `<div class="hero-capacity-row">
+          <span class="hero-capacity">
+            ${capacityHtml}
+          </span>
+        </div>`;
+
+        if (heroCapacityRegex.test(htmlContent)) {
+          htmlContent = htmlContent.replace(heroCapacityRegex, newHeroCapacity);
+          console.log(
+            `✅ Updated hero capacity with: ${capacityItems.join(" • ")}${
+              hasLanguageCodes ? " (with translation support)" : ""
+            }`
+          );
+        } else {
+          console.log(`⚠️  Hero capacity row not found in HTML`);
+        }
       }
     }
 

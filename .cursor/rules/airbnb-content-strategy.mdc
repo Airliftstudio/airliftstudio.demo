@@ -41,21 +41,18 @@ Try to make it maximum two words.
 
 ### Hero Section
 - Come up with a good tagline for the hero-subtitle based on the Airbnb listing. Do not use abbreviations like "w/" etc.
-- Replace the capacity information
 
 ### About Section
-- Update all the features. There should be 3 or 4 feature cards depending on how many features the Airbnb listing have to highlight. Make sure every feature has an appropriate icon. If unsure about if the icon exists use fa-star.
+- Update all the features. There should be 3 or 4 feature cards depending on how many features the Airbnb listing have to highlight.
 - Replace all the amenities with new one from the Airbnb listing. Make sure there is one for each amenity in the Airbnb listing.
-- Every amenity item must have an appropriate icon. If unsure about if the icon exists use fa-check or a more general icon.
 
 ### Gallery Section
 - Update the alt text for all the images in the gallery section with their respective alt text in listing.json
 
 ### Reviews Section
 - Replace the two featured reviews with two very positive reviews following these criteria:
-	- Both reviews must be between 60-100 words
-	- Reviews must be within 20 words of each other
-	- Count words manually: "This is a test" = 4 words
+	- Both reviews must be between 400-900 characters
+	- Reviews must be within 200 characters of each other. The closer in length the better.
 	- Choose complementary perspectives (e.g., location vs. amenities)
 
 ### Location Section

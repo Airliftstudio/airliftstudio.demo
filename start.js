@@ -85,25 +85,36 @@ async function main() {
 
   const listingId = getListingId(airbnbUrl);
   console.log(`Processing listing ID: ${listingId}`);
-
+  let args = [airbnbUrl];
   try {
     switch (command) {
       case "setup":
         console.log("=== Running Setup ===");
-        await runCommand(
-          "setup.js",
-          [airbnbUrl, param3, param4].filter(Boolean)
-        );
+        args = [airbnbUrl, param3, param4];
+        await runCommand("setup.js", args.filter(Boolean));
         break;
 
       case "scrape":
         console.log("=== Running Scrape ===");
+        args = [airbnbUrl];
         await runCommand("scrape.js", [airbnbUrl]);
         break;
 
       case "modify":
         console.log("=== Running Modify ===");
-        await runCommand("modify.js", [airbnbUrl]);
+        args = [airbnbUrl];
+        if (
+          (param3 && typeof param3 === "string" && param3.includes(",")) ||
+          (param4 && typeof param4 === "string" && param4.includes(","))
+        ) {
+          // Prefer param3 if both are comma-separated lists, else use whichever is present
+          if (param3 && param3.includes(",")) {
+            args.push(param3);
+          } else if (param4 && param4.includes(",")) {
+            args.push(param4);
+          }
+        }
+        await runCommand("modify.js", args);
         break;
 
       case "all":

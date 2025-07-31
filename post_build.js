@@ -437,9 +437,9 @@ function validateAndFixIcons(targetFilePath) {
       ) {
         const defaultIcon = DEFAULT_ICONS[section] || "fa-check";
         console.log(
-          `⚠️  Icon ${iconClass} not found, replacing with ${defaultIcon}`
+          `⚠️  Icon ${iconClass} not found, replacing with fas ${defaultIcon}`
         );
-        return defaultIcon;
+        return `fas ${defaultIcon}`;
       }
       return iconClass;
     }
