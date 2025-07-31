@@ -1,0 +1,6 @@
+/*
+  X-Robots-Tag: index, follow
+/demo/*
+  X-Robots-Tag: noindex, nofollow
+/templates/*
+  X-Robots-Tag: noindex, nofollow

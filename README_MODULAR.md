@@ -4,7 +4,7 @@ This is a modular version of the Airbnb scraper that splits the functionality in
 
 ## Files
 
-- `scrape_airbnb.js` - Main orchestrator script
+- `start.js` - Main orchestrator script
 - `setup.js` - Creates the file structure for the website
 - `scrape.js` - Scrapes the Airbnb listing and writes data to listing.json
 - `modify.js` - Modifies index.html based on listing.json data
@@ -15,12 +15,12 @@ This is a modular version of the Airbnb scraper that splits the functionality in
 
 ```bash
 # Run all commands in sequence
-node scrape_airbnb.js all <airbnb_url> [template] [languages]
+node start.js all <airbnb_url> [template] [languages]
 
 # Run individual commands
-node scrape_airbnb.js setup <airbnb_url> [template] [languages]
-node scrape_airbnb.js scrape <airbnb_url>
-node scrape_airbnb.js modify <airbnb_url>
+node start.js setup <airbnb_url> [template] [languages]
+node start.js scrape <airbnb_url>
+node start.js modify <airbnb_url>
 ```
 
 ### Individual Scripts
@@ -42,18 +42,19 @@ node modify.js <airbnb_url>
 
 ```bash
 # Complete workflow with default template
-node scrape_airbnb.js all https://www.airbnb.com/rooms/123456789
+node start.js all https://www.airbnb.com/rooms/123456789
 
 # Complete workflow with specific template
-node scrape_airbnb.js all https://www.airbnb.com/rooms/123456789 v1
+node start.js all https://www.airbnb.com/rooms/123456789 v1
 
 # With translations
-node scrape_airbnb.js all https://www.airbnb.com/rooms/123456789 v1 en,es,fr
+node start.js all https://www.airbnb.com/rooms/123456789 v1 es,fr
+node start.js all https://www.airbnb.com/rooms/123456789 es,fr
 
 # Step by step
-node scrape_airbnb.js setup https://www.airbnb.com/rooms/123456789 v1
-node scrape_airbnb.js scrape https://www.airbnb.com/rooms/123456789
-node scrape_airbnb.js modify https://www.airbnb.com/rooms/123456789
+node start.js setup https://www.airbnb.com/rooms/123456789 v1
+node start.js scrape https://www.airbnb.com/rooms/123456789
+node start.js modify https://www.airbnb.com/rooms/123456789
 ```
 
 ## Template System

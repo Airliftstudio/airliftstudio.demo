@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require("fs");
+const path = require("path");
 
 function extractCreditsContent(bizSectionPath) {
   try {
@@ -367,7 +368,7 @@ function main() {
   const args = process.argv.slice(2);
 
   if (args.length < 1) {
-    console.log("Usage: node inject_biz.js <target_html_file>");
+    console.log("Usage: node inject_biz.js <project_directory>");
     console.log("");
     console.log("This script will:");
     console.log("1. Extract the credits content from biz_section.html");
@@ -378,19 +379,29 @@ function main() {
       "3. Extract the business offering section from biz_section.html"
     );
     console.log("4. Insert it before the <footer> tag in the target HTML file");
+    console.log(
+      "5. Inject reviews from listing.json into the target HTML file"
+    );
     console.log("");
     console.log("Examples:");
-    console.log("  node inject_biz.js villa-lestari-ubud/index.html");
-    console.log("  node inject_biz.js villa-zori-bali/index.html");
-    console.log("  node inject_biz.js villa-lespoir-bali/index.html");
+    console.log("  node inject_biz.js demo/test");
+    console.log("  node inject_biz.js demo/villa-zori-bali");
+    console.log("  node inject_biz.js demo/villa-lespoir-bali");
     process.exit(1);
   }
 
-  const targetFile = args[0];
+  const projectDir = args[0];
+  const targetFile = path.join(projectDir, "index.html");
+
+  // Check if project directory exists
+  if (!fs.existsSync(projectDir)) {
+    console.error(`❌ Project directory not found: ${projectDir}`);
+    process.exit(1);
+  }
 
   // Check if target file exists
   if (!fs.existsSync(targetFile)) {
-    console.error(`❌ Target file not found: ${targetFile}`);
+    console.error(`❌ index.html not found in: ${targetFile}`);
     process.exit(1);
   }
 

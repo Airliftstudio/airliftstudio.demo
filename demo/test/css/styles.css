@@ -580,7 +580,7 @@ nav {
     transparent
   );
 }
-.reviews-scroll-track {
+#reviews-scroll-track {
   display: flex;
   gap: 30px;
   animation: scroll-left 64s linear infinite;
@@ -824,7 +824,7 @@ footer {
   .reviews-featured {
     grid-template-columns: 1fr;
   }
-  .reviews-scroll-track {
+  #reviews-scroll-track {
     gap: 1rem;
   }
   .hero-content {
