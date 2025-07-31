@@ -40,8 +40,8 @@ function addDefaultTranslations(projectPath) {
 
     // Add default values to each language
     for (const [langCode, langData] of Object.entries(translations)) {
-      const LANGUAGE_DEFINITIONS = require("./language_definitions.js");
-      const langDefaults = LANGUAGE_DEFINITIONS[langCode]?.defaults || {};
+      const SUPPORTED_LANGUAGES = require("./supported_languages.js");
+      const langDefaults = SUPPORTED_LANGUAGES[langCode]?.defaults || {};
 
       // Dynamically apply all default values
       applyDefaultsToObject(langData, langDefaults);

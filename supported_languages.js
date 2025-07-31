@@ -1,5 +1,5 @@
 // Shared language definitions with codes, flags, display names, and default values
-const LANGUAGE_DEFINITIONS = {
+const SUPPORTED_LANGUAGES = {
   en: {
     flag: "🇬🇧",
     displayName: "English",
@@ -342,6 +342,78 @@ const LANGUAGE_DEFINITIONS = {
       "reviews.read_all": "Airbnb'deki tüm değerlendirmeleri oku",
     },
   },
+  fil: {
+    flag: "🇵🇭",
+    displayName: "Filipino",
+    defaults: {
+      "meta.locale": "fil_PH",
+      "meta.language": "Filipino",
+      "nav.about": "Tungkol",
+      "nav.gallery": "Galeriya",
+      "nav.reviews": "Mga Review",
+      "nav.location": "Lokasyon",
+      "badges.superhost": "Superhost",
+      "badges.guest_favorite": "Paborito ng mga Bisita",
+      "hero.cta": "Tingnan ang Availability",
+      "amenities.title": "Mga Amenidad",
+      "reviews.title": "Ano ang Sinasabi ng mga Bisita Namin",
+      "reviews.read_all": "Basahin ang Lahat ng Review sa Airbnb",
+    },
+  },
+  id: {
+    flag: "🇮🇩",
+    displayName: "Bahasa Indonesia",
+    defaults: {
+      "meta.locale": "id_ID",
+      "meta.language": "Bahasa Indonesia",
+      "nav.about": "Tentang",
+      "nav.gallery": "Galeri",
+      "nav.reviews": "Ulasan",
+      "nav.location": "Lokasi",
+      "badges.superhost": "Superhost",
+      "badges.guest_favorite": "Favorit Tamu",
+      "hero.cta": "Periksa Ketersediaan",
+      "amenities.title": "Fasilitas",
+      "reviews.title": "Apa Kata Tamu Kami",
+      "reviews.read_all": "Baca Semua Ulasan di Airbnb",
+    },
+  },
+  th: {
+    flag: "🇹🇭",
+    displayName: "ไทย",
+    defaults: {
+      "meta.locale": "th_TH",
+      "meta.language": "ไทย",
+      "nav.about": "เกี่ยวกับ",
+      "nav.gallery": "แกลเลอรี่",
+      "nav.reviews": "รีวิว",
+      "nav.location": "ตำแหน่ง",
+      "badges.superhost": "ซูเปอร์โฮสต์",
+      "badges.guest_favorite": "ที่ชื่นชอบของแขก",
+      "hero.cta": "ตรวจสอบความพร้อม",
+      "amenities.title": "สิ่งอำนวยความสะดวก",
+      "reviews.title": "แขกของเราพูดอะไร",
+      "reviews.read_all": "อ่านรีวิวทั้งหมดบน Airbnb",
+    },
+  },
+  vi: {
+    flag: "🇻🇳",
+    displayName: "Tiếng Việt",
+    defaults: {
+      "meta.locale": "vi_VN",
+      "meta.language": "Tiếng Việt",
+      "nav.about": "Về chúng tôi",
+      "nav.gallery": "Thư viện ảnh",
+      "nav.reviews": "Đánh giá",
+      "nav.location": "Vị trí",
+      "badges.superhost": "Chủ nhà siêu cấp",
+      "badges.guest_favorite": "Yêu thích của khách",
+      "hero.cta": "Kiểm tra tình trạng",
+      "amenities.title": "Tiện nghi",
+      "reviews.title": "Khách của chúng tôi nói gì",
+      "reviews.read_all": "Đọc tất cả đánh giá trên Airbnb",
+    },
+  },
 };
 
-module.exports = LANGUAGE_DEFINITIONS;
+module.exports = SUPPORTED_LANGUAGES;

@@ -203,8 +203,8 @@ function generateTranslations(projectPath, languageCodes = []) {
   };
 
   // Get English defaults to exclude them
-  const LANGUAGE_DEFINITIONS = require("./language_definitions.js");
-  const enDefaults = LANGUAGE_DEFINITIONS.en?.defaults || {};
+  const SUPPORTED_LANGUAGES = require("./supported_languages.js");
+  const enDefaults = SUPPORTED_LANGUAGES.en?.defaults || {};
 
   // Create English object excluding default values
   const createEnglishObject = (obj, indent = 4, parentKey = "") => {
@@ -309,9 +309,9 @@ function generateTranslations(projectPath, languageCodes = []) {
   ) => {
     const spaces = " ".repeat(indent);
     const lines = [];
-    const LANGUAGE_DEFINITIONS = require("./language_definitions.js");
+    const SUPPORTED_LANGUAGES = require("./supported_languages.js");
 
-    const langDefaults = LANGUAGE_DEFINITIONS[langCode]?.defaults || {};
+    const langDefaults = SUPPORTED_LANGUAGES[langCode]?.defaults || {};
 
     for (const [key, value] of Object.entries(obj)) {
       const currentKey = parentKey ? `${parentKey}.${key}` : key;

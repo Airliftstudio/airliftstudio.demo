@@ -3,7 +3,7 @@ const path = require("path");
 
 function updateLanguageDropdown(htmlContent, languageCodes) {
   // Always include English as the first option
-  const LANGUAGE_DEFINITIONS = require("./language_definitions.js");
+  const SUPPORTED_LANGUAGES = require("./supported_languages.js");
   const uniqueLangCodes = ["en", ...languageCodes.filter((c) => c !== "en")];
 
   // Find the language dropdown section
@@ -21,7 +21,7 @@ function updateLanguageDropdown(htmlContent, languageCodes) {
   // Generate new language options, always with English first
   const languageOptions = uniqueLangCodes
     .map((langCode) => {
-      const langDef = LANGUAGE_DEFINITIONS[langCode];
+      const langDef = SUPPORTED_LANGUAGES[langCode];
       const flag = langDef?.flag || "🌐";
       const displayName = langDef?.displayName || langCode.toUpperCase();
       const activeClass = langCode === "en" ? " active" : "";

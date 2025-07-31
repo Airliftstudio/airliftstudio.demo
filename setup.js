@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const LANGUAGE_DEFINITIONS = require("./language_definitions.js");
+const SUPPORTED_LANGUAGES = require("./supported_languages.js");
 
 function getListingId(url) {
   const match = url.match(/\/rooms\/(\d+)/);
@@ -46,7 +46,7 @@ function isLanguageCode(param) {
   if (param.includes(",")) return true;
 
   // Check if it's a valid language code
-  const availableLanguages = Object.keys(LANGUAGE_DEFINITIONS);
+  const availableLanguages = Object.keys(SUPPORTED_LANGUAGES);
   return availableLanguages.includes(param);
 }
 
@@ -100,7 +100,7 @@ async function setup() {
 
   // Validate languages if provided
   if (LANGUAGES) {
-    const availableLanguages = Object.keys(LANGUAGE_DEFINITIONS);
+    const availableLanguages = Object.keys(SUPPORTED_LANGUAGES);
     const invalidLanguages = LANGUAGES.filter(
       (lang) => !availableLanguages.includes(lang)
     );
