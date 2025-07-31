@@ -198,7 +198,7 @@ function updateURLWithLanguage(lang) {
     if (lang && lang !== "en") {
       const newPath = `${
         pathWithoutLang === "/" ? "" : pathWithoutLang
-      }/${lang}`;
+      }/${lang}/`;
       window.history.replaceState(
         {},
         "",
@@ -211,7 +211,7 @@ function updateURLWithLanguage(lang) {
       window.history.replaceState(
         {},
         "",
-        cleanPath + currentSearch + currentHash
+        cleanPath + "/" + currentSearch + currentHash
       );
     }
   } catch (error) {
