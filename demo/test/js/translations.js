@@ -108,14 +108,14 @@ window.translations = {
       read_all: "Read All Reviews on Airbnb",
     },
   },
-  de: {
+  sv: {
     hero: {
       guests: "",
       bedrooms: "",
       beds: "",
       baths: "",
       subtitle: "",
-      cta: "Verfügbarkeit prüfen",
+      cta: "Kontrollera tillgänglighet",
     },
     about: {
       title: "",
@@ -151,7 +151,7 @@ window.translations = {
       beds: "",
       cleaning: "",
       privacy: "",
-      title: "Ausstattung",
+      title: "Bekvämligheter",
     },
     gallery: {
       title: "",
@@ -186,8 +186,8 @@ window.translations = {
       keywords: "",
       og_title: "",
       og_description: "",
-      locale: "de_DE",
-      language: "Deutsch",
+      locale: "sv_SE",
+      language: "Svenska",
     },
     structuredData: {
       description: "",
@@ -197,18 +197,18 @@ window.translations = {
       ],
     },
     nav: {
-      about: "Über",
-      gallery: "Galerie",
-      reviews: "Bewertungen",
-      location: "Standort",
+      about: "Om",
+      gallery: "Galleri",
+      reviews: "Recensioner",
+      location: "Plats",
     },
     badges: {
       superhost: "Superhost",
-      guest_favorite: "Gastliebling",
+      guest_favorite: "Gästfavorit",
     },
     reviews: {
-      title: "Was unsere Gäste sagen",
-      read_all: "Alle Bewertungen auf Airbnb lesen",
+      title: "Vad våra gäster säger",
+      read_all: "Läs alla recensioner på Airbnb",
     },
   },
   fr: {

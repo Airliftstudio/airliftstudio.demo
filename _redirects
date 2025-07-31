@@ -1,24 +1,11 @@
 # _redirects for subdirectory language handling
 
+# demo redirects
+/demo/* /demo/index.html 200
+/demo/sv/* /demo/:splat 200
+/demo/fr/* /demo/:splat 200
 
-
-# Target language redirects (for reference)
-/target_lang/* /target_lang/index.html 200 
-/target_lang/en/* /target_lang/:splat 200
-/target_lang/fr/* /target_lang/:splat 200
-
-# villa-lestari-ubud redirects
-/villa-lestari-ubud/* /villa-lestari-ubud/index.html 200
-/villa-lestari-ubud/fr/* /villa-lestari-ubud/:splat 200
-/villa-lestari-ubud/sv/* /villa-lestari-ubud/:splat 200
-/villa-lestari-ubud/de/* /villa-lestari-ubud/:splat 200
-
-# artistic-villa-bali redirects
-/artistic-villa-bali/* /artistic-villa-bali/index.html 200
-/artistic-villa-bali/sv/* /artistic-villa-bali/:splat 200
-/artistic-villa-bali/de/* /artistic-villa-bali/:splat 200
-
-# jungle-valley-bali redirects
-/jungle-valley-bali/* /jungle-valley-bali/index.html 200
-/jungle-valley-bali/sv/* /jungle-valley-bali/:splat 200
-/jungle-valley-bali/de/* /jungle-valley-bali/:splat 200
+# templates redirects
+/templates/* /templates/index.html 200
+/templates/de/* /templates/:splat 200
+/templates/fr/* /templates/:splat 200
