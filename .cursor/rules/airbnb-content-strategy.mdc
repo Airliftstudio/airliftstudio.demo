@@ -49,7 +49,7 @@ Try to make it maximum two words.
 - Every amenity item must have an appropriate icon. If unsure about if the icon exists use fa-check or a more general icon.
 
 ### Gallery Section
-- Update the alt text for the images in the gallery based on their alt text in listing.json
+- Update the alt text for all the images in the gallery section with their respective alt text in listing.json
 
 ### Reviews Section
 - Replace the two featured reviews with two very positive reviews following these criteria:

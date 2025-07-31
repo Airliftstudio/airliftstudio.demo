@@ -118,7 +118,20 @@ async function main() {
         await runCommand("scrape.js", [airbnbUrl]);
 
         console.log("3. Modify...");
-        await runCommand("modify.js", [airbnbUrl]);
+        // Pass param3 or param4 to modify.js if either is a comma-separated list
+        let modifyArgs = [airbnbUrl];
+        if (
+          (param3 && typeof param3 === "string" && param3.includes(",")) ||
+          (param4 && typeof param4 === "string" && param4.includes(","))
+        ) {
+          // Prefer param3 if both are comma-separated lists, else use whichever is present
+          if (param3 && param3.includes(",")) {
+            modifyArgs.push(param3);
+          } else if (param4 && param4.includes(",")) {
+            modifyArgs.push(param4);
+          }
+        }
+        await runCommand("modify.js", modifyArgs);
 
         console.log("✅ All commands completed successfully!");
         console.log(

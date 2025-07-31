@@ -9,3 +9,14 @@
 /demo/test/* /demo/test/index.html 200
 /demo/test/sv/* /demo/test/:splat 200
 /demo/test/fr/* /demo/test/:splat 200
+
+
+# demo/serendipity-mengwi redirects
+/demo/serendipity-mengwi/* /demo/serendipity-mengwi/index.html 200
+/demo/serendipity-mengwi/fr/* /demo/serendipity-mengwi/:splat 200
+/demo/serendipity-mengwi/sv/* /demo/serendipity-mengwi/:splat 200
+
+# demo/serendipity-mengwi-bali redirects
+/demo/serendipity-mengwi-bali/* /demo/serendipity-mengwi-bali/index.html 200
+/demo/serendipity-mengwi-bali/de/* /demo/serendipity-mengwi-bali/:splat 200
+/demo/serendipity-mengwi-bali/sv/* /demo/serendipity-mengwi-bali/:splat 200

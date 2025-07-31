@@ -1,6 +1,53 @@
 const fs = require("fs");
 const path = require("path");
 
+function updateLanguageDropdown(htmlContent, languageCodes) {
+  // Always include English as the first option
+  const LANGUAGE_DEFINITIONS = require("./language_definitions.js");
+  const uniqueLangCodes = ["en", ...languageCodes.filter((c) => c !== "en")];
+
+  // Find the language dropdown section
+  const dropdownStartRegex = /<div class="language-dropdown"[^>]*>/;
+  const dropdownEndRegex = /<\/div>\s*<\/div>\s*<\/li>/;
+
+  if (
+    !dropdownStartRegex.test(htmlContent) ||
+    !dropdownEndRegex.test(htmlContent)
+  ) {
+    console.warn("Language dropdown not found in HTML.");
+    return htmlContent;
+  }
+
+  // Generate new language options, always with English first
+  const languageOptions = uniqueLangCodes
+    .map((langCode) => {
+      const langDef = LANGUAGE_DEFINITIONS[langCode];
+      const flag = langDef?.flag || "🌐";
+      const displayName = langDef?.displayName || langCode.toUpperCase();
+      const activeClass = langCode === "en" ? " active" : "";
+
+      return `                <div class="language-option${activeClass}" data-lang="${langCode}">
+                  <span class="language-flag">${flag}</span>
+                  ${displayName}
+                </div>`;
+    })
+    .join("\n");
+
+  // Replace the entire dropdown content
+  const newDropdownContent = `              <div class="language-dropdown" id="languageDropdown">
+${languageOptions}
+              </div>`;
+
+  // Find and replace the dropdown section
+  const dropdownSectionRegex =
+    /<div class="language-dropdown"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*<\/li>/;
+
+  return htmlContent.replace(
+    dropdownSectionRegex,
+    newDropdownContent + "\n            </div>\n          </li>"
+  );
+}
+
 function getListingId(url) {
   const match = url.match(/\/rooms\/(\d+)/);
   return match ? match[1] : "listing";
@@ -111,6 +158,21 @@ async function modify() {
       }
     });
     console.log(`✅ Updated all Airbnb links to use ID ${listingId}`);
+
+    // Update language dropdown if language codes are provided
+    if (process.argv[3]) {
+      const languageCodes = process.argv[3]
+        .split(",")
+        .map((lang) => lang.trim())
+        .filter((lang) => lang);
+
+      if (languageCodes.length > 0) {
+        htmlContent = updateLanguageDropdown(htmlContent, languageCodes);
+        console.log(
+          `✅ Updated language dropdown with: ${languageCodes.join(", ")}`
+        );
+      }
+    }
 
     // Write the modified HTML back to the file
     fs.writeFileSync(indexHtmlPath, htmlContent, "utf8");

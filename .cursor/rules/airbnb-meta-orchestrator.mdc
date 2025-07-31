@@ -37,5 +37,5 @@ Apply these rules every time there is an Airbnb url in the prompt.
 1b. Fill out the empty string translations in the newly created [PROJECT_DIR]/js/translations.js
 1c. Run: node translation_workflow.js add-defaults [PROJECT_DIR] [COMMA_SEPERATED_LANGUAGE_CODES]
 2. Run the following command with the current project index.html:
-node inject_biz.js [PROJECT_DIR]
+node post_build.js [PROJECT_DIR]
 3. When the website is finished building open the index.html in the web browser.

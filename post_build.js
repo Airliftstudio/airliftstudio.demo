@@ -368,7 +368,7 @@ function main() {
   const args = process.argv.slice(2);
 
   if (args.length < 1) {
-    console.log("Usage: node inject_biz.js <project_directory>");
+    console.log("Usage: node post_build.js <project_directory>");
     console.log("");
     console.log("This script will:");
     console.log("1. Extract the credits content from biz_section.html");
@@ -384,9 +384,9 @@ function main() {
     );
     console.log("");
     console.log("Examples:");
-    console.log("  node inject_biz.js demo/test");
-    console.log("  node inject_biz.js demo/villa-zori-bali");
-    console.log("  node inject_biz.js demo/villa-lespoir-bali");
+    console.log("  node post_build.js demo/test");
+    console.log("  node post_build.js demo/villa-zori-bali");
+    console.log("  node post_build.js demo/villa-lespoir-bali");
     process.exit(1);
   }
 

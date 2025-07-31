@@ -109,6 +109,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Hreflang tags for international SEO -->
+    <link rel="alternate" hreflang="en" href="https://villazori.com/en/" />
+    <link rel="alternate" hreflang="es" href="https://villazori.com/es/" />
+    <link rel="alternate" hreflang="fr" href="https://villazori.com/fr/" />
+    <link rel="alternate" hreflang="nl" href="https://villazori.com/nl/" />
+    <link rel="alternate" hreflang="x-default" href="https://villazori.com/" />
+<!-- End Hreflang tags -->
+
   </head>
 
   <body>
@@ -117,10 +125,42 @@
       <nav class="container">
         <a href="#hero" class="logo">Villa Zori</a>
         <ul class="nav-links">
-          <li class="hide-mobile"><a href="#about">About</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#reviews">Reviews</a></li>
-          <li class="hide-mobile"><a href="#location">Location</a></li>
+          <li class="hide-mobile">
+            <a href="#about" data-translate="nav.about">About</a>
+          </li>
+          <li><a href="#gallery" data-translate="nav.gallery">Gallery</a></li>
+          <li class="hide-mobile-sm">
+            <a href="#reviews" data-translate="nav.reviews">Reviews</a>
+          </li>
+          <li class="hide-mobile">
+            <a href="#location" data-translate="nav.location">Location</a>
+          </li>
+          <li>
+            <div class="language-switcher">
+              <button class="language-btn" id="languageBtn">
+                <span id="currentLang">EN</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="language-dropdown" id="languageDropdown">
+                <div class="language-option active" data-lang="en">
+                  <span class="language-flag">🇬🇧</span>
+                  English
+                </div>
+                <div class="language-option" data-lang="es">
+                  <span class="language-flag">🇪🇸</span>
+                  Español
+                </div>
+                <div class="language-option" data-lang="fr">
+                  <span class="language-flag">🇫🇷</span>
+                  Français
+                </div>
+                <div class="language-option" data-lang="nl">
+                  <span class="language-flag">🇳🇱</span>
+                  Nederlands
+                </div>
+              </div>
+            </div>
+          </li>
         </ul>
       </nav>
     </header>
@@ -130,12 +170,13 @@
       <div class="hero-bg-dark"></div>
       <div class="hero-content">
         <div class="hero-badges">
-          <div class="badge badge-superhost">
+          <!-- <div class="badge badge-superhost">
             <i class="fas fa-user-shield"></i>
-            Superhost
-          </div>
+            <span data-translate="badges.superhost">Superhost</span>
+          </div> -->
           <div class="badge badge-guest-favorite">
-            <i class="fas fa-heart"></i> Guest Favorite
+            <i class="fas fa-heart"></i>
+            <span data-translate="badges.guest_favorite">Guest Favorite</span>
           </div>
         </div>
         <h1>Villa Zori</h1>
@@ -157,24 +198,34 @@
 
         <div class="hero-capacity-row">
           <span class="hero-capacity">
-            <span class="hero-capacity-item">4 guests</span>
+            <span class="hero-capacity-item">
+              <span data-translate="hero.guests">4 guests </span>
+            </span>
             <span class="hero-dot">•</span>
-            <span class="hero-capacity-item">2 bedrooms</span>
+            <span class="hero-capacity-item">
+              <span data-translate="hero.bedrooms">2 bedrooms </span>
+            </span>
             <span class="hero-dot">•</span>
-            <span class="hero-capacity-item">2 beds</span>
+            <span class="hero-capacity-item">
+              <span data-translate="hero.beds">2 beds</span>
+            </span>
             <span class="hero-dot">•</span>
-            <span class="hero-capacity-item">2 baths</span>
+            <span class="hero-capacity-item">
+              <span data-translate="hero.baths">2 baths</span>
+            </span>
           </span>
         </div>
-        <div class="hero-subtitle">Luxury 2-Bedroom Villa in Canggu, Bali</div>
+        <div class="hero-subtitle" data-translate="hero.subtitle">
+          Luxury 2-Bedroom Villa in Canggu, Bali
+        </div>
 
         <a
-          href="https://www.airbnb.com/rooms/1370740317977312967/"
+          href="https://www.airbnb.com/rooms/1211195182227864578/"
           class="cta-button"
           target="_blank"
         >
           <i class="fas fa-calendar-check"></i>
-          <span>Check Availability</span>
+          <span data-translate="hero.cta">Check Availability</span>
         </a>
       </div>
     </section>
@@ -182,12 +233,12 @@
     <!-- Floating CTA -->
     <div class="floating-cta">
       <a
-        href="https://www.airbnb.com/rooms/1370740317977312967/"
+        href="https://www.airbnb.com/rooms/1211195182227864578/"
         class="cta-button"
         target="_blank"
       >
         <i class="fas fa-calendar-check"></i>
-        <span>Check Availability</span>
+        <span data-translate="hero.cta">Check Availability</span>
       </a>
     </div>
 
@@ -196,8 +247,10 @@
       <div class="container">
         <div class="about-content">
           <div class="about-text">
-            <h3 class="text-content">Your Private Paradise in Canggu</h3>
-            <p class="text-content">
+            <h3 class="text-content" data-translate="about.title">
+              Your Private Paradise in Canggu
+            </h3>
+            <p class="text-content" data-translate="about.description">
               Step into a tranquil oasis where boundaries between nature and
               comfort blur. Villa Zori offers lush gardens, a private pool, and
               a modern open living design—your peaceful escape just minutes from
@@ -216,8 +269,8 @@
         <div class="features-grid">
           <div class="feature-card">
             <i class="fas fa-swimming-pool"></i>
-            <h4>Private Pool & Garden</h4>
-            <p>
+            <h4 data-translate="features.pool.title">Private Pool & Garden</h4>
+            <p data-translate="features.pool.description">
               Enjoy your own tropical oasis with a private swimming pool and
               lush garden for ultimate relaxation.
             </p>
@@ -225,8 +278,10 @@
 
           <div class="feature-card">
             <i class="fas fa-wifi"></i>
-            <h4>High-Speed WiFi & Workspace</h4>
-            <p>
+            <h4 data-translate="features.wifi.title">
+              High-Speed WiFi & Workspace
+            </h4>
+            <p data-translate="features.wifi.description">
               Fast, reliable internet and two dedicated workspaces—perfect for
               remote work or streaming.
             </p>
@@ -234,8 +289,10 @@
 
           <div class="feature-card">
             <i class="fas fa-utensils"></i>
-            <h4>Fully Equipped Kitchen</h4>
-            <p>
+            <h4 data-translate="features.kitchen.title">
+              Fully Equipped Kitchen
+            </h4>
+            <p data-translate="features.kitchen.description">
               Modern kitchen with all appliances, cookware, and dining
               essentials included.
             </p>
@@ -243,48 +300,73 @@
 
           <div class="feature-card">
             <i class="fas fa-snowflake"></i>
-            <h4>Air Conditioning</h4>
-            <p>
+            <h4 data-translate="features.ac.title">Air Conditioning</h4>
+            <p data-translate="features.ac.description">
               Climate control in every room for comfort in tropical weather.
             </p>
           </div>
         </div>
 
         <div class="amenities-section">
-          <h3 class="text-content">Amenities</h3>
+          <h3 class="text-content" data-translate="amenities.title">
+            Amenities
+          </h3>
           <div class="amenities-grid">
             <div class="amenity-item">
-              <i class="fas fa-swimming-pool"></i> Pool
+              <i class="fas fa-swimming-pool"></i>
+              <span data-translate="amenities.pool">Pool</span>
             </div>
             <div class="amenity-item">
-              <i class="fas fa-wifi"></i> WiFi included
+              <i class="fas fa-wifi"></i>
+              <span data-translate="amenities.wifi"> WiFi included </span>
             </div>
             <div class="amenity-item">
-              <i class="fas fa-laptop"></i> Dedicated workspace
+              <i class="fas fa-laptop"></i>
+              <span data-translate="amenities.workspace">
+                Dedicated workspace
+              </span>
             </div>
             <div class="amenity-item">
-              <i class="fas fa-car"></i> Free parking
+              <i class="fas fa-car"></i>
+              <span data-translate="amenities.parking">Free parking</span>
             </div>
             <div class="amenity-item">
-              <i class="fas fa-snowflake"></i> Air conditioning
+              <i class="fas fa-snowflake"></i>
+              <span data-translate="amenities.ac">Air conditioning</span>
             </div>
             <div class="amenity-item">
-              <i class="fas fa-utensils"></i> Full kitchen
+              <i class="fas fa-utensils"></i>
+              <span data-translate="amenities.kitchen">Full kitchen</span>
             </div>
             <div class="amenity-item">
-              <i class="fas fa-door-open"></i> Private patio or balcony
+              <i class="fas fa-door-open"></i>
+              <span data-translate="amenities.patio">
+                Private patio or balcony
+              </span>
             </div>
             <div class="amenity-item">
-              <i class="fas fa-key"></i> Self check-in (lockbox)
+              <i class="fas fa-key"></i>
+              <span data-translate="amenities.checkin">
+                Self check-in (lockbox)
+              </span>
             </div>
             <div class="amenity-item">
-              <i class="fas fa-bed"></i> 2 queen beds, 2 bathrooms
+              <i class="fas fa-bed"></i>
+              <span data-translate="amenities.beds">
+                2 queen beds, 2 bathrooms
+              </span>
             </div>
             <div class="amenity-item">
-              <i class="fas fa-broom"></i> Daily cleaning available
+              <i class="fas fa-broom"></i>
+              <span data-translate="amenities.cleaning">
+                Daily cleaning available
+              </span>
             </div>
             <div class="amenity-item">
-              <i class="fas fa-user-shield"></i> Full privacy, no distractions
+              <i class="fas fa-user-shield"></i>
+              <span data-translate="amenities.privacy">
+                Full privacy, no distractions
+              </span>
             </div>
           </div>
         </div>
@@ -294,8 +376,13 @@
     <!-- Gallery Section -->
     <section id="gallery" class="gallery">
       <div class="container">
-        <h2 class="section-title">Discover Villa Zori</h2>
-        <p class="section-subtitle text-content">
+        <h2 class="section-title" data-translate="gallery.title">
+          Discover Villa Zori
+        </h2>
+        <p
+          class="section-subtitle text-content"
+          data-translate="gallery.subtitle"
+        >
           Experience the beauty and comfort of our peaceful retreat
         </p>
 
@@ -373,28 +460,28 @@
           <div class="gallery-item normal-8">
             <img
               src="images/image-normal-8.jpg"
-              alt="Additional photo 1"
+              alt="Pool view"
               loading="lazy"
             />
           </div>
           <div class="gallery-item landscape-2">
             <img
               src="images/image-landscape-2.jpg"
-              alt="additional photo 2"
+              alt="Villa additional photo"
               loading="lazy"
             />
           </div>
           <div class="gallery-item normal-9">
             <img
               src="images/image-normal-9.jpg"
-              alt="additional photo 3"
+              alt="Villa Zori additional view"
               loading="lazy"
             />
           </div>
           <div class="gallery-item normal-10">
             <img
               src="images/image-normal-10.jpg"
-              alt="additional photo 4"
+              alt="Interior design"
               loading="lazy"
             />
           </div>
@@ -405,7 +492,9 @@
     <!-- Reviews Section -->
     <section id="reviews" class="reviews">
       <div class="container">
-        <h2 class="section-title">What Our Guests Say</h2>
+        <h2 class="section-title" data-translate="reviews.title">
+          What Our Guests Say
+        </h2>
         <div class="reviews-featured">
           <div class="review-card">
             <div class="review-header">
@@ -445,11 +534,13 @@
         </div>
         <div class="text-content reviews-cta">
           <a
-            href="https://www.airbnb.com/rooms/1370740317977312967/reviews"
+            href="https://www.airbnb.com/rooms/1211195182227864578/reviews"
             target="_blank"
             class="cta-button"
           >
-            Read All Reviews on Airbnb
+            <span data-translate="reviews.read_all"
+              >Read All Reviews on Airbnb</span
+            >
           </a>
         </div>
       </div>
@@ -458,11 +549,13 @@
     <!-- Location Section -->
     <section id="location" class="location">
       <div class="container">
-        <h2 class="section-title">Perfect Canggu Location</h2>
+        <h2 class="section-title" data-translate="location.title">
+          Perfect Canggu Location
+        </h2>
 
         <div class="section-content">
           <div>
-            <p class="text-content">
+            <p class="text-content" data-translate="location.description">
               Villa Zori is strategically located in a quiet and peaceful area
               with friendly neighbors, yet perfectly positioned for exploring
               everything Canggu has to offer.
@@ -471,8 +564,10 @@
               <div class="location-item">
                 <i class="fas fa-motorcycle"></i>
                 <div>
-                  <h4>4 minutes to Canggu beaches</h4>
-                  <p>
+                  <h4 data-translate="location.beaches.title">
+                    4 minutes to Canggu beaches
+                  </h4>
+                  <p data-translate="location.beaches.description">
                     Quick scooter ride to world-class surf spots and beach clubs
                   </p>
                 </div>
@@ -480,8 +575,10 @@
               <div class="location-item">
                 <i class="fas fa-utensils"></i>
                 <div>
-                  <h4>1 minute walk to restaurants</h4>
-                  <p>
+                  <h4 data-translate="location.restaurants.title">
+                    1 minute walk to restaurants
+                  </h4>
+                  <p data-translate="location.restaurants.description">
                     Great local cafés and international dining just steps away
                   </p>
                 </div>
@@ -489,15 +586,23 @@
               <div class="location-item">
                 <i class="fas fa-shopping-cart"></i>
                 <div>
-                  <h4>Minutes from convenience stores</h4>
-                  <p>Easy access to supermarkets and daily necessities</p>
+                  <h4 data-translate="location.stores.title">
+                    Minutes from convenience stores
+                  </h4>
+                  <p data-translate="location.stores.description">
+                    Easy access to supermarkets and daily necessities
+                  </p>
                 </div>
               </div>
               <div class="location-item">
                 <i class="fas fa-car"></i>
                 <div>
-                  <h4>Wide street access</h4>
-                  <p>Easy arrival by car with free private parking</p>
+                  <h4 data-translate="location.parking.title">
+                    Wide street access
+                  </h4>
+                  <p data-translate="location.parking.description">
+                    Easy arrival by car with free private parking
+                  </p>
                 </div>
               </div>
             </div>
@@ -520,19 +625,23 @@
           aria-label="WhatsApp"
           ><i class="fab fa-whatsapp"></i>
         </a>
-        <a href="mailto:hello@villazori.com" aria-label="Email">
-          <i class="fas fa-envelope"></i>
+        <a href="mailto:hello@villazori.com" aria-label="Email"
+          ><i class="fas fa-envelope"></i>
         </a>
       </div>
       <p>© 2025 Villa Zori</p>
-      <p>Your tropical escape in the heart of Canggu.</p>
+      <p data-translate="footer.tagline">
+        Your tropical escape in the heart of Canggu.
+      </p>
       <small class="footer-attribution"
         >Website by
-        <a href="https://airliftstudios.com" target="_blank">
-          airliftstudios.com
+        <a href="https://airliftstudios.com" target="_blank"
+          >airliftstudios.com
         </a>
       </small>
     </footer>
+    <script src="js/translations.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/lang.js"></script>
   </body>
 </html>

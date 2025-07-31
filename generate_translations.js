@@ -164,13 +164,7 @@ function generateTranslations(projectPath, languageCodes = []) {
   const hreflangTags = generateHreflangTags(htmlContent, allLanguageCodes);
 
   // Update HTML with hreflang tags
-  const updatedHtmlContent = updateHtmlWithHreflang(htmlContent, hreflangTags);
-
-  // Update HTML with language dropdown options
-  const finalHtmlContent = updateLanguageDropdown(
-    updatedHtmlContent,
-    allLanguageCodes
-  );
+  const finalHtmlContent = updateHtmlWithHreflang(htmlContent, hreflangTags);
 
   // Create a properly formatted en object string
   const formatObject = (obj, indent = 2) => {
@@ -626,58 +620,10 @@ ${hreflangTags}
     // Replace existing hreflang section
     return htmlContent.replace(existingHreflangRegex, hreflangSection);
   } else {
-    // Find the existing comment and insert hreflang section after it
-    const commentRegex = /(<!-- Hreflang tags for international SEO -->)/;
-    return htmlContent.replace(
-      commentRegex,
-      `$1\n${hreflangTags}\n<!-- End Hreflang tags -->`
-    );
+    // Add hreflang section at the end of the <head> tag
+    const headEndRegex = /(\s*<\/head>)/;
+    return htmlContent.replace(headEndRegex, `\n    ${hreflangSection}\n$1`);
   }
-}
-
-function updateLanguageDropdown(htmlContent, languageCodes) {
-  // Find the language dropdown section
-  const dropdownStartRegex = /<div class="language-dropdown"[^>]*>/;
-  const dropdownEndRegex = /<\/div>\s*<\/div>\s*<\/li>/;
-
-  if (
-    !dropdownStartRegex.test(htmlContent) ||
-    !dropdownEndRegex.test(htmlContent)
-  ) {
-    console.warn("Language dropdown not found in HTML.");
-    return htmlContent;
-  }
-
-  // Generate new language options
-  const languageOptions = languageCodes
-    .map((langCode) => {
-      const LANGUAGE_DEFINITIONS = require("./language_definitions.js");
-
-      const langDef = LANGUAGE_DEFINITIONS[langCode];
-      const flag = langDef?.flag || "🌐";
-      const displayName = langDef?.displayName || langCode.toUpperCase();
-      const activeClass = langCode === "en" ? " active" : "";
-
-      return `                <div class="language-option${activeClass}" data-lang="${langCode}">
-                  <span class="language-flag">${flag}</span>
-                  ${displayName}
-                </div>`;
-    })
-    .join("\n");
-
-  // Replace the entire dropdown content
-  const newDropdownContent = `              <div class="language-dropdown" id="languageDropdown">
-${languageOptions}
-              </div>`;
-
-  // Find and replace the dropdown section
-  const dropdownSectionRegex =
-    /<div class="language-dropdown"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*<\/li>/;
-
-  return htmlContent.replace(
-    dropdownSectionRegex,
-    newDropdownContent + "\n            </div>\n          </li>"
-  );
 }
 
 // Get project path and language codes from command line arguments
