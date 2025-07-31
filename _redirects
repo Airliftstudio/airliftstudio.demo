@@ -20,3 +20,8 @@
 /demo/serendipity-mengwi-bali/* /demo/serendipity-mengwi-bali/index.html 200
 /demo/serendipity-mengwi-bali/de/* /demo/serendipity-mengwi-bali/:splat 200
 /demo/serendipity-mengwi-bali/sv/* /demo/serendipity-mengwi-bali/:splat 200
+
+# demo/villa-zori-bali redirects
+/demo/villa-zori-bali/* /demo/villa-zori-bali/index.html 200
+/demo/villa-zori-bali/sv/* /demo/villa-zori-bali/:splat 200
+/demo/villa-zori-bali/de/* /demo/villa-zori-bali/:splat 200

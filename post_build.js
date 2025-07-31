@@ -3,6 +3,13 @@
 const fs = require("fs");
 const path = require("path");
 
+// Default icons for different sections
+const DEFAULT_ICONS = {
+  amenities: "fa-check",
+  features: "fa-star",
+  location: "fa-map-marker-alt",
+};
+
 function extractCreditsContent(bizSectionPath) {
   try {
     const content = fs.readFileSync(bizSectionPath, "utf8");
@@ -201,6 +208,17 @@ function insertBusinessSection(targetFilePath, businessSection) {
 
 function injectReviewsFromJson(targetFilePath) {
   try {
+    // Read the target HTML file first to check for existing review-mini elements
+    let content = fs.readFileSync(targetFilePath, "utf8");
+
+    // Check if there are already review-mini elements in the HTML
+    if (content.includes('class="review-mini"')) {
+      console.log(
+        `⚠️  review-mini elements already exist in ${targetFilePath}, skipping review injection`
+      );
+      return;
+    }
+
     // Determine the directory of the target file
     const targetDir = targetFilePath.substring(
       0,
@@ -225,9 +243,6 @@ function injectReviewsFromJson(targetFilePath) {
       );
       return;
     }
-
-    // Read the target HTML file
-    let content = fs.readFileSync(targetFilePath, "utf8");
 
     // Extract the two featured reviewers to exclude them
     const featuredReviewers = [];
@@ -364,6 +379,119 @@ function injectReviewsFromJson(targetFilePath) {
   }
 }
 
+function getAvailableIcons(fontAwesomePath) {
+  try {
+    const cssContent = fs.readFileSync(fontAwesomePath, "utf8");
+    const iconRegex = /\.fa-[a-zA-Z0-9-]+(?:\s*\{|,)/g;
+    const icons = new Set();
+
+    let match;
+    while ((match = iconRegex.exec(cssContent)) !== null) {
+      const iconName = match[0].replace(/[^\w-]/g, "");
+      if (iconName.startsWith("fa-")) {
+        icons.add(iconName);
+        // Also add the fas fa- version for compatibility
+        icons.add("fas " + iconName);
+      }
+    }
+
+    return icons;
+  } catch (error) {
+    console.error(`Error reading Font Awesome CSS: ${error.message}`);
+    return new Set();
+  }
+}
+
+function validateAndFixIcons(targetFilePath) {
+  try {
+    console.log(`🔍 Validating Font Awesome icons in ${targetFilePath}...`);
+
+    // Get the project directory
+    const projectDir = path.dirname(targetFilePath);
+    const fontAwesomePath = path.join(projectDir, "css", "fontawesome.min.css");
+
+    // Check if Font Awesome CSS exists
+    if (!fs.existsSync(fontAwesomePath)) {
+      console.log(
+        `⚠️  Font Awesome CSS not found at ${fontAwesomePath}, skipping icon validation`
+      );
+      return;
+    }
+
+    // Get available icons
+    const availableIcons = getAvailableIcons(fontAwesomePath);
+    console.log(`📊 Found ${availableIcons.size} available Font Awesome icons`);
+
+    // Read the HTML file
+    let content = fs.readFileSync(targetFilePath, "utf8");
+    let modified = false;
+
+    // Function to replace invalid icons
+    function replaceInvalidIcon(iconClass, section) {
+      // Clean up the icon class to extract just the fa- part
+      const cleanIconClass = iconClass.replace(/^(fas|far|fab)\s+/, "");
+
+      if (
+        !availableIcons.has(iconClass) &&
+        !availableIcons.has(cleanIconClass)
+      ) {
+        const defaultIcon = DEFAULT_ICONS[section] || "fa-check";
+        console.log(
+          `⚠️  Icon ${iconClass} not found, replacing with ${defaultIcon}`
+        );
+        return defaultIcon;
+      }
+      return iconClass;
+    }
+
+    // Check amenities section
+    const amenitiesIconRegex = /<i class="([^"]*fa-[^"]*)"[^>]*>/g;
+    content = content.replace(amenitiesIconRegex, (match, iconClass) => {
+      const newIconClass = replaceInvalidIcon(iconClass, "amenities");
+      if (newIconClass !== iconClass) {
+        modified = true;
+        return match.replace(iconClass, newIconClass);
+      }
+      return match;
+    });
+
+    // Check features section
+    const featuresIconRegex = /<i class="([^"]*fa-[^"]*)"[^>]*>/g;
+    content = content.replace(featuresIconRegex, (match, iconClass) => {
+      const newIconClass = replaceInvalidIcon(iconClass, "features");
+      if (newIconClass !== iconClass) {
+        modified = true;
+        return match.replace(iconClass, newIconClass);
+      }
+      return match;
+    });
+
+    // Check location section
+    const locationIconRegex = /<i class="([^"]*fa-[^"]*)"[^>]*>/g;
+    content = content.replace(locationIconRegex, (match, iconClass) => {
+      const newIconClass = replaceInvalidIcon(iconClass, "location");
+      if (newIconClass !== iconClass) {
+        modified = true;
+        return match.replace(iconClass, newIconClass);
+      }
+      return match;
+    });
+
+    if (modified) {
+      fs.writeFileSync(targetFilePath, content, "utf8");
+      console.log(
+        `✅ Icon validation and fixes completed for ${targetFilePath}`
+      );
+    } else {
+      console.log(`✅ All Font Awesome icons are valid in ${targetFilePath}`);
+    }
+  } catch (error) {
+    console.error(`Error validating icons: ${error.message}`);
+    // Don't exit process, just log the error and continue
+    console.log("Continuing with other operations...");
+  }
+}
+
 function main() {
   const args = process.argv.slice(2);
 
@@ -371,16 +499,17 @@ function main() {
     console.log("Usage: node post_build.js <project_directory>");
     console.log("");
     console.log("This script will:");
-    console.log("1. Extract the credits content from biz_section.html");
+    console.log("1. Validate and fix Font Awesome icons in the HTML file");
+    console.log("2. Extract the credits content from biz_section.html");
     console.log(
-      "2. Insert it at the beginning of the <head> tag in the target HTML file"
+      "3. Insert it at the beginning of the <head> tag in the target HTML file"
     );
     console.log(
-      "3. Extract the business offering section from biz_section.html"
+      "4. Extract the business offering section from biz_section.html"
     );
-    console.log("4. Insert it before the <footer> tag in the target HTML file");
+    console.log("5. Insert it before the <footer> tag in the target HTML file");
     console.log(
-      "5. Inject reviews from listing.json into the target HTML file"
+      "6. Inject reviews from listing.json into the target HTML file"
     );
     console.log("");
     console.log("Examples:");
@@ -412,6 +541,9 @@ function main() {
     process.exit(1);
   }
 
+  // Validate and fix Font Awesome icons first
+  validateAndFixIcons(targetFile);
+
   console.log(`📖 Extracting credits content from ${bizSectionPath}...`);
   const creditsContent = extractCreditsContent(bizSectionPath);
 
@@ -441,4 +573,5 @@ module.exports = {
   extractBusinessSection,
   insertCreditsContent,
   insertBusinessSection,
+  validateAndFixIcons,
 };
