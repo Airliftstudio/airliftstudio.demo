@@ -6,6 +6,7 @@ window.translations = {
       beds: "2 beds",
       baths: "2 baths",
       subtitle: "Luxury 2-Bedroom Villa in Canggu, Bali",
+      cta: "Check Availability",
     },
     about: {
       title: "Your Private Paradise in Canggu",
@@ -41,6 +42,7 @@ window.translations = {
       beds: "2 queen beds, 2 bathrooms",
       cleaning: "Daily cleaning available",
       privacy: "Full privacy, no distractions",
+      title: "Amenities",
     },
     gallery: {
       title: "Discover Villa Zori",
@@ -75,6 +77,8 @@ window.translations = {
       keywords: "Villa Zori, Canggu villa, Bali villa, private pool, superhost, guest favorite, family villa, remote work, luxury villa, tropical garden, airbnb, book villa, best villa Canggu, vacation rental, Bali accommodation",
       og_title: "Villa Zori - Luxury 2BR Villa in Canggu, Bali | Private Pool, Superhost, Guest Favorite",
       og_description: "Book Villa Zori, a 5-star rated 2-bedroom villa in Canggu, Bali. Private pool, tropical garden, superhost, guest favorite, 4 minutes from beaches. Perfect for families and remote work. See real guest reviews!",
+      locale: "en_US",
+      language: "English",
     },
     structuredData: {
       description: "Luxury 2BR Villa in Canggu, Bali. Private pool, tropical garden, superhost, guest favorite, 4 minutes from beaches. Perfect for families and remote work.",
@@ -89,6 +93,20 @@ window.translations = {
         "Free Parking",
       ],
     },
+    nav: {
+      about: "About",
+      gallery: "Gallery",
+      reviews: "Reviews",
+      location: "Location",
+    },
+    badges: {
+      superhost: "Superhost",
+      guest_favorite: "Guest Favorite",
+    },
+    reviews: {
+      title: "What Our Guests Say",
+      read_all: "Read All Reviews on Airbnb",
+    },
   },
   sv: {
     hero: {
@@ -97,6 +115,7 @@ window.translations = {
       beds: "",
       baths: "",
       subtitle: "",
+      cta: "Kontrollera tillgänglighet",
     },
     about: {
       title: "",
@@ -132,6 +151,7 @@ window.translations = {
       beds: "",
       cleaning: "",
       privacy: "",
+      title: "Bekvämligheter",
     },
     gallery: {
       title: "",
@@ -166,12 +186,29 @@ window.translations = {
       keywords: "",
       og_title: "",
       og_description: "",
+      locale: "sv_SE",
+      language: "Svenska",
     },
     structuredData: {
       description: "",
       addressCountry: "",
       keywords: "",
-      amenityNames: [],
+      amenityNames: [
+      ],
+    },
+    nav: {
+      about: "Om",
+      gallery: "Galleri",
+      reviews: "Recensioner",
+      location: "Plats",
+    },
+    badges: {
+      superhost: "Superhost",
+      guest_favorite: "Gästfavorit",
+    },
+    reviews: {
+      title: "Vad våra gäster säger",
+      read_all: "Läs alla recensioner på Airbnb",
     },
   },
   fr: {
@@ -181,6 +218,7 @@ window.translations = {
       beds: "",
       baths: "",
       subtitle: "",
+      cta: "Vérifier la disponibilité",
     },
     about: {
       title: "",
@@ -216,6 +254,7 @@ window.translations = {
       beds: "",
       cleaning: "",
       privacy: "",
+      title: "Équipements",
     },
     gallery: {
       title: "",
@@ -250,12 +289,29 @@ window.translations = {
       keywords: "",
       og_title: "",
       og_description: "",
+      locale: "fr_FR",
+      language: "Français",
     },
     structuredData: {
       description: "",
       addressCountry: "",
       keywords: "",
-      amenityNames: [],
+      amenityNames: [
+      ],
     },
-  }
+    nav: {
+      about: "À propos",
+      gallery: "Galerie",
+      reviews: "Avis",
+      location: "Emplacement",
+    },
+    badges: {
+      superhost: "Superhost",
+      guest_favorite: "Favori des voyageurs",
+    },
+    reviews: {
+      title: "Ce que disent nos voyageurs",
+      read_all: "Lire tous les avis sur Airbnb",
+    },
+  },
 };
