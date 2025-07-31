@@ -160,9 +160,9 @@ function getLanguageFromURL() {
   const path = window.location.pathname;
   console.log("Current path:", path); // Debug log
 
-  // More flexible regex that handles various path formats
+  // Look for language code at the end of the path
   const langMatch = path.match(
-    new RegExp(`^/(${supportedLanguages.join("|")})(\/.*)?$`)
+    new RegExp(`\/(${supportedLanguages.join("|")})\/?$`)
   );
   console.log("Language match:", langMatch); // Debug log
   const result = langMatch ? langMatch[1] : null;
@@ -176,11 +176,14 @@ function updateURLWithLanguage(lang) {
   const currentSearch = window.location.search;
   const currentHash = window.location.hash;
 
-  // Remove any existing language prefix and clean up double slashes
-  let pathWithoutLang = currentPath.replace(
-    new RegExp(`^/(${supportedLanguages.join("|")})(\/.*)?$`),
-    "/"
-  );
+  // Remove any existing language suffix and clean up double slashes
+  let pathWithoutLang = currentPath;
+
+  // Remove all language codes from the end of the path
+  supportedLanguages.forEach((languageCode) => {
+    const langRegex = new RegExp(`\/${languageCode}\/?$`);
+    pathWithoutLang = pathWithoutLang.replace(langRegex, "");
+  });
 
   // Clean up any double slashes
   pathWithoutLang = pathWithoutLang.replace(/\/+/g, "/");
@@ -191,18 +194,18 @@ function updateURLWithLanguage(lang) {
   }
 
   try {
-    // If we're switching to a language, add the prefix
+    // If we're switching to a language, add the suffix
     if (lang && lang !== "en") {
-      const newPath = `/${lang}${
+      const newPath = `${
         pathWithoutLang === "/" ? "" : pathWithoutLang
-      }`;
+      }/${lang}`;
       window.history.replaceState(
         {},
         "",
         newPath + currentSearch + currentHash
       );
     } else {
-      // For English (default), remove the language prefix
+      // For English (default), remove the language suffix
       // Ensure we don't end up with double slashes
       const cleanPath = pathWithoutLang === "/" ? "/" : pathWithoutLang;
       window.history.replaceState(
