@@ -443,23 +443,28 @@ function generateTranslations(projectPath, languageCodes = []) {
 }
 
 function extractFolderName(targetFilePath) {
-  // Extract folder name from path like "villa-lestari-ubud" or "villa-lestari-ubud/index.html"
+  // Extract the full project path from the target file path
+  // For paths like "demo/test" or "demo/test/index.html", we want "demo/test"
   const pathParts = targetFilePath.split("/");
-  if (pathParts.length >= 1) {
-    // If it's just a folder name, return it
-    if (pathParts.length === 1) {
-      return pathParts[0];
-    }
-    // If it's a path with a file, return the folder name
-    return pathParts[pathParts.length - 2];
+
+  // If it's just a folder name, return it
+  if (pathParts.length === 1) {
+    return pathParts[0];
   }
-  throw new Error("Could not extract folder name from path: " + targetFilePath);
+
+  // If it ends with a file (like index.html), remove the file part
+  if (pathParts[pathParts.length - 1].includes(".")) {
+    return pathParts.slice(0, -1).join("/");
+  }
+
+  // Otherwise, return the full path
+  return pathParts.join("/");
 }
 
 function addLanguageRedirects(projectPath, languages) {
   try {
     const redirectsPath = "_redirects";
-    const folderName = extractFolderName(projectPath);
+    const fullPath = extractFolderName(projectPath);
 
     // Read existing redirects file
     let redirectsContent = "";
@@ -467,23 +472,26 @@ function addLanguageRedirects(projectPath, languages) {
       redirectsContent = fs.readFileSync(redirectsPath, "utf8");
     }
 
-    // Check if redirects for this folder already exist
-    const folderRedirectPattern = new RegExp(
-      `/${folderName}/\\*.*${folderName}/index\\.html`
+    // Check if redirects for this path already exist
+    const pathRedirectPattern = new RegExp(
+      `/${fullPath.replace(/\//g, "\\/")}/\\*.*${fullPath.replace(
+        /\//g,
+        "\\/"
+      )}/index\\.html`
     );
-    if (folderRedirectPattern.test(redirectsContent)) {
+    if (pathRedirectPattern.test(redirectsContent)) {
       console.log(
-        `⚠️  Redirects for ${folderName} already exist in _redirects file`
+        `⚠️  Redirects for ${fullPath} already exist in _redirects file`
       );
       return;
     }
 
-    // Create new redirects for this folder
+    // Create new redirects for this path
     const newRedirects = [
-      `# ${folderName} redirects`,
-      `/${folderName}/* /${folderName}/index.html 200`,
+      `# ${fullPath} redirects`,
+      `/${fullPath}/* /${fullPath}/index.html 200`,
       ...languages.map(
-        (lang) => `/${folderName}/${lang}/* /${folderName}/:splat 200`
+        (lang) => `/${fullPath}/${lang}/* /${fullPath}/:splat 200`
       ),
     ].join("\n");
 
@@ -493,9 +501,9 @@ function addLanguageRedirects(projectPath, languages) {
     // Write back to file
     fs.writeFileSync(redirectsPath, updatedContent, "utf8");
 
-    console.log(`✅ Language redirects added to _redirects for ${folderName}:`);
+    console.log(`✅ Language redirects added to _redirects for ${fullPath}:`);
     languages.forEach((lang) => {
-      console.log(`   - /${folderName}/${lang}/* → /${folderName}/:splat 200`);
+      console.log(`   - /${fullPath}/${lang}/* → /${fullPath}/:splat 200`);
     });
   } catch (error) {
     console.error("Error adding language redirects:", error.message);
@@ -504,8 +512,8 @@ function addLanguageRedirects(projectPath, languages) {
 
 function addLocalLanguageRedirects(projectPath, languages) {
   try {
-    const folderName = extractFolderName(projectPath);
-    const localRedirectsPath = `${folderName}/_redirects`;
+    const fullPath = extractFolderName(projectPath);
+    const localRedirectsPath = `${fullPath}/_redirects`;
 
     // Read existing local redirects file
     let localRedirectsContent = "";

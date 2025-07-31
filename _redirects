@@ -1,18 +1,11 @@
 # _redirects for subdirectory language handling
 
+# templates/v1 redirects
+/templates/v1/* /templates/v1/index.html 200
+/templates/v1/sv/* /templates/v1/:splat 200
+/templates/v1/fr/* /templates/v1/:splat 200
 
-
-# templates redirects
-/templates/* /templates/index.html 200
-/templates/de/* /templates/:splat 200
-/templates/fr/* /templates/:splat 200
-
-# demo redirects
-/demo/* /demo/index.html 200
-/demo/sv/* /demo/:splat 200
-/demo/fr/* /demo/:splat 200
-
-# demo redirects
+# demo/test redirects
 /demo/test/* /demo/test/index.html 200
 /demo/test/sv/* /demo/test/:splat 200
 /demo/test/fr/* /demo/test/:splat 200
