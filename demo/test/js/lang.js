@@ -176,16 +176,24 @@ function updateURLWithLanguage(lang) {
   const currentSearch = window.location.search;
   const currentHash = window.location.hash;
 
-  // Remove any existing language prefix
-  const pathWithoutLang = currentPath.replace(
+  // Remove any existing language prefix and clean up double slashes
+  let pathWithoutLang = currentPath.replace(
     new RegExp(`^/(${supportedLanguages.join("|")})(\/.*)?$`),
     "/"
   );
 
+  // Clean up any double slashes
+  pathWithoutLang = pathWithoutLang.replace(/\/+/g, "/");
+
+  // Remove trailing slash except for root
+  if (pathWithoutLang !== "/" && pathWithoutLang.endsWith("/")) {
+    pathWithoutLang = pathWithoutLang.slice(0, -1);
+  }
+
   try {
     // If we're switching to a language, add the prefix
     if (lang && lang !== "en") {
-      const newPath = `/${lang}/${
+      const newPath = `/${lang}${
         pathWithoutLang === "/" ? "" : pathWithoutLang
       }`;
       window.history.replaceState(
