@@ -538,16 +538,19 @@ async function scrape() {
   );
 
   // Process images for JSON
-  const processedImages = uniqueImages.map((img) => ({
-    src: img.src,
-    alt: img.alt,
-    width: parseInt(img.width) || 0,
-    height: parseInt(img.height) || 0,
-    aspect: getAspect(img.width, img.height),
-    category: img.category || "",
-    isHero: img.isHero,
-    mustUse: img.mustUse,
-  }));
+  const processedImages = uniqueImages.map((img) => {
+    const imageObj = {
+      src: img.src,
+      alt: img.alt,
+      width: parseInt(img.width) || 0,
+      height: parseInt(img.height) || 0,
+      aspect: getAspect(img.width, img.height),
+      category: img.category || "",
+    };
+    if (img.isHero) imageObj.isHero = true;
+    if (img.mustUse) imageObj.mustUse = true;
+    return imageObj;
+  });
 
   // Create structured JSON object with all information
   const jsonData = {
@@ -556,16 +559,13 @@ async function scrape() {
     title: title,
     summary: summary,
     capacity: cleanCapacity,
-    location: location, // Add location to JSON
+    location: location,
     // amenities: allAmenities,
     amenitiesByCategory: amenitiesByCategory, // Structured amenities
     badges: badges,
     reviews: filteredReviews,
     images: processedImages,
     highlights: highlights,
-    isSuperhost: isSuperhost,
-    isGuestFavorite: isGuestFavorite,
-    scraped_at: new Date().toISOString(),
   };
 
   // Write JSON file

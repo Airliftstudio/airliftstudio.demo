@@ -141,7 +141,6 @@ demo/
 └── <listing_id>/
     ├── index.html          # Main website file
     ├── listing.json        # Scraped data
-    ├── LISTING.md          # Markdown version of data
     ├── images/             # Folder for downloaded images
     ├── css/               # Style files
     ├── js/                # JavaScript files

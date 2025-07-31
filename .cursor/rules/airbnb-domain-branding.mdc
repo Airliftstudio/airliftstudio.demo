@@ -27,8 +27,5 @@ Generate domain name suggestions and create unique branding elements for each pr
 - Use whois to check if the domain name is available to purchase
 - If not available then generate another suggestion and check with whois until you find a domain name that is available to purchase
 
-## Favicon Creation
-- Set the emoji 🏝️ as favicon
-
 ## Rename project folder
 - Rename the project folder to the selected domain name suggestion hyphenated like example: villa-zori-bali

@@ -176,12 +176,15 @@ nav {
   font-size: 1.3rem;
   margin-bottom: 1.2rem;
 }
-.hero-details-row {
+.hero-capacity-row {
   margin-bottom: 1rem;
 }
-.hero-details {
+.hero-capacity {
   font-size: 1.05rem;
   font-weight: 500;
+}
+.hero-capacity-item {
+  white-space: nowrap;
 }
 
 .cta-button {
@@ -252,9 +255,6 @@ nav {
   color: var(--white);
 }
 
-.hero-detail-item {
-  white-space: nowrap;
-}
 .hero-bg-dark {
   position: absolute;
   inset: 0;
@@ -268,7 +268,7 @@ nav {
 }
 .hero-content h1,
 .hero-content .hero-subtitle,
-.hero-content .hero-details,
+.hero-content .hero-capacity,
 .hero-content {
   color: var(--white);
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
@@ -840,10 +840,6 @@ footer {
     font-size: 0.9rem;
   }
 
-  .hero-details-row {
-    margin-bottom: 0.5rem;
-  }
-
   .hero-content .cta-button {
     font-size: 1rem;
     padding: 0.5rem 1rem;
@@ -856,8 +852,10 @@ footer {
   .hero-subtitle {
     font-size: 1.1rem;
   }
-
-  .hero-details {
+  .hero-capacity-row {
+    margin-bottom: 0.5rem;
+  }
+  .hero-capacity {
     font-size: 0.8rem;
   }
   .badge {
@@ -895,7 +893,7 @@ footer {
   }
 }
 @media (max-width: 430px) {
-  .hero-details {
+  .hero-capacity {
     flex-direction: column;
     gap: 0.1em;
   }
