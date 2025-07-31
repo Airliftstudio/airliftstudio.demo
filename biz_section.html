@@ -21,10 +21,10 @@
     <meta http-equiv="Content-Language" content="en" />
 
     <!-- Include other css to test interactions with -->
-    <link rel="stylesheet" href="target/css/fonts-local.css" />
-    <link rel="stylesheet" href="target/css/fontawesome.min.css" />
-    <link rel="stylesheet" href="target/css/styles.css" />
-    <link rel="stylesheet" href="target/css/lang.css" />
+    <link rel="stylesheet" href="templates/v1/css/fonts-local.css" />
+    <link rel="stylesheet" href="templates/v1/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="templates/v1/css/styles.css" />
+    <link rel="stylesheet" href="templates/v1/css/lang.css" />
 
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -98,6 +98,23 @@
             </ul>
             <div class="biz-card-extras-label">Add-ons</div>
             <div class="biz-card-extras-block">
+              <label for="biz-multiselect-hands-off" class="biz-extra-label"
+                >Multi-language support
+                <span
+                  class="biz-info-icon"
+                  aria-label="More info about multi-language support"
+                  role="button"
+                >
+                  <i class="fas fa-info-circle"></i>
+                  <span class="biz-tooltip" role="tooltip">
+                    This service not only includes the translation of the
+                    website, but also custom SEO for each language. Meaning that
+                    people searching in their own language will have a higher
+                    chance of find your website. This is a great way to expand
+                    your reach and attract more guests from different countries.
+                  </span>
+                </span>
+              </label>
               <div class="biz-multiselect" id="biz-multiselect-hands-on"></div>
               <div class="biz-smallprint">
                 First translation $29, each additional +$19
@@ -182,9 +199,9 @@
                   <span class="biz-tooltip" role="tooltip">
                     This service not only includes the translation of the
                     website, but also custom SEO for each language. Meaning that
-                    people searching in their own language will find your
-                    website. This is a great way to expand your reach and
-                    attract more guests from different countries.
+                    people searching in their own language will have a higher
+                    chance of find your website. This is a great way to expand
+                    your reach and attract more guests from different countries.
                   </span>
                 </span> </label
               ><br />
@@ -268,6 +285,7 @@
             padding: 64px 0 48px 0;
             line-height: 1.4;
             overflow-x: hidden;
+            background: #eafff8;
           }
           .biz-section::before {
             content: "DEMO SITE";
@@ -708,25 +726,42 @@
             let langHandsOff = [];
             let years = 1;
             const langList = [
-              { code: "en", name: "English", flag: "🇬🇧" },
               { code: "ar", name: "Arabic", flag: "🇸🇦" },
-              { code: "zh", name: "Chinese (Simplified)", flag: "🇨🇳" },
+              { code: "bn", name: "Bengali", flag: "🇧🇩" },
+              { code: "bg", name: "Bulgarian", flag: "🇧🇬" },
+              { code: "br", name: "Portuguese (Brazil)", flag: "🇧🇷" },
+              { code: "cs", name: "Czech", flag: "🇨🇿" },
+              { code: "zh", name: "Chinese", flag: "🇨🇳" },
+              { code: "da", name: "Danish", flag: "🇩🇰" },
               { code: "nl", name: "Dutch", flag: "🇳🇱" },
-              { code: "tl", name: "Filipino", flag: "🇵🇭" },
+              { code: "en", name: "English", flag: "🇬🇧" },
+              { code: "el", name: "Greek", flag: "🇬🇷" },
+              { code: "fa", name: "Persian", flag: "🇮🇷" },
+              { code: "fil", name: "Filipino", flag: "🇵🇭" },
+              { code: "fi", name: "Finnish", flag: "🇫🇮" },
               { code: "fr", name: "French", flag: "🇫🇷" },
               { code: "de", name: "German", flag: "🇩🇪" },
               { code: "hi", name: "Hindi", flag: "🇮🇳" },
+              { code: "hr", name: "Croatian", flag: "🇭🇷" },
+              { code: "hu", name: "Hungarian", flag: "🇭🇺" },
               { code: "id", name: "Indonesian", flag: "🇮🇩" },
               { code: "it", name: "Italian", flag: "🇮🇹" },
               { code: "ja", name: "Japanese", flag: "🇯🇵" },
               { code: "ko", name: "Korean", flag: "🇰🇷" },
+              { code: "ms", name: "Malay", flag: "🇲🇾" },
+              { code: "no", name: "Norwegian", flag: "🇳🇴" },
               { code: "pl", name: "Polish", flag: "🇵🇱" },
               { code: "pt", name: "Portuguese", flag: "🇵🇹" },
+              { code: "ro", name: "Romanian", flag: "🇷🇴" },
               { code: "ru", name: "Russian", flag: "🇷🇺" },
+              { code: "si", name: "Sinhala", flag: "🇱🇰" },
+              { code: "sl", name: "Slovenian", flag: "🇸🇮" },
               { code: "es", name: "Spanish", flag: "🇪🇸" },
               { code: "sv", name: "Swedish", flag: "🇸🇪" },
               { code: "th", name: "Thai", flag: "🇹🇭" },
               { code: "tr", name: "Turkish", flag: "🇹🇷" },
+              { code: "uk", name: "Ukrainian", flag: "🇺🇦" },
+              { code: "ur", name: "Urdu", flag: "🇵🇰" },
               { code: "vi", name: "Vietnamese", flag: "🇻🇳" },
             ];
             // Elements
