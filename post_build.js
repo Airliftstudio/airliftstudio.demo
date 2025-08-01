@@ -492,6 +492,291 @@ function validateAndFixIcons(targetFilePath) {
   }
 }
 
+function verifyAmenities(targetFilePath) {
+  try {
+    console.log(
+      `🔍 Verifying amenities from listing.json against ${targetFilePath}...`
+    );
+
+    // Get the project directory
+    const projectDir = path.dirname(targetFilePath);
+    const listingJsonPath = path.join(projectDir, "listing.json");
+
+    // Check if listing.json exists
+    if (!fs.existsSync(listingJsonPath)) {
+      console.log(
+        `⚠️  listing.json not found at ${listingJsonPath}, skipping amenity verification`
+      );
+      return;
+    }
+
+    // Read listing.json
+    const listingData = JSON.parse(fs.readFileSync(listingJsonPath, "utf8"));
+
+    if (!listingData.amenitiesByCategory) {
+      console.log(
+        `⚠️  No amenitiesByCategory found in listing.json, skipping amenity verification`
+      );
+      return;
+    }
+
+    // Read the HTML file
+    const content = fs.readFileSync(targetFilePath, "utf8");
+
+    // Extract all amenities from listing.json
+    const allAmenities = [];
+    for (const [category, amenities] of Object.entries(
+      listingData.amenitiesByCategory
+    )) {
+      amenities.forEach((amenity) => {
+        // Clean up amenity name (remove newlines and extra spaces)
+        const cleanAmenity = amenity
+          .replace(/\n/g, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+        allAmenities.push({
+          name: cleanAmenity,
+          category: category,
+        });
+      });
+    }
+
+    // Extract amenities displayed in HTML
+    const htmlAmenities = [];
+    const amenityItemRegex =
+      /<span[^>]*data-translate="amenities\.[^"]*"[^>]*>([^<]+)<\/span>/g;
+    let match;
+    while ((match = amenityItemRegex.exec(content)) !== null) {
+      htmlAmenities.push(match[1].trim());
+    }
+
+    console.log(`\n✅ Amenities displayed in HTML:`);
+
+    htmlAmenities.forEach((amenity) => {
+      console.log(`   ✅ ${amenity}`);
+    });
+
+    console.log(`\n❌ Amenities from listing.json NOT displayed in HTML:`);
+    let foundMissing = false;
+
+    allAmenities.forEach((amenity) => {
+      const isDisplayed = htmlAmenities.some(
+        (htmlAmenity) =>
+          htmlAmenity.toLowerCase().includes(amenity.name.toLowerCase()) ||
+          amenity.name.toLowerCase().includes(htmlAmenity.toLowerCase())
+      );
+
+      if (!isDisplayed) {
+        console.log(`   ❌ ${amenity.name} (${amenity.category})`);
+        foundMissing = true;
+      }
+    });
+
+    if (!foundMissing) {
+      console.log(
+        `   🎉 All amenities from listing.json are displayed in HTML!`
+      );
+    }
+
+    console.log(`\n📈 Summary:`);
+    console.log(`   • Displayed: ${htmlAmenities.length} amenities`);
+    console.log(
+      `   • Available: ${allAmenities.length} amenities from listing.json`
+    );
+    console.log(
+      `   • Coverage: ${(
+        (htmlAmenities.length / allAmenities.length) *
+        100
+      ).toFixed(1)}%`
+    );
+  } catch (error) {
+    console.error(`Error verifying amenities: ${error.message}`);
+    // Don't exit process, just log the error and continue
+    console.log("Continuing with other operations...");
+  }
+}
+
+function checkImageAspects(targetFilePath) {
+  try {
+    console.log(`🖼️  Checking image aspects in listing.json...`);
+
+    // Get the project directory
+    const projectDir = path.dirname(targetFilePath);
+    const listingJsonPath = path.join(projectDir, "listing.json");
+
+    // Check if listing.json exists
+    if (!fs.existsSync(listingJsonPath)) {
+      console.log(
+        `⚠️  listing.json not found at ${listingJsonPath}, skipping image aspect check`
+      );
+      return;
+    }
+
+    // Read listing.json
+    const listingData = JSON.parse(fs.readFileSync(listingJsonPath, "utf8"));
+
+    if (!listingData.images || !Array.isArray(listingData.images)) {
+      console.log(
+        `⚠️  No images found in listing.json, skipping image aspect check`
+      );
+      return;
+    }
+
+    // Count images by aspect
+    const portraitImages = listingData.images.filter(
+      (img) => img.aspect === "portrait"
+    );
+    const landscapeImages = listingData.images.filter(
+      (img) => img.aspect === "landscape"
+    );
+
+    // Check for warnings
+    let hasWarnings = false;
+
+    if (portraitImages.length === 0) {
+      console.log(`\n⚠️  WARNING: No portrait images found in listing.json`);
+      console.log(
+        `   • The website template expects at least one portrait image`
+      );
+      console.log(`   • Consider selecting a portrait image for better layout`);
+      hasWarnings = true;
+    }
+
+    if (landscapeImages.length < 3) {
+      console.log(
+        `\n⚠️  WARNING: Less than 3 landscape images found in listing.json`
+      );
+      console.log(`   • Found: ${landscapeImages.length} landscape images`);
+      console.log(
+        `   • Recommended: At least 3 landscape images for optimal layout`
+      );
+      hasWarnings = true;
+    }
+
+    if (!hasWarnings) {
+      console.log(`\n✅ Image aspects look good!`);
+    }
+  } catch (error) {
+    console.error(`Error checking image aspects: ${error.message}`);
+    // Don't exit process, just log the error and continue
+    console.log("Continuing with other operations...");
+  }
+}
+
+function checkImagesDirectory(targetFilePath) {
+  try {
+    // Get the project directory
+    const projectDir = path.dirname(targetFilePath);
+    const imagesDir = path.join(projectDir, "images");
+
+    // Check if images directory exists
+    if (!fs.existsSync(imagesDir)) {
+      console.log(
+        `\n🚨 CRITICAL ERROR: Images directory not found at ${imagesDir}`
+      );
+      console.log(
+        `   • The website requires an 'images' directory with downloaded images`
+      );
+      console.log(`   • Please run the image download process first`);
+      return;
+    }
+
+    // Get all files in the images directory
+    const files = fs.readdirSync(imagesDir);
+
+    // Filter for image files (common image extensions)
+    const imageExtensions = [".jpg", ".jpeg", ".png", ".gif", ".webp"];
+    const imageFiles = files.filter((file) => {
+      const ext = path.extname(file).toLowerCase();
+      return imageExtensions.includes(ext);
+    });
+
+    // Define the expected image names
+    const expectedImages = [
+      "hero-bg.jpg",
+      "image-landscape-1.jpg",
+      "image-landscape-2.jpg",
+      "image-portrait-1.jpg",
+      "image-normal-1.jpg",
+      "image-normal-2.jpg",
+      "image-normal-3.jpg",
+      "image-normal-4.jpg",
+      "image-normal-5.jpg",
+      "image-normal-6.jpg",
+      "image-normal-7.jpg",
+      "image-normal-8.jpg",
+      "image-normal-9.jpg",
+      "image-normal-10.jpg",
+    ];
+
+    // Check for missing or incorrectly named images
+    const missingImages = [];
+    const incorrectNames = [];
+    const foundImages = [];
+
+    expectedImages.forEach((expectedImage) => {
+      if (!imageFiles.includes(expectedImage)) {
+        missingImages.push(expectedImage);
+      } else {
+        foundImages.push(expectedImage);
+      }
+    });
+
+    // Check for extra images (not in expected list)
+    imageFiles.forEach((imageFile) => {
+      if (!expectedImages.includes(imageFile)) {
+        incorrectNames.push(imageFile);
+      }
+    });
+
+    // Generate critical warnings
+    let hasCriticalIssues = false;
+
+    if (imageFiles.length !== 14) {
+      console.log(
+        `\n🚨 CRITICAL WARNING: Incorrect number of images in /images directory!`
+      );
+      console.log(`   • Found: ${imageFiles.length} images`);
+      console.log(`   • Expected: 14 images`);
+      console.log(`   • Missing: ${14 - imageFiles.length} images`);
+      console.log(`   • This will cause the website to display broken images`);
+      hasCriticalIssues = true;
+    }
+
+    if (missingImages.length > 0) {
+      console.log(`\n🚨 CRITICAL WARNING: Missing required images!`);
+      console.log(`   • Missing images:`);
+      missingImages.forEach((image) => {
+        console.log(`     - ${image}`);
+      });
+      console.log(
+        `   • These images are required for the website to function properly`
+      );
+      hasCriticalIssues = true;
+    }
+
+    if (incorrectNames.length > 0) {
+      console.log(`\n🚨 CRITICAL WARNING: Images with incorrect names found!`);
+      console.log(`   • Incorrectly named images:`);
+      incorrectNames.forEach((image) => {
+        console.log(`     - ${image}`);
+      });
+      console.log(`   • These images will not be used by the website`);
+      hasCriticalIssues = true;
+    }
+
+    if (!hasCriticalIssues) {
+      console.log(
+        `\n✅ Images directory looks good! All 14 required images found with correct names.`
+      );
+    }
+  } catch (error) {
+    console.error(`Error checking images directory: ${error.message}`);
+    // Don't exit process, just log the error and continue
+    console.log("Continuing with other operations...");
+  }
+}
+
 function main() {
   const args = process.argv.slice(2);
 
@@ -560,6 +845,17 @@ function main() {
   injectReviewsFromJson(targetFile);
 
   console.log(
+    `📖 Verifying amenities from listing.json against ${targetFile}...`
+  );
+  verifyAmenities(targetFile);
+
+  console.log(`📖 Checking image aspects in listing.json...`);
+  checkImageAspects(targetFile);
+
+  console.log(`📖 Checking images directory...`);
+  checkImagesDirectory(targetFile);
+
+  console.log(
     "🎉 Done! The credits content, business section, and reviews have been added."
   );
 }
@@ -574,4 +870,7 @@ module.exports = {
   insertCreditsContent,
   insertBusinessSection,
   validateAndFixIcons,
+  verifyAmenities,
+  checkImageAspects,
+  checkImagesDirectory,
 };

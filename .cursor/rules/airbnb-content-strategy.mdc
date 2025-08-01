@@ -44,7 +44,7 @@ Try to make it maximum two words.
 
 ### About Section
 - Update all the features. There should be 3 or 4 feature cards depending on how many features the Airbnb listing have to highlight.
-- Replace all the amenities with new one from the Airbnb listing. Make sure there is one for each amenity in the Airbnb listing.
+- Replace all the amenities with new one from the Airbnb listing. Include all the best and unique amenities offered that might be interesting for a potential guest.
 
 ### Gallery Section
 - Update the alt text for all the images in the gallery section with their respective alt text in listing.json

@@ -2,6 +2,66 @@ const fs = require("fs");
 const path = require("path");
 const { chromium } = require("playwright");
 
+// List of amenities to exclude from saving to listing.json
+//TODO kanske lägg till att exludera alla amenities som är för långa eller innehåller parantes eller radbryt?
+//TODO updatera den här löpande...
+const EXCLUDED_AMENITIES = [
+  "Fire extinguisher",
+  "Hot water",
+  "Shampoo",
+  "Conditioner",
+  "Body soap",
+  "Bidet",
+  "Shower gel",
+  "Hair dryer",
+  "Cleaning products",
+  "Hangers",
+  "Bed linens",
+  "Extra pillows and blankets",
+  "Room-darkening shades",
+  "Drying rack for clothing",
+  "Clothing storage",
+  "Hot water kettle",
+  "Trash compactor",
+  "Dinning table",
+  "Single level home",
+  "Wine glasses,",
+  "Gas stove",
+  "Refrigerator",
+  "Dishes and silverware",
+  "Freezer",
+  "Rice maker",
+  "Drying rack for clothing",
+  "Clothing storage: closet",
+  "Stainless steel gas stove",
+  "Toaster",
+  "Coffee maker",
+  "Coffee machine",
+  "Coffee",
+  "Tea",
+  "Building staff",
+  "Carbon monoxide alarm",
+  "Smoke alarm",
+  "Iron",
+  "Ironing board",
+  "Essentials",
+  "Stove",
+  "Blender",
+  "Conditioner",
+  "Hot water kettle",
+  "Mini fridge",
+  "First aid kit",
+  "Clothing storage: wardrobe",
+  "Smoking allowed",
+];
+
+// Function to clean up amenities by keeping only the first line
+function cleanAmenity(amenity) {
+  // Split by newlines and take only the first line
+  const lines = amenity.split("\n");
+  return lines[0].trim();
+}
+
 function getAspect(width, height) {
   if (width > height) return "landscape";
   if (height > width) return "portrait";
@@ -432,12 +492,34 @@ async function scrape() {
       category.category.trim().toLowerCase() !== "not included"
     ) {
       category.items.forEach((item) => {
-        allAmenities.push(item.trim());
+        const trimmedItem = item.trim();
+        // Check if this amenity should be excluded
+        const shouldExclude = EXCLUDED_AMENITIES.some((excluded) =>
+          trimmedItem.toLowerCase().includes(excluded.toLowerCase())
+        );
+
+        if (!shouldExclude) {
+          // Clean the amenity by keeping only the first line
+          const cleanedAmenity = cleanAmenity(trimmedItem);
+          allAmenities.push(cleanedAmenity);
+        }
       });
 
-      // Add to structured amenities
+      // Add to structured amenities (filtered)
       if (category.category.trim()) {
-        amenitiesByCategory[category.category] = category.items;
+        const filteredItems = category.items
+          .filter((item) => {
+            const trimmedItem = item.trim();
+            const shouldExclude = EXCLUDED_AMENITIES.some((excluded) =>
+              trimmedItem.toLowerCase().includes(excluded.toLowerCase())
+            );
+            return !shouldExclude;
+          })
+          .map((item) => cleanAmenity(item.trim())); // Clean each amenity
+
+        if (filteredItems.length > 0) {
+          amenitiesByCategory[category.category] = filteredItems;
+        }
       }
     }
   });
