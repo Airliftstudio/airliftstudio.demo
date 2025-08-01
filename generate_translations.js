@@ -1,6 +1,111 @@
 const fs = require("fs");
 const path = require("path");
 
+function cleanHtmlContent(htmlContent) {
+  let cleanedContent = htmlContent;
+
+  // Remove text content from elements with data-translate attributes
+  // Use a very precise approach that only removes text, not HTML structure
+  const dataTranslateRegex =
+    /<([^>]+data-translate="[^"]+"[^>]*)>([^<]*(?:<[^>]*>[^<]*<\/[^>]*>[^<]*)*)<\/[^>]*>/g;
+  cleanedContent = cleanedContent.replace(
+    dataTranslateRegex,
+    (match, openingTag, content) => {
+      // Extract only the text content (remove HTML tags)
+      const textContent = content.replace(/<[^>]*>/g, "").trim();
+      if (textContent) {
+        // Replace only the text content with empty string, preserve all HTML structure
+        return match.replace(textContent, "");
+      }
+      return match;
+    }
+  );
+
+  // Handle any remaining simple data-translate elements
+  const simpleDataTranslateRegex =
+    /<([^>]+data-translate="[^"]+"[^>]*)>[^<]*<\/[^>]*>/g;
+  cleanedContent = cleanedContent.replace(
+    simpleDataTranslateRegex,
+    (match, openingTag) => {
+      // Extract text content between tags
+      const textMatch = match.match(/>([^<]*)</);
+      if (textMatch && textMatch[1].trim()) {
+        return match.replace(textMatch[1], "");
+      }
+      return match;
+    }
+  );
+
+  // Remove title content
+  cleanedContent = cleanedContent.replace(
+    /<title>([^<]+)<\/title>/g,
+    "<title></title>"
+  );
+
+  // Remove meta description content
+  cleanedContent = cleanedContent.replace(
+    /<meta\s+name="description"\s+content="([^"]+)"/g,
+    '<meta name="description" content=""'
+  );
+
+  // Remove meta keywords content
+  cleanedContent = cleanedContent.replace(
+    /<meta\s+name="keywords"\s+content="([^"]+)"/g,
+    '<meta name="keywords" content=""'
+  );
+
+  // Remove og:title content
+  cleanedContent = cleanedContent.replace(
+    /<meta\s+property="og:title"\s+content="([^"]+)"/g,
+    '<meta property="og:title" content=""'
+  );
+
+  // Remove og:description content
+  cleanedContent = cleanedContent.replace(
+    /<meta\s+property="og:description"\s+content="([^"]+)"/g,
+    '<meta property="og:description" content=""'
+  );
+
+  // Remove structured data content
+  cleanedContent = cleanedContent.replace(
+    /<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g,
+    (match, jsonContent) => {
+      try {
+        const structuredDataObj = JSON.parse(jsonContent);
+
+        // Clear translatable fields
+        if (structuredDataObj.description) {
+          structuredDataObj.description = "";
+        }
+        if (structuredDataObj.keywords) {
+          structuredDataObj.keywords = "";
+        }
+        if (
+          structuredDataObj.amenityFeature &&
+          Array.isArray(structuredDataObj.amenityFeature)
+        ) {
+          structuredDataObj.amenityFeature =
+            structuredDataObj.amenityFeature.map((feature) => ({
+              ...feature,
+              name: "",
+            }));
+        }
+
+        return `<script type="application/ld+json id="structured-data">${JSON.stringify(
+          structuredDataObj,
+          null,
+          2
+        )}</script>`;
+      } catch (e) {
+        // If JSON parsing fails, return the original match
+        return match;
+      }
+    }
+  );
+
+  return cleanedContent;
+}
+
 function generateTranslations(projectPath, languageCodes = []) {
   const indexPath = path.join(projectPath, "index.html");
   const translationsPath = path.join(projectPath, "js", "translations.js");
@@ -163,8 +268,14 @@ function generateTranslations(projectPath, languageCodes = []) {
   // Generate hreflang tags
   const hreflangTags = generateHreflangTags(htmlContent, allLanguageCodes);
 
+  // Clean the HTML content by removing translatable text
+  const cleanedHtmlContent = cleanHtmlContent(htmlContent);
+
   // Update HTML with hreflang tags
-  const finalHtmlContent = updateHtmlWithHreflang(htmlContent, hreflangTags);
+  const finalHtmlContent = updateHtmlWithHreflang(
+    cleanedHtmlContent,
+    hreflangTags
+  );
 
   // Create a properly formatted en object string
   const formatObject = (obj, indent = 2) => {
@@ -406,13 +517,18 @@ function generateTranslations(projectPath, languageCodes = []) {
 
   console.log("✅ English translations generated successfully!");
   console.log(`📁 Updated: ${translationsPath}`);
-  console.log(`🌐 Updated: ${indexPath} with hreflang tags`);
+  console.log(
+    `🌐 Updated: ${indexPath} with hreflang tags and cleaned translatable content`
+  );
   console.log(`🔍 Found ${Object.keys(translations).length} translation keys`);
   console.log(`📊 Meta data extracted: ${Object.keys(meta).length} items`);
   console.log(
     `🏗️  Structured data extracted: ${Object.keys(structuredData).length} items`
   );
   console.log(`🌍 Languages for hreflang: ${allLanguageCodes.join(", ")}`);
+  console.log(
+    `🧹 Cleaned HTML content: removed translatable text while preserving structure`
+  );
 
   // Add language redirects
   addLanguageRedirects(projectPath, languageCodes);

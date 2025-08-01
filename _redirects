@@ -41,3 +41,21 @@
 /demo/villa-zori/ko/* /demo/villa-zori/:splat 200
 /demo/villa-zori/hi/* /demo/villa-zori/:splat 200
 /demo/villa-zori/ru/* /demo/villa-zori/:splat 200
+
+# demo/villa-zori-bali-test redirects
+/demo/villa-zori-bali-test/* /demo/villa-zori-bali-test/index.html 200
+
+# demo/villa-zori-bali-test2 redirects
+/demo/villa-zori-bali-test2/* /demo/villa-zori-bali-test2/index.html 200
+
+# demo/villa-zori-bali-fresh redirects
+/demo/villa-zori-bali-fresh/* /demo/villa-zori-bali-fresh/index.html 200
+
+# demo/villa-zori-bali-final-test redirects
+/demo/villa-zori-bali-final-test/* /demo/villa-zori-bali-final-test/index.html 200
+
+# demo/villa-zori-bali-fixed-test redirects
+/demo/villa-zori-bali-fixed-test/* /demo/villa-zori-bali-fixed-test/index.html 200
+
+# demo/villa-zori-bali-original redirects
+/demo/villa-zori-bali-original/* /demo/villa-zori-bali-original/index.html 200
