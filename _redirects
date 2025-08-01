@@ -25,3 +25,19 @@
 /demo/villa-zori-bali/* /demo/villa-zori-bali/index.html 200
 /demo/villa-zori-bali/sv/* /demo/villa-zori-bali/:splat 200
 /demo/villa-zori-bali/de/* /demo/villa-zori-bali/:splat 200
+
+
+# demo/villa-zori redirects
+/demo/villa-zori/* /demo/villa-zori/index.html 200
+/demo/villa-zori/en/* /demo/villa-zori/:splat 200
+/demo/villa-zori/id/* /demo/villa-zori/:splat 200
+/demo/villa-zori/fr/* /demo/villa-zori/:splat 200
+/demo/villa-zori/de/* /demo/villa-zori/:splat 200
+/demo/villa-zori/it/* /demo/villa-zori/:splat 200
+/demo/villa-zori/es/* /demo/villa-zori/:splat 200
+/demo/villa-zori/nl/* /demo/villa-zori/:splat 200
+/demo/villa-zori/zh/* /demo/villa-zori/:splat 200
+/demo/villa-zori/ja/* /demo/villa-zori/:splat 200
+/demo/villa-zori/ko/* /demo/villa-zori/:splat 200
+/demo/villa-zori/hi/* /demo/villa-zori/:splat 200
+/demo/villa-zori/ru/* /demo/villa-zori/:splat 200

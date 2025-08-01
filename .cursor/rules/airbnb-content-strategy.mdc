@@ -44,7 +44,7 @@ Try to make it maximum two words.
 
 ### About Section
 - Update all the features. There should be 3 or 4 feature cards depending on how many features the Airbnb listing have to highlight.
-- Replace all the amenities with new one from the Airbnb listing. Include all the best and unique amenities offered that might be interesting for a potential guest.
+- Replace all the amenities with new one from the Airbnb listing. Include all the best and unique amenities offered that might be interesting for a potential guest. Do not include any amenities about number of bedrooms, beds, or baths.
 
 ### Gallery Section
 - Update the alt text for all the images in the gallery section with their respective alt text in listing.json
@@ -59,4 +59,4 @@ Try to make it maximum two words.
 - Rewrite this section and the reasons why this location is perfect. Use 3-5 reasons with appropriate icons.
 
 ### Footer
-- Only include WhatsApp and Instagram if they were supplied to you in the prompt together with the Airbnb listing url. If no contact information is supplied in the prompt then only include email that should be hello@[suggested-domain-name].com
+- Update the contact information for instagram, WhatsApp, and email if it was included in the user prompt. If email is missing then default to hello@[suggested-domain-name].com. If instagram or WhatsApp are missing then comment out their <a> tag.

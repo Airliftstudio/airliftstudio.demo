@@ -13,7 +13,7 @@ This rule should only be applied as final steps after the website has been built
 1. Run this command to generate translations base: node cd.. && cd.. && translation_workflow.js generate [PROJECT_DIR] [COMMA_SEPERATED_LANGUAGE_CODES].
 This will create [PROJECT_DIR]/js/translations.js which is our translation file. The file contains multiple language sections (like 'de', 'fr', etc.) where the English (en) section has complete translations, but all other language sections have empty strings that need to be translated.
 
-2. Translate all the empty strings for every language section in the file, keeping the exact same structure and field names.
+2. Go through one language section at a time and translate all the empty strings for that language.
 Requirements:
 - Maintain exact structure - only fill in the empty strings, don't change field names or object structure.
 - Keep brand names, location names, and specific property features consistent.
