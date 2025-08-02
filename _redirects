@@ -59,3 +59,33 @@
 
 # demo/villa-zori-bali-original redirects
 /demo/villa-zori-bali-original/* /demo/villa-zori-bali-original/index.html 200
+
+# demo/villa-zori-bali-separate-test redirects
+/demo/villa-zori-bali-separate-test/* /demo/villa-zori-bali-separate-test/index.html 200
+/demo/villa-zori-bali-separate-test/fr/* /demo/villa-zori-bali-separate-test/:splat 200
+/demo/villa-zori-bali-separate-test/de/* /demo/villa-zori-bali-separate-test/:splat 200
+/demo/villa-zori-bali-separate-test/es/* /demo/villa-zori-bali-separate-test/:splat 200
+
+# demo/villa-zori-bali-simple-test redirects
+/demo/villa-zori-bali-simple-test/* /demo/villa-zori-bali-simple-test/index.html 200
+/demo/villa-zori-bali-simple-test/fr/* /demo/villa-zori-bali-simple-test/:splat 200
+/demo/villa-zori-bali-simple-test/de/* /demo/villa-zori-bali-simple-test/:splat 200
+/demo/villa-zori-bali-simple-test/es/* /demo/villa-zori-bali-simple-test/:splat 200
+
+# demo/villa-zori-bali-auto-test redirects
+/demo/villa-zori-bali-auto-test/* /demo/villa-zori-bali-auto-test/index.html 200
+/demo/villa-zori-bali-auto-test/fr/* /demo/villa-zori-bali-auto-test/:splat 200
+/demo/villa-zori-bali-auto-test/de/* /demo/villa-zori-bali-auto-test/:splat 200
+/demo/villa-zori-bali-auto-test/es/* /demo/villa-zori-bali-auto-test/:splat 200
+
+# demo/villa-zori-bali-script-test redirects
+/demo/villa-zori-bali-script-test/* /demo/villa-zori-bali-script-test/index.html 200
+/demo/villa-zori-bali-script-test/fr/* /demo/villa-zori-bali-script-test/:splat 200
+/demo/villa-zori-bali-script-test/de/* /demo/villa-zori-bali-script-test/:splat 200
+/demo/villa-zori-bali-script-test/es/* /demo/villa-zori-bali-script-test/:splat 200
+
+# demo/casa-granada-ubud redirects
+/demo/casa-granada-ubud/* /demo/casa-granada-ubud/index.html 200
+/demo/casa-granada-ubud/sv/* /demo/casa-granada-ubud/:splat 200
+/demo/casa-granada-ubud/de/* /demo/casa-granada-ubud/:splat 200
+/demo/casa-granada-ubud/fr/* /demo/casa-granada-ubud/:splat 200

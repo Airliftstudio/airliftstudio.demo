@@ -2,63 +2,84 @@ const fs = require("fs");
 const path = require("path");
 
 function addDefaultTranslations(projectPath) {
-  const translationsPath = path.join(projectPath, "js", "translations.js");
+  const jsPath = path.join(projectPath, "js");
 
-  if (!fs.existsSync(translationsPath)) {
-    console.error("❌ Translations file not found:", translationsPath);
+  if (!fs.existsSync(jsPath)) {
+    console.error("❌ JS directory not found:", jsPath);
     return;
   }
 
+  // Get all translation files
+  const translationFiles = fs
+    .readdirSync(jsPath)
+    .filter((file) => file.startsWith("translations_") && file.endsWith(".js"));
+
+  if (translationFiles.length === 0) {
+    console.error("❌ No translation files found in:", jsPath);
+    return;
+  }
+
+  console.log(`📁 Found ${translationFiles.length} translation files`);
+
   try {
-    // Read the current translations file
-    const translationsContent = fs.readFileSync(translationsPath, "utf8");
+    // Process each translation file
+    for (const fileName of translationFiles) {
+      const filePath = path.join(jsPath, fileName);
+      const langCode = fileName.replace("translations_", "").replace(".js", "");
 
-    // Extract the translations object
-    const translationsMatch = translationsContent.match(
-      /window\.translations\s*=\s*([\s\S]*?);/
-    );
+      console.log(`🔄 Processing: ${fileName} (${langCode})`);
 
-    if (!translationsMatch) {
-      console.error("❌ Could not find translations object in file");
-      return;
-    }
+      // Read the current translation file
+      const fileContent = fs.readFileSync(filePath, "utf8");
 
-    // Parse the translations object using Function constructor (safer than eval)
-    let translationsStr = translationsMatch[1];
-    // Fix common syntax issues
-    translationsStr = translationsStr.replace(/,\s*};$/, "};");
-    translationsStr = translationsStr.replace(/,\s*,\s*};$/, "};");
+      // Extract the translations object
+      const translationsMatch = fileContent.match(
+        new RegExp(`window\\.translations_${langCode}\\s*=\\s*([\\s\\S]*?);`)
+      );
 
-    // Escape apostrophes and quotes properly
-    translationsStr = translationsStr.replace(/'/g, "\\'");
-    translationsStr = translationsStr.replace(/"/g, '\\"');
+      if (!translationsMatch) {
+        console.error(`❌ Could not find translations object in ${fileName}`);
+        continue;
+      }
 
-    // Convert back to single quotes for the function constructor
-    translationsStr = translationsStr.replace(/\\"/g, "'");
+      // Parse the translations object using Function constructor (safer than eval)
+      let translationsStr = translationsMatch[1];
+      // Fix common syntax issues
+      translationsStr = translationsStr.replace(/,\s*};$/, "};");
+      translationsStr = translationsStr.replace(/,\s*,\s*};$/, "};");
 
-    const translations = new Function("return " + translationsStr)();
+      // Escape apostrophes and quotes properly
+      translationsStr = translationsStr.replace(/'/g, "\\'");
+      translationsStr = translationsStr.replace(/"/g, '\\"');
 
-    // Add default values to each language
-    for (const [langCode, langData] of Object.entries(translations)) {
+      // Convert back to single quotes for the function constructor
+      translationsStr = translationsStr.replace(/\\"/g, "'");
+
+      const translations = new Function("return " + translationsStr)();
+
+      // Add default values for this language
       const SUPPORTED_LANGUAGES = require("./supported_languages.js");
       const langDefaults = SUPPORTED_LANGUAGES[langCode]?.defaults || {};
 
       // Dynamically apply all default values
-      applyDefaultsToObject(langData, langDefaults);
+      applyDefaultsToObject(translations, langDefaults);
+
+      // Convert back to string
+      const updatedTranslationsStr = formatTranslationsObject(translations);
+      const updatedContent = fileContent.replace(
+        new RegExp(`window\\.translations_${langCode}\\s*=\\s*{[\\s\\S]*};`),
+        `window.translations_${langCode} = {\n${updatedTranslationsStr}\n};`
+      );
+
+      // Write back to file
+      fs.writeFileSync(filePath, updatedContent);
+
+      console.log(`✅ Updated: ${fileName}`);
     }
 
-    // Convert back to string
-    const updatedTranslationsStr = formatTranslationsObject(translations);
-    const updatedContent = translationsContent.replace(
-      /window\.translations\s*=\s*{[\s\S]*};/,
-      `window.translations = {\n${updatedTranslationsStr}\n};`
+    console.log(
+      "✅ Default translations added successfully to all language files!"
     );
-
-    // Write back to file
-    fs.writeFileSync(translationsPath, updatedContent);
-
-    console.log("✅ Default translations added successfully!");
-    console.log(`📁 Updated: ${translationsPath}`);
   } catch (error) {
     console.error("❌ Error adding default translations:", error.message);
   }

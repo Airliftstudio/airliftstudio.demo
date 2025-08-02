@@ -106,219 +106,13 @@ function cleanHtmlContent(htmlContent) {
   return cleanedContent;
 }
 
-function generateTranslations(projectPath, languageCodes = []) {
-  const indexPath = path.join(projectPath, "index.html");
-  const translationsPath = path.join(projectPath, "js", "translations.js");
-
-  if (!fs.existsSync(indexPath)) {
-    console.error(`Index.html not found at ${indexPath}`);
-    return;
-  }
-
-  // If translations.js does not exist, create an empty file to start with
-  if (!fs.existsSync(translationsPath)) {
-    fs.mkdirSync(path.dirname(translationsPath), { recursive: true });
-    fs.writeFileSync(translationsPath, "window.TRANSLATIONS = {};\n", "utf8");
-    console.log(`Created new translations.js at ${translationsPath}`);
-  }
-
-  // Read the HTML file
-  const htmlContent = fs.readFileSync(indexPath, "utf8");
-
-  // Extract all data-translate attributes and their text content
-  // Improved regex to handle various HTML structures
-  const dataTranslateRegex =
-    /data-translate="([^"]+)"[^>]*>([^<]*(?:<[^>]*>[^<]*<\/[^>]*>[^<]*)*)<\/[^>]*>/g;
-  const translations = {};
-
-  let match;
-  while ((match = dataTranslateRegex.exec(htmlContent)) !== null) {
-    const key = match[1];
-    let value = match[2].trim();
-
-    // Clean up the value by removing HTML tags but keeping text content
-    value = value.replace(/<[^>]*>/g, "").trim();
-
-    // Remove any trailing HTML comments or extra content
-    value = value.replace(/-->.*$/, "").trim();
-
-    // Convert multiline text to single line by replacing line breaks with spaces
-    value = value
-      .replace(/\s*\n\s*/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
-
-    if (value) {
-      // Convert key path to nested object
-      const keyParts = key.split(".");
-      let current = translations;
-
-      for (let i = 0; i < keyParts.length - 1; i++) {
-        const part = keyParts[i];
-        if (!current[part]) {
-          current[part] = {};
-        }
-        current = current[part];
-      }
-
-      current[keyParts[keyParts.length - 1]] = value;
-    }
-  }
-
-  // Extract meta data from HTML
-  const meta = {};
-
-  // Extract title
-  const titleMatch = htmlContent.match(/<title>([^<]+)<\/title>/);
-  if (titleMatch) {
-    meta.title = titleMatch[1].trim();
-  }
-
-  // Extract meta description
-  const descMatch = htmlContent.match(
-    /<meta\s+name="description"\s+content="([^"]+)"/
-  );
-  if (descMatch) {
-    meta.description = descMatch[1];
-  }
-
-  // Extract meta keywords
-  const keywordsMatch = htmlContent.match(
-    /<meta\s+name="keywords"\s+content="([^"]+)"/
-  );
-  if (keywordsMatch) {
-    meta.keywords = keywordsMatch[1];
-  }
-
-  // Extract og:title
-  const ogTitleMatch = htmlContent.match(
-    /<meta\s+property="og:title"\s+content="([^"]+)"/
-  );
-  if (ogTitleMatch) {
-    meta.og_title = ogTitleMatch[1];
-  }
-
-  // Extract og:description
-  const ogDescMatch = htmlContent.match(
-    /<meta\s+property="og:description"\s+content="([^"]+)"/
-  );
-  if (ogDescMatch) {
-    meta.og_description = ogDescMatch[1];
-  }
-
-  // Add default meta values
-  meta.locale = "en_US";
-  meta.language = "English";
-
-  // Extract structured data
-  const structuredData = {};
-
-  // Extract structured data JSON
-  const structuredDataMatch = htmlContent.match(
-    /<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/
-  );
-  if (structuredDataMatch) {
-    try {
-      const jsonContent = structuredDataMatch[1].trim();
-      const structuredDataObj = JSON.parse(jsonContent);
-
-      if (structuredDataObj.description) {
-        structuredData.description = structuredDataObj.description;
-      }
-
-      if (
-        structuredDataObj.address &&
-        structuredDataObj.address.addressCountry
-      ) {
-        structuredData.addressCountry =
-          structuredDataObj.address.addressCountry;
-      }
-
-      if (structuredDataObj.keywords) {
-        structuredData.keywords = structuredDataObj.keywords;
-      }
-
-      // Extract amenity names from amenityFeature array
-      if (
-        structuredDataObj.amenityFeature &&
-        Array.isArray(structuredDataObj.amenityFeature)
-      ) {
-        structuredData.amenityNames = structuredDataObj.amenityFeature.map(
-          (feature) => feature.name
-        );
-      }
-    } catch (e) {
-      console.warn("Could not parse structured data JSON:", e.message);
-    }
-  }
-
-  // Create the complete English translation object
-  const enTranslation = {
-    ...translations,
-    meta,
-    structuredData,
-  };
-
-  // Ensure 'en' is always included in language codes
-  const allLanguageCodes = [
-    "en",
-    ...languageCodes.filter((lang) => lang !== "en"),
-  ];
-
-  // Generate hreflang tags
-  const hreflangTags = generateHreflangTags(htmlContent, allLanguageCodes);
-
-  // Clean the HTML content by removing translatable text
-  const cleanedHtmlContent = cleanHtmlContent(htmlContent);
-
-  // Update HTML with hreflang tags
-  const finalHtmlContent = updateHtmlWithHreflang(
-    cleanedHtmlContent,
-    hreflangTags
-  );
-
-  // Create a properly formatted en object string
-  const formatObject = (obj, indent = 2) => {
-    const spaces = " ".repeat(indent);
-    const lines = [];
-
-    for (const [key, value] of Object.entries(obj)) {
-      if (
-        typeof value === "object" &&
-        value !== null &&
-        !Array.isArray(value)
-      ) {
-        lines.push(`${spaces}${key}: {`);
-        lines.push(formatObject(value, indent + 2));
-        lines.push(`${spaces}},`);
-      } else if (Array.isArray(value)) {
-        lines.push(`${spaces}${key}: [`);
-        value.forEach((item) => {
-          lines.push(`${spaces}  "${item}",`);
-        });
-        lines.push(`${spaces}],`);
-      } else {
-        // Properly escape the string value to ensure valid JSON
-        const escapedValue =
-          typeof value === "string"
-            ? `"${value
-                .replace(/"/g, '\\"')
-                .replace(/\n/g, " ")
-                .replace(/\s+/g, " ")}"`
-            : value;
-        lines.push(`${spaces}${key}: ${escapedValue},`);
-      }
-    }
-
-    return lines.join("\n");
-  };
-
+function createLanguageFiles(jsPath, enTranslation, languageCodes) {
   // Get English defaults to exclude them
   const SUPPORTED_LANGUAGES = require("./supported_languages.js");
   const enDefaults = SUPPORTED_LANGUAGES.en?.defaults || {};
 
   // Create English object excluding default values
-  const createEnglishObject = (obj, indent = 4, parentKey = "") => {
+  const createEnglishObject = (obj, indent = 2, parentKey = "") => {
     const spaces = " ".repeat(indent);
     const lines = [];
 
@@ -355,7 +149,7 @@ function generateTranslations(projectPath, languageCodes = []) {
             ) {
               childLines.push(`${spaces}  ${childKey}: {`);
               childLines.push(
-                createEnglishObject(childValue, indent + 4, childCurrentKey)
+                createEnglishObject(childValue, indent + 2, childCurrentKey)
               );
               childLines.push(`${spaces}  },`);
             } else if (Array.isArray(childValue)) {
@@ -406,16 +200,11 @@ function generateTranslations(projectPath, languageCodes = []) {
     return lines.join("\n");
   };
 
-  const enObjectString = `\n  en: {\n${createEnglishObject(
-    enTranslation,
-    4
-  )}\n  }`;
-
   // Create placeholder objects for other languages with default values
   const createPlaceholderObject = (
     obj,
     langCode,
-    indent = 4,
+    indent = 2,
     parentKey = ""
   ) => {
     const spaces = " ".repeat(indent);
@@ -460,7 +249,7 @@ function generateTranslations(projectPath, languageCodes = []) {
                 createPlaceholderObject(
                   childValue,
                   langCode,
-                  indent + 4,
+                  indent + 2,
                   childCurrentKey
                 )
               );
@@ -491,65 +280,56 @@ function generateTranslations(projectPath, languageCodes = []) {
     return lines.join("\n");
   };
 
-  // Build the complete translations object with placeholders for all languages
-  let translationsContent = `window.translations = {${enObjectString}`;
-
-  // Add placeholder objects for other languages
+  // Create individual language files with window.translations_[code] format
   for (const langCode of languageCodes) {
-    if (langCode !== "en") {
-      const placeholderObject = `\n  ${langCode}: {\n${createPlaceholderObject(
+    const langFilePath = path.join(jsPath, `translations_${langCode}.js`);
+
+    if (langCode === "en") {
+      const enObjectString = `window.translations_${langCode} = {\n${createEnglishObject(
+        enTranslation,
+        2
+      )}\n};`;
+      fs.writeFileSync(langFilePath, enObjectString);
+    } else {
+      const placeholderObject = `window.translations_${langCode} = {\n${createPlaceholderObject(
         enTranslation,
         langCode,
-        4
-      )}\n  }`;
-      translationsContent += `,${placeholderObject}`;
+        2
+      )}\n};`;
+      fs.writeFileSync(langFilePath, placeholderObject);
     }
   }
+}
 
-  // Close the object
-  const completeTranslationsContent = translationsContent + "\n};";
-
-  // Write the completely rewritten translations file
-  fs.writeFileSync(translationsPath, completeTranslationsContent);
-
-  // Write the updated HTML file
-  fs.writeFileSync(indexPath, finalHtmlContent);
-
-  console.log("✅ English translations generated successfully!");
-  console.log(`📁 Updated: ${translationsPath}`);
-  console.log(
-    `🌐 Updated: ${indexPath} with hreflang tags and cleaned translatable content`
+function createTranslationsLoader(jsPath, languageCodes) {
+  // Read the existing lang.js template
+  const langJsTemplatePath = path.join(
+    __dirname,
+    "templates",
+    "v1",
+    "js",
+    "lang.js"
   );
-  console.log(`🔍 Found ${Object.keys(translations).length} translation keys`);
-  console.log(`📊 Meta data extracted: ${Object.keys(meta).length} items`);
-  console.log(
-    `🏗️  Structured data extracted: ${Object.keys(structuredData).length} items`
-  );
-  console.log(`🌍 Languages for hreflang: ${allLanguageCodes.join(", ")}`);
-  console.log(
-    `🧹 Cleaned HTML content: removed translatable text while preserving structure`
-  );
+  let langJsContent = fs.readFileSync(langJsTemplatePath, "utf8");
 
-  // Add language redirects
-  addLanguageRedirects(projectPath, languageCodes);
-  addLocalLanguageRedirects(projectPath, languageCodes);
+  // Generate the translation loading lines
+  const translationLines = languageCodes
+    .map(
+      (langCode) =>
+        `  translations["${langCode}"] = window.translations_${langCode} || {};`
+    )
+    .join("\n");
 
-  // Show the extracted translation keys
-  console.log("\n📝 Extracted translation keys:");
-  const printKeys = (obj, prefix = "") => {
-    for (const [key, value] of Object.entries(obj)) {
-      if (
-        typeof value === "object" &&
-        value !== null &&
-        !Array.isArray(value)
-      ) {
-        printKeys(value, prefix + key + ".");
-      } else {
-        console.log(`  ${prefix}${key}: "${value}"`);
-      }
-    }
-  };
-  printKeys(translations);
+  // Find and replace only the loadTranslations function content
+  const loadTranslationsRegex =
+    /translations\["en"\] = window\.translations_en \|\| \{\};/;
+  const newLoadFunction = translationLines;
+
+  // Replace only the loadTranslations function
+  langJsContent = langJsContent.replace(loadTranslationsRegex, newLoadFunction);
+
+  // Write the updated lang.js file
+  fs.writeFileSync(path.join(jsPath, "lang.js"), langJsContent);
 }
 
 function extractFolderName(targetFilePath) {
@@ -740,6 +520,244 @@ ${hreflangTags}
     const headEndRegex = /(\s*<\/head>)/;
     return htmlContent.replace(headEndRegex, `\n    ${hreflangSection}\n$1`);
   }
+}
+
+function addTranslationScriptsToHtml(htmlContent, languageCodes) {
+  // Generate script tags for all translation files
+  const scriptTags = languageCodes
+    .map(
+      (langCode) => `    <script src="js/translations_${langCode}.js"></script>`
+    )
+    .join("\n");
+
+  // Add script tags just before the closing body tag
+  const updatedHtml = htmlContent.replace(
+    /(\s*)<\/body>/,
+    `\n${scriptTags}\n$1</body>`
+  );
+
+  return updatedHtml;
+}
+
+function generateTranslations(projectPath, languageCodes = []) {
+  const indexPath = path.join(projectPath, "index.html");
+  const jsPath = path.join(projectPath, "js");
+
+  if (!fs.existsSync(indexPath)) {
+    console.error(`Index.html not found at ${indexPath}`);
+    return;
+  }
+
+  // Create js directory if it doesn't exist
+  if (!fs.existsSync(jsPath)) {
+    fs.mkdirSync(jsPath, { recursive: true });
+  }
+
+  // Read the HTML file
+  const htmlContent = fs.readFileSync(indexPath, "utf8");
+
+  // Extract all data-translate attributes and their text content
+  // Improved regex to handle various HTML structures
+  const dataTranslateRegex =
+    /data-translate="([^"]+)"[^>]*>([^<]*(?:<[^>]*>[^<]*<\/[^>]*>[^<]*)*)<\/[^>]*>/g;
+  const translations = {};
+
+  let match;
+  while ((match = dataTranslateRegex.exec(htmlContent)) !== null) {
+    const key = match[1];
+    let value = match[2].trim();
+
+    // Clean up the value by removing HTML tags but keeping text content
+    value = value.replace(/<[^>]*>/g, "").trim();
+
+    // Remove any trailing HTML comments or extra content
+    value = value.replace(/-->.*$/, "").trim();
+
+    // Convert multiline text to single line by replacing line breaks with spaces
+    value = value
+      .replace(/\s*\n\s*/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    if (value) {
+      // Convert key path to nested object
+      const keyParts = key.split(".");
+      let current = translations;
+
+      for (let i = 0; i < keyParts.length - 1; i++) {
+        const part = keyParts[i];
+        if (!current[part]) {
+          current[part] = {};
+        }
+        current = current[part];
+      }
+
+      current[keyParts[keyParts.length - 1]] = value;
+    }
+  }
+
+  // Extract meta data from HTML
+  const meta = {};
+
+  // Extract title
+  const titleMatch = htmlContent.match(/<title>([^<]+)<\/title>/);
+  if (titleMatch) {
+    meta.title = titleMatch[1].trim();
+  }
+
+  // Extract meta description
+  const descMatch = htmlContent.match(
+    /<meta\s+name="description"\s+content="([^"]+)"/
+  );
+  if (descMatch) {
+    meta.description = descMatch[1];
+  }
+
+  // Extract meta keywords
+  const keywordsMatch = htmlContent.match(
+    /<meta\s+name="keywords"\s+content="([^"]+)"/
+  );
+  if (keywordsMatch) {
+    meta.keywords = keywordsMatch[1];
+  }
+
+  // Extract og:title
+  const ogTitleMatch = htmlContent.match(
+    /<meta\s+property="og:title"\s+content="([^"]+)"/
+  );
+  if (ogTitleMatch) {
+    meta.og_title = ogTitleMatch[1];
+  }
+
+  // Extract og:description
+  const ogDescMatch = htmlContent.match(
+    /<meta\s+property="og:description"\s+content="([^"]+)"/
+  );
+  if (ogDescMatch) {
+    meta.og_description = ogDescMatch[1];
+  }
+
+  // Add default meta values
+  meta.locale = "en_US";
+  meta.language = "English";
+
+  // Extract structured data
+  const structuredData = {};
+
+  // Extract structured data JSON
+  const structuredDataMatch = htmlContent.match(
+    /<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/
+  );
+  if (structuredDataMatch) {
+    try {
+      const jsonContent = structuredDataMatch[1].trim();
+      const structuredDataObj = JSON.parse(jsonContent);
+
+      if (structuredDataObj.description) {
+        structuredData.description = structuredDataObj.description;
+      }
+
+      if (
+        structuredDataObj.address &&
+        structuredDataObj.address.addressCountry
+      ) {
+        structuredData.addressCountry =
+          structuredDataObj.address.addressCountry;
+      }
+
+      if (structuredDataObj.keywords) {
+        structuredData.keywords = structuredDataObj.keywords;
+      }
+
+      // Extract amenity names from amenityFeature array
+      if (
+        structuredDataObj.amenityFeature &&
+        Array.isArray(structuredDataObj.amenityFeature)
+      ) {
+        structuredData.amenityNames = structuredDataObj.amenityFeature.map(
+          (feature) => feature.name
+        );
+      }
+    } catch (e) {
+      console.warn("Could not parse structured data JSON:", e.message);
+    }
+  }
+
+  // Create the complete English translation object
+  const enTranslation = {
+    ...translations,
+    meta,
+    structuredData,
+  };
+
+  // Ensure 'en' is always included in language codes
+  const allLanguageCodes = [
+    "en",
+    ...languageCodes.filter((lang) => lang !== "en"),
+  ];
+
+  // Generate hreflang tags
+  const hreflangTags = generateHreflangTags(htmlContent, allLanguageCodes);
+
+  // Clean the HTML content by removing translatable text
+  const cleanedHtmlContent = cleanHtmlContent(htmlContent);
+
+  // Update HTML with hreflang tags
+  let finalHtmlContent = updateHtmlWithHreflang(
+    cleanedHtmlContent,
+    hreflangTags
+  );
+
+  // Add translation script imports to HTML
+  finalHtmlContent = addTranslationScriptsToHtml(
+    finalHtmlContent,
+    allLanguageCodes
+  );
+
+  // Create individual language files
+  createLanguageFiles(jsPath, enTranslation, allLanguageCodes);
+
+  // Create the main translations loader
+  createTranslationsLoader(jsPath, allLanguageCodes);
+
+  // Write the updated HTML file
+  fs.writeFileSync(indexPath, finalHtmlContent);
+
+  console.log("✅ English translations generated successfully!");
+  console.log(`📁 Created language files in: ${jsPath}`);
+  console.log(
+    `🌐 Updated: ${indexPath} with hreflang tags and cleaned translatable content`
+  );
+  console.log(`🔍 Found ${Object.keys(translations).length} translation keys`);
+  console.log(`📊 Meta data extracted: ${Object.keys(meta).length} items`);
+  console.log(
+    `🏗️  Structured data extracted: ${Object.keys(structuredData).length} items`
+  );
+  console.log(`🌍 Languages for hreflang: ${allLanguageCodes.join(", ")}`);
+  console.log(
+    `🧹 Cleaned HTML content: removed translatable text while preserving structure`
+  );
+
+  // Add language redirects
+  addLanguageRedirects(projectPath, languageCodes);
+  addLocalLanguageRedirects(projectPath, languageCodes);
+
+  // Show the extracted translation keys
+  console.log("\n📝 Extracted translation keys:");
+  const printKeys = (obj, prefix = "") => {
+    for (const [key, value] of Object.entries(obj)) {
+      if (
+        typeof value === "object" &&
+        value !== null &&
+        !Array.isArray(value)
+      ) {
+        printKeys(value, prefix + key + ".");
+      } else {
+        console.log(`  ${prefix}${key}: "${value}"`);
+      }
+    }
+  };
+  printKeys(translations);
 }
 
 // Get project path and language codes from command line arguments

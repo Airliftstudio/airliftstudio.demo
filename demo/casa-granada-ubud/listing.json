@@ -1,6 +1,6 @@
 {
   "id": "1438162628878297672",
-  "url": "https://www.airbnb.com/rooms/1438162628878297672/",
+  "url": "https://www.airbnb.com/rooms/1438162628878297672",
   "title": "Secluded 1 Br Villa in Ubud Jungle",
   "summary": "Casa Granada 6 – Refined Jungle Hideaway in Ubud\n\nCasa Granada 6 offers a peaceful and beautifully designed one-bedroom villa set in the heart of Ubud’s tropical jungle. With its open layout, relaxed atmosphere, and lush garden surroundings, the villa is perfect for travelers looking for a quiet and private escape with Balinese charm.\n\nThe space\nCasa Granada 6 – Refined Jungle Hideaway in Ubud\n\nCasa Granada 6 offers a peaceful and beautifully designed one-bedroom villa set in the heart of Ubud’s tropical jungle. With its open layout, relaxed atmosphere, and lush garden surroundings, the villa is perfect for travelers looking for a quiet and private escape with Balinese charm. Spread over two levels, it features two private pools on different floors, giving you extra space to relax, each with its own lounge area and stunning jungle views.\n\n\nThe Villa\n\n1 bedroom | Capacity: 2 guests I Size: 100 m2\nDesign: minimalist tropical architecture with flowing spaces, natural light, and handcrafted finishes\n\nThis villa invites you to unwind in a thoughtfully curated space where indoor comfort meets outdoor beauty. Arched walkways, large windows, and organic textures create a soft, airy ambiance. The bedroom features a canopy bed for restful nights, while the terrace includes a private pool and a shaded massage table perfect for in-villa wellness experiences.\n\n\nFeatures \n\n• Two private swimming pools on separate floors, each with jungle views\n• Air conditioning throughout the villa\n• Wi-Fi connection\n• Safety box\n• Balcony, terrace, and outdoor seating\n• Enclosed garden with tropical plants\n• Hair dryer\n• Mosquito net in the bedroom\n• No Tv – just nature and stillness\n\n\nKitchen Amenities \n\nThe fully equipped open gas kitchen includes:\nrefrigerator, freezer, microwave, dishes and cutlery, cooking utensils, coffee machine, frying pan, toaster, kettle, and juicer\n\n\nOptional Services (upon request)\n\n• Private chef (for lunch and dinner)\n• Yoga teacher for private sessions\n• In-villa massages and body treatments\n\n\nLocation Highlights\n\n• 5 km from Ubud town – restaurants, markets, and cultural attractions nearby\n• Nestled between rice fields and jungle for a completely private stay\n• Ideal for yoga retreats, romantic getaways, and nature lovers\n\nImportant Information\n\n• Accessible by car and motorbike\n• Pets are not allowed\n• Please note that staff and management may access the villa at any time for daily maintenance and service purposes\n\nAbout Bali\n\nSurrounded by vibrant nature, Casa Granada 6 embraces the authentic rhythm of Bali. While regular cleaning and fogging are carried out, geckos, ants, and mosquitoes are part of the experience. Natural repellents are provided to ensure a comfortable and relaxed stay.\n\nOther things to note\nIncluded services\n\n- Swimming pool\n\n- Final Cleaning\n\n- Bed linen: Change each 3 days\n\n- Towels: Change each 3 days\n\n- Air conditioning\n\n- Internet Access",
   "capacity": "3 guests  -  1 bedroom  -  2 beds  -  1 bath",
@@ -52,6 +52,7 @@
     ]
   },
   "badges": [
+    "superhost",
     "guest_favorite"
   ],
   "reviews": [
@@ -83,7 +84,8 @@
       "width": 741,
       "height": 497,
       "aspect": "landscape",
-      "category": "Bedroom"
+      "category": "Bedroom",
+      "mustUse": true
     },
     {
       "src": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1438162628878297672/original/78827338-1a06-4bb2-92ae-cf3ae539b953.jpeg?im_w=720",

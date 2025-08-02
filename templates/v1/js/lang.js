@@ -6,7 +6,9 @@ let translations = {};
 
 // Load translations from JSON files
 function loadTranslations() {
-  translations = window.translations;
+  // Automatically load all language files
+  translations["en"] = window.translations_en || {};
+
   supportedLanguages = Object.keys(translations);
 
   // Initialize the language system after translations are loaded

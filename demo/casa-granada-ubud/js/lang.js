@@ -6,7 +6,12 @@ let translations = {};
 
 // Load translations from JSON files
 function loadTranslations() {
-  translations = window.translations;
+  // Automatically load all language files
+    translations["en"] = window.translations_en || {};
+  translations["sv"] = window.translations_sv || {};
+  translations["de"] = window.translations_de || {};
+  translations["fr"] = window.translations_fr || {};
+
   supportedLanguages = Object.keys(translations);
 
   // Initialize the language system after translations are loaded
@@ -98,7 +103,7 @@ function updateStructuredData(lang) {
 
     // Update the script content
     scriptElement.textContent = JSON.stringify(existingData, null, 2);
-    
+    console.log("Structured data updated successfully for language:", lang);
   } catch (error) {
     console.warn("Error updating structured data:", error);
   }
@@ -158,14 +163,15 @@ function translatePage(lang) {
 // Get language from URL path
 function getLanguageFromURL() {
   const path = window.location.pathname;
+  console.log("Current path:", path);
 
   // Look for language code at the end of the path
   const langMatch = path.match(
     new RegExp(`\/(${supportedLanguages.join("|")})\/?$`)
   );
-  
+  console.log("Language match:", langMatch);
   const result = langMatch ? langMatch[1] : null;
-  
+  console.log("Detected language:", result);
   return result;
 }
 
@@ -262,20 +268,23 @@ function initLang() {
   const urlLanguage = getLanguageFromURL();
   const savedLanguage = localStorage.getItem("preferredLanguage");
 
+  console.log("URL Language:", urlLanguage);
+  console.log("Saved Language:", savedLanguage);
+
   let languageToUse = "en"; // default
 
   if (urlLanguage && translations[urlLanguage]) {
     languageToUse = urlLanguage;
-    
+    console.log("Using URL language:", languageToUse);
     // Don't update URL here as it's already correct
   } else if (savedLanguage && translations[savedLanguage]) {
     languageToUse = savedLanguage;
-    
+    console.log("Using saved language:", languageToUse);
     // Update URL to reflect the saved language preference
 
     updateURLWithLanguage(savedLanguage);
   } else {
-    
+    console.log("Using default language:", languageToUse);
   }
 
   translatePage(languageToUse);

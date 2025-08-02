@@ -138,7 +138,7 @@ async function setup() {
 
     // Define files to skip based on language settings
     const skipFiles = LANGUAGES
-      ? ["index.html", "js/translations.js"] // Skip regular index.html when languages are specified
+      ? ["index.html"] // Skip regular index.html when languages are specified
       : [
           "index_lang.html",
           "js/translations.js",
