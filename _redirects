@@ -5,11 +5,6 @@
 /templates/v1/sv/* /templates/v1/:splat 200
 /templates/v1/fr/* /templates/v1/:splat 200
 
-# demo/test redirects
-/demo/test/* /demo/test/index.html 200
-/demo/test/sv/* /demo/test/:splat 200
-/demo/test/fr/* /demo/test/:splat 200
-
 
 # demo/serendipity-mengwi redirects
 /demo/serendipity-mengwi/* /demo/serendipity-mengwi/index.html 200
@@ -89,3 +84,15 @@
 /demo/casa-granada-ubud/sv/* /demo/casa-granada-ubud/:splat 200
 /demo/casa-granada-ubud/de/* /demo/casa-granada-ubud/:splat 200
 /demo/casa-granada-ubud/fr/* /demo/casa-granada-ubud/:splat 200
+
+# demo/test redirects
+/demo/test/* /demo/test/index.html 200
+/demo/test/sv/* /demo/test/:splat 200
+/demo/test/de/* /demo/test/:splat 200
+/demo/test/fr/* /demo/test/:splat 200
+
+# demo/test redirects
+/demo/test/* /demo/test/index.html 200
+/demo/test/sv/* /demo/test/:splat 200
+/demo/test/de/* /demo/test/:splat 200
+/demo/test/fr/* /demo/test/:splat 200

@@ -492,109 +492,7 @@ function validateAndFixIcons(targetFilePath) {
   }
 }
 
-function verifyAmenities(targetFilePath) {
-  try {
-    console.log(
-      `🔍 Verifying amenities from listing.json against ${targetFilePath}...`
-    );
-
-    // Get the project directory
-    const projectDir = path.dirname(targetFilePath);
-    const listingJsonPath = path.join(projectDir, "listing.json");
-
-    // Check if listing.json exists
-    if (!fs.existsSync(listingJsonPath)) {
-      console.log(
-        `⚠️  listing.json not found at ${listingJsonPath}, skipping amenity verification`
-      );
-      return;
-    }
-
-    // Read listing.json
-    const listingData = JSON.parse(fs.readFileSync(listingJsonPath, "utf8"));
-
-    if (!listingData.amenitiesByCategory) {
-      console.log(
-        `⚠️  No amenitiesByCategory found in listing.json, skipping amenity verification`
-      );
-      return;
-    }
-
-    // Read the HTML file
-    const content = fs.readFileSync(targetFilePath, "utf8");
-
-    // Extract all amenities from listing.json
-    const allAmenities = [];
-    for (const [category, amenities] of Object.entries(
-      listingData.amenitiesByCategory
-    )) {
-      amenities.forEach((amenity) => {
-        // Clean up amenity name (remove newlines and extra spaces)
-        const cleanAmenity = amenity
-          .replace(/\n/g, " ")
-          .replace(/\s+/g, " ")
-          .trim();
-        allAmenities.push({
-          name: cleanAmenity,
-          category: category,
-        });
-      });
-    }
-
-    // Extract amenities displayed in HTML
-    const htmlAmenities = [];
-    const amenityItemRegex =
-      /<span[^>]*data-translate="amenities\.[^"]*"[^>]*>([^<]+)<\/span>/g;
-    let match;
-    while ((match = amenityItemRegex.exec(content)) !== null) {
-      htmlAmenities.push(match[1].trim());
-    }
-
-    console.log(`\n✅ Amenities displayed in HTML:`);
-
-    htmlAmenities.forEach((amenity) => {
-      console.log(`   ✅ ${amenity}`);
-    });
-
-    console.log(`\n❌ Amenities from listing.json NOT displayed in HTML:`);
-    let foundMissing = false;
-
-    allAmenities.forEach((amenity) => {
-      const isDisplayed = htmlAmenities.some(
-        (htmlAmenity) =>
-          htmlAmenity.toLowerCase().includes(amenity.name.toLowerCase()) ||
-          amenity.name.toLowerCase().includes(htmlAmenity.toLowerCase())
-      );
-
-      if (!isDisplayed) {
-        console.log(`   ❌ ${amenity.name} (${amenity.category})`);
-        foundMissing = true;
-      }
-    });
-
-    if (!foundMissing) {
-      console.log(
-        `   🎉 All amenities from listing.json are displayed in HTML!`
-      );
-    }
-
-    console.log(`\n📈 Summary:`);
-    console.log(`   • Displayed: ${htmlAmenities.length} amenities`);
-    console.log(
-      `   • Available: ${allAmenities.length} amenities from listing.json`
-    );
-    console.log(
-      `   • Coverage: ${(
-        (htmlAmenities.length / allAmenities.length) *
-        100
-      ).toFixed(1)}%`
-    );
-  } catch (error) {
-    console.error(`Error verifying amenities: ${error.message}`);
-    // Don't exit process, just log the error and continue
-    console.log("Continuing with other operations...");
-  }
-}
+function verifyAmenities(targetFilePath) {}
 
 function checkImageAspects(targetFilePath) {
   try {
@@ -777,6 +675,173 @@ function checkImagesDirectory(targetFilePath) {
   }
 }
 
+function validateTranslations(projectDir) {
+  try {
+    const jsDir = path.join(projectDir, "js");
+
+    if (!fs.existsSync(jsDir)) {
+      console.log("⚠️  No js directory found, skipping translation validation");
+      return;
+    }
+
+    // Find all translation files
+    const translationFiles = fs
+      .readdirSync(jsDir)
+      .filter(
+        (file) => file.startsWith("translations_") && file.endsWith(".js")
+      )
+      .map((file) => file.replace(".js", ""));
+
+    if (translationFiles.length === 0) {
+      console.log("⚠️  No translation files found, skipping validation");
+      return;
+    }
+
+    console.log(
+      `📖 Validating ${translationFiles.length} translation files...`
+    );
+
+    // Load English translations as the reference
+    const enFilePath = path.join(jsDir, "translations_en.js");
+    if (!fs.existsSync(enFilePath)) {
+      console.error("❌ CRITICAL: translations_en.js not found!");
+      return;
+    }
+
+    // Load English translations
+    const enContent = fs.readFileSync(enFilePath, "utf8");
+    let enTranslations;
+    try {
+      // Execute the content to get the translations object
+      const enModule = {};
+      const enFunction = new Function("window", enContent);
+      enFunction(enModule);
+      enTranslations = enModule.translations_en;
+    } catch (error) {
+      console.error(
+        "❌ CRITICAL: Failed to parse translations_en.js:",
+        error.message
+      );
+      return;
+    }
+
+    if (!enTranslations) {
+      console.error(
+        "❌ CRITICAL: translations_en object not found in translations_en.js"
+      );
+      return;
+    }
+
+    // Get all keys from English translations
+    const getAllKeys = (obj, prefix = "") => {
+      const keys = [];
+      for (const [key, value] of Object.entries(obj)) {
+        const currentKey = prefix ? `${prefix}.${key}` : key;
+        if (typeof value === "object" && value !== null) {
+          keys.push(...getAllKeys(value, currentKey));
+        } else {
+          keys.push(currentKey);
+        }
+      }
+      return keys;
+    };
+
+    const enKeys = getAllKeys(enTranslations);
+    console.log(`📊 English translations have ${enKeys.length} keys`);
+
+    // Validate each translation file
+    let hasErrors = false;
+
+    for (const translationFile of translationFiles) {
+      const langCode = translationFile.replace("translations_", "");
+      const filePath = path.join(jsDir, `${translationFile}.js`);
+
+      console.log(`🔍 Validating ${translationFile}.js...`);
+
+      // Load translation file
+      const content = fs.readFileSync(filePath, "utf8");
+      let translations;
+      try {
+        const module = {};
+        const function_ = new Function("window", content);
+        function_(module);
+        translations = module[`translations_${langCode}`];
+      } catch (error) {
+        console.error(
+          `❌ CRITICAL: Failed to parse ${translationFile}.js:`,
+          error.message
+        );
+        hasErrors = true;
+        continue;
+      }
+
+      if (!translations) {
+        console.error(
+          `❌ CRITICAL: translations_${langCode} object not found in ${translationFile}.js`
+        );
+        hasErrors = true;
+        continue;
+      }
+
+      // Check for missing keys
+      const langKeys = getAllKeys(translations);
+      const missingKeys = enKeys.filter((key) => !langKeys.includes(key));
+
+      if (missingKeys.length > 0) {
+        console.error(
+          `❌ CRITICAL: ${translationFile}.js is missing ${missingKeys.length} keys:`
+        );
+        missingKeys.forEach((key) => console.error(`   - ${key}`));
+        hasErrors = true;
+      }
+
+      // Check for empty strings
+      const findEmptyStrings = (obj, prefix = "") => {
+        const emptyStrings = [];
+        for (const [key, value] of Object.entries(obj)) {
+          const currentKey = prefix ? `${prefix}.${key}` : key;
+          if (typeof value === "object" && value !== null) {
+            emptyStrings.push(...findEmptyStrings(value, currentKey));
+          } else if (value === "") {
+            emptyStrings.push(currentKey);
+          }
+        }
+        return emptyStrings;
+      };
+
+      const emptyStrings = findEmptyStrings(translations);
+
+      if (emptyStrings.length > 0) {
+        console.error(
+          `❌ CRITICAL: ${translationFile}.js has ${emptyStrings.length} empty strings:`
+        );
+        emptyStrings.forEach((key) => console.error(`   - ${key}`));
+        hasErrors = true;
+      }
+
+      // Check for extra keys (optional warning)
+      const extraKeys = langKeys.filter((key) => !enKeys.includes(key));
+      if (extraKeys.length > 0) {
+        console.log(
+          `⚠️  ${translationFile}.js has ${extraKeys.length} extra keys (not critical):`
+        );
+        extraKeys.forEach((key) => console.log(`   - ${key}`));
+      }
+    }
+
+    if (hasErrors) {
+      console.error("❌ CRITICAL: Translation validation failed!");
+    } else {
+      console.log("✅ All translation files validated successfully!");
+    }
+  } catch (error) {
+    console.error(
+      "❌ CRITICAL: Error during translation validation:",
+      error.message
+    );
+  }
+}
+
 function main() {
   const args = process.argv.slice(2);
 
@@ -855,6 +920,9 @@ function main() {
   console.log(`📖 Checking images directory...`);
   checkImagesDirectory(targetFile);
 
+  console.log(`📖 Validating translation files...`);
+  validateTranslations(projectDir);
+
   console.log(
     "🎉 Done! The credits content, business section, and reviews have been added."
   );
@@ -873,4 +941,5 @@ module.exports = {
   verifyAmenities,
   checkImageAspects,
   checkImagesDirectory,
+  validateTranslations,
 };

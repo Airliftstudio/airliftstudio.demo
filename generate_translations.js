@@ -362,18 +362,16 @@ function addLanguageRedirects(projectPath, languages) {
       redirectsContent = fs.readFileSync(redirectsPath, "utf8");
     }
 
-    // Check if redirects for this path already exist
+    // Remove existing redirects for this path
     const pathRedirectPattern = new RegExp(
-      `/${fullPath.replace(/\//g, "\\/")}/\\*.*${fullPath.replace(
-        /\//g,
-        "\\/"
-      )}/index\\.html`
+      `# ${fullPath.replace(/\//g, "\\/")} redirects\\n.*?\\n\\n`,
+      "gs"
     );
     if (pathRedirectPattern.test(redirectsContent)) {
       console.log(
-        `⚠️  Redirects for ${fullPath} already exist in _redirects file`
+        `🔄 Removing existing redirects for ${fullPath} from _redirects file`
       );
-      return;
+      redirectsContent = redirectsContent.replace(pathRedirectPattern, "");
     }
 
     // Create new redirects for this path
@@ -391,7 +389,7 @@ function addLanguageRedirects(projectPath, languages) {
     // Write back to file
     fs.writeFileSync(redirectsPath, updatedContent, "utf8");
 
-    console.log(`✅ Language redirects added to _redirects for ${fullPath}:`);
+    console.log(`✅ Language redirects updated in _redirects for ${fullPath}:`);
     languages.forEach((lang) => {
       console.log(`   - /${fullPath}/${lang}/* → /${fullPath}/:splat 200`);
     });
@@ -411,18 +409,19 @@ function addLocalLanguageRedirects(projectPath, languages) {
       localRedirectsContent = fs.readFileSync(localRedirectsPath, "utf8");
     }
 
-    // Check if language redirects already exist
-    const hasLanguageRedirects = languages.some((lang) => {
-      const langRedirectPattern = new RegExp(`/${lang}/\\*.*:splat`);
-      return langRedirectPattern.test(localRedirectsContent);
+    // Remove existing language redirects
+    languages.forEach((lang) => {
+      const langRedirectPattern = new RegExp(`/${lang}/\\*.*:splat.*\\n?`, "g");
+      if (langRedirectPattern.test(localRedirectsContent)) {
+        console.log(
+          `🔄 Removing existing redirect for /${lang}/* from ${localRedirectsPath}`
+        );
+        localRedirectsContent = localRedirectsContent.replace(
+          langRedirectPattern,
+          ""
+        );
+      }
     });
-
-    if (hasLanguageRedirects) {
-      console.log(
-        `⚠️  Language redirects already exist in ${localRedirectsPath}`
-      );
-      return;
-    }
 
     // Create new language redirects for local file
     const newLocalRedirects = languages
@@ -450,7 +449,9 @@ function addLocalLanguageRedirects(projectPath, languages) {
     // Write back to file
     fs.writeFileSync(localRedirectsPath, localRedirectsContent, "utf8");
 
-    console.log(`✅ Local language redirects added to ${localRedirectsPath}:`);
+    console.log(
+      `✅ Local language redirects updated in ${localRedirectsPath}:`
+    );
     languages.forEach((lang) => {
       console.log(`   - /${lang}/* → /:splat 200`);
     });
@@ -523,6 +524,12 @@ ${hreflangTags}
 }
 
 function addTranslationScriptsToHtml(htmlContent, languageCodes) {
+  // Remove existing translation script tags
+  let cleanedHtml = htmlContent.replace(
+    /<script src="js\/translations_[a-z]{2}\.js"><\/script>\s*\n?/g,
+    ""
+  );
+
   // Generate script tags for all translation files
   const scriptTags = languageCodes
     .map(
@@ -531,7 +538,7 @@ function addTranslationScriptsToHtml(htmlContent, languageCodes) {
     .join("\n");
 
   // Add script tags just before the closing body tag
-  const updatedHtml = htmlContent.replace(
+  const updatedHtml = cleanedHtml.replace(
     /(\s*)<\/body>/,
     `\n${scriptTags}\n$1</body>`
   );
