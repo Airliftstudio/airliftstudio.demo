@@ -262,15 +262,20 @@ function addLanguageRedirects(projectPath, languages) {
     }
 
     // Remove existing redirects for this path
+    // Look for the comment header and all redirects that follow it
     const pathRedirectPattern = new RegExp(
-      `# ${fullPath.replace(/\//g, "\\/")} redirects\\n.*?\\n\\n`,
+      `# ${fullPath.replace(/\//g, "\\/")} redirects\\n.*?(?=\\n\\n|$)`,
       "gs"
     );
+
     if (pathRedirectPattern.test(redirectsContent)) {
       console.log(
         `🔄 Removing existing redirects for ${fullPath} from _redirects file`
       );
       redirectsContent = redirectsContent.replace(pathRedirectPattern, "");
+
+      // Clean up any double newlines that might be left
+      redirectsContent = redirectsContent.replace(/\n\n\n+/g, "\n\n");
     }
 
     // Create new redirects for this path
