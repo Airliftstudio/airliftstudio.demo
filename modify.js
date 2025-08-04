@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 function updateLanguageDropdown(htmlContent, languageCodes) {
+  console.log("Updating language dropdown..." + languageCodes);
   // Always include English as the first option
   const SUPPORTED_LANGUAGES = require("./supported_languages.js");
   const uniqueLangCodes = ["en", ...languageCodes.filter((c) => c !== "en")];
@@ -345,4 +346,14 @@ async function modify() {
   console.log(`✅ Modification complete!`);
 }
 
-modify().catch(console.error);
+// Only run modify() if this file is executed directly (not when required as a module)
+if (require.main === module) {
+  modify().catch(console.error);
+}
+
+// Export the updateLanguageDropdown function for use in other modules
+module.exports = {
+  updateLanguageDropdown,
+  getListingId,
+  removeConsoleLogsFromJSFiles,
+};

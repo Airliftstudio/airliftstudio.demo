@@ -36,7 +36,8 @@ Apply these rules every time there is an Airbnb url in the prompt.
 - Each rule's requirements must be fully satisfied
 
 ## Final steps
-1. If the user requested the website to be translated then follow the rules in side airbnb-translations.mdc.
+**IMPORTANT** These 3 steps must be done in the correct order.
+1. If the user requested the website to be translated then follow the rules and steps in airbnb-translations.mdc. Only continue to step 2 after all the translation steps are complete.
 2. Run the following command:
 node post_build.js [PROJECT_DIR]. post_build.js is in the root directory of airliftstudio, two steps up from the project folder.
 3. When the website is finished building open the index.html in the web browser.

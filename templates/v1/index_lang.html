@@ -6,6 +6,7 @@
     <meta name="robots" content="index, follow" />
     <meta name="language" content="English" />
     <meta http-equiv="Content-Language" content="en" />
+    <link rel="preload" href="images/hero-bg.jpg" as="image" />
 
     <title>
       Villa Zori - Luxury 2BR Villa in Canggu, Bali | Private Pool, Superhost,
@@ -155,6 +156,13 @@
 
     <!-- Hero Section -->
     <section class="hero">
+      <img
+        src="images/hero-bg.jpg"
+        alt="Hero background"
+        class="hero-bg-image"
+        fetchpriority="high"
+        loading="eager"
+      />
       <div class="hero-bg-dark"></div>
       <div class="hero-content">
         <div class="hero-badges">
@@ -302,11 +310,11 @@
           <div class="amenities-grid">
             <div class="amenity-item">
               <i class="fas fa-swimming-pool"></i>
-              <span data-translate="amenities.pool">Pool</span>
+              <span data-translate="amenities.pool">Private Pool</span>
             </div>
             <div class="amenity-item">
               <i class="fas fa-wifi"></i>
-              <span data-translate="amenities.wifi"> WiFi included </span>
+              <span data-translate="amenities.wifi">Fast WiFi</span>
             </div>
             <div class="amenity-item">
               <i class="fas fa-laptop"></i>
@@ -327,10 +335,8 @@
               <span data-translate="amenities.kitchen">Full kitchen</span>
             </div>
             <div class="amenity-item">
-              <i class="fas fa-door-open"></i>
-              <span data-translate="amenities.patio">
-                Private patio or balcony
-              </span>
+              <i class="fas fa-eye"></i>
+              <span data-translate="amenities.view"> Ricefield view </span>
             </div>
             <div class="amenity-item">
               <i class="fas fa-key"></i>
@@ -349,6 +355,10 @@
               <span data-translate="amenities.privacy">
                 Full privacy, no distractions
               </span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-umbrella-beach"></i>
+              <span data-translate="amenities.beach"> Beach nearby </span>
             </div>
           </div>
         </div>

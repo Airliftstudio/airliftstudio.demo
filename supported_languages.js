@@ -60,7 +60,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "de_DE",
       "meta.language": "Deutsch",
-      "nav.about": "Über",
+      "nav.about": "Übersicht",
       "nav.gallery": "Galerie",
       "nav.reviews": "Bewertungen",
       "nav.location": "Standort",

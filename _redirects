@@ -79,20 +79,175 @@
 /demo/villa-zori-bali-script-test/de/* /demo/villa-zori-bali-script-test/:splat 200
 /demo/villa-zori-bali-script-test/es/* /demo/villa-zori-bali-script-test/:splat 200
 
+# demo/test redirects
+/demo/test/* /demo/test/index.html 200
+/demo/test/sv/* /demo/test/:splat 200
+/demo/test/de/* /demo/test/:splat 200
+/demo/test/fr/* /demo/test/:splat 200
+
+# demo/test redirects
+/demo/test/* /demo/test/index.html 200
+/demo/test/sv/* /demo/test/:splat 200
+/demo/test/de/* /demo/test/:splat 200
+/demo/test/fr/* /demo/test/:splat 200
+
+# demo/villa-batu-karu-bali redirects
+/demo/villa-batu-karu-bali/* /demo/villa-batu-karu-bali/index.html 200
+/demo/villa-batu-karu-bali/zh/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/ko/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/ja/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/hi/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/ar/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/tr/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/id/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/fil/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/th/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/vi/* /demo/villa-batu-karu-bali/:splat 200
+
+# demo/villa-batu-karu-bali redirects
+/demo/villa-batu-karu-bali/* /demo/villa-batu-karu-bali/index.html 200
+/demo/villa-batu-karu-bali/zh/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/ko/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/ja/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/hi/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/ar/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/tr/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/id/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/fil/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/th/* /demo/villa-batu-karu-bali/:splat 200
+/demo/villa-batu-karu-bali/vi/* /demo/villa-batu-karu-bali/:splat 200
+
+# demo/villa-batu-karu redirects
+/demo/villa-batu-karu/* /demo/villa-batu-karu/index.html 200
+/demo/villa-batu-karu/sv/* /demo/villa-batu-karu/:splat 200
+/demo/villa-batu-karu/de/* /demo/villa-batu-karu/:splat 200
+
+# demo/villa-batu-karu redirects
+/demo/villa-batu-karu/* /demo/villa-batu-karu/index.html 200
+/demo/villa-batu-karu/fr/* /demo/villa-batu-karu/:splat 200
+
+# demo/makai-kedungu-bali redirects
+/demo/makai-kedungu-bali/* /demo/makai-kedungu-bali/index.html 200
+/demo/makai-kedungu-bali/sv/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/de/* /demo/makai-kedungu-bali/:splat 200
+
+# demo/makai-kedungu-bali redirects
+/demo/makai-kedungu-bali/* /demo/makai-kedungu-bali/index.html 200
+/demo/makai-kedungu-bali/da/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/de/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/en/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/es/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/fi/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/fr/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/id/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/it/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/nl/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/no/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/pl/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/pt/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/ru/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/sv/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/vi/* /demo/makai-kedungu-bali/:splat 200
+/demo/makai-kedungu-bali/ro/* /demo/makai-kedungu-bali/:splat 200
+
+# demo/makai-kediri redirects
+/demo/makai-kediri/* /demo/makai-kediri/index.html 200
+/demo/makai-kediri/sv/* /demo/makai-kediri/:splat 200
+/demo/makai-kediri/da/* /demo/makai-kediri/:splat 200
+/demo/makai-kediri/de/* /demo/makai-kediri/:splat 200
+
+# demo/makai-kediri redirects
+/demo/makai-kediri/* /demo/makai-kediri/index.html 200
+/demo/makai-kediri/en/* /demo/makai-kediri/:splat 200
+/demo/makai-kediri/sv/* /demo/makai-kediri/:splat 200
+/demo/makai-kediri/da/* /demo/makai-kediri/:splat 200
+/demo/makai-kediri/de/* /demo/makai-kediri/:splat 200
+
+# demo/villa-casa-granada redirects
+/demo/villa-casa-granada/* /demo/villa-casa-granada/index.html 200
+/demo/villa-casa-granada/en/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/fr/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/de/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/es/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/it/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/id/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/pt/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/zh/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/ja/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/hi/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/ru/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/sv/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/nl/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/ar/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/uk/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/th/* /demo/villa-casa-granada/:splat 200
+/demo/villa-casa-granada/ko/* /demo/villa-casa-granada/:splat 200
+
+# demo/makai-kedungu redirects
+/demo/makai-kedungu/* /demo/makai-kedungu/index.html 200
+/demo/makai-kedungu/en/* /demo/makai-kedungu/:splat 200
+/demo/makai-kedungu/sv/* /demo/makai-kedungu/:splat 200
+/demo/makai-kedungu/fr/* /demo/makai-kedungu/:splat 200
+
 # demo/casa-granada-ubud redirects
 /demo/casa-granada-ubud/* /demo/casa-granada-ubud/index.html 200
+/demo/casa-granada-ubud/en/* /demo/casa-granada-ubud/:splat 200
 /demo/casa-granada-ubud/sv/* /demo/casa-granada-ubud/:splat 200
-/demo/casa-granada-ubud/de/* /demo/casa-granada-ubud/:splat 200
 /demo/casa-granada-ubud/fr/* /demo/casa-granada-ubud/:splat 200
+/demo/casa-granada-ubud/de/* /demo/casa-granada-ubud/:splat 200
 
-# demo/test redirects
-/demo/test/* /demo/test/index.html 200
-/demo/test/sv/* /demo/test/:splat 200
-/demo/test/de/* /demo/test/:splat 200
-/demo/test/fr/* /demo/test/:splat 200
+# demo/casa-granada-ubud redirects
+/demo/casa-granada-ubud/* /demo/casa-granada-ubud/index.html 200
+/demo/casa-granada-ubud/en/* /demo/casa-granada-ubud/:splat 200
+/demo/casa-granada-ubud/sv/* /demo/casa-granada-ubud/:splat 200
+/demo/casa-granada-ubud/fr/* /demo/casa-granada-ubud/:splat 200
+/demo/casa-granada-ubud/nl/* /demo/casa-granada-ubud/:splat 200
+/demo/casa-granada-ubud/fi/* /demo/casa-granada-ubud/:splat 200
+/demo/casa-granada-ubud/it/* /demo/casa-granada-ubud/:splat 200
+/demo/casa-granada-ubud/es/* /demo/casa-granada-ubud/:splat 200
+/demo/casa-granada-ubud/de/* /demo/casa-granada-ubud/:splat 200
+/demo/casa-granada-ubud/id/* /demo/casa-granada-ubud/:splat 200
+/demo/casa-granada-ubud/zh/* /demo/casa-granada-ubud/:splat 200
+/demo/casa-granada-ubud/ko/* /demo/casa-granada-ubud/:splat 200
+/demo/casa-granada-ubud/hi/* /demo/casa-granada-ubud/:splat 200
+/demo/casa-granada-ubud/ru/* /demo/casa-granada-ubud/:splat 200
 
-# demo/test redirects
-/demo/test/* /demo/test/index.html 200
-/demo/test/sv/* /demo/test/:splat 200
-/demo/test/de/* /demo/test/:splat 200
-/demo/test/fr/* /demo/test/:splat 200
+# demo/aruna-escape-ubud redirects
+/demo/aruna-escape-ubud/* /demo/aruna-escape-ubud/index.html 200
+/demo/aruna-escape-ubud/en/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/ro/* /demo/aruna-escape-ubud/:splat 200
+
+# demo/aruna-escape-ubud redirects
+/demo/aruna-escape-ubud/* /demo/aruna-escape-ubud/index.html 200
+/demo/aruna-escape-ubud/en/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/sv/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/de/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/fr/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/es/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/nl/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/it/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/pt/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/zh/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/id/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/ko/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/hi/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/ar/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/vi/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/ja/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/ru/* /demo/aruna-escape-ubud/:splat 200
+
+# demo/aruna-escape redirects
+/demo/aruna-escape/* /demo/aruna-escape/index.html 200
+/demo/aruna-escape/en/* /demo/aruna-escape/:splat 200
+/demo/aruna-escape/sv/* /demo/aruna-escape/:splat 200
+/demo/aruna-escape/de/* /demo/aruna-escape/:splat 200
+/demo/aruna-escape/fr/* /demo/aruna-escape/:splat 200
+
+# demo/aruna-escape redirects
+/demo/aruna-escape/* /demo/aruna-escape/index.html 200
+/demo/aruna-escape/en/* /demo/aruna-escape/:splat 200
+/demo/aruna-escape/de/* /demo/aruna-escape/:splat 200
+/demo/aruna-escape/fr/* /demo/aruna-escape/:splat 200
+/demo/aruna-escape/sv/* /demo/aruna-escape/:splat 200
+/demo/aruna-escape/zh/* /demo/aruna-escape/:splat 200
+/demo/aruna-escape/ru/* /demo/aruna-escape/:splat 200

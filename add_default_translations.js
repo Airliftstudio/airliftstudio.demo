@@ -42,20 +42,26 @@ function addDefaultTranslations(projectPath) {
         continue;
       }
 
-      // Parse the translations object using Function constructor (safer than eval)
+      // Parse the translations object using a safer approach
       let translationsStr = translationsMatch[1];
       // Fix common syntax issues
       translationsStr = translationsStr.replace(/,\s*};$/, "};");
       translationsStr = translationsStr.replace(/,\s*,\s*};$/, "};");
 
-      // Escape apostrophes and quotes properly
-      translationsStr = translationsStr.replace(/'/g, "\\'");
-      translationsStr = translationsStr.replace(/"/g, '\\"');
+      // Use a more robust parsing approach
+      let translations;
 
-      // Convert back to single quotes for the function constructor
-      translationsStr = translationsStr.replace(/\\"/g, "'");
-
-      const translations = new Function("return " + translationsStr)();
+      // Try using eval with proper error handling (safest for this use case)
+      try {
+        translations = eval(`(${translationsStr})`);
+      } catch (evalError) {
+        console.error(`❌ Failed to parse ${fileName}:`, evalError.message);
+        console.error(
+          `❌ Problematic content:`,
+          translationsStr.substring(0, 200) + "..."
+        );
+        translations = {};
+      }
 
       // Add default values for this language
       const SUPPORTED_LANGUAGES = require("./supported_languages.js");
@@ -76,10 +82,6 @@ function addDefaultTranslations(projectPath) {
 
       console.log(`✅ Updated: ${fileName}`);
     }
-
-    console.log(
-      "✅ Default translations added successfully to all language files!"
-    );
   } catch (error) {
     console.error("❌ Error adding default translations:", error.message);
   }
@@ -105,9 +107,9 @@ function applyDefaultsToObject(obj, defaults) {
 
     // Set the value if the target field is empty or doesn't exist
     const finalKey = keys[keys.length - 1];
-    if (!current[finalKey] || current[finalKey] === "") {
-      current[finalKey] = defaultValue;
-    }
+    // if (!current[finalKey] || current[finalKey] === "") {
+    current[finalKey] = defaultValue;
+    // }
   }
 }
 

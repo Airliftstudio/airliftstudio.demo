@@ -1,6 +1,113 @@
 const fs = require("fs");
 const path = require("path");
 
+function cleanTranslationHtmlContent(indexPath) {
+  let htmlContent = fs.readFileSync(indexPath, "utf8");
+
+  let cleanedContent = htmlContent;
+
+  // Remove text content from elements with data-translate attributes
+  // Use a very precise approach that only removes text, not HTML structure
+  const dataTranslateRegex =
+    /<([^>]+data-translate="[^"]+"[^>]*)>([^<]*(?:<[^>]*>[^<]*<\/[^>]*>[^<]*)*)<\/[^>]*>/g;
+  cleanedContent = cleanedContent.replace(
+    dataTranslateRegex,
+    (match, openingTag, content) => {
+      // Extract only the text content (remove HTML tags)
+      const textContent = content.replace(/<[^>]*>/g, "").trim();
+      if (textContent) {
+        // Replace only the text content with empty string, preserve all HTML structure
+        return match.replace(textContent, "");
+      }
+      return match;
+    }
+  );
+
+  // Handle any remaining simple data-translate elements
+  const simpleDataTranslateRegex =
+    /<([^>]+data-translate="[^"]+"[^>]*)>[^<]*<\/[^>]*>/g;
+  cleanedContent = cleanedContent.replace(
+    simpleDataTranslateRegex,
+    (match, openingTag) => {
+      // Extract text content between tags
+      const textMatch = match.match(/>([^<]*)</);
+      if (textMatch && textMatch[1].trim()) {
+        return match.replace(textMatch[1], "");
+      }
+      return match;
+    }
+  );
+
+  // Remove title content
+  cleanedContent = cleanedContent.replace(
+    /<title>([^<]+)<\/title>/g,
+    "<title></title>"
+  );
+
+  // Remove meta description content
+  cleanedContent = cleanedContent.replace(
+    /<meta\s+name="description"\s+content="([^"]+)"/g,
+    '<meta name="description" content=""'
+  );
+
+  // Remove meta keywords content
+  cleanedContent = cleanedContent.replace(
+    /<meta\s+name="keywords"\s+content="([^"]+)"/g,
+    '<meta name="keywords" content=""'
+  );
+
+  // Remove og:title content
+  cleanedContent = cleanedContent.replace(
+    /<meta\s+property="og:title"\s+content="([^"]+)"/g,
+    '<meta property="og:title" content=""'
+  );
+
+  // Remove og:description content
+  cleanedContent = cleanedContent.replace(
+    /<meta\s+property="og:description"\s+content="([^"]+)"/g,
+    '<meta property="og:description" content=""'
+  );
+
+  // Remove structured data content
+  cleanedContent = cleanedContent.replace(
+    /<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g,
+    (match, jsonContent) => {
+      try {
+        const structuredDataObj = JSON.parse(jsonContent);
+
+        // Clear translatable fields
+        if (structuredDataObj.description) {
+          structuredDataObj.description = "";
+        }
+        if (structuredDataObj.keywords) {
+          structuredDataObj.keywords = "";
+        }
+        if (
+          structuredDataObj.amenityFeature &&
+          Array.isArray(structuredDataObj.amenityFeature)
+        ) {
+          structuredDataObj.amenityFeature =
+            structuredDataObj.amenityFeature.map((feature) => ({
+              ...feature,
+              name: "",
+            }));
+        }
+
+        return `<script type="application/ld+json id="structured-data">${JSON.stringify(
+          structuredDataObj,
+          null,
+          2
+        )}</script>`;
+      } catch (e) {
+        // If JSON parsing fails, return the original match
+        return match;
+      }
+    }
+  );
+  fs.writeFileSync(indexPath, cleanedContent, "utf8");
+  console.log("✅ Removed default translations from index.html");
+}
+
 function polishProject(projectPath) {
   try {
     // Validate project path
@@ -44,6 +151,20 @@ Link: </css/styles.css>; rel=preload; as=style, </js/script.js>; rel=preload; as
 
     // Remove business-offering section from index.html
     removeBusinessOfferingSection(indexPath);
+
+    // Remove default translations from index.html only if js/translations_en.js exists
+    const translationsEnPath = path.join(
+      fullProjectPath,
+      "js",
+      "translations_en.js"
+    );
+    if (fs.existsSync(translationsEnPath)) {
+      cleanTranslationHtmlContent(indexPath);
+    } else {
+      console.log(
+        "ℹ️  Skipping removal of default translations: js/translations_en.js not found"
+      );
+    }
 
     console.log("✅ Polish complete!");
     console.log(`📁 Updated: ${headersPath}`);

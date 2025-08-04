@@ -53,6 +53,7 @@ const EXCLUDED_AMENITIES = [
   "First aid kit",
   "Clothing storage: wardrobe",
   "Smoking allowed",
+  "Private patio or balcony",
 ];
 
 // Function to clean up amenities by keeping only the first line
@@ -146,10 +147,34 @@ async function scrape() {
   const title = await page.textContent("h1");
 
   // Extract the summary as HTML, then convert <br> to \n and strip other tags
-  const summaryHtml = await page.$eval(
-    '[data-section-id="DESCRIPTION_DEFAULT"] h2, [data-section-id="DESCRIPTION_DEFAULT"] span',
-    (el) => el.innerHTML
-  );
+
+  let summaryHtml;
+  try {
+    summaryHtml = await page.$eval(
+      '[data-section-id="DESCRIPTION_DEFAULT"] h2, [data-section-id="DESCRIPTION_DEFAULT"] span',
+      (el) => el.innerHTML
+    );
+  } catch (e) {
+    // If selector not found, try backup modal page
+    const backupUrl = `https://www.airbnb.com/rooms/${listingId}/?modal=DESCRIPTION`;
+    console.log(
+      "Summary selector not found, navigating to backup modal page..."
+    );
+    await page.goto(backupUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForSelector(
+      '[data-section-id="DESCRIPTION_DEFAULT"] h2, [data-section-id="DESCRIPTION_DEFAULT"] span',
+      { timeout: 15000 }
+    );
+    summaryHtml = await page.$eval(
+      '[data-section-id="DESCRIPTION_DEFAULT"] h2, [data-section-id="DESCRIPTION_DEFAULT"] span',
+      (el) => el.innerHTML
+    );
+    // After getting the summaryHtml, close the modal by clicking the top left corner of the page
+    const viewport = page.viewportSize() || { width: 1200, height: 800 };
+    const x = Math.floor(viewport.width * 0.01);
+    const y = Math.floor(viewport.height * 0.01);
+    await page.mouse.click(x, y).catch(() => {});
+  }
   // Replace <br> and <br/> with \n, then strip other HTML tags
   const summary = summaryHtml
     .replace(/<br\s*\/?>/gi, "\n")
@@ -172,10 +197,6 @@ async function scrape() {
     capacityText = "N/A";
   }
 
-  console.log(`Title: ${title}`);
-  console.log(`Summary: ${summary}`);
-  console.log(`Capacity: ${capacityText}`);
-
   // --- Host Info ---
   console.log("Extracting host info...");
   const hostSection = await page.$('[data-section-id="HOST_OVERVIEW_DEFAULT"]');
@@ -189,8 +210,6 @@ async function scrape() {
     'div[data-section-id="GUEST_FAVORITE_BANNER"]'
   );
   let isGuestFavorite = !!guestFavoriteSection;
-
-  console.log(`Superhost: ${isSuperhost}`);
 
   // --- Listing Highlights ---
   console.log("Extracting listing highlights...");
@@ -208,7 +227,6 @@ async function scrape() {
       })
     );
   }
-  console.log("Highlights:", highlights);
 
   // Hero images
   const heroImages = await page.evaluate(() => {
@@ -240,7 +258,6 @@ async function scrape() {
       return { src, alt, width, height, isHero, mustUse: true };
     });
   });
-  console.log(heroImages);
 
   // --- Amenities ---
   console.log("Extracting amenities...");
@@ -254,7 +271,6 @@ async function scrape() {
     'section:has(h1:text("What this place offers"))',
     (el) => el.innerText
   );
-  console.log("Amenities modal text:\n", amenitiesModalText);
   const amenitiesStructured = await page.$$eval(
     'section:has(h1:text("What this place offers")) > section > div',
     (divs) =>
@@ -266,13 +282,9 @@ async function scrape() {
         return { category, items };
       })
   );
-  console.log("Amenities structured:", amenitiesStructured);
 
   // --- Reviews ---
-  console.log("Navigating to reviews page...");
-  // Vi kan inte lita på att det finns en "Show all x reviews" för om det finns för få så visas inte knappen men länken här fungerar iaf.
   await page.goto(AIRBNB_URL + "/reviews", { waitUntil: "domcontentloaded" });
-  console.log("Waiting for reviews modal to be visible...");
   await page.waitForSelector("div[data-review-id]", {
     state: "visible",
     timeout: 20000,
@@ -307,7 +319,7 @@ async function scrape() {
       return { name, rating, reviewText };
     })
   );
-  console.log(reviews);
+  console.log(reviews.length + " reviews found");
 
   // After waiting for the reviews modal to be visible
 
@@ -317,8 +329,6 @@ async function scrape() {
       (el) => el.innerText
     )
     .catch(() => null);
-
-  console.log("Overall rating text:", overallRatingText);
 
   let overallRating = null;
   if (overallRatingText) {
@@ -330,11 +340,9 @@ async function scrape() {
       overallRating = parseFloat(match[1]);
     }
   }
-  console.log("Overall rating:", overallRating);
 
   // --- Images ---
 
-  console.log("Navigating to photo tour for images...");
   // Go to photo tour
   await page.goto(AIRBNB_URL + "?modal=PHOTO_TOUR_SCROLLABLE", {
     waitUntil: "domcontentloaded",
@@ -464,8 +472,6 @@ async function scrape() {
     };
   });
 
-  console.log(uniqueImages);
-
   // --- Generate JSON file ---
   console.log("Generating structured JSON file...");
 
@@ -591,7 +597,6 @@ async function scrape() {
       );
 
       if (sortedByLength.length < 2) break;
-
       const longest = sortedByLength[0];
       const secondLongest = sortedByLength[1];
       const difference = longest.text.length - secondLongest.text.length;

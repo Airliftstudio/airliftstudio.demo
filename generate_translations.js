@@ -1,111 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 
-function cleanHtmlContent(htmlContent) {
-  let cleanedContent = htmlContent;
-
-  // Remove text content from elements with data-translate attributes
-  // Use a very precise approach that only removes text, not HTML structure
-  const dataTranslateRegex =
-    /<([^>]+data-translate="[^"]+"[^>]*)>([^<]*(?:<[^>]*>[^<]*<\/[^>]*>[^<]*)*)<\/[^>]*>/g;
-  cleanedContent = cleanedContent.replace(
-    dataTranslateRegex,
-    (match, openingTag, content) => {
-      // Extract only the text content (remove HTML tags)
-      const textContent = content.replace(/<[^>]*>/g, "").trim();
-      if (textContent) {
-        // Replace only the text content with empty string, preserve all HTML structure
-        return match.replace(textContent, "");
-      }
-      return match;
-    }
-  );
-
-  // Handle any remaining simple data-translate elements
-  const simpleDataTranslateRegex =
-    /<([^>]+data-translate="[^"]+"[^>]*)>[^<]*<\/[^>]*>/g;
-  cleanedContent = cleanedContent.replace(
-    simpleDataTranslateRegex,
-    (match, openingTag) => {
-      // Extract text content between tags
-      const textMatch = match.match(/>([^<]*)</);
-      if (textMatch && textMatch[1].trim()) {
-        return match.replace(textMatch[1], "");
-      }
-      return match;
-    }
-  );
-
-  // Remove title content
-  cleanedContent = cleanedContent.replace(
-    /<title>([^<]+)<\/title>/g,
-    "<title></title>"
-  );
-
-  // Remove meta description content
-  cleanedContent = cleanedContent.replace(
-    /<meta\s+name="description"\s+content="([^"]+)"/g,
-    '<meta name="description" content=""'
-  );
-
-  // Remove meta keywords content
-  cleanedContent = cleanedContent.replace(
-    /<meta\s+name="keywords"\s+content="([^"]+)"/g,
-    '<meta name="keywords" content=""'
-  );
-
-  // Remove og:title content
-  cleanedContent = cleanedContent.replace(
-    /<meta\s+property="og:title"\s+content="([^"]+)"/g,
-    '<meta property="og:title" content=""'
-  );
-
-  // Remove og:description content
-  cleanedContent = cleanedContent.replace(
-    /<meta\s+property="og:description"\s+content="([^"]+)"/g,
-    '<meta property="og:description" content=""'
-  );
-
-  // Remove structured data content
-  cleanedContent = cleanedContent.replace(
-    /<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g,
-    (match, jsonContent) => {
-      try {
-        const structuredDataObj = JSON.parse(jsonContent);
-
-        // Clear translatable fields
-        if (structuredDataObj.description) {
-          structuredDataObj.description = "";
-        }
-        if (structuredDataObj.keywords) {
-          structuredDataObj.keywords = "";
-        }
-        if (
-          structuredDataObj.amenityFeature &&
-          Array.isArray(structuredDataObj.amenityFeature)
-        ) {
-          structuredDataObj.amenityFeature =
-            structuredDataObj.amenityFeature.map((feature) => ({
-              ...feature,
-              name: "",
-            }));
-        }
-
-        return `<script type="application/ld+json id="structured-data">${JSON.stringify(
-          structuredDataObj,
-          null,
-          2
-        )}</script>`;
-      } catch (e) {
-        // If JSON parsing fails, return the original match
-        return match;
-      }
-    }
-  );
-
-  return cleanedContent;
-}
-
 function createLanguageFiles(jsPath, enTranslation, languageCodes) {
   // Get English defaults to exclude them
   const SUPPORTED_LANGUAGES = require("./supported_languages.js");
@@ -291,6 +186,10 @@ function createLanguageFiles(jsPath, enTranslation, languageCodes) {
       )}\n};`;
       fs.writeFileSync(langFilePath, enObjectString);
     } else {
+      // If the file already exists, skip it
+      if (fs.existsSync(langFilePath)) {
+        continue;
+      }
       const placeholderObject = `window.translations_${langCode} = {\n${createPlaceholderObject(
         enTranslation,
         langCode,
@@ -403,55 +302,24 @@ function addLocalLanguageRedirects(projectPath, languages) {
     const fullPath = extractFolderName(projectPath);
     const localRedirectsPath = `${fullPath}/_redirects`;
 
-    // Read existing local redirects file
-    let localRedirectsContent = "";
-    if (fs.existsSync(localRedirectsPath)) {
-      localRedirectsContent = fs.readFileSync(localRedirectsPath, "utf8");
-    }
-
-    // Remove existing language redirects
-    languages.forEach((lang) => {
-      const langRedirectPattern = new RegExp(`/${lang}/\\*.*:splat.*\\n?`, "g");
-      if (langRedirectPattern.test(localRedirectsContent)) {
-        console.log(
-          `🔄 Removing existing redirect for /${lang}/* from ${localRedirectsPath}`
-        );
-        localRedirectsContent = localRedirectsContent.replace(
-          langRedirectPattern,
-          ""
-        );
-      }
-    });
-
-    // Create new language redirects for local file
+    // Create new redirects content - completely replace the file
+    const defaultRedirect = "/* /index.html 200";
     const newLocalRedirects = languages
       .map((lang) => `/${lang}/* /:splat 200`)
       .join("\n");
 
-    // Add to existing content (after the default redirect)
-    const defaultRedirect = "/* /index.html 200";
-    if (localRedirectsContent.includes(defaultRedirect)) {
-      // Insert after the default redirect
-      const beforeDefault = localRedirectsContent.substring(
-        0,
-        localRedirectsContent.indexOf(defaultRedirect) + defaultRedirect.length
-      );
-      const afterDefault = localRedirectsContent.substring(
-        localRedirectsContent.indexOf(defaultRedirect) + defaultRedirect.length
-      );
-      localRedirectsContent =
-        beforeDefault + "\n" + newLocalRedirects + afterDefault;
-    } else {
-      // If no default redirect, add both
-      localRedirectsContent = defaultRedirect + "\n\n" + newLocalRedirects;
-    }
+    // Combine default redirect with language redirects
+    const redirectsContent = newLocalRedirects
+      ? `${defaultRedirect}\n${newLocalRedirects}`
+      : defaultRedirect;
 
-    // Write back to file
-    fs.writeFileSync(localRedirectsPath, localRedirectsContent, "utf8");
+    // Write the complete new content to file (overwrites everything)
+    fs.writeFileSync(localRedirectsPath, redirectsContent, "utf8");
 
     console.log(
       `✅ Local language redirects updated in ${localRedirectsPath}:`
     );
+    console.log(`   - ${defaultRedirect}`);
     languages.forEach((lang) => {
       console.log(`   - /${lang}/* → /:splat 200`);
     });
@@ -707,7 +575,7 @@ function generateTranslations(projectPath, languageCodes = []) {
   const hreflangTags = generateHreflangTags(htmlContent, allLanguageCodes);
 
   // Clean the HTML content by removing translatable text
-  const cleanedHtmlContent = cleanHtmlContent(htmlContent);
+  const cleanedHtmlContent = htmlContent;
 
   // Update HTML with hreflang tags
   let finalHtmlContent = updateHtmlWithHreflang(
@@ -746,8 +614,8 @@ function generateTranslations(projectPath, languageCodes = []) {
   );
 
   // Add language redirects
-  addLanguageRedirects(projectPath, languageCodes);
-  addLocalLanguageRedirects(projectPath, languageCodes);
+  addLanguageRedirects(projectPath, allLanguageCodes);
+  addLocalLanguageRedirects(projectPath, allLanguageCodes);
 
   // Show the extracted translation keys
   console.log("\n📝 Extracted translation keys:");

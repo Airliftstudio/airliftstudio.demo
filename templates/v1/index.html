@@ -6,6 +6,7 @@
     <meta name="robots" content="index, follow" />
     <meta name="language" content="English" />
     <meta http-equiv="Content-Language" content="en" />
+    <link rel="preload" href="images/hero-bg.jpg" as="image" />
 
     <title>
       Villa Zori - Luxury 2BR Villa in Canggu, Bali | Private Pool, Superhost,
@@ -127,6 +128,13 @@
 
     <!-- Hero Section -->
     <section class="hero">
+      <img
+        src="images/hero-bg.jpg"
+        alt="Hero background"
+        class="hero-bg-image"
+        fetchpriority="high"
+        loading="eager"
+      />
       <div class="hero-bg-dark"></div>
       <div class="hero-content">
         <div class="hero-badges">
@@ -254,10 +262,10 @@
           <h3 class="text-content">Amenities</h3>
           <div class="amenities-grid">
             <div class="amenity-item">
-              <i class="fas fa-swimming-pool"></i> Pool
+              <i class="fas fa-swimming-pool"></i> Private Pool
             </div>
             <div class="amenity-item">
-              <i class="fas fa-wifi"></i> WiFi included
+              <i class="fas fa-wifi"></i> Fast WiFi
             </div>
             <div class="amenity-item">
               <i class="fas fa-laptop"></i> Dedicated workspace
@@ -272,16 +280,19 @@
               <i class="fas fa-utensils"></i> Full kitchen
             </div>
             <div class="amenity-item">
-              <i class="fas fa-door-open"></i> Private patio or balcony
-            </div>
-            <div class="amenity-item">
               <i class="fas fa-key"></i> Self check-in (lockbox)
             </div>
             <div class="amenity-item">
-              <i class="fas fa-broom"></i> Daily cleaning available
+              <i class="fas fa-broom"></i> Daily cleaning
             </div>
             <div class="amenity-item">
               <i class="fas fa-user-shield"></i> Full privacy, no distractions
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-eye"></i> Ricefield view
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-umbrella-beach"></i> Beach nearby
             </div>
           </div>
         </div>

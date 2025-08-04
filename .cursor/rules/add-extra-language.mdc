@@ -1,0 +1,21 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+
+Follow these steps to add new language translations for these languages:[]
+
+1. **Generate Translation Files**:
+   ```
+   node translation_workflow.js add [PROJECT_DIR] [COMMA_SEPERATED_LANGUAGE_CODES]
+   ```
+   This will create a translation file for every new language ([PROJECT_DIR]/js/translations_fr.js etc.). It will have the same structure as the default English translation in /js/translations_en.js.
+
+2. **Manual Translation**:
+   Go through each new translation file and add translations.
+   **Requirements**:
+   - Maintain exact structure - only fill in the empty strings, don't change field names or object structure.
+   - Keep brand names, location names.
+   - Ensure translations sound natural, appropriate and easy to understand rather than literal translations word for word.
+3. Run this command in root directory: node post_build.js [PROJECT_DIR].

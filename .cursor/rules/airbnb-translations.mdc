@@ -3,22 +3,31 @@ description:
 globs: 
 alwaysApply: true
 ---
+
 # Translations Rule (Conditional)
 
 ## Purpose
 This rule should only be applied as final steps after the website has been built if the user requested the website to be translated.
 
-###Steps to translate the complete website
+## Steps to translate the complete website
 
-1. Run this command to generate translations base: node cd.. && cd.. && translation_workflow.js generate [PROJECT_DIR] [COMMA_SEPERATED_LANGUAGE_CODES].
-This will create [PROJECT_DIR]/js/translations_en.js which is our default English language file. You will also see a separate translation file for each other requested language (translations_fr.js etc.). These other language files contains the exact same keys but with empty string values that needs to be translated.
+1. **Generate Translation Files**:
+   ```
+   node translation_workflow.js generate [PROJECT_DIR] [COMMA_SEPERATED_LANGUAGE_CODES]
+   ```
+   This will create `[PROJECT_DIR]/js/translations_en.js` which is our default English language file. You will also see a separate translation file for each other requested language (translations_fr.js etc.). These other language files contain the exact same keys as translations_en.js but with empty string values that need to be translated.
 
-2. Go through each language translation file and add translations.
-Requirements:
-- Maintain exact structure - only fill in the empty strings, don't change field names or object structure.
-- Keep brand names, location names, and specific property features consistent.
-- Ensure translations sound natural and appropriate for each target market.
-When all languages are translated verify that there are no empty strings in the file. If there still is then translate them.
+2. **Manual Translation**:
+   Go through each language translation file and add translations.
+   **Requirements**:
+   - Maintain exact structure - only fill in the empty strings, don't change field names or object structure.
+   - Keep brand names, location names.
+   - Ensure translations sound natural, appropriate and easy to understand rather than literal translations word for word.
 
-3. Run: node translation_workflow.js add-defaults [PROJECT_DIR] [COMMA_SEPERATED_LANGUAGE_CODES].
-This will add some extra generic fixed translation keys that does not need extra translations.
+3. **Clean up Translation**:
+   ```
+   node translation_workflow.js clean [PROJECT_DIR]
+   ```
+   This is an important last step to clean up the translation files.
+
+    
