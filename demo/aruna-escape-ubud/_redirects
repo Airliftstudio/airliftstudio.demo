@@ -1,4 +1,12 @@
-/ /index.html 200
-/* /:splat 200
-
-/:lang/* /:splat 200
+/* /index.html 200
+/en/* /:splat 200
+/sv/* /:splat 200
+/de/* /:splat 200
+/fr/* /:splat 200
+/es/* /:splat 200
+/nl/* /:splat 200
+/it/* /:splat 200
+/pt/* /:splat 200
+/da/* /:splat 200
+/no/* /:splat 200
+/fi/* /:splat 200

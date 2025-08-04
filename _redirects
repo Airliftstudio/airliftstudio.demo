@@ -5,19 +5,27 @@
 /templates/v1/sv/* /templates/v1/:splat 200
 /templates/v1/fr/* /templates/v1/:splat 200
 
-# demo/aruna-escape redirects
-/demo/aruna-escape/:lang/ /demo/aruna-escape/index.html 200
-/demo/aruna-escape/:lang/* /demo/aruna-escape/:splat 200
-/demo/aruna-escape/* /demo/aruna-escape/index.html 200
+
 
 # demo/test redirects
 /demo/test/:lang/ /demo/test/index.html 200
 /demo/test/:lang/* /demo/test/:splat 200
 /demo/test/* /demo/test/index.html 200
 
-# demo/aruna-escape-ubud redirects
-
-
 /demo/aruna-escape-ubud/* /demo/aruna-escape-ubud/:splat 200
 /demo/aruna-escape-ubud/:lang/* /demo/aruna-escape-ubud/:splat 200
 /demo/aruna-escape-ubud/:lang/ /demo/aruna-escape-ubud/index.html 200
+
+# demo/aruna-escape-ubud redirects
+/demo/aruna-escape-ubud/* /demo/aruna-escape-ubud/index.html 200
+/demo/aruna-escape-ubud/en/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/sv/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/de/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/fr/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/es/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/nl/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/it/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/pt/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/da/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/no/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/fi/* /demo/aruna-escape-ubud/:splat 200
