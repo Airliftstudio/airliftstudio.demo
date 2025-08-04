@@ -273,13 +273,12 @@ function addLanguageRedirects(projectPath, languages) {
       redirectsContent = redirectsContent.replace(pathRedirectPattern, "");
     }
 
-    // Create new redirects for this path
+    // Create new redirects for this path using dynamic parameters
     const newRedirects = [
       `# ${fullPath} redirects`,
+      `/${fullPath}/:lang/ /${fullPath}/index.html 200`,
+      `/${fullPath}/:lang/* /${fullPath}/:splat 200`,
       `/${fullPath}/* /${fullPath}/index.html 200`,
-      ...languages.map(
-        (lang) => `/${fullPath}/${lang}/* /${fullPath}/:splat 200`
-      ),
     ].join("\n");
 
     // Add to existing content
@@ -289,9 +288,9 @@ function addLanguageRedirects(projectPath, languages) {
     fs.writeFileSync(redirectsPath, updatedContent, "utf8");
 
     console.log(`✅ Language redirects updated in _redirects for ${fullPath}:`);
-    languages.forEach((lang) => {
-      console.log(`   - /${fullPath}/${lang}/* → /${fullPath}/:splat 200`);
-    });
+    console.log(`   - /${fullPath}/:lang/ → /${fullPath}/index.html 200`);
+    console.log(`   - /${fullPath}/:lang/* → /${fullPath}/:splat 200`);
+    console.log(`   - /${fullPath}/* → /${fullPath}/index.html 200`);
   } catch (error) {
     console.error("Error adding language redirects:", error.message);
   }
@@ -302,16 +301,11 @@ function addLocalLanguageRedirects(projectPath, languages) {
     const fullPath = extractFolderName(projectPath);
     const localRedirectsPath = `${fullPath}/_redirects`;
 
-    // Create new redirects content - completely replace the file
-    const defaultRedirect = "/* /index.html 200";
-    const newLocalRedirects = languages
-      .map((lang) => `/${lang}/* /:splat 200`)
-      .join("\n");
-
-    // Combine default redirect with language redirects
-    const redirectsContent = newLocalRedirects
-      ? `${defaultRedirect}\n${newLocalRedirects}`
-      : defaultRedirect;
+    // Create new redirects content using dynamic parameters
+    const redirectsContent = [
+      "/* /index.html 200",
+      "/:lang/* /:splat 200",
+    ].join("\n");
 
     // Write the complete new content to file (overwrites everything)
     fs.writeFileSync(localRedirectsPath, redirectsContent, "utf8");
@@ -319,10 +313,8 @@ function addLocalLanguageRedirects(projectPath, languages) {
     console.log(
       `✅ Local language redirects updated in ${localRedirectsPath}:`
     );
-    console.log(`   - ${defaultRedirect}`);
-    languages.forEach((lang) => {
-      console.log(`   - /${lang}/* → /:splat 200`);
-    });
+    console.log(`   - /* /index.html 200`);
+    console.log(`   - /:lang/* /:splat 200`);
   } catch (error) {
     console.error("Error adding local language redirects:", error.message);
   }

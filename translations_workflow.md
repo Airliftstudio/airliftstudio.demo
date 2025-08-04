@@ -1,6 +1,7 @@
 # Translations documentation
 
 Sweet spot är runt 10 språk. mer än det så kan det faila..
+vid 10st så ser det bra ut men några av de transatlions files som ser ut att de skrivs sparas inte??? nollställs..
 
 ##Kan använda detta för att lägga till flera språk senare::
 
@@ -28,3 +29,4 @@ Follow these steps to add new language translations for these languages:[]
 Fix the missing translations in the translations files.
 Run post_build.js to see which ones have empty strings.
 Go through each translation file with empty strings and add translations based on the english defaults in translations_en.js
+Final step: run node translation_workflow.js clean [PROJECT_DIR]

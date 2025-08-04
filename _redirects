@@ -9,3 +9,13 @@
 /demo/aruna-escape/:lang/ /demo/aruna-escape/index.html 200
 /demo/aruna-escape/:lang/* /demo/aruna-escape/:splat 200
 /demo/aruna-escape/* /demo/aruna-escape/index.html 200
+
+# demo/test redirects
+/demo/test/:lang/ /demo/test/index.html 200
+/demo/test/:lang/* /demo/test/:splat 200
+/demo/test/* /demo/test/index.html 200
+
+# demo/aruna-escape-ubud redirects
+/demo/aruna-escape-ubud/:lang/ /demo/aruna-escape-ubud/index.html 200
+/demo/aruna-escape-ubud/:lang/* /demo/aruna-escape-ubud/:splat 200
+/demo/aruna-escape-ubud/* /demo/aruna-escape-ubud/index.html 200

@@ -8,11 +8,16 @@ let translations = {};
 function loadTranslations() {
   // Automatically load all language files
     translations["en"] = window.translations_en || {};
+  translations["sv"] = window.translations_sv || {};
   translations["de"] = window.translations_de || {};
   translations["fr"] = window.translations_fr || {};
-  translations["sv"] = window.translations_sv || {};
-  translations["zh"] = window.translations_zh || {};
-  translations["ru"] = window.translations_ru || {};
+  translations["es"] = window.translations_es || {};
+  translations["nl"] = window.translations_nl || {};
+  translations["it"] = window.translations_it || {};
+  translations["pt"] = window.translations_pt || {};
+  translations["da"] = window.translations_da || {};
+  translations["no"] = window.translations_no || {};
+  translations["fi"] = window.translations_fi || {};
 
   supportedLanguages = Object.keys(translations);
 
