@@ -1,2 +1,4 @@
-/* /index.html 200
+/ /index.html 200
+/* /:splat 200
+
 /:lang/* /:splat 200

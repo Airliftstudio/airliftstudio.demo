@@ -9,24 +9,29 @@ window.translations_fr = {
   },
   about: {
     title: "Votre paradis jungle privé à Ubud",
-    description: "Plongez dans une retraite jungle magique où la nature et le luxe s'unissent. Aruna Escape offre des vues jungle époustouflantes, une piscine privée et un design de villa en bois unique—votre évasion paisible à seulement 10 minutes du centre animé d'Ubud.",
+    description:
+      "Plongez dans une retraite jungle magique où la nature et le luxe s'unissent. Aruna Escape offre des vues jungle époustouflantes, une piscine privée et un design de villa en bois unique—votre évasion paisible à seulement 10 minutes du centre animé d'Ubud.",
   },
   features: {
     pool: {
       title: "Piscine privée et vues jungle",
-      description: "Profitez de votre propre oasis jungle avec une piscine privée et des vues jungle époustouflantes pour une relaxation ultime.",
+      description:
+        "Profitez de votre propre oasis jungle avec une piscine privée et des vues jungle époustouflantes pour une relaxation ultime.",
     },
     wifi: {
       title: "WiFi haute vitesse et espace de travail",
-      description: "Internet rapide et fiable avec espace de travail dédié—parfait pour le télétravail ou le streaming.",
+      description:
+        "Internet rapide et fiable avec espace de travail dédié—parfait pour le télétravail ou le streaming.",
     },
     bathtub: {
       title: "Baignoire jungle",
-      description: "Baignoire jungle unique avec des vues forestières inégalées pour une expérience nature vraiment immersive.",
+      description:
+        "Baignoire jungle unique avec des vues forestières inégalées pour une expérience nature vraiment immersive.",
     },
     ac: {
       title: "Climatisation",
-      description: "Contrôle climatique dans chaque pièce pour le confort par temps tropical.",
+      description:
+        "Contrôle climatique dans chaque pièce pour le confort par temps tropical.",
     },
   },
   amenities: {
@@ -49,40 +54,52 @@ window.translations_fr = {
   },
   location: {
     title: "Emplacement parfait à Ubud",
-    description: "Aruna Escape est stratégiquement situé dans un cadre jungle paisible avec des vues nature époustouflantes, mais parfaitement positionné pour explorer tout ce qu'Ubud a à offrir.",
+    description:
+      "Aruna Escape est stratégiquement situé dans un cadre jungle paisible avec des vues nature époustouflantes, mais parfaitement positionné pour explorer tout ce qu'Ubud a à offrir.",
     jungle: {
       title: "Vues jungle époustouflantes",
-      description: "Immergez-vous au cœur de la nature avec des environnements jungle à couper le souffle",
+      description:
+        "Immergez-vous au cœur de la nature avec des environnements jungle à couper le souffle",
     },
     center: {
       title: "10 minutes du centre d'Ubud",
-      description: "Accès facile à la culture animée d'Ubud, aux restaurants et aux attractions",
+      description:
+        "Accès facile à la culture animée d'Ubud, aux restaurants et aux attractions",
     },
     river: {
       title: "Vues et sons de la rivière",
-      description: "Profitez des sons paisibles de la rivière qui coule sous la villa",
+      description:
+        "Profitez des sons paisibles de la rivière qui coule sous la villa",
     },
     transport: {
       title: "Transport privé disponible",
-      description: "Service de chauffeur privé pratique pour un transport sans tracas",
+      description:
+        "Service de chauffeur privé pratique pour un transport sans tracas",
     },
   },
   footer: {
     tagline: "Votre évasion jungle au cœur d'Ubud.",
   },
   meta: {
-    title: "Aruna Escape - Villa jungle unique près du centre d'Ubud | Piscine privée, Superhost, Favori des voyageurs",
-    description: "Réservez Aruna Escape, une villa jungle unique 5 étoiles à Ubud, Bali. Piscine privée, vues jungle, superhost, favori des voyageurs, 10 minutes du centre d'Ubud. Parfait pour les couples et la lune de miel. Voir les vrais avis des voyageurs !",
-    keywords: "Aruna Escape, villa Ubud, villa Bali, villa jungle, piscine privée, superhost, favori des voyageurs, villa lune de miel, télétravail, villa luxe, vues jungle, airbnb, réserver villa, meilleure villa Ubud, location vacances, hébergement Bali",
-    og_title: "Aruna Escape - Villa jungle unique près du centre d'Ubud | Piscine privée, Superhost, Favori des voyageurs",
-    og_description: "Réservez Aruna Escape, une villa jungle unique 5 étoiles à Ubud, Bali. Piscine privée, vues jungle, superhost, favori des voyageurs, 10 minutes du centre d'Ubud. Parfait pour les couples et la lune de miel. Voir les vrais avis des voyageurs !",
+    title:
+      "Aruna Escape - Villa jungle unique près du centre d'Ubud | Piscine privée, Superhost, Favori des voyageurs",
+    description:
+      "Réservez Aruna Escape, une villa jungle unique 5 étoiles à Ubud, Bali. Piscine privée, vues jungle, superhost, favori des voyageurs, 10 minutes du centre d'Ubud. Parfait pour les couples et la lune de miel. Voir les vrais avis des voyageurs !",
+    keywords:
+      "Aruna Escape, villa Ubud, villa Bali, villa jungle, piscine privée, superhost, favori des voyageurs, villa lune de miel, télétravail, villa luxe, vues jungle, airbnb, réserver villa, meilleure villa Ubud, location vacances, hébergement Bali",
+    og_title:
+      "Aruna Escape - Villa jungle unique près du centre d'Ubud | Piscine privée, Superhost, Favori des voyageurs",
+    og_description:
+      "Réservez Aruna Escape, une villa jungle unique 5 étoiles à Ubud, Bali. Piscine privée, vues jungle, superhost, favori des voyageurs, 10 minutes du centre d'Ubud. Parfait pour les couples et la lune de miel. Voir les vrais avis des voyageurs !",
     locale: "fr_FR",
     language: "Français",
   },
   structuredData: {
-    description: "Villa jungle unique à Ubud, Bali. Piscine privée, vues jungle, superhost, favori des voyageurs, 10 minutes du centre d'Ubud. Parfait pour les couples et la lune de miel.",
+    description:
+      "Villa jungle unique à Ubud, Bali. Piscine privée, vues jungle, superhost, favori des voyageurs, 10 minutes du centre d'Ubud. Parfait pour les couples et la lune de miel.",
     addressCountry: "Indonésie",
-    keywords: "Aruna Escape, villa Ubud, villa Bali, villa jungle, piscine privée, superhost, favori des voyageurs, villa lune de miel, télétravail, villa luxe, vues jungle, airbnb, réserver villa, meilleure villa Ubud, location vacances, hébergement Bali",
+    keywords:
+      "Aruna Escape, villa Ubud, villa Bali, villa jungle, piscine privée, superhost, favori des voyageurs, villa lune de miel, télétravail, villa luxe, vues jungle, airbnb, réserver villa, meilleure villa Ubud, location vacances, hébergement Bali",
     amenityNames: [
       "Piscine privée",
       "Vues jungle",
