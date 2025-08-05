@@ -36,8 +36,10 @@ Read the whole listing.json and select 14 images to download following these rul
 - Select images based on their alt description. Pick images so we have good variety.
 - Do not pick images with too detailed descriptions, we want more images that are showing of bigger spaces or views and not "Kitchen equipment" etc.
 - The downloaded image should be named be assigned fixed names:
-hero-bg.jpg, image-landscape-1.jpg,image-landscape-2.jpg,image-portrait-1.jpg,image-normal-1.jpg,image-normal-2.jpg,image-normal-3.jpg,image-normal-4.jpg,image-normal-5.jpg,image-normal-6.jpg,image-normal-7.jpg,image-normal-8.jpg,image-normal-9.jpg,image-normal-10.jpg. Make sure if there is a portrait image that is the one named image-portrait-1.jpg and only landscape images would be named image-landscape-1.jpg or image-landscape-2.jpg.
-- Create one single command for downloading all of the images at the same time into the images/ folder
+hero-bg.jpg, image-landscape-1.jpg,image-landscape-2.jpg,image-portrait-1.jpg,image-normal-1.jpg,image-normal-2.jpg,image-normal-3.jpg,image-normal-4.jpg,image-normal-5.jpg,image-normal-6.jpg,image-normal-7.jpg,image-normal-8.jpg,image-normal-9.jpg,image-normal-10.jpg. 
+- IMPORTANT: Make sure that the image-portrait-1.jpg is a portrait image if possible. And image-landscape-1.jpg and image-landscape-2.jpg are landscape images.
+- Create one single command for downloading all of the images at the same time into the images/ folder.
+- IMPORTANT: Make sure the download url is exactly the same as in listing.json.
 
 
 ## File Edit Restrictions

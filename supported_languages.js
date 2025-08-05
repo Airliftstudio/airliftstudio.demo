@@ -6,7 +6,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "en_US",
       "meta.language": "English",
-      "nav.about": "About",
+      "nav.about": "Overview",
       "nav.gallery": "Gallery",
       "nav.reviews": "Reviews",
       "nav.location": "Location",
@@ -24,9 +24,9 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "fr_FR",
       "meta.language": "Français",
-      "nav.about": "À propos",
+      "nav.about": "Aperçu",
       "nav.gallery": "Galerie",
-      "nav.reviews": "Avis",
+      "nav.reviews": "Commentaires",
       "nav.location": "Emplacement",
       "badges.superhost": "Superhost",
       "badges.guest_favorite": "Favori des voyageurs",
@@ -42,7 +42,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "sv_SE",
       "meta.language": "Svenska",
-      "nav.about": "Om",
+      "nav.about": "Översikt",
       "nav.gallery": "Galleri",
       "nav.reviews": "Recensioner",
       "nav.location": "Plats",
@@ -78,7 +78,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "es_ES",
       "meta.language": "Español",
-      "nav.about": "Acerca de",
+      "nav.about": "Resumen",
       "nav.gallery": "Galería",
       "nav.reviews": "Reseñas",
       "nav.location": "Ubicación",
@@ -96,7 +96,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "it_IT",
       "meta.language": "Italiano",
-      "nav.about": "Chi siamo",
+      "nav.about": "Panoramica",
       "nav.gallery": "Galleria",
       "nav.reviews": "Recensioni",
       "nav.location": "Posizione",
@@ -114,7 +114,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "pt_PT",
       "meta.language": "Português",
-      "nav.about": "Sobre",
+      "nav.about": "Visão Geral",
       "nav.gallery": "Galeria",
       "nav.reviews": "Avaliações",
       "nav.location": "Localização",
@@ -132,7 +132,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "nl_NL",
       "meta.language": "Nederlands",
-      "nav.about": "Over",
+      "nav.about": "Overzicht",
       "nav.gallery": "Galerij",
       "nav.reviews": "Beoordelingen",
       "nav.location": "Locatie",
@@ -150,7 +150,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "da_DK",
       "meta.language": "Dansk",
-      "nav.about": "Om",
+      "nav.about": "Oversigt",
       "nav.gallery": "Galleri",
       "nav.reviews": "Anmeldelser",
       "nav.location": "Placering",
@@ -168,7 +168,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "no_NO",
       "meta.language": "Norsk",
-      "nav.about": "Om",
+      "nav.about": "Oversikt",
       "nav.gallery": "Galleri",
       "nav.reviews": "Anmeldelser",
       "nav.location": "Plassering",
@@ -186,7 +186,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "fi_FI",
       "meta.language": "Suomi",
-      "nav.about": "Tietoja",
+      "nav.about": "Yleiskatsaus",
       "nav.gallery": "Galleria",
       "nav.reviews": "Arvostelut",
       "nav.location": "Sijainti",
@@ -204,7 +204,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "pl_PL",
       "meta.language": "Polski",
-      "nav.about": "O nas",
+      "nav.about": "Przegląd",
       "nav.gallery": "Galeria",
       "nav.reviews": "Recenzje",
       "nav.location": "Lokalizacja",
@@ -222,7 +222,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "ru_RU",
       "meta.language": "Русский",
-      "nav.about": "О нас",
+      "nav.about": "Обзор",
       "nav.gallery": "Галерея",
       "nav.reviews": "Отзывы",
       "nav.location": "Расположение",
@@ -258,7 +258,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "ko_KR",
       "meta.language": "한국어",
-      "nav.about": "소개",
+      "nav.about": "개요",
       "nav.gallery": "갤러리",
       "nav.reviews": "후기",
       "nav.location": "위치",
@@ -276,7 +276,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "zh_CN",
       "meta.language": "中文",
-      "nav.about": "关于",
+      "nav.about": "概览",
       "nav.gallery": "相册",
       "nav.reviews": "评价",
       "nav.location": "位置",
@@ -294,7 +294,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "ar_SA",
       "meta.language": "العربية",
-      "nav.about": "حول",
+      "nav.about": "نظرة عامة",
       "nav.gallery": "معرض الصور",
       "nav.reviews": "التقييمات",
       "nav.location": "الموقع",
@@ -312,7 +312,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "hi_IN",
       "meta.language": "हिन्दी",
-      "nav.about": "के बारे में",
+      "nav.about": "अवलोकन",
       "nav.gallery": "गैलरी",
       "nav.reviews": "समीक्षाएं",
       "nav.location": "स्थान",
@@ -330,7 +330,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "tr_TR",
       "meta.language": "Türkçe",
-      "nav.about": "Hakkında",
+      "nav.about": "Genel Bakış",
       "nav.gallery": "Galeri",
       "nav.reviews": "Değerlendirmeler",
       "nav.location": "Konum",
@@ -348,7 +348,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "fil_PH",
       "meta.language": "Filipino",
-      "nav.about": "Tungkol",
+      "nav.about": "Buod",
       "nav.gallery": "Galeriya",
       "nav.reviews": "Mga Review",
       "nav.location": "Lokasyon",
@@ -366,7 +366,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "id_ID",
       "meta.language": "Bahasa Indonesia",
-      "nav.about": "Tentang",
+      "nav.about": "Ikhtisar",
       "nav.gallery": "Galeri",
       "nav.reviews": "Ulasan",
       "nav.location": "Lokasi",
@@ -384,7 +384,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "th_TH",
       "meta.language": "ไทย",
-      "nav.about": "เกี่ยวกับ",
+      "nav.about": "ภาพรวม",
       "nav.gallery": "แกลเลอรี่",
       "nav.reviews": "รีวิว",
       "nav.location": "ตำแหน่ง",
@@ -402,7 +402,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "vi_VN",
       "meta.language": "Tiếng Việt",
-      "nav.about": "Về chúng tôi",
+      "nav.about": "Tổng quan",
       "nav.gallery": "Thư viện ảnh",
       "nav.reviews": "Đánh giá",
       "nav.location": "Vị trí",
@@ -420,7 +420,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "pt_BR",
       "meta.language": "Português (Brasil)",
-      "nav.about": "Sobre",
+      "nav.about": "Visão Geral",
       "nav.gallery": "Galeria",
       "nav.reviews": "Avaliações",
       "nav.location": "Localização",
@@ -438,7 +438,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "ms_MY",
       "meta.language": "Bahasa Melayu",
-      "nav.about": "Tentang",
+      "nav.about": "Ringkasan",
       "nav.gallery": "Galeri",
       "nav.reviews": "Ulasan",
       "nav.location": "Lokasi",
@@ -456,7 +456,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "uk_UA",
       "meta.language": "Українська",
-      "nav.about": "Про нас",
+      "nav.about": "Огляд",
       "nav.gallery": "Галерея",
       "nav.reviews": "Відгуки",
       "nav.location": "Розташування",
@@ -474,7 +474,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "sl_SI",
       "meta.language": "Slovenščina",
-      "nav.about": "O nas",
+      "nav.about": "Pregled",
       "nav.gallery": "Galerija",
       "nav.reviews": "Ocene",
       "nav.location": "Lokacija",
@@ -492,7 +492,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "hr_HR",
       "meta.language": "Hrvatski",
-      "nav.about": "O nama",
+      "nav.about": "Pregled",
       "nav.gallery": "Galerija",
       "nav.reviews": "Recenzije",
       "nav.location": "Lokacija",
@@ -510,7 +510,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "bg_BG",
       "meta.language": "Български",
-      "nav.about": "За нас",
+      "nav.about": "Преглед",
       "nav.gallery": "Галерия",
       "nav.reviews": "Отзиви",
       "nav.location": "Местоположение",
@@ -528,7 +528,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "ro_RO",
       "meta.language": "Română",
-      "nav.about": "Despre noi",
+      "nav.about": "Prezentare",
       "nav.gallery": "Galerie",
       "nav.reviews": "Recenzii",
       "nav.location": "Locație",
@@ -546,7 +546,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "hu_HU",
       "meta.language": "Magyar",
-      "nav.about": "Rólunk",
+      "nav.about": "Áttekintés",
       "nav.gallery": "Galéria",
       "nav.reviews": "Értékelések",
       "nav.location": "Helyszín",
@@ -564,7 +564,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "cs_CZ",
       "meta.language": "Čeština",
-      "nav.about": "O nás",
+      "nav.about": "Přehled",
       "nav.gallery": "Galerie",
       "nav.reviews": "Recenze",
       "nav.location": "Umístění",
@@ -582,7 +582,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "el_GR",
       "meta.language": "Ελληνικά",
-      "nav.about": "Σχετικά με εμάς",
+      "nav.about": "Επισκόπηση",
       "nav.gallery": "Γκαλερί",
       "nav.reviews": "Κριτικές",
       "nav.location": "Τοποθεσία",
@@ -600,7 +600,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "bn_BD",
       "meta.language": "বাংলা",
-      "nav.about": "আমাদের সম্পর্কে",
+      "nav.about": "সংক্ষিপ্ত বিবরণ",
       "nav.gallery": "গ্যালারি",
       "nav.reviews": "পর্যালোচনা",
       "nav.location": "অবস্থান",
@@ -618,7 +618,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "si_LK",
       "meta.language": "සිංහල",
-      "nav.about": "අප ගැන",
+      "nav.about": "සාරාංශය",
       "nav.gallery": "ගැලරිය",
       "nav.reviews": "සමාලෝචන",
       "nav.location": "ස්ථානය",
@@ -636,7 +636,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "ur_PK",
       "meta.language": "اردو",
-      "nav.about": "ہمارے بارے میں",
+      "nav.about": "جائزہ",
       "nav.gallery": "گیلری",
       "nav.reviews": "تبصرے",
       "nav.location": "مقام",
@@ -654,7 +654,7 @@ const SUPPORTED_LANGUAGES = {
     defaults: {
       "meta.locale": "fa_IR",
       "meta.language": "فارسی",
-      "nav.about": "درباره ما",
+      "nav.about": "نمای کلی",
       "nav.gallery": "گالری",
       "nav.reviews": "نظرات",
       "nav.location": "موقعیت",

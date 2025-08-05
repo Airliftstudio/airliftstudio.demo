@@ -37,3 +37,59 @@
 /demo/villa-momo-samui/de/* /demo/villa-momo-samui/:splat 200
 /demo/villa-momo-samui/es/* /demo/villa-momo-samui/:splat 200
 /demo/villa-momo-samui/fr/* /demo/villa-momo-samui/:splat 200
+
+# demo/braya-villa-thailand redirects
+/demo/braya-villa-thailand/* /demo/braya-villa-thailand/index.html 200
+/demo/braya-villa-thailand/en/* /demo/braya-villa-thailand/:splat 200
+/demo/braya-villa-thailand/sv/* /demo/braya-villa-thailand/:splat 200
+/demo/braya-villa-thailand/es/* /demo/braya-villa-thailand/:splat 200
+/demo/braya-villa-thailand/de/* /demo/braya-villa-thailand/:splat 200
+/demo/braya-villa-thailand/it/* /demo/braya-villa-thailand/:splat 200
+/demo/braya-villa-thailand/fr/* /demo/braya-villa-thailand/:splat 200
+/demo/braya-villa-thailand/nl/* /demo/braya-villa-thailand/:splat 200
+/demo/braya-villa-thailand/da/* /demo/braya-villa-thailand/:splat 200
+/demo/braya-villa-thailand/no/* /demo/braya-villa-thailand/:splat 200
+/demo/braya-villa-thailand/fi/* /demo/braya-villa-thailand/:splat 200
+
+# demo/tropical-chalet-surat redirects
+/demo/tropical-chalet-surat/* /demo/tropical-chalet-surat/index.html 200
+/demo/tropical-chalet-surat/en/* /demo/tropical-chalet-surat/:splat 200
+/demo/tropical-chalet-surat/pl/* /demo/tropical-chalet-surat/:splat 200
+/demo/tropical-chalet-surat/ru/* /demo/tropical-chalet-surat/:splat 200
+/demo/tropical-chalet-surat/ja/* /demo/tropical-chalet-surat/:splat 200
+/demo/tropical-chalet-surat/ko/* /demo/tropical-chalet-surat/:splat 200
+/demo/tropical-chalet-surat/zh/* /demo/tropical-chalet-surat/:splat 200
+/demo/tropical-chalet-surat/ar/* /demo/tropical-chalet-surat/:splat 200
+/demo/tropical-chalet-surat/hi/* /demo/tropical-chalet-surat/:splat 200
+/demo/tropical-chalet-surat/tr/* /demo/tropical-chalet-surat/:splat 200
+/demo/tropical-chalet-surat/fil/* /demo/tropical-chalet-surat/:splat 200
+
+# demo/treehouse-koh-phangan redirects
+/demo/treehouse-koh-phangan/* /demo/treehouse-koh-phangan/index.html 200
+/demo/treehouse-koh-phangan/en/* /demo/treehouse-koh-phangan/:splat 200
+/demo/treehouse-koh-phangan/id/* /demo/treehouse-koh-phangan/:splat 200
+/demo/treehouse-koh-phangan/th/* /demo/treehouse-koh-phangan/:splat 200
+/demo/treehouse-koh-phangan/vi/* /demo/treehouse-koh-phangan/:splat 200
+/demo/treehouse-koh-phangan/br/* /demo/treehouse-koh-phangan/:splat 200
+/demo/treehouse-koh-phangan/ms/* /demo/treehouse-koh-phangan/:splat 200
+/demo/treehouse-koh-phangan/uk/* /demo/treehouse-koh-phangan/:splat 200
+/demo/treehouse-koh-phangan/sl/* /demo/treehouse-koh-phangan/:splat 200
+
+# demo/chic-villa-fisherman redirects
+/demo/chic-villa-fisherman/* /demo/chic-villa-fisherman/index.html 200
+/demo/chic-villa-fisherman/en/* /demo/chic-villa-fisherman/:splat 200
+/demo/chic-villa-fisherman/hu/* /demo/chic-villa-fisherman/:splat 200
+/demo/chic-villa-fisherman/bg/* /demo/chic-villa-fisherman/:splat 200
+/demo/chic-villa-fisherman/ro/* /demo/chic-villa-fisherman/:splat 200
+/demo/chic-villa-fisherman/hr/* /demo/chic-villa-fisherman/:splat 200
+/demo/chic-villa-fisherman/cs/* /demo/chic-villa-fisherman/:splat 200
+/demo/chic-villa-fisherman/el/* /demo/chic-villa-fisherman/:splat 200
+/demo/chic-villa-fisherman/bn/* /demo/chic-villa-fisherman/:splat 200
+/demo/chic-villa-fisherman/si/* /demo/chic-villa-fisherman/:splat 200
+
+# demo/tiny-villa-phuket redirects
+/demo/tiny-villa-phuket/* /demo/tiny-villa-phuket/index.html 200
+/demo/tiny-villa-phuket/en/* /demo/tiny-villa-phuket/:splat 200
+/demo/tiny-villa-phuket/ur/* /demo/tiny-villa-phuket/:splat 200
+/demo/tiny-villa-phuket/fa/* /demo/tiny-villa-phuket/:splat 200
+/demo/tiny-villa-phuket/sv/* /demo/tiny-villa-phuket/:splat 200
