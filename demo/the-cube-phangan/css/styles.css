@@ -103,7 +103,7 @@ nav {
   position: relative;
   overflow: hidden;
 }
-.placeholder {
+.hero-placeholder {
   background-color: #1e281ed1; /* your desired placeholder color */
   width: 100%;
   height: 100%;

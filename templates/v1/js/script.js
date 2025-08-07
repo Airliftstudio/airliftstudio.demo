@@ -129,7 +129,35 @@ function populateReviews() {
   }
 }
 
+function animateHeroImage() {
+  const img = document.querySelector(".hero-bg-image");
+  const placeholder = document.querySelector(".hero-placeholder");
+
+  img.addEventListener("load", () => {
+    // Animate the image in
+    gsap.to(img, {
+      opacity: 1,
+      scale: 1,
+      duration: 2.0,
+      ease: "power2.out",
+    });
+
+    // Remove the placeholder
+    gsap.to(placeholder, {
+      opacity: 0,
+      duration: 0.8,
+      onComplete: () => placeholder.remove(),
+    });
+  });
+
+  // Optional fallback: in case image is cached and already loaded
+  if (img.complete) {
+    img.dispatchEvent(new Event("load"));
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+  animateHeroImage();
   animateHeroStarsAndRating();
   populateReviews();
 });
