@@ -89,7 +89,7 @@
               </li>
               <li>
                 <i class="fas fa-check biz-check"></i> Technical guidance for
-                deployment
+                deployment and maintenance
               </li>
               <li>
                 <i class="fas fa-check biz-check"></i> Total freedom to modify
@@ -98,7 +98,7 @@
             </ul>
             <div class="biz-card-extras-label">Add-ons</div>
             <div class="biz-card-extras-block">
-              <label for="biz-multiselect-hands-off" class="biz-extra-label"
+              <span class="biz-extra-label"
                 >Multi-language support
                 <span
                   class="biz-info-icon"
@@ -114,7 +114,7 @@
                     your reach and attract more guests from different countries.
                   </span>
                 </span>
-              </label>
+              </span>
               <div class="biz-multiselect" id="biz-multiselect-hands-on"></div>
               <div class="biz-smallprint">
                 First translation $29, each additional +$19
@@ -135,7 +135,6 @@
             </div>
             <a
               id="biz-calc-order-hands-on"
-              href="https://forms.gle/hands-on-form"
               target="_blank"
               class="biz-order-btn"
               >Get Hands-On</a
@@ -188,7 +187,7 @@
             </ul>
             <div class="biz-card-extras-label">Add-ons</div>
             <div class="biz-card-extras-block">
-              <label for="biz-multiselect-hands-off" class="biz-extra-label"
+              <span class="biz-extra-label"
                 >Multi-language support
                 <span
                   class="biz-info-icon"
@@ -203,11 +202,12 @@
                     chance of find your website. This is a great way to expand
                     your reach and attract more guests from different countries.
                   </span>
-                </span> </label
-              ><br />
+                </span>
+              </span>
+              <br />
               <div class="biz-multiselect" id="biz-multiselect-hands-off"></div>
               <div class="biz-smallprint">
-                First translation $29, each additional +$19
+                First language $29, each additional +$19
               </div>
             </div>
             <div class="biz-card-extras-note">
@@ -231,18 +231,66 @@
                   </span>
                 </span> </label
               ><br />
-              <select id="biz-years" class="biz-years-select">
-                <option value="1">1 year (included)</option>
-                <option value="2">2 years (+$39)</option>
-                <option value="3">3 years (+$78)</option>
-                <option value="4">4 years (+$117)</option>
-                <option value="5">5 years (+$156)</option>
-                <option value="6">6 years (+$195)</option>
-                <option value="7">7 years (+$234)</option>
-                <option value="8">8 years (+$273)</option>
-                <option value="9">9 years (+$312)</option>
-                <option value="10">10 years (+$351)</option>
-              </select>
+              <div class="biz-years-container">
+                <div class="biz-custom-select" id="biz-custom-select">
+                  <div class="biz-select-display">
+                    <span id="biz-select-text">1 year (included)</span>
+                    <i class="fas fa-chevron-down"></i>
+                  </div>
+                  <div class="biz-select-dropdown" id="biz-select-dropdown">
+                    <div class="biz-select-option" data-value="1">
+                      <span>1 year (included)</span>
+                    </div>
+                    <div class="biz-select-option" data-value="2">
+                      <span>2 years (+$39)</span>
+                    </div>
+                    <div class="biz-select-option" data-value="3">
+                      <span>3 years (+$78)</span>
+                    </div>
+                    <div class="biz-select-option" data-value="4">
+                      <span>4 years (+$117)</span>
+                    </div>
+                    <div class="biz-select-option" data-value="5">
+                      <span>5 years (+$156)</span>
+                    </div>
+                    <div
+                      class="biz-select-option biz-option-popular"
+                      data-value="6"
+                    >
+                      <span>6 years (+$195)</span>
+                      <span class="biz-option-badge">Most Selected</span>
+                    </div>
+                    <div class="biz-select-option" data-value="7">
+                      <span>7 years (+$234)</span>
+                    </div>
+                    <div class="biz-select-option" data-value="8">
+                      <span>8 years (+$273)</span>
+                    </div>
+                    <div class="biz-select-option" data-value="9">
+                      <span>9 years (+$312)</span>
+                    </div>
+                    <div class="biz-select-option" data-value="10">
+                      <span>10 years (+$351)</span>
+                    </div>
+                  </div>
+                </div>
+                <select
+                  id="biz-years"
+                  class="biz-years-select"
+                  style="display: none"
+                >
+                  <option value="1">1 year (included)</option>
+                  <option value="2">2 years (+$39)</option>
+                  <option value="3">3 years (+$78)</option>
+                  <option value="4">4 years (+$117)</option>
+                  <option value="5">5 years (+$156)</option>
+                  <option value="6">6 years (+$195)</option>
+                  <option value="7">7 years (+$234)</option>
+                  <option value="8">8 years (+$273)</option>
+                  <option value="9">9 years (+$312)</option>
+                  <option value="10">10 years (+$351)</option>
+                </select>
+              </div>
               <div class="biz-smallprint">
                 Includes domain name, hosting, and email forwarding.
               </div>
@@ -262,7 +310,6 @@
             </div>
             <a
               id="biz-calc-order-hands-off"
-              href="https://forms.gle/hands-off-form"
               target="_blank"
               class="biz-order-btn"
               >Get Hands-Off</a
@@ -437,14 +484,100 @@
             font-size: 0.8rem;
             color: #444;
           }
-          .biz-years-select {
+          .biz-years-container {
+            position: relative;
             width: 100%;
             margin-top: 0.3em;
+          }
+          .biz-years-select {
+            width: 100%;
             border-radius: 7px;
             border: 1px solid #c4a47c;
             padding: 0.3em;
             font-size: 0.98em;
             height: 38px;
+          }
+          .biz-custom-select {
+            position: relative;
+            width: 100%;
+          }
+          .biz-select-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            border-radius: 7px;
+            border: 1px solid #c4a47c;
+            padding: 0.3em 0.7em;
+            font-size: 0.98em;
+            height: 38px;
+            background: #fff;
+            cursor: pointer;
+            transition: border-color 0.2s ease;
+          }
+          .biz-select-display:hover {
+            border-color: #a08a5c;
+          }
+          .biz-select-display i {
+            color: #c4a47c;
+            font-size: 0.8em;
+            transition: transform 0.2s ease;
+          }
+          .biz-custom-select.open .biz-select-display i {
+            transform: rotate(180deg);
+          }
+          .biz-select-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid #c4a47c;
+            border-radius: 7px;
+            box-shadow: 0 4px 16px rgba(44, 85, 48, 0.1);
+            z-index: 100;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            margin-top: 2px;
+          }
+          .biz-custom-select.open .biz-select-dropdown {
+            display: block;
+          }
+          .biz-select-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6em 0.8em;
+            cursor: pointer;
+            font-size: 0.98em;
+            color: #2c5530;
+            transition: background 0.13s;
+            border-bottom: 1px solid #f0f0f0;
+          }
+          .biz-select-option:last-child {
+            border-bottom: none;
+          }
+          .biz-select-option:hover {
+            background: #e6f0e6;
+          }
+          .biz-select-option.selected {
+            background: #e6f0e6;
+            font-weight: 600;
+          }
+          .biz-option-popular {
+            background: linear-gradient(135deg, #fff5f5, #ffe8e8);
+            border-left: 3px solid #ff6b6b;
+          }
+          .biz-option-badge {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.15em 0.5em;
+            border-radius: 10px;
+            box-shadow: 0 1px 4px rgba(238, 90, 82, 0.3);
+            margin-left: 0.5em;
           }
           .biz-receipt {
             background: #f8f9fa;
@@ -521,6 +654,9 @@
             min-width: 100%;
           }
           .biz-multiselect .multi-select-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             padding: 0.6em 1em;
             cursor: pointer;
             font-size: 1em;
@@ -531,6 +667,20 @@
           .biz-multiselect .multi-select-option:hover,
           .biz-multiselect .multi-select-option.selected {
             background: #e6f0e6;
+          }
+          .biz-multiselect .multi-select-option-left {
+            display: flex;
+            align-items: center;
+          }
+          .biz-multiselect .multi-select-badge {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.15em 0.5em;
+            border-radius: 10px;
+            box-shadow: 0 1px 4px rgba(76, 175, 80, 0.3);
+            margin-left: 0.5em;
           }
           .biz-multiselect .multi-select-tag {
             background: #f3e9d2;
@@ -726,26 +876,38 @@
             let langHandsOff = [];
             let years = 1;
             const langList = [
+              // English first
+              { code: "en", name: "English", flag: "🇬🇧" },
+
+              // Recommended languages (alphabetical by name, excluding English)
+              { code: "fr", name: "French", flag: "🇫🇷", recommended: true },
+              { code: "de", name: "German", flag: "🇩🇪", recommended: true },
+              { code: "es", name: "Spanish", flag: "🇪🇸", recommended: true },
+              { code: "ru", name: "Russian", flag: "🇷🇺", recommended: true },
+              {
+                code: "zh",
+                name: "Chinese (Simplified)",
+                flag: "🇨🇳",
+                recommended: true,
+              },
+              { code: "it", name: "Italian", flag: "🇮🇹", recommended: true },
+
+              // All other languages (alphabetical by name)
               { code: "ar", name: "Arabic", flag: "🇸🇦" },
               { code: "bn", name: "Bengali", flag: "🇧🇩" },
               { code: "bg", name: "Bulgarian", flag: "🇧🇬" },
-              { code: "br", name: "Portuguese (Brazil)", flag: "🇧🇷" },
+              { code: "br", name: "Brazilian Portuguese", flag: "🇧🇷" },
               { code: "cs", name: "Czech", flag: "🇨🇿" },
-              { code: "zh", name: "Chinese", flag: "🇨🇳" },
               { code: "da", name: "Danish", flag: "🇩🇰" },
               { code: "nl", name: "Dutch", flag: "🇳🇱" },
-              { code: "en", name: "English", flag: "🇬🇧" },
               { code: "el", name: "Greek", flag: "🇬🇷" },
               { code: "fa", name: "Persian", flag: "🇮🇷" },
               { code: "fil", name: "Filipino", flag: "🇵🇭" },
               { code: "fi", name: "Finnish", flag: "🇫🇮" },
-              { code: "fr", name: "French", flag: "🇫🇷" },
-              { code: "de", name: "German", flag: "🇩🇪" },
               { code: "hi", name: "Hindi", flag: "🇮🇳" },
               { code: "hr", name: "Croatian", flag: "🇭🇷" },
               { code: "hu", name: "Hungarian", flag: "🇭🇺" },
               { code: "id", name: "Indonesian", flag: "🇮🇩" },
-              { code: "it", name: "Italian", flag: "🇮🇹" },
               { code: "ja", name: "Japanese", flag: "🇯🇵" },
               { code: "ko", name: "Korean", flag: "🇰🇷" },
               { code: "ms", name: "Malay", flag: "🇲🇾" },
@@ -753,10 +915,8 @@
               { code: "pl", name: "Polish", flag: "🇵🇱" },
               { code: "pt", name: "Portuguese", flag: "🇵🇹" },
               { code: "ro", name: "Romanian", flag: "🇷🇴" },
-              { code: "ru", name: "Russian", flag: "🇷🇺" },
               { code: "si", name: "Sinhala", flag: "🇱🇰" },
               { code: "sl", name: "Slovenian", flag: "🇸🇮" },
-              { code: "es", name: "Spanish", flag: "🇪🇸" },
               { code: "sv", name: "Swedish", flag: "🇸🇪" },
               { code: "th", name: "Thai", flag: "🇹🇭" },
               { code: "tr", name: "Turkish", flag: "🇹🇷" },
@@ -825,7 +985,13 @@
                   opt.className =
                     "multi-select-option" +
                     (selected.includes(lang.code) ? " selected" : "");
-                  opt.innerHTML = `<span class='biz-receipt-flag'>${lang.flag}</span>${lang.name}`;
+
+                  let optContent = `<div class="multi-select-option-left"><span class='biz-receipt-flag'>${lang.flag}</span>${lang.name}</div>`;
+                  if (lang.recommended) {
+                    optContent += `<span class="multi-select-badge">Recommended</span>`;
+                  }
+                  opt.innerHTML = optContent;
+
                   opt.onclick = (e) => {
                     e.stopPropagation();
                     if (selected.includes(lang.code)) {
@@ -889,11 +1055,56 @@
               // No visual selection highlight
             }
 
-            // Years
-            selYears.addEventListener("change", () => {
-              years = parseInt(selYears.value, 10);
-              updateCalc("hands-off");
+            // Custom select functionality
+            const customSelect = document.getElementById("biz-custom-select");
+            const selectDisplay = document.getElementById("biz-select-text");
+            const selectDropdown = document.getElementById(
+              "biz-select-dropdown"
+            );
+            const selectOptions =
+              selectDropdown.querySelectorAll(".biz-select-option");
+
+            // Toggle dropdown
+            selectDisplay.parentElement.addEventListener("click", () => {
+              customSelect.classList.toggle("open");
             });
+
+            // Close dropdown when clicking outside
+            document.addEventListener("click", (e) => {
+              if (!customSelect.contains(e.target)) {
+                customSelect.classList.remove("open");
+              }
+            });
+
+            // Handle option selection
+            selectOptions.forEach((option) => {
+              option.addEventListener("click", () => {
+                const value = parseInt(option.dataset.value, 10);
+                const text = option.querySelector("span").textContent;
+
+                // Update display text
+                selectDisplay.textContent = text;
+
+                // Update hidden select
+                selYears.value = value;
+                years = value;
+
+                // Update selected state
+                selectOptions.forEach((opt) =>
+                  opt.classList.remove("selected")
+                );
+                option.classList.add("selected");
+
+                // Close dropdown
+                customSelect.classList.remove("open");
+
+                // Update calculations
+                updateCalc("hands-off");
+              });
+            });
+
+            // Initialize selected state
+            selectOptions[0].classList.add("selected");
             // Calculation logic
             function calcLangPrice(langs) {
               if (!langs.length) return 0;
@@ -1026,13 +1237,26 @@
               return { domain, email };
             }
 
-            function buildHandsOffOrderLink() {
+            https: function buildHandsOffOrderLink() {
               const { domain, email } = getSuggestedDomainAndEmail();
               const baseUrl =
-                "https://docs.google.com/forms/d/e/1FAIpQLScYr-lpokldmKQn1lcZ7GwsMUWzfqndJ41-QD7yiuzPEzsVuA/viewform?usp=pp_url";
+                "https://docs.google.com/forms/d/e/1FAIpQLSfWusXrgWVjZqmh6xep6ENTqfCUcA6VMJQbhVugNH4e5eMPdg/viewform?usp=pp_url";
               const params = new URLSearchParams();
+              // Extract Airbnb link from the "Check Availability" button
+              const airbnbBtn = document.querySelector(
+                '.cta-button[href*="airbnb.com/rooms/"]'
+              );
+              if (airbnbBtn) {
+                let airbnblink = airbnbBtn.getAttribute("href");
+                params.append("entry.402381781", airbnblink);
+              }
+              //TODO could add these if they are not commended out in footer..?
+              // params.append("entry.875430132", whatsapp);
+              // params.append("entry.1944542596", instagram);
+
               params.append("entry.2022870313", domain);
               params.append("entry.1556942181", email);
+
               // Always include English first
               params.append("entry.616393419", "English");
               if (langHandsOff && langHandsOff.length) {
@@ -1060,6 +1284,41 @@
             if (orderBtnOff) {
               orderBtnOff.addEventListener("click", function (e) {
                 this.href = buildHandsOffOrderLink();
+              });
+            }
+
+            https: function buildHandsOnOrderLink() {
+              const baseUrl =
+                "https://docs.google.com/forms/d/e/1FAIpQLSc8XyIa2VmeYcSMExqGhtpUHvwoIPvx8nO4so8cQY65qsE8LQ/viewform?usp=pp_url";
+              const params = new URLSearchParams();
+              // Extract Airbnb link from the "Check Availability" button
+              const airbnbBtn = document.querySelector(
+                '.cta-button[href*="airbnb.com/rooms/"]'
+              );
+              if (airbnbBtn) {
+                let airbnblink = airbnbBtn.getAttribute("href");
+                params.append("entry.402381781", airbnblink);
+              }
+
+              // Always include English first
+              params.append("entry.616393419", "English");
+              if (langHandsOff && langHandsOff.length) {
+                langHandsOff.forEach((code) => {
+                  if (code === "en") return;
+                  const lang = langList.find((l) => l.code === code);
+                  if (lang) params.append("entry.616393419", lang.name);
+                });
+              }
+              return `${baseUrl}&${params.toString()}`;
+            }
+
+            // Update order button href on click
+            const orderBtnOn = document.getElementById(
+              "biz-calc-order-hands-on"
+            );
+            if (orderBtnOn) {
+              orderBtnOn.addEventListener("click", function (e) {
+                this.href = buildHandsOnOrderLink();
               });
             }
 
