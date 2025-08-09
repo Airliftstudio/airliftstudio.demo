@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get Your Free Demo | Airlift Studios</title>
+    <meta
+      name="description"
+      content="Request your free demo website. Provide your Airbnb listing, desired domain, languages, and optional public contact info."
+    />
+
+    <link rel="stylesheet" href="assets/css/fonts-local.css" />
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container nav-inner">
+        <a href="./#home" class="brand">
+          <img
+            src="assets/images/logo.png"
+            alt="Airlift Studios logo"
+            class="brand-logo"
+          />
+          <span class="brand-name">Airlift</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="./#why">Why Us</a>
+          <a href="./#how">How It Works</a>
+          <a href="./#pricing">Pricing</a>
+          <a href="./#showcase">Showcase</a>
+          <a href="./#testimonials">Testimonials</a>
+          <a href="./#faq">FAQ</a>
+        </nav>
+        <button class="nav-toggle" aria-label="Toggle Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <section class="section" aria-labelledby="order-title">
+      <div class="container">
+        <h1 id="order-title" class="section-title">Get Your Free Demo</h1>
+        <p class="section-lead">
+          Fill out the form below. We’ll build a no‑commitment demo to preview
+          your site.
+        </p>
+
+        <!-- Step 1: Form -->
+        <form id="order-form" class="text-content" novalidate>
+          <div
+            style="
+              display: grid;
+              gap: 14px;
+              grid-template-columns: 1fr;
+              max-width: 760px;
+            "
+          >
+            <label>
+              <span>Your name *</span>
+              <input
+                id="name"
+                type="text"
+                required
+                placeholder="Jane Doe"
+                style="
+                  width: 100%;
+                  padding: 12px;
+                  border: 1px solid rgba(0, 0, 0, 0.12);
+                  border-radius: 10px;
+                "
+              />
+            </label>
+            <label>
+              <span>Your Airbnb listing URL *</span>
+              <input
+                id="airbnbUrl"
+                type="url"
+                required
+                placeholder="https://www.airbnb.com/rooms/12345678"
+                style="
+                  width: 100%;
+                  padding: 12px;
+                  border: 1px solid rgba(0, 0, 0, 0.12);
+                  border-radius: 10px;
+                "
+              />
+            </label>
+            <label>
+              <span>Desired domain name *</span>
+              <input
+                id="domain"
+                type="text"
+                required
+                placeholder="yourvillabali.com"
+                style="
+                  width: 100%;
+                  padding: 12px;
+                  border: 1px solid rgba(0, 0, 0, 0.12);
+                  border-radius: 10px;
+                "
+              />
+            </label>
+
+            <div>
+              <div style="font-weight: 700; margin-bottom: 6px">Languages</div>
+              <div class="small" style="margin-bottom: 8px">
+                English is included by default. Select additional languages:
+              </div>
+              <div
+                id="languages"
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(2, minmax(200px, 1fr));
+                  gap: 10px;
+                  padding: 12px;
+                  border: 1px solid rgba(0, 0, 0, 0.12);
+                  border-radius: 10px;
+                  background: #fff;
+                  max-width: 760px;
+                "
+              >
+                <!-- populated by JS -->
+              </div>
+            </div>
+
+            <div>
+              <div style="font-weight: 700; margin-bottom: 6px">
+                Optional footer contact
+              </div>
+              <div
+                style="
+                  display: grid;
+                  gap: 10px;
+                  grid-template-columns: 1fr 1fr;
+                  max-width: 760px;
+                "
+              >
+                <label>
+                  <span>WhatsApp (optional)</span>
+                  <input
+                    id="whatsapp"
+                    type="text"
+                    placeholder="+62 812 3456 7890"
+                    style="
+                      width: 100%;
+                      padding: 12px;
+                      border: 1px solid rgba(0, 0, 0, 0.12);
+                      border-radius: 10px;
+                    "
+                  />
+                </label>
+                <label>
+                  <span>Instagram (optional)</span>
+                  <input
+                    id="instagram"
+                    type="text"
+                    placeholder="@youraccount"
+                    style="
+                      width: 100%;
+                      padding: 12px;
+                      border: 1px solid rgba(0, 0, 0, 0.12);
+                      border-radius: 10px;
+                    "
+                  />
+                </label>
+              </div>
+            </div>
+
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                margin-top: 4px;
+              "
+            >
+              <button type="submit" class="btn btn-primary">
+                Create order
+              </button>
+              <span
+                id="form-error"
+                class="small"
+                style="color: #dc2626; display: none"
+                >Please fill in all required fields correctly.</span
+              >
+            </div>
+          </div>
+        </form>
+
+        <!-- Step 2: Summary/Share -->
+        <div
+          id="order-summary"
+          class="text-content"
+          style="display: none; max-width: 800px; margin-top: 20px"
+        >
+          <h2 class="section-title" style="margin-bottom: 6px">
+            Order summary
+          </h2>
+          <div
+            id="summary-block"
+            style="
+              background: #fff;
+              border: 1px solid rgba(0, 0, 0, 0.08);
+              border-radius: 14px;
+              padding: 16px;
+              box-shadow: var(--shadow);
+            "
+          ></div>
+
+          <div
+            style="margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap"
+          >
+            <a
+              id="send-instagram"
+              class="btn btn-outline"
+              target="_blank"
+              rel="noopener"
+              >Send order on Instagram</a
+            >
+            <a id="send-email" class="btn btn-dark">Send order by email</a>
+            <button id="copy-order" class="btn btn-primary" type="button">
+              Copy order
+            </button>
+            <button id="edit-order" class="btn btn-outline" type="button">
+              Edit order
+            </button>
+          </div>
+
+          <div class="small" style="margin-top: 10px; color: var(--muted)">
+            If direct send doesn’t work, copy the order and DM
+            <b>@airliftstudios</b> on Instagram or email
+            <b>hello@airliftstudios.com</b>.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-bottom">
+        <small>© <span id="year"></span> Airlift Studios.</small>
+      </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script>
+      // Language list (same selection as biz_section.html; English included by default)
+      const LANG_LIST = [
+        { code: "en", name: "English", flag: "🇬🇧" },
+        { code: "fr", name: "French", flag: "🇫🇷", rec: true },
+        { code: "de", name: "German", flag: "🇩🇪", rec: true },
+        { code: "es", name: "Spanish", flag: "🇪🇸", rec: true },
+        { code: "ru", name: "Russian", flag: "🇷🇺", rec: true },
+        { code: "zh", name: "Chinese (Simplified)", flag: "🇨🇳", rec: true },
+        { code: "it", name: "Italian", flag: "🇮🇹", rec: true },
+        { code: "ar", name: "Arabic", flag: "🇸🇦" },
+        { code: "bn", name: "Bengali", flag: "🇧🇩" },
+        { code: "bg", name: "Bulgarian", flag: "🇧🇬" },
+        { code: "br", name: "Brazilian Portuguese", flag: "🇧🇷" },
+        { code: "cs", name: "Czech", flag: "🇨🇿" },
+        { code: "da", name: "Danish", flag: "🇩🇰" },
+        { code: "nl", name: "Dutch", flag: "🇳🇱" },
+        { code: "el", name: "Greek", flag: "🇬🇷" },
+        { code: "fa", name: "Persian", flag: "🇮🇷" },
+        { code: "fil", name: "Filipino", flag: "🇵🇭" },
+        { code: "fi", name: "Finnish", flag: "🇫🇮" },
+        { code: "hi", name: "Hindi", flag: "🇮🇳" },
+        { code: "hr", name: "Croatian", flag: "🇭🇷" },
+        { code: "hu", name: "Hungarian", flag: "🇭🇺" },
+        { code: "id", name: "Indonesian", flag: "🇮🇩" },
+        { code: "ja", name: "Japanese", flag: "🇯🇵" },
+        { code: "ko", name: "Korean", flag: "🇰🇷" },
+        { code: "ms", name: "Malay", flag: "🇲🇾" },
+        { code: "no", name: "Norwegian", flag: "🇳🇴" },
+        { code: "pl", name: "Polish", flag: "🇵🇱" },
+        { code: "pt", name: "Portuguese", flag: "🇵🇹" },
+        { code: "ro", name: "Romanian", flag: "🇷🇴" },
+        { code: "si", name: "Sinhala", flag: "🇱🇰" },
+        { code: "sl", name: "Slovenian", flag: "🇸🇮" },
+        { code: "sv", name: "Swedish", flag: "🇸🇪" },
+        { code: "th", name: "Thai", flag: "🇹🇭" },
+        { code: "tr", name: "Turkish", flag: "🇹🇷" },
+        { code: "uk", name: "Ukrainian", flag: "🇺🇦" },
+        { code: "ur", name: "Urdu", flag: "🇵🇰" },
+        { code: "vi", name: "Vietnamese", flag: "🇻🇳" },
+      ];
+
+      const langContainer = document.getElementById("languages");
+      // Render checkboxes excluding English
+      LANG_LIST.filter((l) => l.code !== "en").forEach((lang) => {
+        const id = `lang-${lang.code}`;
+        const wrapper = document.createElement("label");
+        wrapper.style.display = "flex";
+        wrapper.style.alignItems = "center";
+        wrapper.style.gap = "8px";
+        wrapper.innerHTML = `<input type="checkbox" id="${id}" value="${
+          lang.code
+        }" /> <span>${lang.flag} ${lang.name}${
+          lang.rec
+            ? ' <span class="small" style="color:#16a34a;">(recommended)</span>'
+            : ""
+        }</span>`;
+        langContainer.appendChild(wrapper);
+      });
+
+      // Prefill support via query parameters
+      (function prefillFromQuery() {
+        const params = new URLSearchParams(location.search);
+        const setVal = (id, keys) => {
+          let v = null;
+          for (const k of keys) {
+            if (params.has(k)) {
+              v = params.get(k);
+              break;
+            }
+          }
+          if (v !== null) {
+            const el = document.getElementById(id);
+            if (el) el.value = v;
+          }
+        };
+        setVal("name", ["name", "n"]);
+        setVal("airbnbUrl", ["airbnb", "airbnbUrl", "listing", "url"]);
+        setVal("domain", ["domain", "d"]);
+        setVal("whatsapp", ["whatsapp", "wa", "phone"]);
+        setVal("instagram", ["instagram", "ig"]);
+        const langs = new Set();
+        if (params.has("languages")) {
+          params
+            .get("languages")
+            .split(",")
+            .forEach((c) => {
+              const t = c.trim().toLowerCase();
+              if (t) langs.add(t);
+            });
+        }
+        const multi = params.getAll("lang");
+        multi.forEach((c) => {
+          const t = c.trim().toLowerCase();
+          if (t) langs.add(t);
+        });
+        langs.forEach((code) => {
+          const cb = document.querySelector(
+            `#languages input[value="${code}"]`
+          );
+          if (cb) cb.checked = true;
+        });
+      })();
+
+      const form = document.getElementById("order-form");
+      const errorEl = document.getElementById("form-error");
+      const summaryWrap = document.getElementById("order-summary");
+      const summaryBlock = document.getElementById("summary-block");
+
+      function isValidDomain(domain) {
+        return /^[a-z0-9-]+\.[a-z]{2,}$/i.test(domain.trim());
+      }
+      function isValidAirbnb(url) {
+        try {
+          const u = new URL(url);
+          return /airbnb\.\w+/.test(u.hostname) && /\/rooms\//.test(u.pathname);
+        } catch {
+          return false;
+        }
+      }
+
+      function buildOrderText(values) {
+        const languages = ["English"].concat(
+          values.languages
+            .map((c) => LANG_LIST.find((l) => l.code === c)?.name)
+            .filter(Boolean)
+        );
+        return [
+          `New demo order`,
+          `Name: ${values.name}`,
+          `Airbnb: ${values.airbnbUrl}`,
+          `Desired domain: ${values.domain}`,
+          `Languages: ${languages.join(", ")}`,
+          values.whatsapp ? `WhatsApp (footer): ${values.whatsapp}` : null,
+          values.instagram ? `Instagram (footer): ${values.instagram}` : null,
+        ]
+          .filter(Boolean)
+          .join("\n");
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const values = {
+          name: document.getElementById("name").value.trim(),
+          airbnbUrl: document.getElementById("airbnbUrl").value.trim(),
+          domain: document.getElementById("domain").value.trim(),
+          languages: Array.from(
+            langContainer.querySelectorAll('input[type="checkbox"]:checked')
+          ).map((i) => i.value),
+          whatsapp: document.getElementById("whatsapp").value.trim(),
+          instagram: document.getElementById("instagram").value.trim(),
+        };
+
+        const valid =
+          values.name &&
+          isValidAirbnb(values.airbnbUrl) &&
+          isValidDomain(values.domain);
+        if (!valid) {
+          errorEl.style.display = "inline";
+          return;
+        }
+        errorEl.style.display = "none";
+
+        // Build summary
+        const languages = ["English"].concat(
+          values.languages
+            .map((c) => LANG_LIST.find((l) => l.code === c)?.name)
+            .filter(Boolean)
+        );
+        summaryBlock.innerHTML = `
+          <div style="display:grid; gap:8px;">
+            <div><b>Name</b><br/>${values.name}</div>
+            <div><b>Airbnb</b><br/><a href="${
+              values.airbnbUrl
+            }" target="_blank" rel="noopener">${values.airbnbUrl}</a></div>
+            <div><b>Desired domain</b><br/>${values.domain}</div>
+            <div><b>Languages</b><br/>${languages.join(", ")}</div>
+            ${
+              values.whatsapp
+                ? `<div><b>WhatsApp (footer)</b><br/>${values.whatsapp}</div>`
+                : ""
+            }
+            ${
+              values.instagram
+                ? `<div><b>Instagram (footer)</b><br/>${values.instagram}</div>`
+                : ""
+            }
+          </div>
+        `;
+
+        // Build links
+        const orderText = buildOrderText(values);
+        const encoded = encodeURIComponent(orderText);
+        const subject = encodeURIComponent(`New demo order - ${values.domain}`);
+
+        // Instagram: deep link + profile fallback (no reliable prefill on web)
+        const igUser = "airliftstudios";
+        const igDeep = `instagram://user?username=${igUser}`;
+        const igProfile = `https://www.instagram.com/${igUser}/`;
+        const igBtn = document.getElementById("send-instagram");
+        igBtn.href = igProfile;
+        igBtn.addEventListener("click", () => {
+          try {
+            navigator.clipboard.writeText(orderText);
+          } catch {}
+        });
+        igBtn.title = "We'll copy your order so you can paste it in DM";
+
+        // Email
+        const mail = `mailto:hello@airliftstudios.com?subject=${subject}&body=${encoded}`;
+        const mailBtn = document.getElementById("send-email");
+        mailBtn.href = mail;
+        mailBtn.setAttribute("target", "_blank");
+        mailBtn.setAttribute("rel", "noopener");
+
+        // Copy
+        const copyBtn = document.getElementById("copy-order");
+        copyBtn.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(orderText);
+            copyBtn.textContent = "Copied!";
+            setTimeout(() => (copyBtn.textContent = "Copy order"), 1500);
+          } catch {}
+        });
+
+        // Show summary view
+        form.style.display = "none";
+        summaryWrap.style.display = "";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        // Hook edit button to go back
+        const editBtn = document.getElementById("edit-order");
+        if (editBtn) {
+          editBtn.onclick = () => {
+            summaryWrap.style.display = "none";
+            form.style.display = "";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          };
+        }
+      });
+    </script>
+  </body>
+</html>
