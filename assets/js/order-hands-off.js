@@ -93,7 +93,6 @@ function renderSummaryReceipt(values) {
     }
   }
 }
-//file:///Users/emilmannfeldt/dev/workspace/other/airliftstudio/order_hands_off.html?name=Jane%20Doe&demo_url=https%3A%2F%2Fwww.airliftstudios.com%2Fdemo%2Fmy-airbnb&domain=myvilla.com&email=hello&forward_to=host%40gmail.com&languages=fr,de&years=3
 const form = document.getElementById("order-form");
 const summaryWrap = document.getElementById("order-summary");
 const summaryBlock = document.getElementById("summary-block");
