@@ -1,5 +1,10 @@
 # _redirects for subdirectory language handling
 
+# Order form redirects
+/order-hands-on /order_hands_on.html 200
+/order-hands-off /order_hands_off.html 200
+/order-demo /order_demo.html 200
+
 # templates/v1 redirects
 /templates/v1/* /templates/v1/index.html 200
 /templates/v1/sv/* /templates/v1/:splat 200

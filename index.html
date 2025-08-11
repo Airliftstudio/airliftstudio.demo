@@ -220,7 +220,9 @@
             property and drives more bookings.
           </p>
           <div class="hero-cta">
-            <a href="order_demo.html" class="btn btn-primary"
+            <a
+              href="https://airliftstudios.com/order-demo"
+              class="btn btn-primary"
               >Get Your Free Demo</a
             >
             <a href="#showcase" class="btn btn-outline">View Showcase</a>
@@ -1549,127 +1551,6 @@
             updateCalc("hands-on");
             updateCalc("hands-off");
 
-            // --- DYNAMIC GOOGLE FORM PREFILL FOR HANDS-OFF PACKAGE ---
-            function getSuggestedDomainAndEmail() {
-              // Get the folder name that contains the HTML file
-              let path = window.location.pathname;
-              // Remove trailing slash if present
-              if (path.endsWith("/")) path = path.slice(0, -1);
-              // Split path into segments
-              const segments = path.split("/").filter(Boolean);
-              // If the last segment ends with .html, get the second-to-last segment (the folder)
-              // Otherwise, get the last segment
-              let folder;
-              if (segments[segments.length - 1].match(/\.html$/)) {
-                folder = segments[segments.length - 2] || "property";
-              } else {
-                folder = segments[segments.length - 1] || "property";
-              }
-              // Remove hyphens for domain
-              const domain = folder.replace(/-/g, "") + ".com";
-              const email = "hello@" + folder.replace(/-/g, "") + ".com";
-              return { domain, email };
-            }
-
-            https: function buildHandsOffOrderLink() {
-              const { domain, email } = getSuggestedDomainAndEmail();
-              const baseUrl =
-                "https://docs.google.com/forms/d/e/1FAIpQLSfWusXrgWVjZqmh6xep6ENTqfCUcA6VMJQbhVugNH4e5eMPdg/viewform?usp=pp_url";
-              const params = new URLSearchParams();
-              // Extract Airbnb link from the "Check Availability" button
-              const airbnbBtn = document.querySelector(
-                '.cta-button[href*="airbnb.com/rooms/"]'
-              );
-              if (airbnbBtn) {
-                let airbnblink = airbnbBtn.getAttribute("href");
-                params.append("entry.402381781", airbnblink);
-              }
-              //TODO could add these if they are not commended out in footer..?
-              // params.append("entry.875430132", whatsapp);
-              // params.append("entry.1944542596", instagram);
-
-              params.append("entry.2022870313", domain);
-              params.append("entry.1556942181", email);
-
-              // Always include English first
-              params.append("entry.616393419", "English");
-              if (langHandsOff && langHandsOff.length) {
-                langHandsOff.forEach((code) => {
-                  if (code === "en") return;
-                  const lang = langList.find((l) => l.code === code);
-                  if (lang) params.append("entry.616393419", lang.name);
-                });
-              }
-              if (years > 1) {
-                params.append(
-                  "entry.350908315",
-                  `${years} year${years > 1 ? "s" : ""}`
-                );
-              } else {
-                params.append("entry.350908315", `1 year (Included)`);
-              }
-              return `${baseUrl}&${params.toString()}`;
-            }
-
-            // Update order button href on click
-            const orderBtnOff = document.getElementById(
-              "biz-calc-order-hands-off"
-            );
-            if (orderBtnOff) {
-              orderBtnOff.addEventListener("click", function (e) {
-                this.href = buildHandsOffOrderLink();
-              });
-            }
-
-            https: function buildHandsOnOrderLink() {
-              const baseUrl =
-                "https://docs.google.com/forms/d/e/1FAIpQLSc8XyIa2VmeYcSMExqGhtpUHvwoIPvx8nO4so8cQY65qsE8LQ/viewform?usp=pp_url";
-              const params = new URLSearchParams();
-              // Extract Airbnb link from the "Check Availability" button
-              const airbnbBtn = document.querySelector(
-                '.cta-button[href*="airbnb.com/rooms/"]'
-              );
-              if (airbnbBtn) {
-                let airbnblink = airbnbBtn.getAttribute("href");
-                params.append("entry.402381781", airbnblink);
-              }
-
-              // Always include English first
-              params.append("entry.616393419", "English");
-              if (langHandsOff && langHandsOff.length) {
-                langHandsOff.forEach((code) => {
-                  if (code === "en") return;
-                  const lang = langList.find((l) => l.code === code);
-                  if (lang) params.append("entry.616393419", lang.name);
-                });
-              }
-              return `${baseUrl}&${params.toString()}`;
-            }
-
-            // Update order button href on click
-            const orderBtnOn = document.getElementById(
-              "biz-calc-order-hands-on"
-            );
-            if (orderBtnOn) {
-              orderBtnOn.addEventListener("click", function (e) {
-                this.href = buildHandsOnOrderLink();
-              });
-            }
-
-            // Update suggested domain and email in the features list
-            function updateSuggestedDomainAndEmail() {
-              const { domain, email } = getSuggestedDomainAndEmail();
-              const domainSpan = document.getElementById("suggested-domain");
-              const emailSpan = document.getElementById("suggested-email");
-
-              if (domainSpan) {
-                domainSpan.innerHTML = `Custom domain name registration<br><span style="font-size: 0.9em; color: #666;">(example: ${domain})</span>`;
-              }
-              if (emailSpan) {
-                emailSpan.innerHTML = `Professional email forwarding<br><span style="font-size: 0.9em; color: #666;">(example: ${email})</span>`;
-              }
-            }
-
             // Call this function when the page loads
             document.addEventListener(
               "DOMContentLoaded",
@@ -1680,7 +1561,7 @@
         <div class="container" style="margin-top: 24px">
           <div class="text-content" style="text-align: center">
             <a
-              href="order_demo.html"
+              href="https://airliftstudios.com/order-demo"
               class="btn btn-dark"
               style="padding: 14px 22px"
             >
