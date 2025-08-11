@@ -719,6 +719,19 @@
             </div>
           </div>
         </div>
+        <div class="container" style="margin-top: 24px">
+          <div class="text-content" style="text-align: center">
+            <a
+              href="https://airliftstudios.com/order-demo"
+              class="btn btn-dark"
+              target="_blank"
+              id="biz-calc-order-demo"
+              style="padding: 14px 22px"
+            >
+              Get Your Free Demo
+            </a>
+          </div>
+        </div>
 
         <style>
           * {
@@ -1551,24 +1564,48 @@
             updateCalc("hands-on");
             updateCalc("hands-off");
 
-            // Call this function when the page loads
-            document.addEventListener(
-              "DOMContentLoaded",
-              updateSuggestedDomainAndEmail
-            );
+            // Function to build demo order link with languages
+            function buildDemoOrderLink() {
+              const baseUrl = "https://airliftstudios.com/order-demo";
+              const params = new URLSearchParams();
+              // Combine languages from both hands-on and hands-off selections
+              const allLanguages = new Set(["en"]); // Always include English
+
+              // Add languages from hands-on selection
+              if (langHandsOn && langHandsOn.length) {
+                langHandsOn.forEach((code) => {
+                  if (code !== "en") allLanguages.add(code);
+                });
+              }
+
+              // Add languages from hands-off selection
+              if (langHandsOff && langHandsOff.length) {
+                langHandsOff.forEach((code) => {
+                  if (code !== "en") allLanguages.add(code);
+                });
+              }
+
+              // Convert to array and join
+              const languagesArray = Array.from(allLanguages);
+              if (languagesArray.length > 0) {
+                const langString = languagesArray.join(",");
+                params.append("languages", langString);
+              }
+
+              return `${baseUrl}?${params.toString()}`;
+            }
+
+            // Update demo button href on click
+            const demoBtn = document.getElementById("biz-calc-order-demo");
+            if (demoBtn) {
+              demoBtn.addEventListener("click", function (e) {
+                console.log("demoBtn clicked");
+                this.href = buildDemoOrderLink();
+                console.log(buildDemoOrderLink());
+              });
+            }
           })();
         </script>
-        <div class="container" style="margin-top: 24px">
-          <div class="text-content" style="text-align: center">
-            <a
-              href="https://airliftstudios.com/order-demo"
-              class="btn btn-dark"
-              style="padding: 14px 22px"
-            >
-              Get Your Free Demo
-            </a>
-          </div>
-        </div>
       </div>
     </section>
 
