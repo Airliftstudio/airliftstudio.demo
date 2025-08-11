@@ -168,7 +168,7 @@ form.addEventListener("submit", (e) => {
       <div><b>Name</b><br/>${values.name}</div>
       <div><b>Airbnb</b><br/><a href="${
         values.airbnbUrl
-      }" target="_blank" rel="noopener">${values.airbnbUrl}</a></div>
+      }" target="_blank" rel="noopener">Link</a></div>
       <div><b>Desired domain</b><br/>${values.domain}</div>
       <div><b>Languages</b><br/>${languages.join(", ")}</div>
       ${
@@ -181,7 +181,6 @@ form.addEventListener("submit", (e) => {
           ? `<div><b>Instagram</b><br/>${values.instagram}</div>`
           : ""
       }
-        <div><b>Languages</b><br/>${languages.join(", ")}
          <span class="summary-action-buttons">
           <button id="copy-order" class="btn btn-primary" type="button">Copy order</button>
           <button id="edit-order" class="btn btn-outline" type="button">Edit order</button>

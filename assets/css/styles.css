@@ -1156,6 +1156,13 @@ img {
 .biz-section {
   background: none !important;
 }
+.biz-discount-banner {
+  background: #fefcf2 !important;
+  color: #191919 !important;
+}
+.biz-discount-banner b {
+  color: #c4a47c !important;
+}
 
 /* Extra small screens */
 @media (max-width: 480px) {
