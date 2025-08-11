@@ -30,22 +30,41 @@ if (window.gsap) {
   gsap.registerPlugin(ScrollTrigger);
 
   // Section animations
-  gsap.utils.toArray(".text-content, .image-content").forEach((section) => {
-    gsap.from(section, {
-      duration: 0.9,
-      y: 40,
-      opacity: 0,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: section,
-        start: "top 85%",
-        end: "bottom 25%",
-        toggleActions: "play none none reverse",
-      },
+  gsap.utils
+    .toArray(".text-content, .image-content, .journey-step")
+    .forEach((section) => {
+      gsap.from(section, {
+        duration: 0.9,
+        y: 40,
+        opacity: 0,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 85%",
+          end: "bottom 25%",
+          toggleActions: "play none none reverse",
+        },
+      });
     });
-  });
 }
 
 // Dynamic year in footer
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+// FAQ functionality - CSS-only approach using native details/summary
+document.addEventListener("DOMContentLoaded", () => {
+  // Listen for toggle events on details elements
+  document.querySelectorAll(".faq-item").forEach((faqItem) => {
+    faqItem.addEventListener("toggle", () => {
+      const icon = faqItem.querySelector(".faq-icon");
+      if (icon) {
+        if (faqItem.hasAttribute("open")) {
+          icon.className = "fa-solid fa-minus faq-icon";
+        } else {
+          icon.className = "fa-solid fa-plus faq-icon";
+        }
+      }
+    });
+  });
+});
