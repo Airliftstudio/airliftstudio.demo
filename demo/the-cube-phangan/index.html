@@ -827,7 +827,6 @@
         </div>
       </div>
     </section>
-
     <section id="business-offering" class="biz-section">
       <div class="biz-container">
         <h2 class="biz-heading">Want This Website for Your Property?</h2>
@@ -843,7 +842,7 @@
           <div class="biz-discount-banner">
             <span class="biz-discount-text"
               >We are just starting and are offering <b>50% off</b> to our first
-              100 customers!</span
+              20 customers!</span
             >
           </div>
         </div>
@@ -932,7 +931,6 @@
             </div>
             <a
               id="biz-calc-order-hands-on"
-              href="https://forms.gle/hands-on-form"
               target="_blank"
               class="biz-order-btn"
               >Get Hands-On</a
@@ -1023,8 +1021,9 @@
                     secure your domain name and hosting to ensure your website
                     stays online for the selected period. After the selected
                     period ends you will lose ownership of your domain name
-                    unless extended beforehand by yourself. Our trusted service
-                    provider partner is
+                    unless extended beforehand by yourself. Note that the cost
+                    your domain name can be more expensive to extend later. Our
+                    trusted service provider partner is
                     <b>Cloudflare</b>.
                   </span>
                 </span> </label
@@ -1108,7 +1107,6 @@
             </div>
             <a
               id="biz-calc-order-hands-off"
-              href="https://forms.gle/hands-off-form"
               target="_blank"
               class="biz-order-btn"
               >Get Hands-Off</a
@@ -1128,7 +1126,7 @@
           }
           .biz-section {
             background: linear-gradient(135deg, #f8f9fa 60%, #e6f0e6 100%);
-            padding: 64px 0 48px 0;
+            padding: 64px 0 64px 0;
             line-height: 1.4;
             overflow-x: hidden;
             background: #eafff8;
@@ -1526,6 +1524,7 @@
             margin-top: 1em;
             margin-bottom: 0.2em;
             text-align: center;
+            cursor: pointer;
           }
           .biz-order-btn:hover {
             background: #3a5d47;
@@ -2003,7 +2002,7 @@
                 document.getElementById(
                   "biz-calc-monthly-hands-off"
                 ).textContent =
-                  total > 0
+                  years > 1
                     ? `Works out at only $${(total / (years * 12)).toFixed(
                         2
                       )}/month`
@@ -2036,41 +2035,67 @@
               return { domain, email };
             }
 
-            https: function buildHandsOffOrderLink() {
-              const { domain, email } = getSuggestedDomainAndEmail();
-              const baseUrl =
-                "https://docs.google.com/forms/d/e/1FAIpQLScYr-lpokldmKQn1lcZ7GwsMUWzfqndJ41-QD7yiuzPEzsVuA/viewform?usp=pp_url";
+            function buildHandsOffOrderLink() {
+              const baseUrl = "order_hands_off.html";
               const params = new URLSearchParams();
-              // Extract Airbnb link from the "Check Availability" button
-              const airbnbBtn = document.querySelector(
-                '.cta-button[href*="airbnb.com/rooms/"]'
-              );
-              if (airbnbBtn) {
-                let airbnblink = airbnbBtn.getAttribute("href");
-                params.append("entry.402381781", airbnblink);
-              }
 
-              params.append("entry.2022870313", domain);
-              params.append("entry.1556942181", email);
+              // Extract demo path from current URL
+              const demoPath =
+                window.location.pathname.split("/demo/")[1] || "";
+              params.append("demo_url", demoPath);
 
-              // Always include English first
-              params.append("entry.616393419", "English");
+              // Get suggested domain
+              const { domain } = getSuggestedDomainAndEmail();
+              params.append("domain", domain);
+
+              // Languages: always include English first, then others
+              let languages = ["en"];
               if (langHandsOff && langHandsOff.length) {
                 langHandsOff.forEach((code) => {
-                  if (code === "en") return;
-                  const lang = langList.find((l) => l.code === code);
-                  if (lang) params.append("entry.616393419", lang.name);
+                  if (code !== "en") languages.push(code.toString());
                 });
               }
-              if (years > 1) {
-                params.append(
-                  "entry.350908315",
-                  `${years} year${years > 1 ? "s" : ""}`
-                );
-              } else {
-                params.append("entry.350908315", `1 year (Included)`);
+              if (languages.length > 0) {
+                const langString = languages.join(",");
+                params.append("languages", langString);
               }
-              return `${baseUrl}&${params.toString()}`;
+
+              // Extract WhatsApp and Instagram from footer links if available
+              // Look for WhatsApp link in the footer
+              const waFooterLink = document.querySelector(
+                'footer a[href*="wa.me"]'
+              );
+              if (waFooterLink) {
+                const waUrl = waFooterLink.getAttribute("href");
+                // Extract just the phone number from the wa.me URL
+                const waMatch = waUrl.match(/wa\.me\/(\d+)/);
+                // Exclude the default placeholder number
+                if (waMatch && waMatch[1] && waMatch[1] !== "6281234567890") {
+                  params.append("wa", waMatch[1]);
+                }
+              }
+
+              // Look for Instagram link in the footer
+              const igFooterLink = document.querySelector(
+                'footer a[href*="instagram.com"]'
+              );
+              if (igFooterLink) {
+                const igUrl = igFooterLink.getAttribute("href");
+                // Extract just the username from the Instagram URL
+                const igMatch = igUrl.match(/instagram\.com\/([^/?#]+)/i);
+                if (
+                  igMatch &&
+                  igMatch[1] &&
+                  igMatch[1].toLowerCase() !== "example"
+                ) {
+                  params.append("ig", igMatch[1]);
+                }
+              }
+
+              // Add years parameter
+              params.append("years", years.toString());
+
+              return `${baseUrl}?${params.toString()}`;
             }
 
             // Update order button href on click
@@ -2080,6 +2105,81 @@
             if (orderBtnOff) {
               orderBtnOff.addEventListener("click", function (e) {
                 this.href = buildHandsOffOrderLink();
+              });
+            }
+
+            function buildHandsOnOrderLink() {
+              const baseUrl = "http://airliftstudios.com/order-hands-on";
+              const params = new URLSearchParams();
+
+              // Extract Airbnb link from the "Check Availability" button
+              const airbnbBtn = document.querySelector(
+                '.cta-button[href*="airbnb.com/rooms/"]'
+              );
+              // Only append the part after /demo/ of the current url
+              const demoPath =
+                window.location.pathname.split("/demo/")[1] || "";
+              if (demoPath) {
+                params.append("demo_url", demoPath);
+              }
+
+              // Extract WhatsApp and Instagram from footer links if available
+              let waUrl = "";
+              let igUrl = "";
+
+              // Look for WhatsApp link in the footer
+              const waFooterLink = document.querySelector(
+                'footer a[href*="wa.me"]'
+              );
+              if (waFooterLink) {
+                waUrl = waFooterLink.getAttribute("href");
+                // Extract just the phone number from the wa.me URL
+                const waMatch = waUrl.match(/wa\.me\/(\d+)/);
+                // Exclude the default placeholder number
+                if (waMatch && waMatch[1] && waMatch[1] !== "6281234567890") {
+                  params.append("wa", waMatch[1]);
+                }
+              }
+
+              // Look for Instagram link in the footer
+              const igFooterLink = document.querySelector(
+                'footer a[href*="instagram.com"]'
+              );
+              if (igFooterLink) {
+                igUrl = igFooterLink.getAttribute("href");
+                // Extract just the username from the Instagram URL
+                const igMatch = igUrl.match(/instagram\.com\/([^/?#]+)/i);
+                if (
+                  igMatch &&
+                  igMatch[1] &&
+                  igMatch[1].toLowerCase() !== "example"
+                ) {
+                  params.append("ig", igMatch[1]);
+                }
+              }
+
+              // Languages: always include English first, then others
+              let languages = ["en"];
+              if (langHandsOn && langHandsOn.length) {
+                langHandsOn.forEach((code) => {
+                  if (code !== "en") languages.push(code.toString());
+                });
+              }
+              if (languages.length > 0) {
+                const langString = languages.join(",");
+                params.append("languages", langString);
+              }
+
+              return `${baseUrl}?${params.toString()}&lang=as,ff,fa`;
+            }
+
+            // Update order button href on click
+            const orderBtnOn = document.getElementById(
+              "biz-calc-order-hands-on"
+            );
+            if (orderBtnOn) {
+              orderBtnOn.addEventListener("click", function (e) {
+                this.href = buildHandsOnOrderLink();
               });
             }
 

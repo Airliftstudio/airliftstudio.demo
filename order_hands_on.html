@@ -3,16 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Get Your Free Demo | Airlift Studios</title>
+    <title>Order Hands‑On Package | Airlift Studios</title>
     <meta
       name="description"
-      content="Request your free demo website. Provide your Airbnb listing, desired domain, languages, and optional public contact info."
+      content="Order the Hands‑On package: we build your site, you handle the rest."
     />
 
     <link rel="stylesheet" href="assets/css/fonts-local.css" />
     <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/order.css" />
+    <style>
+      /* Tooltip behavior */
+      .biz-info-icon {
+        position: relative;
+        cursor: pointer;
+      }
+      .biz-info-icon .biz-tooltip {
+        display: none;
+        position: absolute;
+        top: 120%;
+        background: #fff;
+        color: #000;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        padding: 12px 14px;
+        font-size: 0.9rem;
+        max-width: 320px;
+        min-width: 280px;
+        z-index: 20;
+        font-weight: normal;
+      }
+      .biz-info-icon:hover .biz-tooltip,
+      .biz-info-icon:focus .biz-tooltip,
+      .biz-info-icon:focus-within .biz-tooltip,
+      .biz-info-icon[aria-expanded="true"] .biz-tooltip {
+        display: block;
+      }
+
+      /* Mobile: make language selector single column */
+      @media (max-width: 680px) {
+        #languages {
+          grid-template-columns: 1fr !important;
+        }
+      }
+    </style>
   </head>
   <body>
     <header class="navbar" id="home">
@@ -39,10 +75,10 @@
 
     <section class="section" aria-labelledby="order-title">
       <div class="container">
-        <h1 id="order-title" class="section-title">Get Your Free Demo</h1>
+        <h1 id="order-title" class="section-title">Order Hands‑On Package</h1>
         <p class="section-lead">
-          Fill out the form below. We’ll build a no‑commitment demo to preview
-          your site.
+          We'll build your website, you handle domain, hosting, and email setup.
+          Fill out the form to get started.
         </p>
 
         <!-- Step 1: Form -->
@@ -56,41 +92,42 @@
               </div>
             </label>
             <label>
-              <span>Your Airbnb listing URL *</span>
+              <span>Demo Link *</span>
               <input
-                id="airbnbUrl"
+                id="demoUrl"
                 type="url"
                 required
-                placeholder="https://www.airbnb.com/rooms/12345678"
+                placeholder="https://www.airliftstudios.com/demo/my-airbnb"
               />
-              <div id="airbnbUrl-error" class="field-error">
-                Please enter a valid Airbnb listing URL.
-              </div>
-            </label>
-            <label>
-              <span>Desired domain name</span>
-              <div class="small">
-                If you do not have one in mind we will suggest one for you.
-              </div>
-              <input
-                id="domain"
-                type="text"
-                required
-                placeholder="yourvillabali.com"
-              />
-              <div id="domain-error" class="field-error">
-                Please enter a valid domain name (e.g., yourvillabali.com).
+              <div id="demoUrl-error" class="field-error">
+                Please enter a valid demo URL from airliftstudios.com.
               </div>
             </label>
 
             <div class="languages-section">
-              <div class="languages-title">Languages</div>
+              <div class="languages-title">
+                Languages
+                <span
+                  class="biz-info-icon"
+                  aria-label="More info about language translations"
+                  role="button"
+                  tabindex="0"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-info-circle"></i>
+                  <span class="biz-tooltip" role="tooltip">
+                    This service not only includes the translation of the
+                    website, but also custom SEO for each language. Meaning that
+                    people searching in their own language will have a higher
+                    chance of find your website. This is a great way to expand
+                    your reach and attract more guests from different countries.
+                  </span>
+                </span>
+              </div>
               <div class="languages-description small">
                 English is included by default. Select additional languages:
               </div>
-              <div id="languages" class="languages-grid">
-                <!-- populated by JS -->
-              </div>
+              <div id="languages" class="languages-grid"></div>
             </div>
 
             <div class="contact-info-section">
@@ -128,6 +165,39 @@
         <div id="order-summary" class="order-summary text-content">
           <h2 class="order-summary-title section-title">Order summary</h2>
           <div id="summary-block" class="summary-block"></div>
+          <div
+            id="summary-receipt"
+            style="
+              margin-top: 12px;
+              background: #fff;
+              border: 1px dashed rgba(0, 0, 0, 0.12);
+              border-radius: 10px;
+              padding: 12px;
+            "
+          >
+            <div style="font-weight: 700; margin-bottom: 6px">Receipt</div>
+            <div
+              id="summary-receipt-lines"
+              style="display: grid; gap: 6px"
+            ></div>
+            <div
+              style="
+                border-top: 1px solid rgba(0, 0, 0, 0.12);
+                margin-top: 8px;
+                display: flex;
+                justify-content: space-between;
+                font-weight: 800;
+              "
+            >
+              <span>Total one-time payment</span
+              ><span id="summary-receipt-total">$0.00</span>
+            </div>
+            <div
+              id="summary-monthly"
+              class="small"
+              style="margin-top: 6px; color: var(--muted)"
+            ></div>
+          </div>
 
           <div class="summary-actions">
             <a
@@ -141,7 +211,7 @@
           </div>
 
           <div class="summary-fallback small">
-            If direct send doesn’t work, copy the order and DM
+            If direct send doesn't work, copy the order and DM
             <a
               href="https://www.instagram.com/airliftstudios/"
               target="_blank"
@@ -163,6 +233,6 @@
 
     <script src="assets/js/script.js"></script>
     <script src="assets/js/order.js"></script>
-    <script src="assets/js/order_demo.js"></script>
+    <script src="assets/js/order_hands_on.js"></script>
   </body>
 </html>
