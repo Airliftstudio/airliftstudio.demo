@@ -85,13 +85,6 @@ function updateStructuredData(lang) {
     existingData.address.addressCountry =
       langData.structuredData.addressCountry;
     existingData.keywords = langData.structuredData.keywords;
-    existingData.amenityFeature = langData.structuredData.amenityNames.map(
-      (name) => ({
-        "@type": "LocationFeatureSpecification",
-        name: name,
-        value: true,
-      })
-    );
 
     // Update URL to match language
     let baseUrl = existingData.url.replace(/\/[a-z]{2}\/?$/, "");

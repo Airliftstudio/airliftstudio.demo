@@ -1,6 +1,5 @@
 # _redirects for subdirectory language handling
 
-
 # templates/v1 redirects
 /templates/v1/* /templates/v1/index.html 200
 /templates/v1/sv/* /templates/v1/:splat 200
@@ -14,8 +13,6 @@
 /demo/aruna-escape-ubud/* /demo/aruna-escape-ubud/:splat 200
 /demo/aruna-escape-ubud/:lang/* /demo/aruna-escape-ubud/:splat 200
 /demo/aruna-escape-ubud/:lang/ /demo/aruna-escape-ubud/index.html 200
-
-
 
 # demo/aruna-escape-ubud redirects
 /demo/aruna-escape-ubud/* /demo/aruna-escape-ubud/index.html 200
@@ -94,3 +91,44 @@
 /demo/tiny-villa-phuket/ur/* /demo/tiny-villa-phuket/:splat 200
 /demo/tiny-villa-phuket/fa/* /demo/tiny-villa-phuket/:splat 200
 /demo/tiny-villa-phuket/sv/* /demo/tiny-villa-phuket/:splat 200
+
+# demo/villa-luv-balian redirects
+/demo/villa-luv-balian/* /demo/villa-luv-balian/index.html 200
+/demo/villa-luv-balian/en/* /demo/villa-luv-balian/:splat 200
+/demo/villa-luv-balian/fr/* /demo/villa-luv-balian/:splat 200
+/demo/villa-luv-balian/de/* /demo/villa-luv-balian/:splat 200
+/demo/villa-luv-balian/es/* /demo/villa-luv-balian/:splat 200
+/demo/villa-luv-balian/ru/* /demo/villa-luv-balian/:splat 200
+/demo/villa-luv-balian/zh/* /demo/villa-luv-balian/:splat 200
+/demo/villa-luv-balian/it/* /demo/villa-luv-balian/:splat 200
+/demo/villa-luv-balian/hi/* /demo/villa-luv-balian/:splat 200
+/demo/villa-luv-balian/id/* /demo/villa-luv-balian/:splat 200
+/demo/villa-luv-balian/ja/* /demo/villa-luv-balian/:splat 200
+/demo/villa-luv-balian/ko/* /demo/villa-luv-balian/:splat 200
+
+# demo/prime-perarenan-villa redirects
+/demo/prime-perarenan-villa/* /demo/prime-perarenan-villa/index.html 200
+/demo/prime-perarenan-villa/en/* /demo/prime-perarenan-villa/:splat 200
+/demo/prime-perarenan-villa/fr/* /demo/prime-perarenan-villa/:splat 200
+/demo/prime-perarenan-villa/de/* /demo/prime-perarenan-villa/:splat 200
+/demo/prime-perarenan-villa/es/* /demo/prime-perarenan-villa/:splat 200
+
+# demo/villatestbalisupervilla redirects
+/demo/villatestbalisupervilla/* /demo/villatestbalisupervilla/index.html 200
+/demo/villatestbalisupervilla/en/* /demo/villatestbalisupervilla/:splat 200
+/demo/villatestbalisupervilla/fr/* /demo/villatestbalisupervilla/:splat 200
+/demo/villatestbalisupervilla/sv/* /demo/villatestbalisupervilla/:splat 200
+
+# demo/villa-zori redirects
+/demo/villa-zori/* /demo/villa-zori/index.html 200
+/demo/villa-zori/en/* /demo/villa-zori/:splat 200
+/demo/villa-zori/fr/* /demo/villa-zori/:splat 200
+/demo/villa-zori/de/* /demo/villa-zori/:splat 200
+/demo/villa-zori/es/* /demo/villa-zori/:splat 200
+/demo/villa-zori/ru/* /demo/villa-zori/:splat 200
+/demo/villa-zori/zh/* /demo/villa-zori/:splat 200
+/demo/villa-zori/it/* /demo/villa-zori/:splat 200
+/demo/villa-zori/hi/* /demo/villa-zori/:splat 200
+/demo/villa-zori/id/* /demo/villa-zori/:splat 200
+/demo/villa-zori/ja/* /demo/villa-zori/:splat 200
+/demo/villa-zori/ko/* /demo/villa-zori/:splat 200

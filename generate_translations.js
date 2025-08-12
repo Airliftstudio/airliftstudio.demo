@@ -548,16 +548,6 @@ function generateTranslations(projectPath, languageCodes = []) {
       if (structuredDataObj.keywords) {
         structuredData.keywords = structuredDataObj.keywords;
       }
-
-      // Extract amenity names from amenityFeature array
-      if (
-        structuredDataObj.amenityFeature &&
-        Array.isArray(structuredDataObj.amenityFeature)
-      ) {
-        structuredData.amenityNames = structuredDataObj.amenityFeature.map(
-          (feature) => feature.name
-        );
-      }
     } catch (e) {
       console.warn("Could not parse structured data JSON:", e.message);
     }

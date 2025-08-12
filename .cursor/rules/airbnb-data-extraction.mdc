@@ -9,38 +9,23 @@ alwaysApply: true
 Extract comprehensive information from Airbnb listings and organise project file structure.
 
 ## Extract data
-- Run the following command with the provided Airbnb url:
+- Run the following command with the provided Airbnb url and wait until it is finished:
 node start.js all [AIRBNB_URL] [COMMA_SEPERATED_LANGUAGE_CODES]
 - The [COMMA_SEPERATED_LANGUAGE_CODES] parameter should only be included if the user requested for the website to be translated. 
-- This script will extract all the necessary information from the Airbnb listing that we will use later when creating the website.
+- This script will extract all the necessary information from the Airbnb listing and setup our project structure that we will use later when creating the website.
 
 ## File structure
 - When the script finishes there will be a new folder named after the ID for the Airbnb listing.
-- This folder is our project folder and it contains the following structure
+- This folder is our [PROJECT_DIR] and it contains the following structure
 ```
 Airbnb-id/
 ├── index.html          # Main website file that contains another example Airbnb listing
-├── images/             # Folder to store downloaded images
+├── images/             # Folder to store images
 ├── css/             	# Folder containing style files
 ├── js/             	# Folder containing javascript files
 ├── webfonts/           # Folder containing fonts
 ├── listing.json	# Containing all the extracted data from the Airbnb listing
 ```
-
-## Download images
-Read the whole listing.json and select 14 images to download following these rules:
-- The image with "isHero: true" will be our hero image and must be downloaded as well as all other images with "mustUse: true". 
-- Select more images to download until we have a total of 14 images. 
-- There should be at least one image from every category.
-- Only select one portrait image. If there is no portrait image then select a landscape to act as the image-portrait-1.jpg. Try to pick one with the most height.
-- Select images based on their alt description. Pick images so we have good variety.
-- Do not pick images with too detailed descriptions, we want more images that are showing of bigger spaces or views and not "Kitchen equipment" etc.
-- The downloaded image should be named be assigned fixed names:
-hero-bg.jpg, image-landscape-1.jpg,image-landscape-2.jpg,image-portrait-1.jpg,image-normal-1.jpg,image-normal-2.jpg,image-normal-3.jpg,image-normal-4.jpg,image-normal-5.jpg,image-normal-6.jpg,image-normal-7.jpg,image-normal-8.jpg,image-normal-9.jpg,image-normal-10.jpg. 
-- IMPORTANT: Make sure that the image-portrait-1.jpg is a portrait image if possible. And image-landscape-1.jpg and image-landscape-2.jpg are landscape images.
-- Create one single command for downloading all of the images at the same time into the images/ folder.
-- IMPORTANT: Make sure the download url is exactly the same as in listing.json.
-
 
 ## File Edit Restrictions
 - When building the website you are only allowed to make changes inside this project folder.

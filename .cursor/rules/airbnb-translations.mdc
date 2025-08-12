@@ -10,12 +10,14 @@ alwaysApply: true
 This rule should only be applied as final steps after the website has been built if the user requested the website to be translated.
 
 ## Steps to translate the complete website
+**Critical** All steps must be completed.
 
 1. **Generate Translation Files**:
+   Run this command from root directory. [PROJECT_DIR] is "demo/villa-zori" etc.
    ```
    node translation_workflow.js generate [PROJECT_DIR] [COMMA_SEPERATED_LANGUAGE_CODES]
    ```
-   This will create `[PROJECT_DIR]/js/translations_en.js` which is our default English language file. You will also see a separate translation file for each other requested language (translations_fr.js etc.). These other language files contain the exact same keys as translations_en.js but with empty string values that need to be translated.
+   This will create `[PROJECT_DIR]/js/translations_en.js` which is our default English language file. You will also see a separate translation file for each other requested language (translations_fr.js etc.). These other language files contain the exact same keys as translations_en.js but with empty string values that need to be translated manually in the next step.
 
 2. **Manual Translation**:
    Go through each language translation file and add translations.

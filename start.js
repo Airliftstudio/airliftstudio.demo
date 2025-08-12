@@ -144,11 +144,13 @@ async function main() {
         }
         await runCommand("modify.js", modifyArgs);
 
+        console.log("4. Download images...");
+        await runCommand("download-images.js", [airbnbUrl]);
+
         console.log("✅ All commands completed successfully!");
         console.log(
           `📁 Project created in: ${path.resolve("demo", listingId)}`
         );
-        console.log(`🌐 Open index.html in your browser to view the website`);
         break;
 
       default:

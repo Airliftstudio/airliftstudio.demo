@@ -403,7 +403,11 @@ async function scrape() {
       // Gallery with categories
       sections.forEach((section) => {
         const category = section.querySelector("h2")?.innerText?.trim() || "";
-        const imgs = Array.from(section.querySelectorAll("img")).map((img) => {
+        const imgNodes = Array.from(section.querySelectorAll("img"));
+        // If at least 3 images, exclude the last; otherwise use all
+        const nodesToUse =
+          imgNodes.length >= 3 ? imgNodes.slice(0, -1) : imgNodes;
+        const imgs = nodesToUse.map((img) => {
           const button = img.closest("button");
           let alt = img.getAttribute("alt") || "";
           if (!alt && button) alt = button.getAttribute("aria-label") || "";
@@ -658,7 +662,6 @@ async function scrape() {
   // Write JSON file
   const jsonPath = path.join(destDir, "listing.json");
   fs.writeFileSync(jsonPath, JSON.stringify(jsonData, null, 2), "utf8");
-  console.log(`✅ JSON data saved to ${jsonPath}`);
 
   await browser.close();
 }

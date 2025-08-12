@@ -29,8 +29,7 @@ body {
   font-family: "Inter", sans-serif;
   line-height: 1.6;
   color: var(--text-dark);
-  background: radial-gradient(1200px 800px at 10% -10%, #ffffffaa, transparent),
-    radial-gradient(1200px 800px at 90% -20%, #ffffffaa, transparent), var(--bg);
+  background: var(--bg);
   overflow-x: hidden;
 }
 
@@ -846,7 +845,7 @@ img {
   transition: max-height 0.3s ease-out, padding 0.3s ease-out;
 }
 .faq-item[open] .faq-content {
-  max-height: 200px;
+  max-height: none;
   padding: 0 18px 16px;
 }
 
@@ -1153,6 +1152,9 @@ img {
   }
 }
 
+#business-offering {
+  padding: 0 0 24px 0 !important;
+}
 .biz-section {
   background: none !important;
 }
@@ -1162,6 +1164,21 @@ img {
 }
 .biz-discount-banner b {
   color: #c4a47c !important;
+}
+.biz-cta {
+  margin-top: 30px;
+  margin-bottom: 80px;
+}
+
+#showcase.section {
+  padding: 0 0 80px 0;
+}
+
+.biz-cta .text-content {
+  text-align: center;
+}
+.biz-cta .btn {
+  padding: 14px 22px;
 }
 
 /* Extra small screens */

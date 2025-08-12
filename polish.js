@@ -82,16 +82,6 @@ function cleanTranslationHtmlContent(indexPath) {
         if (structuredDataObj.keywords) {
           structuredDataObj.keywords = "";
         }
-        if (
-          structuredDataObj.amenityFeature &&
-          Array.isArray(structuredDataObj.amenityFeature)
-        ) {
-          structuredDataObj.amenityFeature =
-            structuredDataObj.amenityFeature.map((feature) => ({
-              ...feature,
-              name: "",
-            }));
-        }
 
         return `<script type="application/ld+json id="structured-data">${JSON.stringify(
           structuredDataObj,
@@ -166,6 +156,9 @@ Link: </css/styles.css>; rel=preload; as=style, </js/script.js>; rel=preload; as
       );
     }
 
+    // Remove backup images from images directory
+    removeBackupImages(fullProjectPath);
+
     console.log("✅ Polish complete!");
     console.log(`📁 Updated: ${headersPath}`);
     console.log("🔍 Added SEO headers: X-Robots-Tag: index, follow");
@@ -174,6 +167,7 @@ Link: </css/styles.css>; rel=preload; as=style, </js/script.js>; rel=preload; as
     );
     console.log("🔄 Removed redirects from root _redirects file");
     console.log("💼 Removed business-offering section from index.html");
+    console.log("🗑️  Removed backup images from images/ directory");
   } catch (error) {
     console.error("❌ Error polishing project:", error.message);
     process.exit(1);
@@ -288,6 +282,51 @@ function removeBusinessOfferingSection(indexPath) {
       "❌ Error removing business-offering section:",
       error.message
     );
+  }
+}
+
+function removeBackupImages(projectPath) {
+  try {
+    const imagesPath = path.join(projectPath, "images");
+
+    // Check if images directory exists
+    if (!fs.existsSync(imagesPath)) {
+      console.log(
+        "ℹ️  No images directory found, skipping backup image removal"
+      );
+      return;
+    }
+
+    // Read all files in the images directory
+    const files = fs.readdirSync(imagesPath);
+    let removedCount = 0;
+
+    // Filter and remove files that start with "backup"
+    files.forEach((file) => {
+      if (file.startsWith("backup")) {
+        const filePath = path.join(imagesPath, file);
+        try {
+          fs.unlinkSync(filePath);
+          removedCount++;
+          console.log(`🗑️  Removed backup image: ${file}`);
+        } catch (error) {
+          console.error(
+            `❌ Error removing backup image ${file}:`,
+            error.message
+          );
+        }
+      }
+    });
+
+    if (removedCount > 0) {
+      console.log(
+        `✅ Removed ${removedCount} backup images from images/ directory`
+      );
+    } else {
+      console.log("ℹ️  No backup images found in images/ directory");
+    }
+  } catch (error) {
+    console.error("❌ Error removing backup images:", error.message);
   }
 }
 

@@ -715,6 +715,8 @@ function checkImagesDirectory(targetFilePath) {
       return imageExtensions.includes(ext);
     });
 
+    imageFiles = imageFiles.filter((file) => !file.includes("backup"));
+
     // Define the expected image names
     const expectedImages = [
       "hero-bg.jpg",

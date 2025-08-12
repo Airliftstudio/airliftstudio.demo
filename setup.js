@@ -171,10 +171,7 @@ async function setup() {
   const imagesDir = path.join(destDir, "images");
   if (!fs.existsSync(imagesDir)) {
     fs.mkdirSync(imagesDir, { recursive: true });
-    console.log(`✅ Created images directory: ${imagesDir}`);
   }
-
-  console.log(`✅ Setup complete! Project structure created in: ${destDir}`);
 }
 
 setup().catch(console.error);

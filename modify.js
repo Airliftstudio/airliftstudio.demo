@@ -214,7 +214,6 @@ async function modify() {
         return `https://www.airbnb.com/rooms/${listingId}/`;
       }
     });
-    console.log(`✅ Updated all Airbnb links to use ID ${listingId}`);
 
     // Update language dropdown if language codes are provided
     if (process.argv[3]) {
@@ -247,10 +246,8 @@ async function modify() {
 
         // Generate the capacity HTML
         let capacityHtml;
-        console.log("Translation mode---------------" + process.argv[3]);
 
         if (hasLanguageCodes) {
-          console.log("Translation mode---------------");
           // Translation mode: use data-translate attributes
           capacityHtml = capacityItems
             .map((item, index) => {
@@ -319,11 +316,6 @@ async function modify() {
 
         if (heroCapacityRegex.test(htmlContent)) {
           htmlContent = htmlContent.replace(heroCapacityRegex, newHeroCapacity);
-          console.log(
-            `✅ Updated hero capacity with: ${capacityItems.join(" • ")}${
-              hasLanguageCodes ? " (with translation support)" : ""
-            }`
-          );
         } else {
           console.log(`⚠️  Hero capacity row not found in HTML`);
         }
@@ -332,7 +324,6 @@ async function modify() {
 
     // Write the modified HTML back to the file
     fs.writeFileSync(indexHtmlPath, htmlContent, "utf8");
-    console.log(`✅ Successfully modified ${indexHtmlPath}`);
   } else {
     console.log(
       `⚠️  index.html not found at ${indexHtmlPath}, skipping modifications`
@@ -342,8 +333,6 @@ async function modify() {
   // Remove console.log calls from JavaScript files
   console.log("Removing console.log calls from JavaScript files...");
   removeConsoleLogsFromJSFiles(destDir);
-
-  console.log(`✅ Modification complete!`);
 }
 
 // Only run modify() if this file is executed directly (not when required as a module)

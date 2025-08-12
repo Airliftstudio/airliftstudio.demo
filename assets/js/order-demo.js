@@ -84,16 +84,42 @@ const form = document.getElementById("order-form");
 const summaryWrap = document.getElementById("order-summary");
 const summaryBlock = document.getElementById("summary-block");
 
+// Helper function to clean up Airbnb URL
+function cleanAirbnbUrl(url) {
+  try {
+    // Handle different Airbnb domains (.com, .se, etc.)
+    const urlObj = new URL(url);
+
+    // Extract the room ID from the path
+    const pathMatch = urlObj.pathname.match(/\/rooms\/(\d+)/);
+    if (!pathMatch) {
+      return url; // Return original if we can't parse it
+    }
+
+    const roomId = pathMatch[1];
+
+    // Return the standardized format
+    return `https://www.airbnb.com/rooms/${roomId}/`;
+  } catch (error) {
+    // If URL parsing fails, return the original
+    return url;
+  }
+}
+
 function buildOrderText(values) {
   const languages = ["English"].concat(
     values.languages
       .map((c) => LANG_LIST.find((l) => l.code === c)?.name)
       .filter(Boolean)
   );
+
+  // Clean up the Airbnb URL
+  const cleanedAirbnbUrl = cleanAirbnbUrl(values.airbnbUrl);
+
   return [
     `New demo order`,
     `Name: ${values.name}`,
-    `Airbnb: ${values.airbnbUrl}`,
+    `Airbnb: ${cleanedAirbnbUrl}`,
     values.domain ? `Desired domain name: ${values.domain}` : null,
     languages.length > 1 ? `Languages: ${languages.join(", ")}` : null,
     values.instagram || values.whatsapp ? `Contact info to include:` : null,
