@@ -33,7 +33,6 @@ function clearAllErrors() {
 
 // Prefill support via query parameters
 (function prefillFromQuery() {
-  //?name=John%20Smith&airbnb=https%3A//www.airbnb.com/rooms/12345678&domain=villa-paradise-bali.com&languages=en,de&wa=+621234567890&ig=myinsta
   const params = new URLSearchParams(location.search);
   const setVal = (id, keys) => {
     let v = null;

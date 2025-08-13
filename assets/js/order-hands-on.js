@@ -1,4 +1,4 @@
-const BASE_PRICE = 39.0; // hands-off discounted price
+const BASE_PRICE = 35.9; // hands-off discounted price
 const ORIGINAL_PRICE = 119.0; // original before discount
 const LANG_FIRST = 29.0;
 const LANG_ADDITIONAL = 19.0;

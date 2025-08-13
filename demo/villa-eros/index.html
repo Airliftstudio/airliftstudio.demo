@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--
+    ═══════════════════════════════════════════════════════════════════════════════
+    Built with ❤️ for the Airbnb community | © 2025 airliftStudios.com
+
+    📧 Get Your Free Demo Website today:
+    Visit: https://airliftstudios.com
+    ═══════════════════════════════════════════════════════════════════════════════
+    -->
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta http-equiv="Content-Language" content="en" />
+    <link rel="preload" href="images/hero-bg.jpg" as="image" />
+
+    <title>
+      Makai Kedungu - Luxury Private Villa in Bali | Private Pool, Superhost,
+      Guest Favorite
+    </title>
+    <meta
+      name="description"
+      content="Book Makai Kedungu, a 5-star rated luxury 1-bedroom villa in Kedungu, Bali. Private pool, modern industrial design, superhost, guest favorite, 15 minutes from Canggu. Perfect for honeymoons and romantic getaways. See real guest reviews!"
+    />
+    <meta
+      name="keywords"
+      content="Makai Kedungu, Kedungu villa, Bali villa, private pool, superhost, guest favorite, honeymoon villa, luxury villa, modern design, airbnb, book villa, best villa Kedungu, vacation rental, Bali accommodation"
+    />
+    <link rel="canonical" href="https://makai-kedungu.com/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:title"
+      content="Makai Kedungu - Luxury Private Honeymoon Villa in Bali | Private Pool, Superhost, Guest Favorite"
+    />
+    <meta
+      property="og:description"
+      content="Book Makai Kedungu, a 5-star rated luxury 1-bedroom villa in Kedungu, Bali. Private pool, modern industrial design, superhost, guest favorite, 15 minutes from Canggu. Perfect for honeymoons and romantic getaways. See real guest reviews!"
+    />
+    <meta property="og:url" content="https://makai-kedungu.com/" />
+    <meta
+      property="og:image"
+      content="https://makai-kedungu.com/images/hero-bg.jpg"
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏝️</text></svg>"
+    />
+
+    <link rel="stylesheet" href="css/fonts-local.css" />
+    <link rel="stylesheet" href="css/fontawesome.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/lang.css" />
+
+    <script type="application/ld+json" id="structured-data">
+      {
+        "@context": "https://schema.org",
+        "@type": "LodgingBusiness",
+        "name": "Makai Kedungu",
+        "description": "Luxury Private Honeymoon Villa in Kedungu, Bali. Private pool, modern industrial design, superhost, guest favorite, 15 minutes from Canggu. Perfect for honeymoons and romantic getaways.",
+        "image": "https://makai-kedungu.com/images/hero-bg.jpg",
+        "url": "https://makai-kedungu.com/",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Kedungu",
+          "addressRegion": "Bali",
+          "addressCountry": "Indonesia"
+        },
+        "keywords": "Makai Kedungu, Kedungu villa, Bali villa, private pool, superhost, guest favorite, honeymoon villa, luxury villa, modern design, airbnb, book villa, best villa Kedungu, vacation rental, Bali accommodation",
+        "email": "hello@makai-kedungu.com"
+      }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <nav class="container">
+        <a href="#hero" class="logo">Villa Eros</a>
+        <ul class="nav-links">
+          <li class="hide-mobile"><a href="#about">Overview</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li class="hide-mobile-sm"><a href="#reviews">Reviews</a></li>
+          <li class="hide-mobile"><a href="#location">Location</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-placeholder"></div>
+      <img
+        src="images/hero-bg.jpg"
+        alt="hero image"
+        class="hero-bg-image"
+        fetchpriority="high"
+        loading="eager"
+      />
+      <div class="hero-bg-dark"></div>
+      <div class="hero-content">
+        <div class="hero-badges">
+          <div class="badge badge-superhost">
+            <i class="fas fa-user-shield"></i>
+            Superhost
+          </div>
+          <div class="badge badge-guest-favorite">
+            <i class="fas fa-heart"></i> Guest Favorite
+          </div>
+        </div>
+        <h1>Villa Eros</h1>
+        <div>
+          <span class="soft-rating-badge">
+            <span class="stars" id="hero-stars">
+              <span class="star" data-idx="0">☆</span>
+              <span class="star" data-idx="1">☆</span>
+              <span class="star" data-idx="2">☆</span>
+              <span class="star" data-idx="3">☆</span>
+              <span class="star" data-idx="4">☆</span>
+            </span>
+            <span id="hero-rating-animation-value" class="fixed-rating">
+              0.0
+            </span>
+            <span id="airbnb-rating-value">4.95</span>
+          </span>
+        </div>
+
+        <div class="hero-capacity-row">
+          <span class="hero-capacity">
+            <span class="hero-capacity-item">6 guests</span
+            ><span class="hero-dot">•</span
+            ><span class="hero-capacity-item">3 bedroom</span
+            ><span class="hero-dot">•</span
+            ><span class="hero-capacity-item">3 bed</span
+            ><span class="hero-dot">•</span
+            ><span class="hero-capacity-item">3.5 baths</span>
+          </span>
+        </div>
+        <div class="hero-subtitle">Private Luxury Escape in Bali</div>
+
+        <a
+          href="https://www.airbnb.com/rooms/1140362471270428362/"
+          class="cta-button"
+          target="_blank"
+        >
+          <i class="fas fa-calendar-check"></i>
+          <span>Check Availability</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Floating CTA -->
+    <div class="floating-cta">
+      <a
+        href="https://www.airbnb.com/rooms/1140362471270428362/"
+        class="cta-button"
+        target="_blank"
+      >
+        <i class="fas fa-calendar-check"></i>
+        <span>Check Availability</span>
+      </a>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h3 class="text-content">Your Luxury Retreat in Bali</h3>
+            <p class="text-content">
+              Villa Eros is a huge 3-bed, private pool luxury retreat
+              strategically positioned to enjoy the best of 'old Bali' and the
+              area's rugged beaches, whilst remaining a short 15 minute scoot
+              into the madness of Canggu.
+            </p>
+          </div>
+          <div class="about-image image-content">
+            <img
+              src="images/image-normal-1.jpg"
+              alt="Bedroom image 2"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-swimming-pool"></i>
+            <h4>Private Pool with Sun Loungers</h4>
+            <p>
+              Enjoy your own private pool with comfortable sun loungers for the
+              ultimate relaxation experience.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <i class="fas fa-laptop"></i>
+            <h4>Electric Standing Desk & Workspace</h4>
+            <p>
+              Dedicated workspace with electronic standing desk, office chair,
+              and monitor for remote work.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <i class="fas fa-tv"></i>
+            <h4>55" LG Smart TV with AirPlay</h4>
+            <p>
+              Premium entertainment with Netflix, Apple TV, and Sonos media
+              system for your viewing pleasure.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <i class="fas fa-bath"></i>
+            <h4>Freestanding Bathtub</h4>
+            <p>
+              Luxurious freestanding bathtub with caddy for the perfect romantic
+              soak after a day of exploring.
+            </p>
+          </div>
+        </div>
+
+        <div class="amenities-section">
+          <h3 class="text-content">Amenities</h3>
+          <div class="amenities-grid">
+            <div class="amenity-item">
+              <i class="fas fa-swimming-pool"></i> Private Pool with Sun
+              Loungers
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-wifi"></i> Up to 400MB Fibre WiFi
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-laptop"></i> Electric Standing Desk
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-tv"></i> 55" LG Smart TV with AirPlay
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-music"></i> Sonos Media System
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-bath"></i> Freestanding Bathtub with Caddy
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-coffee"></i> Pod Coffee Machine with Milk Steamer
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-utensils"></i> NutriBullet Pro & Air Fryer
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-broom"></i> Daily Housekeeping
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-user-tie"></i> Dedicated Villa Manager
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-car"></i> Private Parking
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-key"></i> Smart Lock Entrance
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-heart"></i> Heart Shaped Floating Breakfast Tray
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-plug"></i> UK/USB/USB-C Plug Sockets
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-battery-full"></i> Phone Battery Pack
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+      <div class="container">
+        <h2 class="section-title">Discover Villa Eros</h2>
+        <p class="section-subtitle text-content">
+          Experience the luxury and comfort of our modern industrial design
+          retreat
+        </p>
+
+        <div class="gallery-grid">
+          <div class="gallery-item hero">
+            <img src="images/hero-bg.jpg" alt="hero image" loading="lazy" />
+          </div>
+          <div class="gallery-item landscape-1">
+            <img
+              src="images/image-landscape-1.jpg"
+              alt="Full kitchen image 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-1">
+            <img
+              src="images/image-normal-1.jpg"
+              alt="Bedroom image 2"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-2">
+            <img
+              src="images/image-normal-2.jpg"
+              alt="Full kitchen image 3"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item portrait-1">
+            <img
+              src="images/image-portrait-1.jpg"
+              alt="Living room image 3"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-3">
+            <img
+              src="images/image-normal-3.jpg"
+              alt="Bedroom image 3"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-4">
+            <img
+              src="images/image-normal-4.jpg"
+              alt="Half bathroom image 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-5">
+            <img
+              src="images/image-normal-5.jpg"
+              alt="Workspace image 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-6">
+            <img
+              src="images/image-normal-6.jpg"
+              alt="Pool image 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-7">
+            <img
+              src="images/image-normal-7.jpg"
+              alt="Living room image 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-8">
+            <img
+              src="images/image-normal-8.jpg"
+              alt="Full bathroom image 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item landscape-2">
+            <img
+              src="images/image-landscape-2.jpg"
+              alt="Bedroom image 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-9">
+            <img
+              src="images/image-normal-9.jpg"
+              alt="Full bathroom image 2"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-10">
+            <img
+              src="images/image-normal-10.jpg"
+              alt="Pool image 4"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews">
+      <div class="container">
+        <h2 class="section-title">What Our Guests Say</h2>
+        <div class="reviews-featured">
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-avatar">C</div>
+              <div class="review-info">
+                <h4>Charlie</h4>
+                <div class="review-stars">★★★★★</div>
+              </div>
+            </div>
+            <p>
+              "This was hands down the best Airbnb I've ever stayed in. The
+              villa is spacious, beautiful, and incredibly well-maintained, but
+              what really sets it apart is the team. The host and the staff on
+              the property went above and beyond for every little detail.
+              Thoughtful, helpful, and just genuinely amazing people. Can't
+              recommend this place enough!"
+            </p>
+          </div>
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-avatar">M</div>
+              <div class="review-info">
+                <h4>Michelle</h4>
+                <div class="review-stars">★★★★★</div>
+              </div>
+            </div>
+            <p>
+              "We cannot recommend this place enough! The villa was just as
+              beautiful and magical as the pictures. Hayley and her team were
+              incredible from the moment we booked our stay. Helping us book
+              extra experiences and providing special treats in the kitchen upon
+              our arrival. The space is beautifully decorated and impeccably
+              clean. The workstation is perfect and the living room was
+              adorable. We wish we could have stayed longer and can't wait to
+              come back!"
+            </p>
+          </div>
+        </div>
+        <div class="reviews-scroll-container">
+          <div id="reviews-scroll-track">
+            <div class="review-mini" data-reviewer="Cheryl">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">C</div>
+                <div>
+                  <h5>Cheryl</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Amazing, private villa. Housekeepers are really friendly and
+                you get hotel-level service with daily cleaning and separately
+                priced same-day laundry services but its very cheap. They
+                contact you via Whatspp every morning if you need the service
+                and they reply very quickly. I asked about amenities around the
+                area and they gave a very detailed description which helped us
+                to get around a lot more comfortably :) This could be my dream
+                house! My partner and I were so well-rested and happy in the
+                villa we barely went out 😂"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Steph">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">S</div>
+                <div>
+                  <h5>Steph</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "We had an incredible stay here. We arrived quite late at night
+                and were able to get in without any issues. The location was
+                beautiful and very peaceful. The villa was perfect for a
+                relaxing getaway, sitting by the pool on the daybeds was a great
+                way to spend the day. The host and staff were very friendly.
+                They looked after us with 5 star service everyday and always
+                available to talk to/communicate with if need be. We would
+                absolutely recommend staying here if anyone is looking for a
+                nice getaway!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Candice">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">C</div>
+                <div>
+                  <h5>Candice</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "The villa is amazingly beautiful and just like the pictures. It
+                is clean and neat and just feels like home. Most importantly the
+                host is so nice and highly responsive. The management team is
+                always trying their best to accommodate us and to ensure we have
+                what we need. We were impressed by their warm hospitality and
+                proactive attitude. Overall, we enjoyed the stay so much and it
+                made our first visit in Bali extremely memorable and enjoyable.
+                Highly recommend it to anyone who is visiting Bali!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Lilly">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">L</div>
+                <div>
+                  <h5>Lilly</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "My partner and I had a wonderful stay at this beautiful villa
+                in Bali. It was spotless, well-maintained, and had everything we
+                could possibly need for a comfortable and relaxing stay. The
+                location was peaceful and felt like a true escape, yet still
+                convenient enough to explore the area. The hosts were incredibly
+                responsive and helpful throughout our stay, which made the
+                experience even better. Highly recommend!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Lara">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">L</div>
+                <div>
+                  <h5>Lara</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Villa was lovely and looked exactly like in the pictures. It is
+                located in a private and quiet area, not far away from different
+                beaches. There Are also some cute Cafés and Restaurants 2-3km
+                away. We loved the time in the Villa and it felt really
+                comfortable. The Daily cleaning was also amazing. They organized
+                Scooter rental and laundry Service. 🌞💗"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Joe">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">J</div>
+                <div>
+                  <h5>Joe</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "I loved staying at the villa! Located in Kedungu which is a
+                very peaceful location surrounded by lots of nature, we were
+                just a 10 min walk from the beach and getting around the area by
+                motorbike was lots of fun. The villa was very cosy and had
+                everything you needed to stay in and chill, hosts were super
+                friendly and helpful, we’ll definitely be back!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Maple">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">M</div>
+                <div>
+                  <h5>Maple</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "The villa was everything we wished for a holiday trip. The
+                interior of the villa was super clean, and the hosts went out of
+                the way to ensure that we had a fuss-free holiday. Will
+                definitely recommend this place to anyone who wants to visit
+                Bali and especially Kedungu. 10/10 experience with the Eros team
+                :)"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="William">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">W</div>
+                <div>
+                  <h5>William</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Had a fantastic stay - the villa is so beautiful and so
+                well-equipped with toiletries, card games, and other little
+                touches that make you feel immediately at home. The daily
+                cleaning was also super helpful and gave us additional peace of
+                mind. Will definitely be staying here again if we return to
+                Bali!!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Collins">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">C</div>
+                <div>
+                  <h5>Collins</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Amazing Villa. Amazing hosts. Spent way tooo little time there.
+                The photos don’t do justice. Soo nice of a place that we decided
+                to cancel our plans and hang out by the private pool all day. A
+                couple of good restaurants around the place and just a stone
+                throw away to the beach."
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Johan">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">J</div>
+                <div>
+                  <h5>Johan</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Great Villa, good spot to relax . Not much around , have a
+                scooter or you will be ordering lots . Staff very nice owner
+                very thoughtful . Plan transport ahead of time for departure , a
+                little harder to get grab cars to come pickup but delivery is
+                easy"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Inez">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">I</div>
+                <div>
+                  <h5>Inez</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "I had the most wonderful fabulous stay in my villa! The staff
+                was always so helpful, responsive, and thorough! The entire team
+                went above and beyond in making me feel comfortable , heard, and
+                celebrated! 10/10 I DEFINITELY recommend!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Abhiram">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">A</div>
+                <div>
+                  <h5>Abhiram</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "I loved the place! The host and team were friendly, responsive
+                and accommodating. The house is really cozy & charming, and I
+                got to experience the countryside, the beach and the slow side
+                of Bali. I would definitely stay here again!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Arif">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">A</div>
+                <div>
+                  <h5>Arif</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Everything was perfect. The house was perfectly designed. The
+                staff was very kind. They took care of us until we transferred
+                from the airport to another place. And thanks for the gifts. I'm
+                glad I chose it. I recommend it."
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Ramine">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">R</div>
+                <div>
+                  <h5>Ramine</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "I had an amazing stay here. Very beautiful villa, with all
+                equipment needed, feeling at home while having cleaning and
+                assistance from the host if needed ! I definitely recommend!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Aurora Natalie">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">A</div>
+                <div>
+                  <h5>Aurora Natalie</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Really beautiful villa. Some long distances to city and
+                activities (around 1-2 hours driving) but perfect for a relaxing
+                and private holiday. Incredibly good and available host!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Meghan">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">M</div>
+                <div>
+                  <h5>Meghan</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "The whole team were absolutely amazing. More than happy to help
+                with questions I had and shared lots of recommendations. The
+                villa was absolutely stunning 😍"
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="text-content reviews-cta">
+          <a
+            href="https://www.airbnb.com/rooms/1140362471270428362/reviews"
+            target="_blank"
+            class="cta-button"
+          >
+            Read All Reviews on Airbnb
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="location">
+      <div class="container">
+        <h2 class="section-title">Perfect Kedungu Location</h2>
+
+        <div class="section-content">
+          <div>
+            <p class="text-content">
+              Tampih/Kedungu is a slice of beautiful, old Bali. You can walk to
+              the beach within around 10 minutes and there are many cafes and
+              restaurants within a 5 minute scooter ride.
+            </p>
+            <div class="location-highlights">
+              <div class="location-item">
+                <i class="fas fa-umbrella-beach"></i>
+                <div>
+                  <h4>10 minutes walk to the beach</h4>
+                  <p>
+                    Easy access to Pantai Tampih, a unique flat and tarmac area
+                    perfect for running or cycling
+                  </p>
+                </div>
+              </div>
+              <div class="location-item">
+                <i class="fas fa-motorcycle"></i>
+                <div>
+                  <h4>15 minutes to Canggu</h4>
+                  <p>
+                    Short scooter ride to the madness and brilliance of Canggu's
+                    vibrant scene
+                  </p>
+                </div>
+              </div>
+              <div class="location-item">
+                <i class="fas fa-utensils"></i>
+                <div>
+                  <h4>Local cafes and restaurants</h4>
+                  <p>
+                    Explore Kedungu, Seseh, Pererenan and Canggu for amazing
+                    dining options
+                  </p>
+                </div>
+              </div>
+              <div class="location-item">
+                <i class="fas fa-spa"></i>
+                <div>
+                  <h4>Joshua District nearby</h4>
+                  <p>
+                    Great coffee, food options, Pigstone Taphouse and Bali Beach
+                    Glamping resort
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-social">
+        <a
+          href="https://instagram.com/example"
+          target="_blank"
+          aria-label="Instagram"
+          ><i class="fab fa-instagram"></i>
+        </a>
+        <a
+          href="https://wa.me/6281234567890"
+          target="_blank"
+          aria-label="WhatsApp"
+          ><i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="mailto:hello@makai-kedungu.com" aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+      <p>© 2025 Villa Eros</p>
+      <p>Your luxury retreat in the heart of Bali.</p>
+      <small class="footer-attribution"
+        >Website by
+        <a href="https://airliftstudios.com" target="_blank">
+          airliftstudios.com
+        </a>
+      </small>
+    </footer>
+    <script src="js/script.js"></script>
+  </body>
+</html>

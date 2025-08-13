@@ -67,4 +67,26 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+  const screenshots = document.querySelectorAll(
+    ".hero-card:not(:first-child) .website-screenshot"
+  );
+
+  // Add scrolling class to trigger CSS animation
+  screenshots.forEach((screenshot, index) => {
+    setTimeout(() => {
+      screenshot.classList.add("scrolling");
+
+      // Add GSAP scroll animation for smoother effect
+      const img = screenshot.querySelector("img");
+      gsap.to(img, {
+        y: "-80%",
+        duration: 6,
+        ease: "power2.inOut",
+        yoyo: true,
+        repeat: -1,
+        delay: index * 0.5,
+        repeatDelay: 2, // 2 second delay at the top before repeating
+      });
+    }, index * 1000); // Stagger the animations
+  });
 });

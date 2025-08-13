@@ -6,7 +6,7 @@
     <meta name="robots" content="index, follow" />
     <meta name="language" content="English" />
     <meta http-equiv="Content-Language" content="en" />
-    <!-- Preload logo for fast navbar render -->
+    <link rel="preload" href="assets/images/hero-showcase.jpg" as="image" />
     <link rel="preload" href="assets/images/logo_nav.jpg" as="image" />
 
     <title>
@@ -153,10 +153,13 @@
               },
               {
                 "@type": "Question",
-                "name": "Can I update my Airbnb website after it's launched?",
+                "name": "How do I make changes to my website?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes! Since you own the website completely, you can update it anytime. We provide you with the source code and documentation, and you can make changes yourself or hire any developer. We also offer optional maintenance packages if you prefer us to handle updates for you."
+                  "text": "To be able to offer you affordable and fixed pricing we do not
+                  provide additional support or modifications after launch. You
+                  can make changes yourself following our guides or hire any
+                  developer."
                 }
               },
               {
@@ -237,8 +240,52 @@
           </div>
         </div>
         <div class="image-content hero-art" aria-hidden="true">
-          <div class="hero-card"></div>
-          <div class="hero-card offset"></div>
+          <div class="hero-card">
+            <div class="website-showcase">
+              <div class="showcase-frame">
+                <div class="showcase-header">
+                  <div class="showcase-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="showcase-url">villazori.com</div>
+                </div>
+                <div class="showcase-content">
+                  <div class="website-screenshot">
+                    <img
+                      src="assets/images/hero-showcase2.jpg"
+                      alt="Villa Zori Website Showcase"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-card offset">
+            <div class="website-showcase">
+              <div class="showcase-frame">
+                <div class="showcase-header">
+                  <div class="showcase-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="showcase-url">erosbali.com</div>
+                </div>
+                <div class="showcase-content">
+                  <div class="website-screenshot">
+                    <img
+                      src="assets/images/hero-showcase.jpg"
+                      alt="Website Showcase"
+                      fetchpriority="high"
+                      loading="eager"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -712,7 +759,7 @@
               <div class="biz-total-row">
                 <span class="biz-total-label">Total one-time payment</span>
                 <span id="biz-calc-total-hands-off" class="biz-total-amount"
-                  >$89.00</span
+                  >$53.90</span
                 >
               </div>
               <span
@@ -1467,7 +1514,7 @@
             function updateCalc(pkg) {
               // Hands-On
               if (!pkg || pkg === "hands-on") {
-                let total = 49 + calcLangPrice(langHandsOn);
+                let total = 35.9 + calcLangPrice(langHandsOn);
                 let lines = [];
                 let langTotal = 0;
                 if (langHandsOn.length) {
@@ -1506,12 +1553,12 @@
               // Hands-Off
               if (!pkg || pkg === "hands-off") {
                 let total =
-                  89 + calcLangPrice(langHandsOff) + calcYearsPrice(years);
+                  53.9 + calcLangPrice(langHandsOff) + calcYearsPrice(years);
                 let lines = [];
                 let langTotal = 0;
                 if (langHandsOff.length || years > 1) {
                   lines.push(
-                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-Off package</span><span><span class="biz-card-price-original">$179</span><span class='biz-card-price-discount'>$89</span></span></div>`
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-Off package</span><span><span class="biz-card-price-original">$179</span><span class='biz-card-price-discount'>$53.90</span></span></div>`
                   );
                 }
                 if (langHandsOff.length) {
@@ -1618,92 +1665,18 @@
         <div class="showcase-grid">
           <a
             class="showcase-card image-content"
-            href="https://coastalstaybali.com"
+            href="https://villazori.com"
             target="_blank"
             rel="noopener noreferrer"
           >
             <div class="showcase-thumb">
               <img
-                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%23e5e7eb' width='100%' height='100%'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='Inter, Arial' font-size='36'>Placeholder</text></svg>"
-                alt="coastalstaybali.com preview"
+                src="assets/images/villa-zori-showcase_cover.jpg"
+                alt="villazori.com preview"
+                loading="lazy"
               />
             </div>
-            <span class="showcase-domain">coastalstaybali.com</span>
-          </a>
-
-          <a
-            class="showcase-card image-content"
-            href="https://jungleretreatbali.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="showcase-thumb">
-              <img
-                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%23e5e7eb' width='100%' height='100%'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='Inter, Arial' font-size='36'>Placeholder</text></svg>"
-                alt="jungleretreatbali.com preview"
-              />
-            </div>
-            <span class="showcase-domain">jungleretreatbali.com</span>
-          </a>
-
-          <a
-            class="showcase-card image-content"
-            href="https://urbanloftstay.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="showcase-thumb">
-              <img
-                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%23e5e7eb' width='100%' height='100%'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='Inter, Arial' font-size='36'>Placeholder</text></svg>"
-                alt="urbanloftstay.com preview"
-              />
-            </div>
-            <span class="showcase-domain">urbanloftstay.com</span>
-          </a>
-
-          <a
-            class="showcase-card image-content"
-            href="https://cliffsidehavenbali.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="showcase-thumb">
-              <img
-                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%23e5e7eb' width='100%' height='100%'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='Inter, Arial' font-size='36'>Placeholder</text></svg>"
-                alt="cliffsidehavenbali.com preview"
-              />
-            </div>
-            <span class="showcase-domain">cliffsidehavenbali.com</span>
-          </a>
-
-          <a
-            class="showcase-card image-content"
-            href="https://lakesidemodernstay.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="showcase-thumb">
-              <img
-                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%23e5e7eb' width='100%' height='100%'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='Inter, Arial' font-size='36'>Placeholder</text></svg>"
-                alt="lakesidemodernstay.com preview"
-              />
-            </div>
-            <span class="showcase-domain">lakesidemodernstay.com</span>
-          </a>
-
-          <a
-            class="showcase-card image-content"
-            href="https://desertdunestay.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="showcase-thumb">
-              <img
-                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%23e5e7eb' width='100%' height='100%'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='Inter, Arial' font-size='36'>Placeholder</text></svg>"
-                alt="desertdunestay.com preview"
-              />
-            </div>
-            <span class="showcase-domain">desertdunestay.com</span>
+            <span class="showcase-domain">villazori.com</span>
           </a>
         </div>
       </div>
@@ -1725,54 +1698,27 @@
               <div class="testimonial-quote">
                 <i class="fa-solid fa-quote-left"></i>
                 <p>
-                  "Airlift turned our listing into a polished site in a week.
-                  The copy, layout, and speed feel incredibly professional. We
-                  saw more direct inquiries within days and the process was
-                  refreshingly simple."
+                  "Had looked at some options but this caught my eye with the
+                  free demo that gave me no reason to not try, an im glad that I
+                  did. The site highlights exactly what guests care about and
+                  looks great on mobile. I can see the detail put into the SEO
+                  and the multi-language feature. Very affordable and hassle
+                  free. Highly recommend!"
                 </p>
               </div>
               <div class="testimonial-author">
                 <div class="author-info">
-                  <div class="author-name">Maya Rodriguez</div>
-                  <div class="author-title">Superhost, Villa Manager</div>
+                  <div class="author-name">Alessandro Galli</div>
+                  <div class="author-title">Superhost, Villa Owner</div>
                 </div>
                 <a
-                  href="https://coastalstaybali.com"
+                  href="https://villazori.com"
                   class="author-website"
                   target="_blank"
                   rel="noopener"
                 >
                   <i class="fa-solid fa-external-link-alt"></i>
-                  coastalstaybali.com
-                </a>
-              </div>
-            </div>
-          </blockquote>
-
-          <blockquote class="testimonial">
-            <div class="testimonial-content">
-              <div class="testimonial-quote">
-                <i class="fa-solid fa-quote-left"></i>
-                <p>
-                  "We tried templates before, but this is on a different level.
-                  The site highlights exactly what guests care about and looks
-                  great on mobile. Launch was fast and support has been
-                  excellent."
-                </p>
-              </div>
-              <div class="testimonial-author">
-                <div class="author-info">
-                  <div class="author-name">Daniel Chen</div>
-                  <div class="author-title">Property Manager</div>
-                </div>
-                <a
-                  href="https://jungleretreatbali.com"
-                  class="author-website"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <i class="fa-solid fa-external-link-alt"></i>
-                  jungleretreatbali.com
+                  villazori.com
                 </a>
               </div>
             </div>
@@ -1877,16 +1823,15 @@
           </details>
           <details class="faq-item">
             <summary>
-              <span>Can I update my Airbnb website after it's launched?</span>
+              <span>How do I make changes to my website?</span>
               <i class="fa-solid fa-plus faq-icon"></i>
             </summary>
             <div class="faq-content">
               <p>
-                Yes! Since you own the website completely, you can update it
-                anytime. We provide you with the source code and documentation,
-                and you can make changes yourself or hire any developer. We also
-                offer optional maintenance packages if you prefer us to handle
-                updates for you.
+                To be able to offer you affordable and fixed pricing we do not
+                provide additional support or modifications after launch. You
+                can make changes yourself following our guides or hire any
+                developer.
               </p>
             </div>
           </details>
@@ -1937,6 +1882,7 @@
               src="assets/images/logo.png"
               alt="Airlift Studios logo"
               class="brand-logo"
+              loading="lazy"
             />
             <span class="brand-name">Airlift Studios</span>
           </a>
