@@ -1211,6 +1211,7 @@ img {
   }
   .journey-path::before {
     left: 20px;
+    top: 0px;
   }
   .journey-step {
     gap: 15px;
