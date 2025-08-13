@@ -220,7 +220,7 @@ form.addEventListener("submit", (e) => {
   const subject = encodeURIComponent(`New demo order - ${values.domain}`);
 
   // Instagram: deep link + profile fallback (no reliable prefill on web)
-  const igUser = "airliftstudios";
+  const igUser = "airlift.studios";
   const igDeep = `instagram://user?username=${igUser}`;
   const igProfile = `https://www.instagram.com/${igUser}/`;
   const igBtn = document.getElementById("send-instagram");

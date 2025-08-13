@@ -1,5 +1,5 @@
-const BASE_PRICE = 53.9; // hands-off discounted price
-const ORIGINAL_PRICE = 179.0; // original before discount
+const BASE_PRICE = 59.9; // hands-off discounted price
+const ORIGINAL_PRICE = 199.0; // original before discount
 const LANG_FIRST = 29.0;
 const LANG_ADDITIONAL = 19.0;
 const YEAR_EXTRA = 39.0;
@@ -348,7 +348,7 @@ form.addEventListener("submit", (e) => {
   const encoded = encodeURIComponent(orderText);
   const subject = encodeURIComponent(`Hands‑Off order - ${values.domain}`);
 
-  const igUser = "airliftstudios";
+  const igUser = "airlift.studios";
   const igBtn = document.getElementById("send-instagram");
   igBtn.href = `https://www.instagram.com/${igUser}/`;
   igBtn.addEventListener("click", () => {

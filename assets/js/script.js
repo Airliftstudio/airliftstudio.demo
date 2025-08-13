@@ -8,10 +8,6 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       if (target) {
         target.scrollIntoView({ behavior: "smooth", block: "start" });
       }
-      // Close mobile menu on navigation
-      const menu = document.querySelector(".nav-links");
-      if (menu && menu.classList.contains("open"))
-        menu.classList.remove("open");
     }
   });
 });

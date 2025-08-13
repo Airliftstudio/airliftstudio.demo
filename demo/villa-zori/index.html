@@ -841,7 +841,7 @@
         <div id="biz-discount-banner" class="biz-discount-banner-outer">
           <div class="biz-discount-banner">
             <span class="biz-discount-text"
-              >We are just starting and are offering <b>50% off</b> to our first
+              >We are just starting and are offering <b>70% off</b> to our first
               20 customers!</span
             >
           </div>
@@ -857,10 +857,10 @@
             </div>
             <div class="biz-card-price-block">
               <div class="biz-price-line">
-                <span class="biz-card-price-original">$99.00</span>
+                <span class="biz-card-price-original">$119.00</span>
               </div>
               <div class="biz-price-line">
-                <span class="biz-card-price-discount">$49.00</span>
+                <span class="biz-card-price-discount">$35.90</span>
                 <span class="biz-price-smallprint"
                   >Fixed price, no monthly fees</span
                 >
@@ -955,7 +955,7 @@
                 <span class="biz-card-price-original">$179.00</span>
               </div>
               <div class="biz-price-line">
-                <span class="biz-card-price-discount">$89.00</span>
+                <span class="biz-card-price-discount">$53.90</span>
                 <span class="biz-price-smallprint"
                   >Fixed price, no monthly fees</span
                 >
@@ -1911,12 +1911,12 @@
             function updateCalc(pkg) {
               // Hands-On
               if (!pkg || pkg === "hands-on") {
-                let total = 49 + calcLangPrice(langHandsOn);
+                let total = 35.9 + calcLangPrice(langHandsOn);
                 let lines = [];
                 let langTotal = 0;
                 if (langHandsOn.length) {
                   lines.push(
-                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-On package</span><span><span class='biz-card-price-original'>$99</span><span class='biz-card-price-discount'>$49</span></span></div>`
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-On package</span><span><span class='biz-card-price-original'>$119</span><span class='biz-card-price-discount'>$35.90</span></span></div>`
                   );
                   langHandsOn.forEach((code, idx) => {
                     if (code === "en") return;
@@ -1950,12 +1950,12 @@
               // Hands-Off
               if (!pkg || pkg === "hands-off") {
                 let total =
-                  89 + calcLangPrice(langHandsOff) + calcYearsPrice(years);
+                  53.9 + calcLangPrice(langHandsOff) + calcYearsPrice(years);
                 let lines = [];
                 let langTotal = 0;
                 if (langHandsOff.length || years > 1) {
                   lines.push(
-                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-Off package</span><span><span class="biz-card-price-original">$179</span><span class='biz-card-price-discount'>$89</span></span></div>`
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-Off package</span><span><span class="biz-card-price-original">$179</span><span class='biz-card-price-discount'>$53.90</span></span></div>`
                   );
                 }
                 if (langHandsOff.length) {

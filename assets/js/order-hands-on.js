@@ -1,5 +1,5 @@
-const BASE_PRICE = 35.9; // hands-off discounted price
-const ORIGINAL_PRICE = 119.0; // original before discount
+const BASE_PRICE = 38.9; // hands-off discounted price
+const ORIGINAL_PRICE = 129.0; // original before discount
 const LANG_FIRST = 29.0;
 const LANG_ADDITIONAL = 19.0;
 
@@ -254,13 +254,29 @@ form.addEventListener("submit", (e) => {
   const encoded = encodeURIComponent(orderText);
   const subject = encodeURIComponent(`Hands‑On order`);
 
-  const igUser = "airliftstudios";
+  const igUser = "airlift.studios";
   const igBtn = document.getElementById("send-instagram");
   igBtn.href = `https://www.instagram.com/${igUser}/`;
-  igBtn.addEventListener("click", () => {
+  igBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const originalText = igBtn.textContent;
+
     try {
-      navigator.clipboard.writeText(orderText);
-    } catch {}
+      await navigator.clipboard.writeText(orderText);
+      igBtn.textContent = "Order copied";
+      igBtn.style.backgroundColor = "#10b981";
+      igBtn.style.color = "white";
+
+      setTimeout(() => {
+        igBtn.textContent = originalText;
+        igBtn.style.backgroundColor = "";
+        igBtn.style.color = "";
+        window.open(igBtn.href, "_blank", "noopener");
+      }, 1500);
+    } catch (error) {
+      // Fallback if clipboard fails
+      window.open(igBtn.href, "_blank", "noopener");
+    }
   });
   igBtn.title = "We'll copy your order so you can paste it in DM";
 

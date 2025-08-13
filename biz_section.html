@@ -61,10 +61,10 @@
             </div>
             <div class="biz-card-price-block">
               <div class="biz-price-line">
-                <span class="biz-card-price-original">$119.00</span>
+                <span class="biz-card-price-original">$129.00</span>
               </div>
               <div class="biz-price-line">
-                <span class="biz-card-price-discount">$35.90</span>
+                <span class="biz-card-price-discount">$38.90</span>
                 <span class="biz-price-smallprint"
                   >Fixed price, no monthly fees</span
                 >
@@ -156,10 +156,10 @@
             </div>
             <div class="biz-card-price-block">
               <div class="biz-price-line">
-                <span class="biz-card-price-original">$179.00</span>
+                <span class="biz-card-price-original">$199.00</span>
               </div>
               <div class="biz-price-line">
-                <span class="biz-card-price-discount">$53.90</span>
+                <span class="biz-card-price-discount">$59.90</span>
                 <span class="biz-price-smallprint"
                   >Fixed price, no monthly fees</span
                 >
@@ -1115,12 +1115,12 @@
             function updateCalc(pkg) {
               // Hands-On
               if (!pkg || pkg === "hands-on") {
-                let total = 35.9 + calcLangPrice(langHandsOn);
+                let total = 38.9 + calcLangPrice(langHandsOn);
                 let lines = [];
                 let langTotal = 0;
                 if (langHandsOn.length) {
                   lines.push(
-                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-On package</span><span><span class='biz-card-price-original'>$119</span><span class='biz-card-price-discount'>$35.90</span></span></div>`
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-On package</span><span><span class='biz-card-price-original'>$129</span><span class='biz-card-price-discount'>$38.90</span></span></div>`
                   );
                   langHandsOn.forEach((code, idx) => {
                     if (code === "en") return;
@@ -1154,12 +1154,12 @@
               // Hands-Off
               if (!pkg || pkg === "hands-off") {
                 let total =
-                  53.9 + calcLangPrice(langHandsOff) + calcYearsPrice(years);
+                  59.9 + calcLangPrice(langHandsOff) + calcYearsPrice(years);
                 let lines = [];
                 let langTotal = 0;
                 if (langHandsOff.length || years > 1) {
                   lines.push(
-                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-Off package</span><span><span class="biz-card-price-original">$179</span><span class='biz-card-price-discount'>$53.90</span></span></div>`
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-Off package</span><span><span class="biz-card-price-original">$199</span><span class='biz-card-price-discount'>$59.90</span></span></div>`
                   );
                 }
                 if (langHandsOff.length) {
