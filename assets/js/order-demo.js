@@ -161,10 +161,7 @@ form.addEventListener("submit", (e) => {
     errors.push("airbnbUrl");
   }
 
-  if (!values.domain) {
-    showFieldError("domain", "Please enter a domain name.");
-    errors.push("domain");
-  } else if (!isValidDomain(values.domain)) {
+  if (values.domain && !isValidDomain(values.domain)) {
     showFieldError(
       "domain",
       "Please enter a valid domain name (e.g., yourvillabali.com)."
