@@ -151,9 +151,13 @@ img {
   color: inherit;
 }
 .brand-logo {
-  width: 32px;
-  height: 32px;
+  width: 46px;
+  height: 48px;
   object-fit: contain;
+}
+footer .brand-logo {
+  height: 100px;
+  width: auto;
 }
 .brand-name {
   font-weight: 800;
@@ -972,7 +976,7 @@ img {
   display: grid;
   grid-template-columns: 1fr auto auto;
   gap: 18px;
-  align-items: start;
+  align-items: end;
 }
 .footer-links {
   display: grid;
@@ -992,6 +996,7 @@ img {
   text-decoration: none;
   color: var(--text-dark);
   font-weight: 600;
+  margin-top: 10px;
 }
 .footer-bottom {
   display: flex;
@@ -1007,7 +1012,6 @@ img {
   .footer-links {
     justify-self: end;
     text-align: right;
-    grid-template-columns: repeat(2, auto);
     column-gap: 28px;
     row-gap: 8px;
     justify-items: end;
@@ -1144,6 +1148,9 @@ img {
   .footer-grid {
     grid-template-columns: 1fr;
   }
+  .journey-path::before {
+    top: 20px;
+  }
 }
 
 @media (max-width: 680px) {
@@ -1211,13 +1218,12 @@ img {
   }
   .journey-path::before {
     left: 20px;
-    top: 0px;
   }
   .journey-step {
-    gap: 15px;
+    gap: 10px;
   }
   .step-marker {
-    width: 40px;
+    width: 42px;
     height: 40px;
   }
   .step-number {
