@@ -282,7 +282,7 @@ form.addEventListener("submit", (e) => {
   igBtn.title = "We'll copy your order so you can paste it in DM";
 
   const mailBtn = document.getElementById("send-email");
-  mailBtn.href = `mailto:hello@airliftstudios.com?subject=${subject}&body=${encoded}`;
+  mailBtn.href = `mailto:order@airliftstudios.com?subject=${subject}&body=${encoded}`;
   mailBtn.target = "_blank";
   mailBtn.rel = "noopener";
 

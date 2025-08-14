@@ -229,7 +229,7 @@ form.addEventListener("submit", (e) => {
   igBtn.title = "We'll copy your order so you can paste it in DM";
 
   // Email
-  const mail = `mailto:hello@airliftstudios.com?subject=${subject}&body=${encoded}`;
+  const mail = `mailto:order@airliftstudios.com?subject=${subject}&body=${encoded}`;
   const mailBtn = document.getElementById("send-email");
   mailBtn.href = mail;
   mailBtn.setAttribute("target", "_blank");
