@@ -534,7 +534,7 @@ footer .brand-logo {
 .journey-path::before {
   content: "";
   position: absolute;
-  left: 28px;
+  left: 29px;
   top: 60px;
   bottom: 60px;
   width: 3px;
