@@ -27,7 +27,7 @@ if (window.gsap) {
 
   // Section animations
   gsap.utils
-    .toArray(".text-content, .image-content, .journey-step, .why-card")
+    .toArray(".text-content, .image-content, .journey-step")
     .forEach((section) => {
       gsap.from(section, {
         duration: 0.9,
