@@ -350,7 +350,8 @@ form.addEventListener("submit", (e) => {
 
   const igUser = "airlift.studios";
   const igBtn = document.getElementById("send-instagram");
-  igBtn.href = `https://www.instagram.com/${igUser}/`;
+  const igDmLink = `https://ig.me/m/${igUser}?text=${orderText}`;
+  igBtn.href = igDmLink;
   igBtn.addEventListener("click", () => {
     try {
       navigator.clipboard.writeText(orderText);

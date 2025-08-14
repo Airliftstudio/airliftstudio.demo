@@ -218,10 +218,9 @@ form.addEventListener("submit", (e) => {
 
   // Instagram: deep link + profile fallback (no reliable prefill on web)
   const igUser = "airlift.studios";
-  const igDeep = `instagram://user?username=${igUser}`;
-  const igProfile = `https://www.instagram.com/${igUser}/`;
+  const igDmLink = `https://ig.me/m/${igUser}?text=${orderText}`;
   const igBtn = document.getElementById("send-instagram");
-  igBtn.href = igProfile;
+  igBtn.href = igDmLink;
   igBtn.addEventListener("click", () => {
     try {
       navigator.clipboard.writeText(orderText);
