@@ -998,7 +998,7 @@ footer .brand-logo {
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  color: var(--text-dark);
+  color: var(--muted);
   font-weight: 600;
   margin-top: 10px;
 }
