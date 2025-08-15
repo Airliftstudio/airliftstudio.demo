@@ -982,6 +982,9 @@ footer .brand-logo {
   gap: 18px;
   align-items: end;
 }
+.footer-brand {
+  margin-bottom: 30px;
+}
 .footer-links {
   display: grid;
   gap: 8px;

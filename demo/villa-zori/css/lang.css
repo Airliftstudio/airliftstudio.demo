@@ -64,7 +64,6 @@
   cursor: pointer;
   transition: background 0.2s ease;
   display: flex;
-  align-items: center;
   gap: 0.5rem;
   font-size: 0.9rem;
 }
