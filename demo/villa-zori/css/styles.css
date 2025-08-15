@@ -128,7 +128,6 @@ nav {
 .hero-content {
   z-index: 2;
   padding: 2.5rem 2rem 2rem 2rem;
-  box-shadow: 0 8px 32px rgba(44, 85, 48, 0.12);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -223,12 +222,9 @@ nav {
   align-items: center;
   gap: 0.25rem;
   font-size: 1.02rem;
-  font-weight: 500;
+  font-weight: 800;
   color: var(--white);
-  border-radius: 18px;
   padding: 0.18rem 0.8rem;
-  box-shadow: 0 1px 4px rgba(196, 164, 124, 0.06);
-  opacity: 0.85;
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
 }
@@ -280,8 +276,7 @@ nav {
 }
 .hero-content h1,
 .hero-content .hero-subtitle,
-.hero-content .hero-capacity,
-.hero-content {
+.hero-content .hero-capacity {
   color: var(--white);
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
 }
@@ -430,7 +425,6 @@ nav {
   border-radius: 15px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.3s ease;
 }
 
 .gallery-item.hero {
@@ -507,7 +501,6 @@ nav {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
 }
 
 .gallery-item:hover {
