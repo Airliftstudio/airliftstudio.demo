@@ -34,13 +34,13 @@ gsap.utils
   )
   .forEach((section) => {
     gsap.from(section, {
-      duration: 1,
+      duration: 0.8,
       y: 50,
       opacity: 0,
       ease: "power2.out",
       scrollTrigger: {
         trigger: section,
-        start: "top 85%",
+        start: "top 90%",
         once: true,
         // toggleActions: "play none none none",
       },
@@ -48,23 +48,27 @@ gsap.utils
   });
 
 // Delayed horizontal items animation
-gsap.utils
-  .toArray(".gallery-item, .amenity-item, .feature-card, .review-card")
-  .forEach((item, index) => {
-    gsap.from(item, {
-      duration: 1,
-      y: 50,
-      opacity: 0,
-      delay: index * 0.1,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: item,
-        start: "top 85%",
-        once: true,
-        // toggleActions: "play none none none",
-      },
+// Animate each group of items with their own delay sequence
+[".gallery-item", ".amenity-item", ".feature-card", ".review-card"].forEach(
+  (selector) => {
+    const items = gsap.utils.toArray(selector);
+    items.forEach((item, idx) => {
+      gsap.from(item, {
+        duration: 0.8,
+        y: 50,
+        opacity: 0,
+        delay: idx * 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: item,
+          start: "top 95%",
+          once: true,
+          // toggleActions: "play none none none",
+        },
+      });
     });
-  });
+  }
+);
 
 // Animated star wave fill and rating count-up
 function animateHeroStarsAndRating() {
