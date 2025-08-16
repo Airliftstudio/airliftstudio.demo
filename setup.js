@@ -139,13 +139,7 @@ async function setup() {
     // Define files to skip based on language settings
     const skipFiles = LANGUAGES
       ? ["index.html"] // Skip regular index.html when languages are specified
-      : [
-          "index_lang.html",
-          "js/translations.js",
-          "js/lang.js",
-          "css/lang.css",
-          "_redirects",
-        ]; // Skip language files when no languages
+      : ["index_lang.html", "lang.js", "lang.css", "_redirects"]; // Skip language files when no languages
 
     // Copy all files from template directory
     copyDir(templateDir, destDir, { skipFiles });

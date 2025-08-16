@@ -9,6 +9,152 @@ function getListingId(url) {
   return match ? match[1] : "listing";
 }
 
+// Function to dynamically extract required filenames from index.html
+function extractRequiredFilenames(projectPath) {
+  try {
+    const indexPath = path.join(projectPath, "index.html");
+
+    // Check if index.html exists
+    if (!fs.existsSync(indexPath)) {
+      console.log("ℹ️  index.html not found, using default required filenames");
+      return getDefaultRequiredFilenames();
+    }
+
+    // Read the HTML file
+    const htmlContent = fs.readFileSync(indexPath, "utf8");
+
+    // Extract all image references using regex - updated for new naming convention
+    const imagePatterns = [
+      /src="images\/(img-hero(?:-landscape)?-\d+w\.jpg)"/g,
+      /src="images\/(img-landscape-\d+-\d+w\.jpg)"/g,
+      /src="images\/(img-portrait-\d+-\d+w\.jpg)"/g,
+      /src="images\/(img-normal-\d+-\d+w\.jpg)"/g,
+    ];
+
+    const foundFilenames = new Set();
+
+    // Extract filenames from each pattern
+    imagePatterns.forEach((pattern) => {
+      let match;
+      while ((match = pattern.exec(htmlContent)) !== null) {
+        foundFilenames.add(match[1]);
+      }
+    });
+
+    // Convert to array and sort to maintain consistent order
+    const requiredFilenames = Array.from(foundFilenames).sort((a, b) => {
+      // Sort hero images first
+      if (a.includes("img-hero")) return -1;
+      if (b.includes("img-hero")) return 1;
+
+      // Sort by type (landscape, portrait, normal) then by number
+      const aType = a.includes("landscape")
+        ? 1
+        : a.includes("portrait")
+        ? 2
+        : 3;
+      const bType = b.includes("landscape")
+        ? 1
+        : b.includes("portrait")
+        ? 2
+        : 3;
+
+      if (aType !== bType) return aType - bType;
+
+      // Extract numbers for sorting
+      const aNum = parseInt(a.match(/\d+/)[0]);
+      const bNum = parseInt(b.match(/\d+/)[0]);
+      return aNum - bNum;
+    });
+
+    console.log(
+      `📋 Found ${requiredFilenames.length} required image filenames in index.html:`
+    );
+    requiredFilenames.forEach((filename) => console.log(`   - ${filename}`));
+
+    return requiredFilenames;
+  } catch (error) {
+    console.error(
+      "❌ Error extracting required filenames from index.html:",
+      error.message
+    );
+    console.log("ℹ️  Falling back to default required filenames");
+    return getDefaultRequiredFilenames();
+  }
+}
+
+// Function to extract width from filename
+function extractWidthFromFilename(filename) {
+  const match = filename.match(/(\d+)w\.jpg$/);
+  return match ? parseInt(match[1]) : null;
+}
+
+// Function to extract image type and requirements from filename
+function extractImageRequirements(filename) {
+  const requirements = {
+    type: null,
+    aspect: null,
+    number: null,
+    width: null,
+  };
+
+  // Extract width
+  requirements.width = extractWidthFromFilename(filename);
+
+  // Extract type and aspect
+  if (filename.includes("img-hero")) {
+    requirements.type = "hero";
+    if (filename.includes("hero-landscape")) {
+      requirements.aspect = "landscape";
+    } else {
+      requirements.aspect = "any"; // Default hero can be any aspect
+    }
+  } else if (filename.includes("img-landscape")) {
+    requirements.type = "landscape";
+    requirements.aspect = "landscape";
+  } else if (filename.includes("img-portrait")) {
+    requirements.type = "portrait";
+    requirements.aspect = "portrait";
+  } else if (filename.includes("img-normal")) {
+    requirements.type = "normal";
+    requirements.aspect = "any";
+  }
+
+  // Extract number (the first number in the filename, before the width)
+  if (filename.includes("img-hero")) {
+    // Hero images typically don't have a sequence number, just width
+    requirements.number = null;
+  } else {
+    // For other image types, extract the number before the width
+    const numberMatch = filename.match(/(\d+)-\d+w/);
+    if (numberMatch) {
+      requirements.number = parseInt(numberMatch[1]);
+    }
+  }
+
+  return requirements;
+}
+
+// Function to get default required filenames (fallback)
+function getDefaultRequiredFilenames() {
+  return [
+    "img-hero-1920w.jpg",
+    "img-landscape-1-1440w.jpg",
+    "img-landscape-2-1440w.jpg",
+    "img-portrait-1-720w.jpg",
+    "img-normal-1-720w.jpg",
+    "img-normal-2-720w.jpg",
+    "img-normal-3-720w.jpg",
+    "img-normal-4-720w.jpg",
+    "img-normal-5-720w.jpg",
+    "img-normal-6-720w.jpg",
+    "img-normal-7-720w.jpg",
+    "img-normal-8-720w.jpg",
+    "img-normal-9-720w.jpg",
+    "img-normal-10-720w.jpg",
+  ];
+}
+
 // Function to download a single image
 function downloadImage(url, filepath) {
   return new Promise((resolve, reject) => {
@@ -339,7 +485,7 @@ function updateAltTextInHtml(projectPath, selectedImages, requiredFilenames) {
         let newAltText = selectedImage.alt || selectedImage.category || "Image";
 
         // Special handling for hero image
-        if (filename === "hero-bg.jpg") {
+        if (filename.includes("img-hero")) {
           if (
             newAltText.startsWith("Listing image") ||
             newAltText.startsWith("Additional photos image")
@@ -428,22 +574,7 @@ async function downloadImages() {
   }
 
   // Define required filenames
-  const requiredFilenames = [
-    "hero-bg.jpg",
-    "image-landscape-1.jpg",
-    "image-landscape-2.jpg",
-    "image-portrait-1.jpg",
-    "image-normal-1.jpg",
-    "image-normal-2.jpg",
-    "image-normal-3.jpg",
-    "image-normal-4.jpg",
-    "image-normal-5.jpg",
-    "image-normal-6.jpg",
-    "image-normal-7.jpg",
-    "image-normal-8.jpg",
-    "image-normal-9.jpg",
-    "image-normal-10.jpg",
-  ];
+  const requiredFilenames = extractRequiredFilenames(destDir);
 
   // Check if images have categories
   const hasCategories = listingData.images.some(
@@ -469,20 +600,44 @@ async function downloadImages() {
     selectedUrls = selectedImages.map((img) => img.src);
   }
 
-  // Ensure we have the hero image (isHero: true) as hero-bg.jpg
-  const heroImage = listingData.images.find((img) => img.isHero);
-  if (heroImage) {
-    // Find if hero image is already selected
-    const heroIndex = selectedImages.findIndex(
-      (img) => img.src === heroImage.src
-    );
-    if (heroIndex === -1) {
-      // Replace first image with hero image
-      selectedImages[0] = heroImage;
-    } else if (heroIndex !== 0) {
-      // Move hero image to first position
-      const heroImg = selectedImages.splice(heroIndex, 1)[0];
-      selectedImages.unshift(heroImg);
+  // Smart hero image selection based on filename requirements
+  const heroFilenames = requiredFilenames.filter((filename) =>
+    filename.includes("img-hero")
+  );
+
+  for (const heroFilename of heroFilenames) {
+    const heroRequirements = extractImageRequirements(heroFilename);
+
+    // Find suitable hero image based on requirements
+    let suitableHeroImage = null;
+
+    if (heroRequirements.aspect === "landscape") {
+      // If hero requires landscape, prioritize landscape images with mustUse or isHero
+      suitableHeroImage =
+        listingData.images.find(
+          (img) => img.aspect === "landscape" && (img.mustUse || img.isHero)
+        ) || listingData.images.find((img) => img.aspect === "landscape");
+    } else {
+      // Default hero selection - prioritize isHero, then mustUse
+      suitableHeroImage =
+        listingData.images.find((img) => img.isHero) ||
+        listingData.images.find((img) => img.mustUse) ||
+        listingData.images[0]; // Fallback to first image
+    }
+
+    if (suitableHeroImage) {
+      // Find if hero image is already selected
+      const heroIndex = selectedImages.findIndex(
+        (img) => img.src === suitableHeroImage.src
+      );
+      if (heroIndex === -1) {
+        // Replace first image with hero image
+        selectedImages[0] = suitableHeroImage;
+      } else if (heroIndex !== 0) {
+        // Move hero image to first position
+        const heroImg = selectedImages.splice(heroIndex, 1)[0];
+        selectedImages.unshift(heroImg);
+      }
     }
   }
 
@@ -502,12 +657,12 @@ async function downloadImages() {
   for (const filename of requiredFilenames) {
     let selectedImage = null;
 
-    if (filename.includes("hero")) {
+    if (filename.includes("img-hero")) {
       // Hero image should already be first
       selectedImage = selectedImages.shift();
-    } else if (filename.includes("landscape")) {
+    } else if (filename.includes("img-landscape")) {
       selectedImage = findAndRemoveByAspect("landscape");
-    } else if (filename.includes("portrait")) {
+    } else if (filename.includes("img-portrait")) {
       selectedImage = findAndRemoveByAspect("portrait");
     } else {
       // Normal images - take any remaining image (randomized)
@@ -529,13 +684,35 @@ async function downloadImages() {
     }
   }
 
-  // Download images
+  // Download images with width parameters
 
   const downloadPromises = sortedImages.map((img, index) => {
     const filename = requiredFilenames[index];
     const filepath = path.join(imagesDir, filename);
 
-    return downloadImage(img.src, filepath)
+    // Extract width from filename and add to URL
+    const width = extractWidthFromFilename(filename);
+    let downloadUrl = img.src;
+
+    if (width) {
+      // Handle existing im_w parameter by replacing it, or add new one
+      if (img.src.includes("im_w=")) {
+        downloadUrl = img.src.replace(/im_w=\d+/, `im_w=${width}`);
+      } else {
+        downloadUrl = img.src.includes("?")
+          ? `${img.src}&im_w=${width}`
+          : `${img.src}?im_w=${width}`;
+      }
+      console.log(
+        `📥 Downloading ${filename} with width ${width}px from: ${downloadUrl}`
+      );
+    } else {
+      console.log(
+        `📥 Downloading ${filename} (no width specified) from: ${downloadUrl}`
+      );
+    }
+
+    return downloadImage(downloadUrl, filepath)
       .then(() => {})
       .catch((error) => {
         console.error(`❌ Failed to download ${filename}: ${error.message}`);
@@ -556,24 +733,101 @@ async function downloadImages() {
     process.exit(1);
   }
 
-  // Download all unselected images as backup
+  // Download all unselected images as backup with matching widths
   const unselectedImages = listingData.images.filter(
     (img) => !selectedUrls.includes(img.src)
   );
 
+  console.log(
+    `📥 Found ${unselectedImages.length} unselected images for backup download`
+  );
+
+  // Create a mapping of aspect ratios to widths from selected images
+  const aspectToWidths = {};
+  requiredFilenames.forEach((filename, index) => {
+    if (index < sortedImages.length) {
+      const image = sortedImages[index];
+      const requirements = extractImageRequirements(filename);
+      const aspect =
+        requirements.aspect === "any" ? image.aspect : requirements.aspect;
+      const width = requirements.width;
+
+      // Only add width to aspect mapping if it's not a hero image or if it's a specific hero aspect
+      if (requirements.type !== "hero" || requirements.aspect !== "any") {
+        if (!aspectToWidths[aspect]) {
+          aspectToWidths[aspect] = new Set();
+        }
+        aspectToWidths[aspect].add(width);
+      }
+    }
+  });
+
+  console.log("📊 Aspect to widths mapping for backup images:");
+  Object.entries(aspectToWidths).forEach(([aspect, widths]) => {
+    console.log(`  ${aspect}: ${Array.from(widths).join(", ")}px`);
+  });
+
+  // Create width distribution counters for each aspect ratio
+  const widthDistribution = {};
+  Object.keys(aspectToWidths).forEach((aspect) => {
+    widthDistribution[aspect] = {};
+    Array.from(aspectToWidths[aspect]).forEach((width) => {
+      widthDistribution[aspect][width] = 0;
+    });
+  });
+
   const backupPromises = unselectedImages.map((img, index) => {
     let filename;
-    if (img.category && img.category !== "") {
-      filename = `backup-${img.category.replace(/\s+/g, "-").toLowerCase()}-${
-        index + 1
-      }-${img.aspect}.jpg`;
+    const aspect = img.aspect;
+    const availableWidths = aspectToWidths[aspect] || new Set([720]); // Default to 720w if no matching widths
+
+    // Distribute backup images across available widths for this aspect ratio
+    const widthArray = Array.from(availableWidths).sort((a, b) => a - b);
+    const widthCounts = widthDistribution[aspect] || {};
+
+    // Find the width with the least downloads for this aspect ratio
+    let selectedWidth = 720; // Default fallback
+    if (Object.keys(widthCounts).length > 0) {
+      const minCount = Math.min(...Object.values(widthCounts));
+      const leastUsedWidths = widthArray.filter(
+        (width) => widthCounts[width] === minCount
+      );
+      selectedWidth = leastUsedWidths[0];
     } else {
-      filename = `backup-${index + 1}-${img.aspect}.jpg`;
+      selectedWidth = widthArray[0] || 720;
+    }
+
+    // Increment the counter for this width
+    if (widthDistribution[aspect]) {
+      widthDistribution[aspect][selectedWidth] =
+        (widthDistribution[aspect][selectedWidth] || 0) + 1;
+    }
+
+    if (img.category && img.category !== "") {
+      filename = `backup-${aspect}-${selectedWidth}w-${img.category
+        .replace(/\s+/g, "-")
+        .toLowerCase()}-${index + 1}.jpg`;
+    } else {
+      filename = `backup-${aspect}-${selectedWidth}w-${index + 1}.jpg`;
     }
     const filepath = path.join(imagesDir, filename);
 
-    return downloadImage(img.src, filepath)
-      .then(() => {})
+    // Handle existing im_w parameter by replacing it, or add new one
+    let downloadUrl = img.src;
+    if (img.src.includes("im_w=")) {
+      downloadUrl = img.src.replace(/im_w=\d+/, `im_w=${selectedWidth}`);
+    } else {
+      downloadUrl = img.src.includes("?")
+        ? `${img.src}&im_w=${selectedWidth}`
+        : `${img.src}?im_w=${selectedWidth}`;
+    }
+
+    return downloadImage(downloadUrl, filepath)
+      .then(() => {
+        console.log(
+          `📥 Downloaded backup ${filename} with width ${selectedWidth}px from: ${downloadUrl}`
+        );
+      })
       .catch((error) => {
         console.error(
           `❌ Failed to download backup ${filename}: ${error.message}`
@@ -582,22 +836,58 @@ async function downloadImages() {
       });
   });
 
-  // Download mustUse images that are not portrait or isHero with ?im_w=1920
+  // Download mustUse images that are not portrait or isHero with high resolution
+  // BUT exclude any that are already selected as main images
   const mustUseHighRes = listingData.images.filter(
-    (img) => img.mustUse && !img.isHero && img.aspect !== "portrait"
+    (img) =>
+      img.mustUse &&
+      !img.isHero &&
+      img.aspect !== "portrait" &&
+      !selectedUrls.includes(img.src)
+  );
+
+  console.log(
+    `📥 Found ${mustUseHighRes.length} mustUse images for high-res backup download`
   );
 
   const highResPromises = mustUseHighRes.map((img, index) => {
-    const filename = `backup-hero-${index + 1}.jpg`;
+    const aspect = img.aspect;
+
+    // For hero backups, use the hero image width from the selected images
+    let width = 1920; // Default fallback
+    const heroFilenames = requiredFilenames.filter((filename) =>
+      filename.includes("img-hero")
+    );
+    if (heroFilenames.length > 0) {
+      const heroWidth = extractWidthFromFilename(heroFilenames[0]);
+      if (heroWidth) {
+        width = heroWidth;
+      }
+    } else {
+      // Fallback to aspect-specific width if no hero image found
+      const availableWidths = aspectToWidths[aspect] || new Set([1920]);
+      width = Array.from(availableWidths)[0] || 1920;
+    }
+
+    const filename = `backup-hero-${index + 1}-${aspect}-${width}w.jpg`;
     const filepath = path.join(imagesDir, filename);
 
-    // Add ?im_w=1920 to the URL
-    const highResUrl = img.src.includes("?")
-      ? `${img.src}&im_w=1920`
-      : `${img.src}?im_w=1920`;
+    // Handle existing im_w parameter by replacing it, or add new one
+    let highResUrl = img.src;
+    if (img.src.includes("im_w=")) {
+      highResUrl = img.src.replace(/im_w=\d+/, `im_w=${width}`);
+    } else {
+      highResUrl = img.src.includes("?")
+        ? `${img.src}&im_w=${width}`
+        : `${img.src}?im_w=${width}`;
+    }
 
     return downloadImage(highResUrl, filepath)
-      .then(() => {})
+      .then(() => {
+        console.log(
+          `📥 Downloaded high-res backup ${filename} with width ${width}px`
+        );
+      })
       .catch((error) => {
         console.error(
           `❌ Failed to download high-res ${filename}: ${error.message}`
@@ -625,4 +915,8 @@ module.exports = {
   selectImagesWithCategories,
   getListingId,
   updateAltTextInHtml,
+  extractRequiredFilenames,
+  getDefaultRequiredFilenames,
+  extractWidthFromFilename,
+  extractImageRequirements,
 };
