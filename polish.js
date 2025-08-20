@@ -128,7 +128,6 @@ function polishProject(projectPath) {
     const headersContent = `/*
   X-Robots-Tag: index, follow
 
-Link: </images/hero-bg.jpg>; rel=preload; as=image
 Link: </css/styles.css>; rel=preload; as=style, </js/script.js>; rel=preload; as=script
 `;
 

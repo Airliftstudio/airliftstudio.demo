@@ -1,0 +1,37 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+Run node copy_template.js v1
+This will generate a copy of a template in /templates/new_template.
+I want you to read the index.html, css/styles.css and js/script.js inside /templates/new_template and modify the look and feel of this template copy so that it becomes its very own design template.
+This new template should also be used for showcasing airbnb villas so the template will have to feature the same kind of information. So I only want to change the look and feel of the template.
+These are the rules that must be followed in the new template:
+ - Keep the navbar the same.
+ - There must be a span#airbnb-rating-value that contains the airbnb rating value.
+ - There must be a div.badge-superhost and div.badge-guest-favorite.
+ - There must be space for 2 featured reviews in the review section. And there must be an empty div strucutre like this in the review section that later will be filled by myself manually.
+ ´´
+         <div class="reviews-scroll-container">
+          <div id="reviews-scroll-track"></div>
+        </div>
+´´
+ - There must be an empty element like this that will be filled by me manually later:
+ ´´
+        <div class="hero-capacity-row">
+          <span class="hero-capacity">
+          </span>
+        </div>
+ ´´
+ - Images that you want to use must follow the naming convention of img-[type]-[index]-[width].jpg.
+   Ex: img-normal-1-720w.jpg,img-normal-2-1440w.jpg,img-landscape-1-1920w.jpg,img-portrait-1-720w.jpg,
+   And there should always be one hero image that can have different aspect and width also.
+   Ex: img-hero-portrait-1920w.jpg,img-hero-landscape-2560w.jpg,img-hero-1920w.jpg.
+   These are the possible image widths to use: 480, 720, 960, 1440, 1920, 2560
+   There should be between 10-16 images used through out the website including a gallery section.
+ - The new template must look good on all screen sizes. Including the gallery section.
+ - There must be a footer with the same type of infomration
+
+Rename the new_template dir to a fitting name for this new template.
+When the website is finished open the index.html in the web browser.

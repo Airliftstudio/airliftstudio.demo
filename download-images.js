@@ -25,7 +25,7 @@ function extractRequiredFilenames(projectPath) {
 
     // Extract all image references using regex - updated for new naming convention
     const imagePatterns = [
-      /src="images\/(img-hero(?:-landscape)?-\d+w\.jpg)"/g,
+      /src="images\/(img-hero(?:-landscape|-portrait)?-\d+w\.jpg)"/g,
       /src="images\/(img-landscape-\d+-\d+w\.jpg)"/g,
       /src="images\/(img-portrait-\d+-\d+w\.jpg)"/g,
       /src="images\/(img-normal-\d+-\d+w\.jpg)"/g,
