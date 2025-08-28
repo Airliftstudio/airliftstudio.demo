@@ -134,3 +134,13 @@
 /demo/villa-zori/id/* /demo/villa-zori/:splat 200
 /demo/villa-zori/ja/* /demo/villa-zori/:splat 200
 /demo/villa-zori/ko/* /demo/villa-zori/:splat 200
+
+# demo/junaya-house redirects
+/demo/junaya-house/* /demo/junaya-house/index.html 200
+/demo/junaya-house/en/* /demo/junaya-house/:splat 200
+/demo/junaya-house/fr/* /demo/junaya-house/:splat 200
+/demo/junaya-house/de/* /demo/junaya-house/:splat 200
+/demo/junaya-house/es/* /demo/junaya-house/:splat 200
+/demo/junaya-house/zh/* /demo/junaya-house/:splat 200
+/demo/junaya-house/id/* /demo/junaya-house/:splat 200
+/demo/junaya-house/ko/* /demo/junaya-house/:splat 200
