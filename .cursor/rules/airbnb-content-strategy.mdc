@@ -56,4 +56,4 @@ Try to make it maximum two words.
 - Rewrite this section and the reasons why this location is perfect. Use 3-5 reasons with appropriate icons.
 
 ### Footer
-- Update the contact information for instagram, WhatsApp, GoogleMaps and email if it was included in the user prompt. If email is missing then default to hello@[suggested-domain-name].com. If instagram, WhatsApp or Google maps url are missing then comment out their <a> tag.
+- Update the contact information for instagram, WhatsApp and email if it was included in the user prompt. If email is missing then default to hello@[suggested-domain-name].com. If instagram or WhatsApp are missing then comment out their <a> tag.
