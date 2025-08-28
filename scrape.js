@@ -401,13 +401,12 @@ async function scrape() {
     let allImages = [];
     if (sections.length > 0) {
       // Gallery with categories
+      // First, collect all images from all sections
+      let tempAllImages = [];
       sections.forEach((section) => {
         const category = section.querySelector("h2")?.innerText?.trim() || "";
         const imgNodes = Array.from(section.querySelectorAll("img"));
-        // If at least 3 images, exclude the last; otherwise use all
-        const nodesToUse =
-          imgNodes.length >= 3 ? imgNodes.slice(0, -1) : imgNodes;
-        const imgs = nodesToUse.map((img) => {
+        const imgs = imgNodes.map((img) => {
           const button = img.closest("button");
           let alt = img.getAttribute("alt") || "";
           if (!alt && button) alt = button.getAttribute("aria-label") || "";
@@ -423,8 +422,26 @@ async function scrape() {
             mustUse: false,
           };
         });
+        tempAllImages.push({ category, imgs });
+      });
 
-        allImages.push(...imgs);
+      // Count total number of images across all sections
+      const totalImageCount = tempAllImages.reduce(
+        (sum, sec) => sum + sec.imgs.length,
+        0
+      );
+      const numCategories = tempAllImages.length;
+      const imageCountBreakpoint = 16 + numCategories;
+
+      // Now, for each section, decide whether to exclude the last image
+      tempAllImages.forEach(({ category, imgs }) => {
+        let nodesToUse;
+        if (totalImageCount < imageCountBreakpoint) {
+          nodesToUse = imgs; // Use all images if total is less than breakpoint
+        } else {
+          nodesToUse = imgs.length >= 3 ? imgs.slice(0, -1) : imgs;
+        }
+        allImages.push(...nodesToUse);
       });
     } else {
       // Fallback: no categories, just get all images
@@ -453,7 +470,7 @@ async function scrape() {
 
   // Combine heroImages and images (allImages), ensuring uniqueness by src
   // Exclude the last image from images (allImages)
-  const imagesExclLast = images.slice(0, -1);
+  const imagesExclLast = images.length > 18 ? images.slice(0, -1) : images;
 
   // Create a map of hero images by URL for quick lookup
   const heroImageMap = new Map();

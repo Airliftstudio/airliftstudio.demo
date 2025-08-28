@@ -437,45 +437,89 @@ function validateAndFixIcons(targetFilePath) {
       ) {
         const defaultIcon = DEFAULT_ICONS[section] || "fa-check";
         console.log(
-          `⚠️  Icon ${iconClass} not found, replacing with fas ${defaultIcon}`
+          `⚠️  Icon ${iconClass} not found in ${section} section, replacing with fas ${defaultIcon}`
         );
         return `fas ${defaultIcon}`;
       }
       return iconClass;
     }
 
-    // Check amenities section
-    const amenitiesIconRegex = /<i class="([^"]*fa-[^"]*)"[^>]*>/g;
-    content = content.replace(amenitiesIconRegex, (match, iconClass) => {
-      const newIconClass = replaceInvalidIcon(iconClass, "amenities");
-      if (newIconClass !== iconClass) {
-        modified = true;
-        return match.replace(iconClass, newIconClass);
+    // Function to process icons within a specific section
+    function processSectionIcons(
+      content,
+      sectionStart,
+      sectionEnd,
+      sectionName
+    ) {
+      // Find the section boundaries
+      const startIndex = content.indexOf(sectionStart);
+      if (startIndex === -1) {
+        console.log(
+          `⚠️  ${sectionName} section not found, skipping icon validation`
+        );
+        return content;
       }
-      return match;
-    });
 
-    // Check features section
-    const featuresIconRegex = /<i class="([^"]*fa-[^"]*)"[^>]*>/g;
-    content = content.replace(featuresIconRegex, (match, iconClass) => {
-      const newIconClass = replaceInvalidIcon(iconClass, "features");
-      if (newIconClass !== iconClass) {
-        modified = true;
-        return match.replace(iconClass, newIconClass);
+      const endIndex = content.indexOf(sectionEnd, startIndex);
+      if (endIndex === -1) {
+        console.log(
+          `⚠️  ${sectionName} section end not found, skipping icon validation`
+        );
+        return content;
       }
-      return match;
-    });
 
-    // Check location section
-    const locationIconRegex = /<i class="([^"]*fa-[^"]*)"[^>]*>/g;
-    content = content.replace(locationIconRegex, (match, iconClass) => {
-      const newIconClass = replaceInvalidIcon(iconClass, "location");
-      if (newIconClass !== iconClass) {
-        modified = true;
-        return match.replace(iconClass, newIconClass);
-      }
-      return match;
-    });
+      // Extract the section content
+      const beforeSection = content.substring(0, startIndex);
+      const sectionContent = content.substring(
+        startIndex,
+        endIndex + sectionEnd.length
+      );
+      const afterSection = content.substring(endIndex + sectionEnd.length);
+
+      // Process icons only within this section
+      const iconRegex = /<i class="([^"]*fa-[^"]*)"[^>]*>/g;
+      const processedSectionContent = sectionContent.replace(
+        iconRegex,
+        (match, iconClass) => {
+          const newIconClass = replaceInvalidIcon(iconClass, sectionName);
+          if (newIconClass !== iconClass) {
+            modified = true;
+            return match.replace(iconClass, newIconClass);
+          }
+          return match;
+        }
+      );
+
+      // Reconstruct the content
+      return beforeSection + processedSectionContent + afterSection;
+    }
+
+    // Process amenities section (within the amenities-grid)
+    content = processSectionIcons(
+      content,
+      '<div class="amenities-section">',
+      "</div>",
+      "amenities"
+    );
+
+    // Process features section (within the features-grid)
+    content = processSectionIcons(
+      content,
+      '<div class="features-grid">',
+      "</div>",
+      "features"
+    );
+
+    // Process location section (within the location-highlights)
+    content = processSectionIcons(
+      content,
+      '<section id="location" class="location">',
+      "</section>",
+      "location"
+    );
+
+    //fallback to make sure all icons are valid
+    content = processSectionIcons(content, "<body>", "</body>", "default");
 
     if (modified) {
       fs.writeFileSync(targetFilePath, content, "utf8");
@@ -546,162 +590,16 @@ function getImageDimensions(imagePath) {
 
 function checkImageAspects(targetFilePath) {
   try {
-    console.log(`🖼️  Checking image aspects in listing.json...`);
+    console.log(`🖼️  Checking image aspect ratios in images directory...`);
 
     // Get the project directory
     const projectDir = path.dirname(targetFilePath);
-    const listingJsonPath = path.join(projectDir, "listing.json");
-
-    // Check if listing.json exists
-    if (!fs.existsSync(listingJsonPath)) {
-      console.log(
-        `⚠️  listing.json not found at ${listingJsonPath}, skipping image aspect check`
-      );
-      return;
-    }
-
-    // Read listing.json
-    const listingData = JSON.parse(fs.readFileSync(listingJsonPath, "utf8"));
-
-    if (!listingData.images || !Array.isArray(listingData.images)) {
-      console.log(
-        `⚠️  No images found in listing.json, skipping image aspect check`
-      );
-      return;
-    }
-
-    // Count images by aspect
-    const portraitImages = listingData.images.filter(
-      (img) => img.aspect === "portrait"
-    );
-    const landscapeImages = listingData.images.filter(
-      (img) => img.aspect === "landscape"
-    );
-
-    // Check for warnings
-    let hasWarnings = false;
-
-    if (portraitImages.length === 0) {
-      console.log(`\n⚠️  WARNING: No portrait images found in listing.json`);
-      console.log(
-        `   • The website template expects at least one portrait image`
-      );
-      console.log(`   • Consider selecting a portrait image for better layout`);
-      hasWarnings = true;
-    }
-
-    if (landscapeImages.length < 3) {
-      console.log(
-        `\n⚠️  WARNING: Less than 3 landscape images found in listing.json`
-      );
-      console.log(`   • Found: ${landscapeImages.length} landscape images`);
-      console.log(
-        `   • Recommended: At least 3 landscape images for optimal layout`
-      );
-      hasWarnings = true;
-    }
-
-    if (!hasWarnings) {
-      console.log(`\n✅ Image aspects look good!`);
-    }
-
-    // Now check the actual downloaded images for aspect ratio compliance
-
     const imagesDir = path.join(projectDir, "images");
+
     if (!fs.existsSync(imagesDir)) {
       console.log(
         `⚠️  Images directory not found, skipping aspect ratio check`
       );
-      return;
-    }
-
-    // Define expected aspect ratios for specific images
-    const aspectRatioChecks = [
-      {
-        filename: "hero-bg.jpg",
-        expectedAspect: "landscape",
-        description: "Hero background image",
-      },
-      {
-        filename: "image-landscape-1.jpg",
-        expectedAspect: "landscape",
-        description: "Landscape image 1",
-      },
-      {
-        filename: "image-landscape-2.jpg",
-        expectedAspect: "landscape",
-        description: "Landscape image 2",
-      },
-      {
-        filename: "image-portrait-1.jpg",
-        expectedAspect: "portrait",
-        description: "Portrait image 1",
-      },
-    ];
-
-    let aspectRatioWarnings = false;
-
-    aspectRatioChecks.forEach((check) => {
-      const imagePath = path.join(imagesDir, check.filename);
-
-      if (!fs.existsSync(imagePath)) {
-        console.log(
-          `⚠️  WARNING: ${check.filename} not found for aspect ratio check`
-        );
-        aspectRatioWarnings = true;
-        return;
-      }
-
-      const dimensions = getImageDimensions(imagePath);
-
-      if (!dimensions) {
-        console.log(
-          `⚠️  WARNING: Could not read dimensions for ${check.filename}`
-        );
-        aspectRatioWarnings = true;
-        return;
-      }
-
-      const aspectRatio = dimensions.width / dimensions.height;
-      const isLandscape = aspectRatio > 1;
-      const isPortrait = aspectRatio < 1;
-
-      let actualAspect = "square";
-      if (isLandscape) actualAspect = "landscape";
-      else if (isPortrait) actualAspect = "portrait";
-
-      if (actualAspect !== check.expectedAspect) {
-        console.log(`⚠️  WARNING: ${check.filename} (${check.description})`);
-        console.log(`   • Expected: ${check.expectedAspect} aspect ratio`);
-        console.log(
-          `   • Actual: ${actualAspect} aspect ratio (${dimensions.width}x${dimensions.height})`
-        );
-        console.log(`   • This may affect the website layout`);
-        aspectRatioWarnings = true;
-      }
-    });
-  } catch (error) {
-    console.error(`Error checking image aspects: ${error.message}`);
-    // Don't exit process, just log the error and continue
-    console.log("Continuing with other operations...");
-  }
-}
-
-function checkImagesDirectory(targetFilePath) {
-  try {
-    // Get the project directory
-    const projectDir = path.dirname(targetFilePath);
-    const imagesDir = path.join(projectDir, "images");
-
-    // Check if images directory exists
-    if (!fs.existsSync(imagesDir)) {
-      console.log(
-        `\n🚨 CRITICAL ERROR: Images directory not found at ${imagesDir}`
-      );
-      console.log(
-        `   • The website requires an 'images' directory with downloaded images`
-      );
-      console.log(`   • Please run the image download process first`);
       return;
     }
 
@@ -715,153 +613,117 @@ function checkImagesDirectory(targetFilePath) {
       return imageExtensions.includes(ext);
     });
 
-    imageFiles = imageFiles.filter((file) => !file.includes("backup"));
+    // Check each image file for aspect ratio compliance
+    let aspectRatioWarnings = false;
 
-    // Define the expected image names
-    const expectedImages = [
-      "hero-bg.jpg",
-      "image-landscape-1.jpg",
-      "image-landscape-2.jpg",
-      "image-portrait-1.jpg",
-      "image-normal-1.jpg",
-      "image-normal-2.jpg",
-      "image-normal-3.jpg",
-      "image-normal-4.jpg",
-      "image-normal-5.jpg",
-      "image-normal-6.jpg",
-      "image-normal-7.jpg",
-      "image-normal-8.jpg",
-      "image-normal-9.jpg",
-      "image-normal-10.jpg",
-    ];
-
-    // Check for missing or incorrectly named images
-    const missingImages = [];
-    const incorrectNames = [];
-    const foundImages = [];
-    const corruptedImages = [];
-
-    expectedImages.forEach((expectedImage) => {
-      if (!imageFiles.includes(expectedImage)) {
-        missingImages.push(expectedImage);
-      } else {
-        foundImages.push(expectedImage);
-      }
-    });
-
-    // Check for extra images (not in expected list)
     imageFiles.forEach((imageFile) => {
-      if (!expectedImages.includes(imageFile)) {
-        incorrectNames.push(imageFile);
+      // Check if filename contains "portrait" or "landscape"
+      const isPortrait = imageFile.toLowerCase().includes("portrait");
+      const isLandscape = imageFile.toLowerCase().includes("landscape");
+
+      // Skip files that don't specify aspect ratio in filename
+      if (!isPortrait && !isLandscape) {
+        return;
+      }
+
+      const imagePath = path.join(imagesDir, imageFile);
+      const dimensions = getImageDimensions(imagePath);
+
+      if (!dimensions) {
+        console.log(`⚠️  WARNING: Could not read dimensions for ${imageFile}`);
+        aspectRatioWarnings = true;
+        return;
+      }
+
+      const aspectRatio = dimensions.width / dimensions.height;
+      const actualIsLandscape = aspectRatio > 1;
+      const actualIsPortrait = aspectRatio < 1;
+
+      let actualAspect = "square";
+      if (actualIsLandscape) actualAspect = "landscape";
+      else if (actualIsPortrait) actualAspect = "portrait";
+
+      const expectedAspect = isPortrait ? "portrait" : "landscape";
+
+      if (actualAspect !== expectedAspect) {
+        console.log(`⚠️  WARNING: ${imageFile}`);
+        console.log(
+          `   • Expected: ${expectedAspect} aspect ratio (based on filename)`
+        );
+        console.log(
+          `   • Actual: ${actualAspect} aspect ratio (${dimensions.width}x${dimensions.height})`
+        );
+        console.log(`   • This may affect the website layout`);
+        aspectRatioWarnings = true;
       }
     });
 
-    // Validate image file sizes and basic format
-    foundImages.forEach((imageName) => {
-      const imagePath = path.join(imagesDir, imageName);
-      const stats = fs.statSync(imagePath);
-      const fileSizeInBytes = stats.size;
-      const fileSizeInKB = fileSizeInBytes / 1024;
+    if (!aspectRatioWarnings) {
+      console.log(`✅ All image aspect ratios match their filenames!`);
+    }
+  } catch (error) {
+    console.error(`Error checking image aspects: ${error.message}`);
+    // Don't exit process, just log the error and continue
+    console.log("Continuing with other operations...");
+  }
+}
 
-      // Check if file is too small (likely corrupted or empty)
-      if (fileSizeInKB < 1) {
-        corruptedImages.push({
-          name: imageName,
-          size: fileSizeInKB.toFixed(2),
-          issue: "File too small (likely corrupted or empty)",
-        });
-      }
-      // Check if file is suspiciously small for an image
-      else if (fileSizeInKB < 5) {
-        corruptedImages.push({
-          name: imageName,
-          size: fileSizeInKB.toFixed(2),
-          issue: "File suspiciously small (may be corrupted)",
-        });
-      }
+function checkImagesDirectory(targetFilePath) {
+  try {
+    const projectDir = path.dirname(targetFilePath);
+    const imagesDir = path.join(projectDir, "images");
 
-      // Basic format validation for JPEG files
-      if (
-        imageName.toLowerCase().endsWith(".jpg") ||
-        imageName.toLowerCase().endsWith(".jpeg")
-      ) {
-        try {
-          const buffer = fs.readFileSync(imagePath);
-          // Check for JPEG file signature (starts with 0xFF 0xD8)
-          if (buffer.length < 2 || buffer[0] !== 0xff || buffer[1] !== 0xd8) {
-            corruptedImages.push({
-              name: imageName,
-              size: fileSizeInKB.toFixed(2),
-              issue: "Invalid JPEG format (missing file signature)",
-            });
-          }
-        } catch (error) {
-          corruptedImages.push({
-            name: imageName,
-            size: fileSizeInKB.toFixed(2),
-            issue: `Error reading file: ${error.message}`,
-          });
-        }
-      }
-    });
-
-    // Generate critical warnings
-    let hasCriticalIssues = false;
-
-    if (imageFiles.length !== 14) {
+    // Ensure images directory exists
+    if (!fs.existsSync(imagesDir)) {
       console.log(
-        `\n🚨 CRITICAL WARNING: Incorrect number of images in /images directory!`
+        `\n🚨 CRITICAL ERROR: Images directory not found at ${imagesDir}`
       );
-      console.log(`   • Found: ${imageFiles.length} images`);
-      console.log(`   • Expected: 14 images`);
-      console.log(`   • Missing: ${14 - imageFiles.length} images`);
-      console.log(`   • This will cause the website to display broken images`);
-      hasCriticalIssues = true;
+      console.log(
+        `   • The website requires an 'images' directory with downloaded images`
+      );
+      console.log(`   • Please run the image download process first`);
+      return;
     }
 
-    if (missingImages.length > 0) {
-      console.log(`\n🚨 CRITICAL WARNING: Missing required images!`);
+    // Read HTML and collect all img-*.jpg references
+    const html = fs.readFileSync(targetFilePath, "utf8");
+    const matches = html.match(/img-[^"'\s]+\.jpg/gi) || [];
+    const referencedImages = Array.from(new Set(matches));
+
+    console.log(
+      `🖼️  Found ${referencedImages.length} image references in index.html`
+    );
+
+    // Verify each referenced image exists in images directory
+    const missing = [];
+    referencedImages.forEach((name) => {
+      const filePath = path.join(imagesDir, name);
+      if (!fs.existsSync(filePath)) {
+        missing.push(name);
+      }
+    });
+
+    if (missing.length > 0) {
+      console.log(
+        `\n🚨 CRITICAL WARNING: Missing referenced images in /images`
+      );
       console.log(`   • Missing images:`);
-      missingImages.forEach((image) => {
-        console.log(`     - ${image}`);
-      });
-      console.log(
-        `   • These images are required for the website to function properly`
-      );
-      hasCriticalIssues = true;
+      missing.forEach((n) => console.log(`     - ${n}`));
+    } else {
+      console.log(`✅ All referenced images exist in /images`);
     }
 
-    if (incorrectNames.length > 0) {
-      console.log(`\n🚨 CRITICAL WARNING: Images with incorrect names found!`);
-      console.log(`   • Incorrectly named images:`);
-      incorrectNames.forEach((image) => {
-        console.log(`     - ${image}`);
-      });
-      console.log(`   • These images will not be used by the website`);
-      hasCriticalIssues = true;
-    }
-
-    if (corruptedImages.length > 0) {
-      console.log(`\n🚨 CRITICAL WARNING: Corrupted or empty images detected!`);
-      console.log(`   • Corrupted images:`);
-      corruptedImages.forEach((image) => {
-        console.log(`     - ${image.name} (${image.size} KB): ${image.issue}`);
-      });
-      console.log(`   • These images will display as broken on the website`);
-      console.log(
-        `   • Please re-download the images using the image download process`
-      );
-      hasCriticalIssues = true;
-    }
-
-    if (!hasCriticalIssues) {
-      console.log(
-        `\n✅ Images directory looks good! All 14 required images found with correct names.`
-      );
+    // Optional: report extra img-*.jpg files in images directory not referenced in HTML
+    const dirImages = (fs.readdirSync(imagesDir) || []).filter((f) =>
+      /^img-.*\.jpg$/i.test(f)
+    );
+    const unreferenced = dirImages.filter((f) => !referencedImages.includes(f));
+    if (unreferenced.length > 0) {
+      console.log(`ℹ️  Unreferenced images present in /images:`);
+      unreferenced.forEach((n) => console.log(`     - ${n}`));
     }
   } catch (error) {
     console.error(`Error checking images directory: ${error.message}`);
-    // Don't exit process, just log the error and continue
     console.log("Continuing with other operations...");
   }
 }
