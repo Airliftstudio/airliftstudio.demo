@@ -784,7 +784,6 @@ footer {
       "normal-2"
       "portrait-1"
       "portrait-1"
-      "portrait-1"
       "normal-3"
       "normal-4"
       "landscape-2"
@@ -798,10 +797,6 @@ footer {
 
   .gallery-item.hero {
     height: 424px;
-  }
-
-  .gallery-item.portrait-1 {
-    height: 648px;
   }
 }
 
