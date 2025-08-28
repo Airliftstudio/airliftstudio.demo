@@ -392,6 +392,8 @@ function getAvailableIcons(fontAwesomePath) {
         icons.add(iconName);
         // Also add the fas fa- version for compatibility
         icons.add("fas " + iconName);
+        // Also add the old fa fa- version for backward compatibility
+        icons.add("fa " + iconName);
       }
     }
 
@@ -429,11 +431,18 @@ function validateAndFixIcons(targetFilePath) {
     // Function to replace invalid icons
     function replaceInvalidIcon(iconClass, section) {
       // Clean up the icon class to extract just the fa- part
-      const cleanIconClass = iconClass.replace(/^(fas|far|fab)\s+/, "");
+      const cleanIconClass = iconClass.replace(/^(fas|far|fab|fa)\s+/, "");
+
+      // Extract the base icon name (before any additional classes)
+      const baseIconMatch = iconClass.match(
+        /(?:fas|far|fab|fa)\s+(fa-[a-zA-Z0-9-]+)/
+      );
+      const baseIcon = baseIconMatch ? baseIconMatch[1] : cleanIconClass;
 
       if (
         !availableIcons.has(iconClass) &&
-        !availableIcons.has(cleanIconClass)
+        !availableIcons.has(cleanIconClass) &&
+        !availableIcons.has(baseIcon)
       ) {
         const defaultIcon = DEFAULT_ICONS[section] || "fa-check";
         console.log(
@@ -728,6 +737,149 @@ function checkImagesDirectory(targetFilePath) {
   }
 }
 
+function addRedirects(projectPath) {
+  try {
+    const redirectsPath = "_redirects";
+    const jsDir = path.join(projectPath, "js");
+
+    // Extract languages from translation files (same logic as validateTranslations)
+    const languages = [];
+
+    if (fs.existsSync(jsDir)) {
+      // Find all translation files
+      const translationFiles = fs
+        .readdirSync(jsDir)
+        .filter(
+          (file) => file.startsWith("translations_") && file.endsWith(".js")
+        )
+        .map((file) => file.replace(".js", ""));
+
+      // Extract language codes from translation files
+      translationFiles.forEach((translationFile) => {
+        const langCode = translationFile.replace("translations_", "");
+        languages.push(langCode);
+      });
+    }
+
+    // Read existing redirects file
+    let redirectsContent = "";
+    if (fs.existsSync(redirectsPath)) {
+      redirectsContent = fs.readFileSync(redirectsPath, "utf8");
+    }
+
+    // Remove existing redirects for this path
+    // Look for the comment header and all redirects that follow it
+    const pathRedirectPattern = new RegExp(
+      `# ${projectPath.replace(/\//g, "\\/")} redirects\\n.*?(?=\\n\\n|$)`,
+      "gs"
+    );
+
+    if (pathRedirectPattern.test(redirectsContent)) {
+      console.log(
+        `🔄 Removing existing redirects for ${projectPath} from _redirects file`
+      );
+      redirectsContent = redirectsContent.replace(pathRedirectPattern, "");
+
+      // Clean up any double newlines that might be left
+      redirectsContent = redirectsContent.replace(/\n\n\n+/g, "\n\n");
+    }
+
+    // Create new redirects for this path
+    const redirectLines = [
+      `# ${projectPath} redirects`,
+      `/${projectPath}/* /${projectPath}/index.html 200`, // Always include default redirect
+    ];
+
+    // Add language-specific redirects
+    languages.forEach((lang) => {
+      redirectLines.push(
+        `/${projectPath}/${lang}/* /${projectPath}/:splat 200`
+      );
+    });
+
+    const newRedirects = redirectLines.join("\n");
+
+    // Insert new redirects just before the "#demo 404" line
+    const demo404Pattern = /(^|\n)(#demo 404)/m;
+    let updatedContent;
+    if (demo404Pattern.test(redirectsContent)) {
+      updatedContent = redirectsContent.replace(
+        demo404Pattern,
+        `\n\n${newRedirects}\n\n$2`
+      );
+    } else {
+      // If "#demo 404" not found, append to the end
+      updatedContent = redirectsContent + "\n\n" + newRedirects;
+    }
+
+    // Write back to file
+    fs.writeFileSync(redirectsPath, updatedContent, "utf8");
+
+    console.log(
+      `✅ Language redirects updated in _redirects for ${projectPath}:`
+    );
+    console.log(
+      `   - /${projectPath}/* → /${projectPath}/index.html 200 (default)`
+    );
+    languages.forEach((lang) => {
+      console.log(
+        `   - /${projectPath}/${lang}/* → /${projectPath}/:splat 200`
+      );
+    });
+  } catch (error) {
+    console.error("Error adding language redirects:", error.message);
+  }
+}
+
+function addLocalRedirects(projectPath) {
+  try {
+    const fullPath = projectPath;
+    const localRedirectsPath = `${fullPath}/_redirects`;
+
+    const languages = [];
+
+    if (fs.existsSync(jsDir)) {
+      // Find all translation files
+      const translationFiles = fs
+        .readdirSync(jsDir)
+        .filter(
+          (file) => file.startsWith("translations_") && file.endsWith(".js")
+        )
+        .map((file) => file.replace(".js", ""));
+
+      // Extract language codes from translation files
+      translationFiles.forEach((translationFile) => {
+        const langCode = translationFile.replace("translations_", "");
+        languages.push(langCode);
+      });
+    }
+
+    // Create new redirects content - completely replace the file
+    const defaultRedirect = "/* /index.html 200";
+    const newLocalRedirects = languages
+      .map((lang) => `/${lang}/* /:splat 200`)
+      .join("\n");
+
+    // Combine default redirect with language redirects
+    const redirectsContent = newLocalRedirects
+      ? `${defaultRedirect}\n${newLocalRedirects}`
+      : defaultRedirect;
+
+    // Write the complete new content to file (overwrites everything)
+    fs.writeFileSync(localRedirectsPath, redirectsContent, "utf8");
+
+    console.log(
+      `✅ Local language redirects updated in ${localRedirectsPath}:`
+    );
+    console.log(`   - ${defaultRedirect}`);
+    languages.forEach((lang) => {
+      console.log(`   - /${lang}/* → /:splat 200`);
+    });
+  } catch (error) {
+    console.error("Error adding local language redirects:", error.message);
+  }
+}
+
 function validateTranslations(projectDir) {
   try {
     const jsDir = path.join(projectDir, "js");
@@ -966,6 +1118,12 @@ function main() {
   console.log(`📖 Checking images directory...`);
   checkImagesDirectory(targetFile);
 
+  console.log(`📖 addRedirects...`);
+  addRedirects(projectDir);
+
+  console.log(`📖 addLocalRedirects...`);
+  addLocalRedirects(projectDir);
+
   console.log(`📖 Validating translation files...`);
   validateTranslations(projectDir);
 
@@ -988,4 +1146,6 @@ module.exports = {
   checkImageAspects,
   checkImagesDirectory,
   validateTranslations,
+  addRedirects,
+  addLocalRedirects,
 };

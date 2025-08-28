@@ -144,3 +144,33 @@
 /demo/junaya-house/zh/* /demo/junaya-house/:splat 200
 /demo/junaya-house/id/* /demo/junaya-house/:splat 200
 /demo/junaya-house/ko/* /demo/junaya-house/:splat 200
+
+# demo/timbul-highland-villa redirects
+/demo/timbul-highland-villa/* /demo/timbul-highland-villa/index.html 200
+/demo/timbul-highland-villa/en/* /demo/timbul-highland-villa/:splat 200
+/demo/timbul-highland-villa/fr/* /demo/timbul-highland-villa/:splat 200
+/demo/timbul-highland-villa/de/* /demo/timbul-highland-villa/:splat 200
+/demo/timbul-highland-villa/es/* /demo/timbul-highland-villa/:splat 200
+/demo/timbul-highland-villa/zh/* /demo/timbul-highland-villa/:splat 200
+/demo/timbul-highland-villa/id/* /demo/timbul-highland-villa/:splat 200
+/demo/timbul-highland-villa/ko/* /demo/timbul-highland-villa/:splat 200
+
+# demo/kabakaba-bali redirects
+/demo/kabakaba-bali/* /demo/kabakaba-bali/index.html 200
+/demo/kabakaba-bali/en/* /demo/kabakaba-bali/:splat 200
+/demo/kabakaba-bali/fr/* /demo/kabakaba-bali/:splat 200
+
+# demo/kamajaya-villa-6 redirects
+/demo/kamajaya-villa-6/* /demo/kamajaya-villa-6/index.html 200
+/demo/kamajaya-villa-6/en/* /demo/kamajaya-villa-6/:splat 200
+/demo/kamajaya-villa-6/fr/* /demo/kamajaya-villa-6/:splat 200
+
+
+# demo/lipah-beach-villas redirects
+/demo/lipah-beach-villas/* /demo/lipah-beach-villas/index.html 200
+/demo/lipah-beach-villas/en/* /demo/lipah-beach-villas/:splat 200
+/demo/lipah-beach-villas/fr/* /demo/lipah-beach-villas/:splat 200
+/demo/lipah-beach-villas/ko/* /demo/lipah-beach-villas/:splat 200
+
+#demo 404
+/demo/* /demo-404.html 404

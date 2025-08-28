@@ -9,6 +9,7 @@ function loadTranslations() {
   // Automatically load all language files
     translations["en"] = window.translations_en || {};
   translations["fr"] = window.translations_fr || {};
+  translations["ko"] = window.translations_ko || {};
 
   supportedLanguages = Object.keys(translations);
 

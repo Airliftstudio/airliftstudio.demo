@@ -8,8 +8,8 @@ window.translations_en = {
     cta: "Check Availability",
   },
   about: {
-    title: "Your Beachfront Paradise in Bali",
-    description: "Welcome to Keynan's House! My name is Putu, and I'm a local guide. I speak Czech, English, Indonesian and Balinese! My house is located in one of the best places for snorkeling or just relaxing on the beach. We are looking forward to meeting you! Suksema.",
+    title: "Your Private Paradise by the Sea",
+    description: "Welcome to Keynan's House! My name is Putu, and I'm a local guide. I speak Czech, English, Indonesian and Balinese! My house is located in one of the best places for snorkeling or just relaxing on the beach. A private villa with 2 separate bedrooms and 2 bathrooms, 1 dining room overlooking the garden, equipped kitchen, AC, and free WiFi.",
   },
   features: {
     pool: {
@@ -17,31 +17,32 @@ window.translations_en = {
       description: "Enjoy your own private indoor pool available all year, open 24 hours for ultimate relaxation and refreshment.",
     },
     beach: {
-      title: "Beach Access",
-      description: "Located in one of the best places for snorkeling or just relaxing on the beach with easy access.",
+      title: "Beach Access & Snorkeling",
+      description: "Located in one of the best places for snorkeling with direct beach access for unforgettable ocean adventures.",
     },
     breakfast: {
       title: "Included Breakfast",
-      description: "Start your day right with included breakfast essentials and coffee to make mornings extra easy.",
+      description: "Start your day right with delicious included breakfast and coffee to make mornings extra easy.",
     },
-    wifi: {
-      title: "Free WiFi & Workspace",
-      description: "Stay connected with free WiFi and dedicated workspace perfect for remote work or planning your adventures.",
+    ac: {
+      title: "Air Conditioning",
+      description: "Climate control in every room for comfort in tropical weather, ensuring a perfect night's sleep.",
     },
   },
   amenities: {
     pool: "Private indoor pool",
-    beach: "Beach access",
-    kitchen: "Kitchen",
     wifi: "Free WiFi",
     workspace: "Dedicated workspace",
-    parking: "Free parking",
+    parking: "Free parking on premises",
     ac: "Air conditioning",
-    fan: "Ceiling fan",
-    dining: "Dining table",
+    kitchen: "Full kitchen",
+    beach: "Beach access",
+    breakfast: "Included breakfast",
+    cleaning: "Cleaning available during stay",
+    luggage: "Luggage dropoff allowed",
+    longstay: "Long term stays allowed",
     safe: "Safe",
-    cleaning: "Cleaning available",
-    breakfast: "Breakfast included",
+    backyard: "Backyard",
     title: "Amenities",
   },
   gallery: {
@@ -50,40 +51,40 @@ window.translations_en = {
   },
   location: {
     title: "Perfect Beachfront Location",
-    description: "Lipah Beach Private Villas is located in one of the best places for snorkeling or just relaxing on the beach, offering the perfect balance of tranquility and adventure.",
+    description: "Lipah Beach Private Villas is located in one of the best places for snorkeling and beach relaxation, offering the perfect balance of tranquility and adventure in beautiful Bali.",
     beaches: {
-      title: "Perfect snorkeling location",
+      title: "Direct beach access",
       description: "Located in one of the best places for snorkeling and beach relaxation",
     },
-    pool: {
-      title: "Private indoor pool",
-      description: "One of the few places in the area with a private pool available all year",
+    restaurants: {
+      title: "Local dining options",
+      description: "Easy access to local restaurants and dining experiences",
     },
     parking: {
-      title: "Free parking on premises",
-      description: "Easy arrival by car with free private parking available",
+      title: "Free private parking",
+      description: "Convenient parking on premises for easy arrival and departure",
     },
-    breakfast: {
-      title: "Included breakfast",
-      description: "Start your day with included breakfast essentials and coffee",
+    backyard: {
+      title: "Private backyard",
+      description: "Enjoy your own private outdoor space for relaxation and dining",
     },
   },
   footer: {
-    tagline: "Your beachfront paradise in Bali.",
+    tagline: "Your beachfront paradise in beautiful Bali.",
   },
   meta: {
-    title: "Lipah Beach Private Villas - 2-Bedroom Villa with Private Pool in Bali | Beach Access, Guest Favorite",
-    description: "Book Lipah Beach Private Villas, a 2-bedroom villa with private pool in Bali. Beach access, snorkeling paradise, included breakfast, guest favorite. Perfect for families and beach lovers. See real guest reviews!",
-    keywords: "Lipah Beach Private Villas, Bali villa, private pool, beach access, snorkeling, guest favorite, family villa, breakfast included, airbnb, book villa, best villa Bali, vacation rental, Bali accommodation, Abang villa",
-    og_title: "Lipah Beach Private Villas - 2-Bedroom Villa with Private Pool in Bali | Beach Access, Guest Favorite",
-    og_description: "Book Lipah Beach Private Villas, a 2-bedroom villa with private pool in Bali. Beach access, snorkeling paradise, included breakfast, guest favorite. Perfect for families and beach lovers. See real guest reviews!",
+    title: "Lipah Beach Private Villas - 2-Bedroom Villa with Private Pool in Bali | Superhost, Guest Favorite",
+    description: "Book Lipah Beach Private Villas, a 5-star rated 2-bedroom villa in Bali. Private pool, beach access, superhost, guest favorite, perfect for snorkeling. Perfect for families and relaxation. See real guest reviews!",
+    keywords: "Lipah Beach Private Villas, Bali villa, private pool, superhost, guest favorite, family villa, beach access, snorkeling, luxury villa, tropical paradise, airbnb, book villa, best villa Bali, vacation rental, Bali accommodation",
+    og_title: "Lipah Beach Private Villas - 2-Bedroom Villa with Private Pool in Bali | Superhost, Guest Favorite",
+    og_description: "Book Lipah Beach Private Villas, a 5-star rated 2-bedroom villa in Bali. Private pool, beach access, superhost, guest favorite, perfect for snorkeling. Perfect for families and relaxation. See real guest reviews!",
     locale: "en_US",
     language: "English",
   },
   structuredData: {
-    description: "2-Bedroom Villa with Private Pool in Bali. Beach access, snorkeling paradise, included breakfast, guest favorite. Perfect for families and beach lovers.",
+    description: "2-Bedroom Villa with Private Pool in Bali. Beach access, snorkeling paradise, superhost, guest favorite. Perfect for families and relaxation.",
     addressCountry: "Indonesia",
-    keywords: "Lipah Beach Private Villas, Bali villa, private pool, beach access, snorkeling, guest favorite, family villa, breakfast included, airbnb, book villa, best villa Bali, vacation rental, Bali accommodation, Abang villa",
+    keywords: "Lipah Beach Private Villas, Bali villa, private pool, superhost, guest favorite, family villa, beach access, snorkeling, luxury villa, tropical paradise, airbnb, book villa, best villa Bali, vacation rental, Bali accommodation",
   },
   nav: {
     about: "Overview",

@@ -250,89 +250,6 @@ function extractFolderName(targetFilePath) {
   return pathParts.join("/");
 }
 
-function addLanguageRedirects(projectPath, languages) {
-  try {
-    const redirectsPath = "_redirects";
-    const fullPath = extractFolderName(projectPath);
-
-    // Read existing redirects file
-    let redirectsContent = "";
-    if (fs.existsSync(redirectsPath)) {
-      redirectsContent = fs.readFileSync(redirectsPath, "utf8");
-    }
-
-    // Remove existing redirects for this path
-    // Look for the comment header and all redirects that follow it
-    const pathRedirectPattern = new RegExp(
-      `# ${fullPath.replace(/\//g, "\\/")} redirects\\n.*?(?=\\n\\n|$)`,
-      "gs"
-    );
-
-    if (pathRedirectPattern.test(redirectsContent)) {
-      console.log(
-        `🔄 Removing existing redirects for ${fullPath} from _redirects file`
-      );
-      redirectsContent = redirectsContent.replace(pathRedirectPattern, "");
-
-      // Clean up any double newlines that might be left
-      redirectsContent = redirectsContent.replace(/\n\n\n+/g, "\n\n");
-    }
-
-    // Create new redirects for this path
-    const newRedirects = [
-      `# ${fullPath} redirects`,
-      `/${fullPath}/* /${fullPath}/index.html 200`,
-      ...languages.map(
-        (lang) => `/${fullPath}/${lang}/* /${fullPath}/:splat 200`
-      ),
-    ].join("\n");
-
-    // Add to existing content
-    const updatedContent = redirectsContent + "\n\n" + newRedirects;
-
-    // Write back to file
-    fs.writeFileSync(redirectsPath, updatedContent, "utf8");
-
-    console.log(`✅ Language redirects updated in _redirects for ${fullPath}:`);
-    languages.forEach((lang) => {
-      console.log(`   - /${fullPath}/${lang}/* → /${fullPath}/:splat 200`);
-    });
-  } catch (error) {
-    console.error("Error adding language redirects:", error.message);
-  }
-}
-
-function addLocalLanguageRedirects(projectPath, languages) {
-  try {
-    const fullPath = extractFolderName(projectPath);
-    const localRedirectsPath = `${fullPath}/_redirects`;
-
-    // Create new redirects content - completely replace the file
-    const defaultRedirect = "/* /index.html 200";
-    const newLocalRedirects = languages
-      .map((lang) => `/${lang}/* /:splat 200`)
-      .join("\n");
-
-    // Combine default redirect with language redirects
-    const redirectsContent = newLocalRedirects
-      ? `${defaultRedirect}\n${newLocalRedirects}`
-      : defaultRedirect;
-
-    // Write the complete new content to file (overwrites everything)
-    fs.writeFileSync(localRedirectsPath, redirectsContent, "utf8");
-
-    console.log(
-      `✅ Local language redirects updated in ${localRedirectsPath}:`
-    );
-    console.log(`   - ${defaultRedirect}`);
-    languages.forEach((lang) => {
-      console.log(`   - /${lang}/* → /:splat 200`);
-    });
-  } catch (error) {
-    console.error("Error adding local language redirects:", error.message);
-  }
-}
-
 function generateHreflangTags(htmlContent, languageCodes) {
   // Extract domain from canonical URL
   const canonicalMatch = htmlContent.match(
@@ -607,10 +524,6 @@ function generateTranslations(projectPath, languageCodes = []) {
   console.log(
     `🧹 Cleaned HTML content: removed translatable text while preserving structure`
   );
-
-  // Add language redirects
-  addLanguageRedirects(projectPath, allLanguageCodes);
-  addLocalLanguageRedirects(projectPath, allLanguageCodes);
 
   // Show the extracted translation keys
   console.log("\n📝 Extracted translation keys:");
