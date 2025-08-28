@@ -1678,6 +1678,33 @@
             let langHandsOn = [];
             let langHandsOff = [];
             let years = 1;
+
+            // Function to get languages from the nav bar language dropdown
+            function getLanguagesFromNavDropdown() {
+              const languageDropdown =
+                document.getElementById("languageDropdown");
+              if (!languageDropdown) return ["en"]; // fallback to English only
+
+              const languageOptions =
+                languageDropdown.querySelectorAll(".language-option");
+              const languages = [];
+
+              languageOptions.forEach((option) => {
+                const langCode = option.getAttribute("data-lang");
+                if (langCode) {
+                  languages.push(langCode);
+                }
+              });
+
+              return languages.length > 0 ? languages : ["en"];
+            }
+
+            // Initialize language arrays with languages from nav dropdown
+            function initializeLanguageArrays() {
+              const navLanguages = getLanguagesFromNavDropdown();
+              langHandsOn = [...navLanguages];
+              langHandsOff = [...navLanguages];
+            }
             const langList = [
               // English first
               { code: "en", name: "English", flag: "🇬🇧" },
@@ -1835,6 +1862,9 @@
               };
               render();
             }
+            // Initialize language arrays with languages from nav dropdown
+            initializeLanguageArrays();
+
             // Create multiselects
             createMultiSelect(
               "biz-multiselect-hands-on",
