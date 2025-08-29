@@ -78,10 +78,9 @@ Your Airbnb website is now live and ready! Here's everything you need:
 - Password: [PASSWORD]
 
 📋 Next Steps:
-1. Change your Cloudflare password immediately
-2. Update your account information in Cloudflare
-3. Add your personal details to the domain registration
-4. Check your email for the forwarding verification link
+1. Change your Cloudflare email and password immediately
+2. Add your personal details to the domain registration
+3. Check your email for the forwarding verification link
 
 📚 Additional Resources:
 - Guides: [WEBSITE_URL]/guides
