@@ -41,5 +41,9 @@
 /demo/junayahouse/fr/* /demo/junayahouse/:splat 200
 /demo/junayahouse/ko/* /demo/junayahouse/:splat 200
 
+
+# demo/timbul-highland redirects
+/demo/timbul-highland/* /demo/timbul-highland/index.html 200
+
 #demo fallback redirect
 /demo/* /demo/404.html 404
