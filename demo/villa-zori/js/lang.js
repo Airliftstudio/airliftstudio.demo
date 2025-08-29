@@ -7,7 +7,7 @@ let translations = {};
 // Load translations from JSON files
 function loadTranslations() {
   // Automatically load all language files
-    translations["en"] = window.translations_en || {};
+  translations["en"] = window.translations_en || {};
   translations["fr"] = window.translations_fr || {};
   translations["de"] = window.translations_de || {};
   translations["es"] = window.translations_es || {};
