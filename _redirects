@@ -58,5 +58,5 @@
 /demo/lipah-beach-villas/fr/* /demo/lipah-beach-villas/:splat 200
 /demo/lipah-beach-villas/ko/* /demo/lipah-beach-villas/:splat 200
 
-#demo 404
-/demo/* /demo-404.html 404
+#demo fallback redirect
+/demo/* /demo/404.html 404

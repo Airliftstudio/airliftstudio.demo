@@ -799,8 +799,8 @@ function addRedirects(projectPath) {
 
     const newRedirects = redirectLines.join("\n");
 
-    // Insert new redirects just before the "#demo 404" line
-    const demo404Pattern = /(^|\n)(#demo 404)/m;
+    // Insert new redirects just before the "#demo fallback redirect" line
+    const demo404Pattern = /(^|\n)(#demo fallback redirect)/m;
     let updatedContent;
     if (demo404Pattern.test(redirectsContent)) {
       updatedContent = redirectsContent.replace(
@@ -808,7 +808,7 @@ function addRedirects(projectPath) {
         `\n\n${newRedirects}\n\n$2`
       );
     } else {
-      // If "#demo 404" not found, append to the end
+      // If "#demo fallback redirect" not found, append to the end
       updatedContent = redirectsContent + "\n\n" + newRedirects;
     }
 
