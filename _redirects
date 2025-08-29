@@ -7,17 +7,6 @@
 /templates/v1/sv/* /templates/v1/:splat 200
 /templates/v1/fr/* /templates/v1/:splat 200
 
-
-# demo/junaya-house redirects
-/demo/junaya-house/* /demo/junaya-house/index.html 200
-/demo/junaya-house/en/* /demo/junaya-house/:splat 200
-/demo/junaya-house/fr/* /demo/junaya-house/:splat 200
-/demo/junaya-house/de/* /demo/junaya-house/:splat 200
-/demo/junaya-house/es/* /demo/junaya-house/:splat 200
-/demo/junaya-house/zh/* /demo/junaya-house/:splat 200
-/demo/junaya-house/id/* /demo/junaya-house/:splat 200
-/demo/junaya-house/ko/* /demo/junaya-house/:splat 200
-
 # demo/timbul-highland-villa redirects
 /demo/timbul-highland-villa/* /demo/timbul-highland-villa/index.html 200
 /demo/timbul-highland-villa/en/* /demo/timbul-highland-villa/:splat 200
@@ -38,12 +27,19 @@
 /demo/kamajaya-villa-6/en/* /demo/kamajaya-villa-6/:splat 200
 /demo/kamajaya-villa-6/fr/* /demo/kamajaya-villa-6/:splat 200
 
-
 # demo/lipah-beach-villas redirects
 /demo/lipah-beach-villas/* /demo/lipah-beach-villas/index.html 200
 /demo/lipah-beach-villas/en/* /demo/lipah-beach-villas/:splat 200
 /demo/lipah-beach-villas/fr/* /demo/lipah-beach-villas/:splat 200
 /demo/lipah-beach-villas/ko/* /demo/lipah-beach-villas/:splat 200
+
+
+
+# demo/junayahouse redirects
+/demo/junayahouse/* /demo/junayahouse/index.html 200
+/demo/junayahouse/en/* /demo/junayahouse/:splat 200
+/demo/junayahouse/fr/* /demo/junayahouse/:splat 200
+/demo/junayahouse/ko/* /demo/junayahouse/:splat 200
 
 #demo fallback redirect
 /demo/* /demo/404.html 404

@@ -320,8 +320,9 @@ function addTranslationScriptsToHtml(htmlContent, languageCodes) {
     ""
   );
 
-  // Generate script tags for all translation files
+  // Generate script tags for all translation files except "en"
   const scriptTags = languageCodes
+    .filter((langCode) => langCode !== "en")
     .map(
       (langCode) => `    <script src="js/translations_${langCode}.js"></script>`
     )

@@ -141,22 +141,15 @@ Link: </css/styles.css>; rel=preload; as=style, </js/script.js>; rel=preload; as
     // Remove business-offering section from index.html
     removeBusinessOfferingSection(indexPath);
 
-    //TODO här så testa att istället ta bort translations_en.js och ersätta med en dynamisk
-    //TODO js code som populerar ett object  vid load... och använder det objektet istället för translations_en.js
-    //TODO för att sätta tillbaka engelska när man byter språk.
-    // // Remove default translations from index.html only if js/translations_en.js exists
-    // const translationsEnPath = path.join(
-    //   fullProjectPath,
-    //   "js",
-    //   "translations_en.js"
-    // );
-    // if (fs.existsSync(translationsEnPath)) {
-    //   cleanTranslationHtmlContent(indexPath);
-    // } else {
-    //   console.log(
-    //     "ℹ️  Skipping removal of default translations: js/translations_en.js not found"
-    //   );
-    // }
+    // Remove js/translations_en.js if it exists
+    const translationsEnPath = path.join(
+      fullProjectPath,
+      "js",
+      "translations_en.js"
+    );
+    if (fs.existsSync(translationsEnPath)) {
+      fs.unlinkSync(translationsEnPath);
+    }
 
     // Remove backup images from images directory
     removeBackupImages(fullProjectPath);

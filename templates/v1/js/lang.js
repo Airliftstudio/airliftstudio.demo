@@ -1,13 +1,160 @@
 // Translation System
 let currentLanguage = "en";
 let supportedLanguages = [];
-
+let defaultEnglishContent = {}; // Store default English content from HTML
 let translations = {};
+
+// Extract default English content from HTML elements with data-translate attributes
+function extractDefaultEnglishContent() {
+  const elements = document.querySelectorAll("[data-translate]");
+
+  elements.forEach((element) => {
+    const key = element.getAttribute("data-translate");
+    const textContent = element.textContent.trim();
+
+    if (textContent) {
+      // Convert dot notation to nested object structure
+      const keys = key.split(".");
+      let current = defaultEnglishContent;
+
+      for (let i = 0; i < keys.length - 1; i++) {
+        if (!current[keys[i]]) {
+          current[keys[i]] = {};
+        }
+        current = current[keys[i]];
+      }
+
+      current[keys[keys.length - 1]] = textContent;
+    }
+  });
+
+  // Extract meta tags content
+  extractMetaContent();
+
+  // Extract structured data content
+  extractStructuredDataContent();
+
+  // Validate that we extracted content
+  if (Object.keys(defaultEnglishContent).length === 0) {
+    console.warn("No default English content extracted from HTML");
+  } else {
+    console.log("✅ Extracted default English content:", defaultEnglishContent);
+    console.log(
+      "📄 Meta content extracted:",
+      defaultEnglishContent.meta ? "Yes" : "No"
+    );
+    console.log(
+      "🏗️ Structured data extracted:",
+      defaultEnglishContent.structuredData ? "Yes" : "No"
+    );
+  }
+}
+
+// Extract meta tags content
+function extractMetaContent() {
+  if (!defaultEnglishContent.meta) {
+    defaultEnglishContent.meta = {};
+  }
+
+  // Extract title
+  const title = document.title;
+  if (title) {
+    defaultEnglishContent.meta.title = title;
+  }
+
+  // Extract meta description
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) {
+    defaultEnglishContent.meta.description =
+      metaDesc.getAttribute("content") || "";
+  }
+
+  // Extract meta keywords
+  const metaKeywords = document.querySelector('meta[name="keywords"]');
+  if (metaKeywords) {
+    defaultEnglishContent.meta.keywords =
+      metaKeywords.getAttribute("content") || "";
+  }
+
+  // Extract og:title
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) {
+    defaultEnglishContent.meta.og_title = ogTitle.getAttribute("content") || "";
+  }
+
+  // Extract og:description
+  const ogDesc = document.querySelector('meta[property="og:description"]');
+  if (ogDesc) {
+    defaultEnglishContent.meta.og_description =
+      ogDesc.getAttribute("content") || "";
+  }
+
+  // Extract language and locale
+  const languageMeta = document.querySelector('meta[name="language"]');
+  if (languageMeta) {
+    defaultEnglishContent.meta.language =
+      languageMeta.getAttribute("content") || "English";
+  }
+
+  const ogLocale = document.querySelector('meta[property="og:locale"]');
+  if (ogLocale) {
+    defaultEnglishContent.meta.locale =
+      ogLocale.getAttribute("content") || "en_US";
+  }
+}
+
+// Extract structured data content
+function extractStructuredDataContent() {
+  if (!defaultEnglishContent.structuredData) {
+    defaultEnglishContent.structuredData = {};
+  }
+
+  const scriptElement = document.getElementById("structured-data");
+  if (scriptElement) {
+    try {
+      const structuredData = JSON.parse(scriptElement.textContent);
+
+      // Extract description
+      if (structuredData.description) {
+        defaultEnglishContent.structuredData.description =
+          structuredData.description;
+      }
+
+      // Extract keywords
+      if (structuredData.keywords) {
+        defaultEnglishContent.structuredData.keywords = structuredData.keywords;
+      }
+
+      // Extract address country
+      if (structuredData.address && structuredData.address.addressCountry) {
+        defaultEnglishContent.structuredData.addressCountry =
+          structuredData.address.addressCountry;
+      }
+    } catch (error) {
+      console.warn("Error parsing structured data:", error);
+    }
+  }
+}
 
 // Load translations from JSON files
 function loadTranslations() {
-  // Automatically load all language files
-  translations["en"] = window.translations_en || {};
+  // Extract default English content from HTML first
+  extractDefaultEnglishContent();
+
+  // Set English translations from extracted content
+  translations["en"] = defaultEnglishContent;
+
+  // Load other language files
+  translations["fr"] = window.translations_fr || {};
+  translations["de"] = window.translations_de || {};
+  translations["es"] = window.translations_es || {};
+  translations["ru"] = window.translations_ru || {};
+  translations["zh"] = window.translations_zh || {};
+  translations["it"] = window.translations_it || {};
+  translations["hi"] = window.translations_hi || {};
+  translations["id"] = window.translations_id || {};
+  translations["ja"] = window.translations_ja || {};
+  translations["ko"] = window.translations_ko || {};
 
   supportedLanguages = Object.keys(translations);
 
@@ -67,35 +214,56 @@ function updateMetaTags(lang) {
 
 // Update structured data based on language
 function updateStructuredData(lang) {
+  console.log("🔄 Updating structured data for language:", lang);
+
   const langData = translations[lang];
-  if (!langData || !langData.structuredData) {
-    console.warn("No structured data found for language:", lang);
+  if (!langData) {
+    console.warn("No translation data found for language:", lang);
     return;
   }
 
   const scriptElement = document.getElementById("structured-data");
-  if (!scriptElement) return;
+  if (!scriptElement) {
+    console.warn("Structured data script element not found");
+    return;
+  }
+
+  console.log("📄 Found structured data script element");
 
   try {
     // Parse the existing structured data
     const existingData = JSON.parse(scriptElement.textContent);
 
-    // Update only the fields that change
-    existingData.description = langData.structuredData.description;
-    existingData.address.addressCountry =
-      langData.structuredData.addressCountry;
-    existingData.keywords = langData.structuredData.keywords;
+    // Get structured data from current language
+    const structuredData = langData.structuredData || {};
+    console.log("🏗️ Structured data for language", lang + ":", structuredData);
+
+    // Update fields if they exist in the translation
+    if (structuredData.description) {
+      existingData.description = structuredData.description;
+      console.log("✅ Updated description:", structuredData.description);
+    }
+
+    if (structuredData.keywords) {
+      existingData.keywords = structuredData.keywords;
+    }
+
+    if (structuredData.addressCountry && existingData.address) {
+      existingData.address.addressCountry = structuredData.addressCountry;
+    }
 
     // Update URL to match language
-    let baseUrl = existingData.url.replace(/\/[a-z]{2}\/?$/, "");
-    baseUrl = baseUrl.replace(/\/$/, "");
-    existingData.url = lang === "en" ? `${baseUrl}/` : `${baseUrl}/${lang}/`;
+    if (existingData.url) {
+      let baseUrl = existingData.url.replace(/\/[a-z]{2}\/?$/, "");
+      baseUrl = baseUrl.replace(/\/$/, "");
+      existingData.url = lang === "en" ? `${baseUrl}/` : `${baseUrl}/${lang}/`;
+    }
 
     // Update the script content
     scriptElement.textContent = JSON.stringify(existingData, null, 2);
-    console.log("Structured data updated successfully for language:", lang);
+    console.log("✅ Structured data updated successfully for language:", lang);
   } catch (error) {
-    console.warn("Error updating structured data:", error);
+    console.warn("❌ Error updating structured data:", error);
   }
 }
 
@@ -103,7 +271,15 @@ function translatePage(lang) {
   currentLanguage = lang;
   const langData = translations[lang];
 
-  if (!langData) return;
+  if (!langData) {
+    console.warn(`No translation data found for language: ${lang}`);
+    return;
+  }
+
+  // If switching to English, use the extracted default content
+  if (lang === "en") {
+    console.log("Switching to English - using extracted default content");
+  }
 
   // Update all elements with data-translate attribute
   document.querySelectorAll("[data-translate]").forEach((element) => {
@@ -190,7 +366,7 @@ function updateURLWithLanguage(lang) {
 
   try {
     // If we're switching to a language, add the suffix
-    if (lang && lang !== "en") {
+    if (lang) {
       const newPath = `${
         pathWithoutLang === "/" ? "" : pathWithoutLang
       }/${lang}/`;
@@ -198,15 +374,6 @@ function updateURLWithLanguage(lang) {
         {},
         "",
         newPath + currentSearch + currentHash
-      );
-    } else {
-      // For English (default), remove the language suffix
-      // Ensure we don't end up with double slashes
-      const cleanPath = pathWithoutLang === "/" ? "/" : pathWithoutLang;
-      window.history.replaceState(
-        {},
-        "",
-        cleanPath + "/" + currentSearch + currentHash
       );
     }
   } catch (error) {
@@ -260,6 +427,7 @@ function initLang() {
 
   console.log("URL Language:", urlLanguage);
   console.log("Saved Language:", savedLanguage);
+  console.log("Available translations:", Object.keys(translations));
 
   let languageToUse = "en"; // default
 

@@ -837,6 +837,7 @@ function addLocalRedirects(projectPath) {
     const localRedirectsPath = `${fullPath}/_redirects`;
 
     const languages = [];
+    const jsDir = path.join(projectPath, "js");
 
     if (fs.existsSync(jsDir)) {
       // Find all translation files
