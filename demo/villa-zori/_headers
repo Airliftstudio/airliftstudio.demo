@@ -1,2 +1,4 @@
 /*
-  X-Robots-Tag: noindex, nofollow
+  X-Robots-Tag: index, follow
+
+Link: </css/styles.css>; rel=preload; as=style, </js/script.js>; rel=preload; as=script

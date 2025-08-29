@@ -158,6 +158,9 @@ Link: </css/styles.css>; rel=preload; as=style, </js/script.js>; rel=preload; as
     // Remove backup images from images directory
     removeBackupImages(fullProjectPath);
 
+    // Remove listing.json from project directory
+    removeListingJson(fullProjectPath);
+
     console.log("✅ Polish complete!");
     console.log(`📁 Updated: ${headersPath}`);
     console.log("🔍 Added SEO headers: X-Robots-Tag: index, follow");
@@ -167,12 +170,14 @@ Link: </css/styles.css>; rel=preload; as=style, </js/script.js>; rel=preload; as
     console.log("🔄 Removed redirects from root _redirects file");
     console.log("💼 Removed business-offering section from index.html");
     console.log("🗑️  Removed backup images from images/ directory");
+    console.log("🗑️  Removed listing.json from project directory");
   } catch (error) {
     console.error("❌ Error polishing project:", error.message);
     process.exit(1);
   }
 }
 
+//! this will make it inaccessible at airliftstudios.com/demo/x
 function removeRedirectsFromRoot(projectPath) {
   const redirectsPath = path.join(__dirname, "_redirects");
 
@@ -326,6 +331,24 @@ function removeBackupImages(projectPath) {
     }
   } catch (error) {
     console.error("❌ Error removing backup images:", error.message);
+  }
+}
+
+function removeListingJson(projectPath) {
+  try {
+    const listingJsonPath = path.join(projectPath, "listing.json");
+
+    // Check if listing.json exists
+    if (!fs.existsSync(listingJsonPath)) {
+      console.log("ℹ️  No listing.json found, skipping removal");
+      return;
+    }
+
+    // Remove the listing.json file
+    fs.unlinkSync(listingJsonPath);
+    console.log("🗑️  Removed listing.json from project directory");
+  } catch (error) {
+    console.error("❌ Error removing listing.json:", error.message);
   }
 }
 
