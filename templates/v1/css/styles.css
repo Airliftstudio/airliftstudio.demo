@@ -9,6 +9,49 @@
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Font loading optimization */
+html {
+  font-display: optional;
+}
+
+html.fonts-loaded {
+  font-display: auto;
+}
+
+/* Prevent layout shift during font loading */
+body {
+  font-display: optional;
+}
+
+.fonts-loaded body {
+  font-display: auto;
+}
+
+/* Font fallback optimization */
+@supports (font-display: swap) {
+  .logo,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-display: swap;
+  }
+}
+
+/* Ensure consistent font rendering */
+.logo,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-synthesis: none;
+  -webkit-font-synthesis: none;
+}
+
 * {
   margin: 0;
   padding: 0;

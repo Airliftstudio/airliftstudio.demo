@@ -35,11 +35,6 @@
 
 
 
-# demo/junayahouse redirects
-/demo/junayahouse/* /demo/junayahouse/index.html 200
-/demo/junayahouse/en/* /demo/junayahouse/:splat 200
-/demo/junayahouse/fr/* /demo/junayahouse/:splat 200
-/demo/junayahouse/ko/* /demo/junayahouse/:splat 200
 
 
 # demo/timbul-highland redirects

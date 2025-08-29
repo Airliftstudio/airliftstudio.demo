@@ -7,6 +7,28 @@
     <meta name="language" content="English" />
     <meta http-equiv="Content-Language" content="en" />
     <link rel="preload" href="images/img-hero-2560w.jpg" as="image" />
+    <!-- Font preloading for critical fonts -->
+    <link
+      rel="preload"
+      href="css/fonts/inter-400.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="css/fonts/inter-600.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="css/fonts/playfair-700.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
 
     <title>
       Villa Zori - Luxury 2BR Villa in Canggu, Bali | Private Pool, Superhost,
@@ -69,6 +91,22 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Font loading optimization -->
+    <script>
+      // Font loading optimization to prevent FOUT/FOIT
+      if ("fonts" in document) {
+        Promise.all([
+          document.fonts.load("400 1em Inter"),
+          document.fonts.load("600 1em Inter"),
+          document.fonts.load('700 1em "Playfair Display"'),
+        ]).then(() => {
+          document.documentElement.classList.add("fonts-loaded");
+        });
+      } else {
+        // Fallback for browsers that don't support Font Loading API
+        document.documentElement.classList.add("fonts-loaded");
+      }
+    </script>
   </head>
 
   <body>

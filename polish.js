@@ -128,7 +128,22 @@ function polishProject(projectPath) {
     const headersContent = `/*
   X-Robots-Tag: index, follow
 
-Link: </css/styles.css>; rel=preload; as=style, </js/script.js>; rel=preload; as=script
+# Font preloading headers for better performance
+/css/fonts/inter-400.ttf
+  Link: <css/fonts/inter-400.ttf>; rel=preload; as=font; type=font/ttf; crossorigin
+
+/css/fonts/inter-600.ttf
+  Link: <css/fonts/inter-600.ttf>; rel=preload; as=font; type=font/ttf; crossorigin
+
+/css/fonts/playfair-700.ttf
+  Link: <css/fonts/playfair-700.ttf>; rel=preload; as=font; type=font/ttf; crossorigin
+
+/css/fonts/inter-300.ttf
+  Link: <css/fonts/inter-300.ttf>; rel=preload; as=font; type=font/ttf; crossorigin
+
+/css/fonts/inter-500.ttf
+  Link: <css/fonts/inter-500.ttf>; rel=preload; as=font; type=font/ttf; crossorigin
+
 `;
 
     // Write the _headers file
