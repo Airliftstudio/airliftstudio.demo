@@ -25,43 +25,50 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
 // Section animations
-// gsap.utils
-//   .toArray(
-//     ".text-content, .image-content, .hero-content, .reviews-scroll-container, .section-title, .feature-card, .amenity-item, .review-header, .review-card, .location-item"
-//   )
-//   .forEach((section) => {
-//     gsap.from(section, {
-//       duration: 1,
-//       y: 50,
-//       opacity: 0,
-//       ease: "power2.out",
-//       scrollTrigger: {
-//         trigger: section,
-//         start: "top 80%",
-//         end: "bottom 20%",
-//         toggleActions: "play none none reverse",
-//       },
-//     });
-//   });
+gsap.utils
+  .toArray(
+    ".text-content, .image-content, .hero-content, .reviews-scroll-container, .section-title, .location-item"
+  )
+  .forEach((section) => {
+    gsap.from(section, {
+      duration: 0.8,
+      y: 50,
+      opacity: 0,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 90%",
+        once: true,
+        // toggleActions: "play none none none",
+      },
+    });
+  });
 
-// Gallery items animation
-// gsap.utils.toArray(".gallery-item").forEach((item, index) => {
-//   gsap.from(item, {
-//     duration: 0.8,
-//     y: 50,
-//     opacity: 0,
-//     delay: index * 0.1,
-//     ease: "power2.out",
-//     scrollTrigger: {
-//       trigger: item,
-//       start: "top 85%",
-//       toggleActions: "play none none reverse",
-//     },
-//   });
-// });
+// Delayed horizontal items animation
+// Animate each group of items with their own delay sequence
+[".gallery-item", ".amenity-item", ".feature-card", ".review-card"].forEach(
+  (selector) => {
+    const items = gsap.utils.toArray(selector);
+    items.forEach((item, idx) => {
+      gsap.from(item, {
+        duration: 0.8,
+        y: 50,
+        opacity: 0,
+        delay: idx * 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: item,
+          start: "top 95%",
+          once: true,
+          // toggleActions: "play none none none",
+        },
+      });
+    });
+  }
+);
 
 // Animated star wave fill and rating count-up
 function animateHeroStarsAndRating() {

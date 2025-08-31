@@ -33,8 +33,48 @@ function clearFieldError(fieldId) {
 }
 
 function clearAllErrors() {
-  const errorFields = ["name", "demoUrl", "domain", "emailName", "forwardTo"];
+  const errorFields = [
+    "name",
+    "demoUrl",
+    "domain",
+    "emailName",
+    "forwardTo",
+    "firstName",
+    "lastName",
+    "regEmail",
+    "phone",
+    "country",
+    "address",
+    "city",
+    "state",
+    "postalCode",
+  ];
   errorFields.forEach((fieldId) => clearFieldError(fieldId));
+}
+
+function isValidPhone(phone) {
+  // Basic phone validation: must start with + and contain only digits, spaces, parentheses, and hyphens
+  return /^\+[\d\s\(\)\-]+$/.test(phone.trim()) && phone.trim().length >= 8;
+}
+
+function isValidName(name) {
+  // Basic name validation: letters, spaces, hyphens, apostrophes
+  return /^[a-zA-Z\s\-']+$/.test(name.trim()) && name.trim().length >= 2;
+}
+
+function isValidAddress(address) {
+  // Basic address validation: letters, numbers, spaces, common punctuation
+  return (
+    /^[a-zA-Z0-9\s\.,\-'#]+$/.test(address.trim()) && address.trim().length >= 5
+  );
+}
+
+function isValidPostalCode(postalCode) {
+  // Basic postal code validation: letters, numbers, spaces, hyphens
+  return (
+    /^[a-zA-Z0-9\s\-]+$/.test(postalCode.trim()) &&
+    postalCode.trim().length >= 3
+  );
 }
 
 function buildReceiptLines(values) {
@@ -115,7 +155,22 @@ domainEl.addEventListener("input", computeEmail);
 computeEmail();
 
 // Add error clearing on input
-const errorFields = ["name", "demoUrl", "domain", "emailName", "forwardTo"];
+const errorFields = [
+  "name",
+  "demoUrl",
+  "domain",
+  "emailName",
+  "forwardTo",
+  "firstName",
+  "lastName",
+  "regEmail",
+  "phone",
+  "country",
+  "address",
+  "city",
+  "state",
+  "postalCode",
+];
 errorFields.forEach((fieldId) => {
   const field = document.getElementById(fieldId);
   if (field) {
@@ -173,6 +228,16 @@ document.addEventListener("click", (e) => {
   }
   setVal("instagram", ["ig"]);
   setVal("years", ["years"]);
+  // Domain registration contact information
+  setVal("firstName", ["first_name", "firstName"]);
+  setVal("lastName", ["last_name", "lastName"]);
+  setVal("regEmail", ["reg_email", "regEmail"]);
+  setVal("phone", ["phone"]);
+  setVal("country", ["country"]);
+  setVal("address", ["address"]);
+  setVal("city", ["city"]);
+  setVal("state", ["state"]);
+  setVal("postalCode", ["postal_code", "postalCode"]);
   const langs = new Set();
   if (params.has("languages")) {
     params
@@ -204,7 +269,8 @@ function buildOrderText(values) {
       .map((c) => LANG_LIST.find((l) => l.code === c)?.name)
       .filter(Boolean)
   );
-  return [
+
+  const orderLines = [
     "Hands‑Off package order",
     `Name: ${values.name}`,
     `Demo: ${values.demoUrl}`,
@@ -216,9 +282,121 @@ function buildOrderText(values) {
     values.instagram || values.whatsapp ? `Contact info to include:` : null,
     values.whatsapp ? `WhatsApp: ${values.whatsapp}` : null,
     values.instagram ? `Instagram: ${values.instagram}` : null,
-  ]
-    .filter(Boolean)
-    .join("\n");
+  ];
+
+  // Add domain registration contact information if any field is filled
+  const hasDomainInfo =
+    values.firstName ||
+    values.lastName ||
+    values.regEmail ||
+    values.phone ||
+    values.country ||
+    values.address ||
+    values.city ||
+    values.state ||
+    values.postalCode;
+
+  if (hasDomainInfo) {
+    orderLines.push("", "\n");
+    orderLines.push("", "Domain registration contact information:");
+    if (values.firstName) orderLines.push(`First name: ${values.firstName}`);
+    if (values.lastName) orderLines.push(`Last name: ${values.lastName}`);
+    if (values.regEmail) orderLines.push(`Email: ${values.regEmail}`);
+    if (values.phone) orderLines.push(`Phone: ${values.phone}`);
+    if (values.country) orderLines.push(`Country: ${values.country}`);
+    if (values.address) orderLines.push(`Address: ${values.address}`);
+    if (values.city) orderLines.push(`City: ${values.city}`);
+    if (values.state) orderLines.push(`State/Province: ${values.state}`);
+    if (values.postalCode) orderLines.push(`Postal code: ${values.postalCode}`);
+  }
+
+  return orderLines.filter(Boolean).join("\n");
+}
+
+function showDomainInfoWarning() {
+  // Create modal overlay
+  const modal = document.createElement("div");
+  modal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  `;
+
+  // Create modal content
+  const modalContent = document.createElement("div");
+  modalContent.style.cssText = `
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  `;
+
+  modalContent.innerHTML = `
+    <div style="margin-bottom: 16px;">
+      <h3 style="margin: 0 0 12px 0; color: #dc3545;">⚠️ Incomplete Contact Information</h3>
+      <p style="margin: 0; line-height: 1.5;">
+        The domain registration contact information needs to be complete to be valid. 
+        If you do not want to share this information with us, you can add it later yourself 
+        following our provided guide.
+      </p>
+    </div>
+    <div style="display: flex; gap: 12px; justify-content: flex-end;">
+      <button id="clear-contact-info" class="btn btn-outline" style="min-width: 120px;">
+        Clear All Contact Info
+      </button>
+      <button id="close-modal" class="btn btn-primary" style="min-width: 120px;">
+        Continue Editing
+      </button>
+    </div>
+  `;
+
+  modal.appendChild(modalContent);
+  document.body.appendChild(modal);
+
+  // Handle clear contact info
+  document
+    .getElementById("clear-contact-info")
+    .addEventListener("click", () => {
+      const contactFields = [
+        "firstName",
+        "lastName",
+        "regEmail",
+        "phone",
+        "country",
+        "address",
+        "city",
+        "state",
+        "postalCode",
+      ];
+      contactFields.forEach((fieldId) => {
+        const field = document.getElementById(fieldId);
+        if (field) field.value = "";
+      });
+      document.body.removeChild(modal);
+    });
+
+  // Handle close modal
+  document.getElementById("close-modal").addEventListener("click", () => {
+    document.body.removeChild(modal);
+  });
+
+  // Close modal when clicking outside
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      document.body.removeChild(modal);
+    }
+  });
 }
 
 form.addEventListener("submit", (e) => {
@@ -237,6 +415,16 @@ form.addEventListener("submit", (e) => {
     whatsapp: document.getElementById("whatsapp").value.trim(),
     instagram: document.getElementById("instagram").value.trim(),
     years: document.getElementById("years").value,
+    // Domain registration contact information
+    firstName: document.getElementById("firstName").value.trim(),
+    lastName: document.getElementById("lastName").value.trim(),
+    regEmail: document.getElementById("regEmail").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+    country: document.getElementById("country").value.trim(),
+    address: document.getElementById("address").value.trim(),
+    city: document.getElementById("city").value.trim(),
+    state: document.getElementById("state").value.trim(),
+    postalCode: document.getElementById("postalCode").value.trim(),
   };
   values.publicEmail = `${values.emailName}@${values.domain}`;
 
@@ -286,6 +474,92 @@ form.addEventListener("submit", (e) => {
     errors.push("forwardTo");
   }
 
+  // Validate domain registration contact information
+  const hasDomainInfo =
+    values.firstName ||
+    values.lastName ||
+    values.regEmail ||
+    values.phone ||
+    values.country ||
+    values.address ||
+    values.city ||
+    values.state ||
+    values.postalCode;
+
+  const isDomainInfoComplete =
+    values.firstName &&
+    values.lastName &&
+    values.regEmail &&
+    values.phone &&
+    values.country &&
+    values.address &&
+    values.city &&
+    values.state &&
+    values.postalCode;
+
+  if (hasDomainInfo && !isDomainInfoComplete) {
+    // Show warning modal for incomplete domain registration info
+    showDomainInfoWarning();
+    return;
+  }
+
+  // Validate individual domain registration fields if any are filled
+  if (hasDomainInfo) {
+    if (!isValidName(values.firstName)) {
+      showFieldError(
+        "firstName",
+        "Please enter a valid first name (letters only)."
+      );
+      errors.push("firstName");
+    }
+
+    if (!isValidName(values.lastName)) {
+      showFieldError(
+        "lastName",
+        "Please enter a valid last name (letters only)."
+      );
+      errors.push("lastName");
+    }
+
+    if (!isValidEmail(values.regEmail)) {
+      showFieldError("regEmail", "Please enter a valid email address.");
+      errors.push("regEmail");
+    }
+
+    if (!isValidPhone(values.phone)) {
+      showFieldError(
+        "phone",
+        "Please enter a valid phone number with country code (e.g., +1 555 123 4567)."
+      );
+      errors.push("phone");
+    }
+
+    if (!isValidName(values.country)) {
+      showFieldError("country", "Please enter a valid country name.");
+      errors.push("country");
+    }
+
+    if (!isValidAddress(values.address)) {
+      showFieldError("address", "Please enter a valid address.");
+      errors.push("address");
+    }
+
+    if (!isValidName(values.city)) {
+      showFieldError("city", "Please enter a valid city name.");
+      errors.push("city");
+    }
+
+    if (!isValidName(values.state)) {
+      showFieldError("state", "Please enter a valid state or province.");
+      errors.push("state");
+    }
+
+    if (!isValidPostalCode(values.postalCode)) {
+      showFieldError("postalCode", "Please enter a valid postal code.");
+      errors.push("postalCode");
+    }
+  }
+
   if (errors.length > 0) {
     // Scroll to first error
     const firstErrorField = document.getElementById(errors[0]);
@@ -302,6 +576,54 @@ form.addEventListener("submit", (e) => {
       .map((c) => LANG_LIST.find((l) => l.code === c)?.name)
       .filter(Boolean)
   );
+  let domainInfoHtml = "";
+  if (hasDomainInfo) {
+    domainInfoHtml = `
+      <div style="grid-column: 1 / -1; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e9ecef;">
+        <div style="font-weight: 700; margin-bottom: 12px; color: var(--primary);">Domain registration contact information:</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+          ${
+            values.firstName
+              ? `<div><b>First name</b><br/>${values.firstName}</div>`
+              : ""
+          }
+          ${
+            values.lastName
+              ? `<div><b>Last name</b><br/>${values.lastName}</div>`
+              : ""
+          }
+          ${
+            values.regEmail
+              ? `<div><b>Email</b><br/>${values.regEmail}</div>`
+              : ""
+          }
+          ${values.phone ? `<div><b>Phone</b><br/>${values.phone}</div>` : ""}
+          ${
+            values.country
+              ? `<div><b>Country</b><br/>${values.country}</div>`
+              : ""
+          }
+          ${
+            values.address
+              ? `<div><b>Address</b><br/>${values.address}</div>`
+              : ""
+          }
+          ${values.city ? `<div><b>City</b><br/>${values.city}</div>` : ""}
+          ${
+            values.state
+              ? `<div><b>State/Province</b><br/>${values.state}</div>`
+              : ""
+          }
+          ${
+            values.postalCode
+              ? `<div><b>Postal code</b><br/>${values.postalCode}</div>`
+              : ""
+          }
+        </div>
+      </div>
+    `;
+  }
+
   summaryBlock.innerHTML = `
       <div class="summary-grid">
         <div><b>Name</b><br/>${values.name}</div>
@@ -329,6 +651,7 @@ form.addEventListener("submit", (e) => {
           <button id="edit-order" class="btn btn-outline" type="button">Edit order</button>
          </span>
         </div>
+        ${domainInfoHtml}
       </div>
     `;
   renderSummaryReceipt(values);

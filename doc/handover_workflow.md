@@ -100,6 +100,7 @@ Best regards,
 - **Account Number**: 5050026398
 - **Account Name**: Widalia sitinjak
 - **Bank**: BCA
+- **Reference**: [domainname or what? more secret? random number? "terima kasih"?]
 
 ### Payment Request Email Template
 
@@ -116,23 +117,33 @@ Payment Information:
 - Bank: BCA
 - Account Number: 5050026398
 - Account Name: Widalia sitinjak
+- Payment reference: [domainname or what? more secret? random number? "terima kasih"?]
 - Amount due: IDR 4,283,000 ($259.90)
 
-Please send the payment confirmation receipt, and we will proceed with the handover immediately.
-
-Once payment is confirmed, we will finalize your website to your specifications and launch it for you.
+Please reply with the payment confirmation receipt, and we will proceed with the handover immediately.
 
 When the website is launched we will notify you and hand over account details to you.
 We will also include detailed guides for how to update content and configurations on your site in the future.
 
 Thank you for choosing our services!
-
 ```
 
-## Notes
+Airlift Studios
+Your demo is ready
+Thank you for your order, we are glad you liked the demo and want to launch your site!
+To proceed please complete the payment using the following details:
 
-- Always test the email forwarding verification process
-- Ensure all credentials are properly documented
-- Keep a backup of all project files
-- Follow up with client after 24-48 hours to ensure smooth transition
-- Send payment request before final handover
+- Bank: BCA
+- Account Number: 5050026398
+- Account Name: Widalia sitinjak
+- Payment reference: [domain_name]
+- Amount due: IDR 4,283,000 ($259.90)
+  Please reply with the payment confirmation receipt, and we will proceed with the handover immediately.
+
+When the website is launched we will notify you and hand over account details to you.
+We will also include detailed guides for how to update content and configurations on your site in the future.
+
+Thank you for choosing our services!
+airliftstudios.com
+
+© 2025 Airlift Studios. All rights reserved.

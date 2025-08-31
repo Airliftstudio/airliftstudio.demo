@@ -236,6 +236,106 @@
               </select>
             </div>
 
+            <div class="contact-info-section">
+              <div class="contact-info-title">
+                Domain registration contact information (optional)
+              </div>
+              <div class="contact-info-description small">
+                <span>This information is required for domain ownership and will be used to register the domain in your name.</span>
+              </div>
+              <div class="info-box" style="background: #fff; border: 1px solid #e9ecef; border-radius: 8px; padding: 16px; margin: 16px 0; font-size: 14px; line-height: 1.5;">
+                <div style="display: flex; align-items: flex-start; gap: 8px;">
+                  <i class="fas fa-info-circle" style="color: var(--primary); margin-top: 2px;"></i>
+                  <div>
+                    <strong>Important:</strong> If you prefer not to share this information with us, you can skip this section and add this information later on yourself. We will include instructions for how to do this when we hand over the website.
+                  </div>
+                </div>
+              </div>
+              <div class="contact-info-grid">
+                <label>
+                  <span>First name</span>
+                  <input
+                    id="firstName"
+                    type="text"
+                    placeholder="John"
+                  />
+                  <div id="firstName-error" class="field-error">Please enter a valid first name.</div>
+                </label>
+                <label>
+                  <span>Last name</span>
+                  <input
+                    id="lastName"
+                    type="text"
+                    placeholder="Doe"
+                  />
+                  <div id="lastName-error" class="field-error">Please enter a valid last name.</div>
+                </label>
+                <label>
+                  <span>Email</span>
+                  <input
+                    id="regEmail"
+                    type="email"
+                    placeholder="john@example.com"
+                  />
+                  <div id="regEmail-error" class="field-error">Please enter a valid email address.</div>
+                </label>
+                <label>
+                  <span>Phone number (country code + number)</span>
+                  <input
+                    id="phone"
+                    type="tel"
+                    placeholder="+1 555 123 4567"
+                  />
+                  <div id="phone-error" class="field-error">Please enter a valid phone number with country code (e.g., +1 555 123 4567).</div>
+                </label>
+                <label>
+                  <span>Country</span>
+                  <input
+                    id="country"
+                    type="text"
+                    placeholder="United States"
+                  />
+                  <div id="country-error" class="field-error">Please enter a valid country name.</div>
+                </label>
+                <label>
+                  <span>Address</span>
+                  <input
+                    id="address"
+                    type="text"
+                    placeholder="123 Main Street"
+                  />
+                  <div id="address-error" class="field-error">Please enter a valid address.</div>
+                </label>
+                <label>
+                  <span>City</span>
+                  <input
+                    id="city"
+                    type="text"
+                    placeholder="New York"
+                  />
+                  <div id="city-error" class="field-error">Please enter a valid city name.</div>
+                </label>
+                <label>
+                  <span>State/Province</span>
+                  <input
+                    id="state"
+                    type="text"
+                    placeholder="NY"
+                  />
+                  <div id="state-error" class="field-error">Please enter a valid state or province.</div>
+                </label>
+                <label>
+                  <span>Postal code</span>
+                  <input
+                    id="postalCode"
+                    type="text"
+                    placeholder="10001"
+                  />
+                  <div id="postalCode-error" class="field-error">Please enter a valid postal code.</div>
+                </label>
+              </div>
+            </div>
+
             <div class="form-actions">
               <button type="submit" class="btn btn-primary">
                 Next
@@ -290,6 +390,12 @@
             ></div>
           </div>
 
+          <div class="terms-agreement">
+            <p class="terms-text">
+              By placing this order, you agree to our 
+              <a href="tos.html" target="_blank" rel="noopener">Terms of Service</a>.
+            </p>
+          </div>
           <div class="summary-actions">
             <a
               id="send-instagram"
