@@ -200,7 +200,7 @@ footer .brand-logo {
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr 1fr;
   gap: 32px;
   align-items: center;
 }
@@ -231,8 +231,8 @@ footer .brand-logo {
 }
 .hero-art {
   position: relative;
-  min-height: 320px;
-  min-width: 480px;
+  min-height: 352px;
+  min-width: 528px;
 }
 .hero-card {
   position: absolute;
@@ -359,6 +359,10 @@ footer .brand-logo {
 }
 
 /* Why Choose Us */
+#why {
+  margin-top: 60px;
+}
+
 .why-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1030,6 +1034,9 @@ footer .brand-logo {
 }
 
 @media (max-width: 1000px) {
+  #why {
+    margin-top: 30px;
+  }
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 64px;
@@ -1051,8 +1058,8 @@ footer .brand-logo {
 }
 
 @media (max-width: 580px) {
-  .hero-art {
-    margin: initial;
+  #why {
+    margin-top: 0px;
   }
   .hero-section {
     padding: 40px 0 30px;
@@ -1060,6 +1067,8 @@ footer .brand-logo {
 
   .hero-art {
     min-width: 300px;
+    min-height: 320px;
+    margin: initial;
   }
   .hero-card {
     min-height: 240px;
