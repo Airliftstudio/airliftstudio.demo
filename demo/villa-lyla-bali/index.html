@@ -1,0 +1,2309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--
+    ═══════════════════════════════════════════════════════════════════════════════
+    Built with ❤️ for the Airbnb community | © 2025 airliftStudios.com
+
+    📧 Get Your Free Demo Website today:
+    Visit: https://airliftstudios.com
+    ═══════════════════════════════════════════════════════════════════════════════
+    -->
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta http-equiv="Content-Language" content="en" />
+    <link rel="preload" href="images/img-hero-2560w.jpg" as="image" />
+    <!-- Font preloading for critical fonts -->
+    <link
+      rel="preload"
+      href="css/fonts/inter-400.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="css/fonts/inter-600.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="css/fonts/playfair-700.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+
+    <title>
+      Villa Lyla - Private Villa 10 min Walk to Beach in Canggu, Bali | Private
+      Pool, Superhost, Guest Favorite
+    </title>
+    <meta
+      name="description"
+      content="Book Villa Lyla, a 5-star rated private villa in Canggu, Bali. Private pool, tropical garden, superhost, guest favorite, 10 minutes from beaches. Perfect for couples and relaxation. See real guest reviews!"
+    />
+    <meta
+      name="keywords"
+      content="Villa Lyla, Canggu villa, Bali villa, private pool, superhost, guest favorite, private villa, relaxation, luxury villa, tropical garden, airbnb, book villa, best villa Canggu, vacation rental, Bali accommodation"
+    />
+    <link rel="canonical" href="https://villalylabali.com/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:title"
+      content="Villa Lyla - Private Villa 10 min Walk to Beach in Canggu, Bali | Private Pool, Superhost, Guest Favorite"
+    />
+    <meta
+      property="og:description"
+      content="Book Villa Lyla, a 5-star rated private villa in Canggu, Bali. Private pool, tropical garden, superhost, guest favorite, 10 minutes from beaches. Perfect for couples and relaxation. See real guest reviews!"
+    />
+    <meta property="og:url" content="https://villalylabali.com/" />
+    <meta
+      property="og:image"
+      content="https://villalylabali.com/images/img-hero-2560w.jpg"
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏝️</text></svg>"
+    />
+
+    <link rel="stylesheet" href="css/fonts-local.css" />
+    <link rel="stylesheet" href="css/fontawesome.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/lang.css" />
+
+    <script type="application/ld+json" id="structured-data">
+      {
+        "@context": "https://schema.org",
+        "@type": "LodgingBusiness",
+        "name": "Villa Lyla",
+        "description": "Private Villa in Canggu, Bali. Private pool, tropical garden, superhost, guest favorite, 10 minutes from beaches. Perfect for couples and relaxation.",
+        "image": "https://villalylabali.com/images/img-hero-2560w.jpg",
+        "url": "https://villalylabali.com/",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Canggu",
+          "addressRegion": "Bali",
+          "addressCountry": "Indonesia"
+        },
+        "keywords": "Villa Lyla, Canggu villa, Bali villa, private pool, superhost, guest favorite, private villa, relaxation, luxury villa, tropical garden, airbnb, book villa, best villa Canggu, vacation rental, Bali accommodation",
+        "email": "hello@villalylabali.com"
+      }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Font loading optimization -->
+    <script>
+      // Font loading optimization to prevent FOUT/FOIT
+      if ("fonts" in document) {
+        Promise.all([
+          document.fonts.load("400 1em Inter"),
+          document.fonts.load("600 1em Inter"),
+          document.fonts.load('700 1em "Playfair Display"'),
+        ]).then(() => {
+          document.documentElement.classList.add("fonts-loaded");
+        });
+      } else {
+        // Fallback for browsers that don't support Font Loading API
+        document.documentElement.classList.add("fonts-loaded");
+      }
+    </script>
+    <!-- Hreflang tags for international SEO -->
+    <link rel="alternate" hreflang="en" href="https://villalylabali.com/en/" />
+    <link rel="alternate" hreflang="fr" href="https://villalylabali.com/fr/" />
+    <link rel="alternate" hreflang="zh" href="https://villalylabali.com/zh/" />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://villalylabali.com/"
+    />
+    <!-- End Hreflang tags -->
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <nav class="container">
+        <a href="#hero" class="logo">Villa Lyla</a>
+        <ul class="nav-links">
+          <li class="hide-mobile">
+            <a href="#about" data-translate="nav.about">Overview</a>
+          </li>
+          <li><a href="#gallery" data-translate="nav.gallery">Gallery</a></li>
+          <li class="hide-mobile-sm">
+            <a href="#reviews" data-translate="nav.reviews">Reviews</a>
+          </li>
+          <li class="hide-mobile">
+            <a href="#location" data-translate="nav.location">Location</a>
+          </li>
+          <li>
+            <div class="language-switcher">
+              <button class="language-btn" id="languageBtn">
+                <span id="currentLang">EN</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="language-dropdown" id="languageDropdown">
+                <div class="language-option active" data-lang="en">
+                  <span class="language-flag">🇬🇧</span>
+                  English
+                </div>
+                <div class="language-option" data-lang="fr">
+                  <span class="language-flag">🇫🇷</span>
+                  Français
+                </div>
+                <div class="language-option" data-lang="zh">
+                  <span class="language-flag">🇨🇳</span>
+                  中文
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-placeholder"></div>
+      <img
+        src="images/img-hero-2560w.jpg"
+        alt="Bedroom image 1"
+        class="hero-bg-image"
+        fetchpriority="high"
+        loading="eager"
+      />
+      <div class="hero-bg-dark"></div>
+      <div class="hero-content">
+        <div class="hero-badges">
+          <div class="badge badge-superhost">
+            <i class="fas fa-user-shield"></i>
+            <span data-translate="badges.superhost">Superhost</span>
+          </div>
+          <div class="badge badge-guest-favorite">
+            <i class="fas fa-heart"></i>
+            <span data-translate="badges.guest_favorite">Guest Favorite</span>
+          </div>
+        </div>
+        <h1>Villa Lyla</h1>
+        <div>
+          <span class="soft-rating-badge">
+            <span class="stars" id="hero-stars">
+              <span class="star" data-idx="0">☆</span>
+              <span class="star" data-idx="1">☆</span>
+              <span class="star" data-idx="2">☆</span>
+              <span class="star" data-idx="3">☆</span>
+              <span class="star" data-idx="4">☆</span>
+            </span>
+            <span id="hero-rating-animation-value" class="fixed-rating">
+              0.0
+            </span>
+            <span id="airbnb-rating-value">4.95</span>
+          </span>
+        </div>
+
+        <div class="hero-capacity-row">
+          <span class="hero-capacity">
+            <span class="hero-capacity-item">
+              <span data-translate="hero.guest">2 guests</span> </span
+            ><span class="hero-dot">•</span
+            ><span class="hero-capacity-item">
+              <span data-translate="hero.bedrooms">1 bedroom</span> </span
+            ><span class="hero-dot">•</span
+            ><span class="hero-capacity-item">
+              <span data-translate="hero.beds">1 bed</span> </span
+            ><span class="hero-dot">•</span
+            ><span class="hero-capacity-item">
+              <span data-translate="hero.baths">1 bath</span>
+            </span>
+          </span>
+        </div>
+        <div class="hero-subtitle" data-translate="hero.subtitle">
+          Private Villa 10 min Walk to Beach in Canggu, Bali
+        </div>
+
+        <a
+          href="https://www.airbnb.com/rooms/1245570220521334980/"
+          class="cta-button"
+          target="_blank"
+        >
+          <i class="fas fa-calendar-check"></i>
+          <span data-translate="hero.cta">Check Availability</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Floating CTA -->
+    <div class="floating-cta">
+      <a
+        href="https://www.airbnb.com/rooms/1245570220521334980/"
+        class="cta-button"
+        target="_blank"
+      >
+        <i class="fas fa-calendar-check"></i>
+        <span data-translate="hero.cta">Check Availability</span>
+      </a>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h3 class="text-content" data-translate="about.title">
+              Your Private Paradise in Canggu
+            </h3>
+            <p class="text-content" data-translate="about.description">
+              Step into a tranquil oasis where boundaries between nature and
+              comfort blur. Villa Lyla offers lush gardens, a private pool, and
+              a modern open living design—your peaceful escape just 10 minutes
+              from Canggu's vibrant beaches and cafés.
+            </p>
+          </div>
+          <div class="about-image image-content">
+            <img
+              src="images/img-normal-1-720w.jpg"
+              alt="Full kitchen image 1"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-swimming-pool"></i>
+            <h4 data-translate="features.pool.title">Private Pool & Garden</h4>
+            <p data-translate="features.pool.description">
+              Enjoy your own tropical oasis with a private plunge pool and lush
+              garden for ultimate relaxation.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <i class="fas fa-wifi"></i>
+            <h4 data-translate="features.wifi.title">
+              High-Speed WiFi & Smart TV
+            </h4>
+            <p data-translate="features.wifi.description">
+              Fast, reliable internet up to 100mbps and smart TV for streaming
+              your favorite shows and movies.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <i class="fas fa-utensils"></i>
+            <h4 data-translate="features.kitchen.title">
+              Fully Equipped Kitchen
+            </h4>
+            <p data-translate="features.kitchen.description">
+              Modern kitchen with microwave, dishwasher, and all essentials for
+              preparing delicious meals.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <i class="fas fa-snowflake"></i>
+            <h4 data-translate="features.ac.title">Air Conditioning</h4>
+            <p data-translate="features.ac.description">
+              Climate control in every room for comfort in tropical weather.
+            </p>
+          </div>
+        </div>
+
+        <div class="amenities-section">
+          <h3 class="text-content" data-translate="amenities.title">
+            Amenities
+          </h3>
+          <div class="amenities-grid">
+            <div class="amenity-item">
+              <i class="fas fa-swimming-pool"></i>
+              <span data-translate="amenities.pool">Private Pool</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-wifi"></i>
+              <span data-translate="amenities.wifi">High-Speed WiFi</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-laptop"></i>
+              <span data-translate="amenities.workspace">
+                Dedicated workspace
+              </span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-car"></i>
+              <span data-translate="amenities.parking">Free parking</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-snowflake"></i>
+              <span data-translate="amenities.ac">Air conditioning</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-utensils"></i>
+              <span data-translate="amenities.kitchen">Full kitchen</span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-eye"></i>
+              <span data-translate="amenities.view">
+                Tropical garden view
+              </span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-key"></i>
+              <span data-translate="amenities.checkin">
+                Self check-in (lockbox)
+              </span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-broom"></i>
+              <span data-translate="amenities.cleaning">
+                Daily cleaning service
+              </span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-user-shield"></i>
+              <span data-translate="amenities.privacy">
+                Full privacy, entire villa
+              </span>
+            </div>
+            <div class="amenity-item">
+              <i class="fas fa-umbrella-beach"></i>
+              <span data-translate="amenities.beach">
+                10 min walk to beach
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+      <div class="container">
+        <h2 class="section-title" data-translate="gallery.title">
+          Discover Villa Lyla
+        </h2>
+        <p
+          class="section-subtitle text-content"
+          data-translate="gallery.subtitle"
+        >
+          Experience the beauty and comfort of our peaceful retreat
+        </p>
+
+        <div class="gallery-grid">
+          <div class="gallery-item hero">
+            <img
+              src="images/img-hero-2560w.jpg"
+              alt="Bedroom image 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item landscape-1">
+            <img
+              src="images/img-landscape-1-960w.jpg"
+              alt="Bedroom image 2"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-1">
+            <img
+              src="images/img-normal-1-720w.jpg"
+              alt="Full kitchen image 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-2">
+            <img
+              src="images/img-normal-2-720w.jpg"
+              alt="Living room image 2"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item portrait-1">
+            <img
+              src="images/img-portrait-1-720w.jpg"
+              alt="Living room image 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-3">
+            <img
+              src="images/img-normal-3-720w.jpg"
+              alt="Living room image 4"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-4">
+            <img
+              src="images/img-normal-4-720w.jpg"
+              alt="Additional photos image 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-5">
+            <img
+              src="images/img-normal-5-720w.jpg"
+              alt="Dining area image 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-6">
+            <img
+              src="images/img-normal-6-720w.jpg"
+              alt="Living room image 5"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-7">
+            <img
+              src="images/img-normal-7-720w.jpg"
+              alt="Living room image 3"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-8">
+            <img
+              src="images/img-normal-8-720w.jpg"
+              alt="Laundry area image 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item landscape-2">
+            <img
+              src="images/img-landscape-2-960w.jpg"
+              alt="Full bathroom image 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-9">
+            <img
+              src="images/img-normal-9-720w.jpg"
+              alt="Dining area image 2"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item normal-10">
+            <img
+              src="images/img-normal-10-720w.jpg"
+              alt="Pool image 1"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews">
+      <div class="container">
+        <h2 class="section-title" data-translate="reviews.title">
+          What Our Guests Say
+        </h2>
+        <div class="reviews-featured">
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-avatar">J</div>
+              <div class="review-info">
+                <h4>Jessica</h4>
+                <div class="review-stars">★★★★★</div>
+              </div>
+            </div>
+            <p>
+              "Highly recommended!! The house is a little tucked away from the
+              main road, which we actually loved, it made for a very peaceful
+              and quiet stay, a real bonus considering how lively and sometimes
+              noisy Canggu can get. The home itself is absolutely beautiful,
+              tastefully designed, and very comfortable, we felt right at home
+              the moment we arrived. There are also plenty of great cafes and
+              restaurants just a short walk away. Would definitely stay here
+              again!"
+            </p>
+          </div>
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-avatar">M</div>
+              <div class="review-info">
+                <h4>Marvin</h4>
+                <div class="review-stars">★★★★★</div>
+              </div>
+            </div>
+            <p>
+              "The villa is a little oasis in the heart of Canggu. Location is
+              excellent 1 minute walk to best cafes and restaurants in
+              Jl.Neyalan. And 5 minutes walking distance to the beach. Every
+              part of the villa is spotless clean and beautiful decorated. We
+              definitely will come back and recommend this villa. Gregory and
+              staff is very kind and responsive."
+            </p>
+          </div>
+        </div>
+        <div class="reviews-scroll-container">
+          <div id="reviews-scroll-track">
+            <div class="review-mini" data-reviewer="Rhonda">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">R</div>
+                <div>
+                  <h5>Rhonda</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "The villa was beautiful and clean. It was very near the beach
+                to walk to and close to amazing restaurants. The villa had
+                everything we needed. Gregory was responsive and helpful. Ensure
+                you tell your driver to put in the sat nav Tiga restaurant and
+                then you can walk across the street to the villa down a pathway
+                where you see a blue sign that says Eva suites and stay to the
+                left then follow the directions Gregory sends to you. You will
+                love it! Our driver Ainun is the best driver in Canggu."
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Jason">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">J</div>
+                <div>
+                  <h5>Jason</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Awesome villa and host! Greg was very responsive and
+                accommodating with our needs. This villa is gorgeous! Very cute
+                lilttle touches to enlighten us during our stay, like the
+                pajamas, the diffuser, the guestbook etc.. Location is
+                unbeatable, close to everything, yet private and quiet enough,
+                despite of some construction that's been going on just like
+                everywhere else now in bali... we loved every minute of it!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Siwen">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">S</div>
+                <div>
+                  <h5>Siwen</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "The path to get into the house has a great feeling.The design
+                of the house is amazing, the movement line is particularly
+                smooth, the space is very high, it is very high. At night, the
+                music is very good. The lights and walls are also very
+                textured... The house is fully equipped, and the host has a
+                heart.The location is good, just a lively street out.Absolutely
+                loved it, recommended."
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Yousef">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">Y</div>
+                <div>
+                  <h5>Yousef</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "The place is very nice and elegant and all the details are very
+                sweet. The furniture is clean and new. The place is arranged to
+                the farthest side of the street. All you need. There are coffee
+                shops, restaurants and shops. The place is very wonderful. The
+                location connects you to the house, but enter the car, it is
+                difficult for the narrow entrance, but go back and re-visit the
+                place"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Ashton">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">A</div>
+                <div>
+                  <h5>Ashton</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Gregory was super easy to communicate with and super friendly.
+                We had the power go out one morning I let him know straight away
+                he had someone there looking at it. within 4 hours the problem
+                was fixed. Was not a small fix but he was onto it straight away.
+                Place was spotless no complaints enjoyed my stay"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Chloe">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">C</div>
+                <div>
+                  <h5>Chloe</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Villa Lyla was fantastic. We loved our stay, it was very
+                central but set back off the road so was very quiet (even with
+                construction going on next door) and felt very safe. Would
+                recommend and would stay there again!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Celal Mert">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">C</div>
+                <div>
+                  <h5>Celal Mert</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "The house was perfect. At the same time, it was in a very good
+                location, close to everywhere. I thank our host very much, he
+                was very interested. Thanks for everything"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Shannon">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">S</div>
+                <div>
+                  <h5>Shannon</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Wonderful stay the villa was perfect, great location, we will
+                definitely be back!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Rob">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">R</div>
+                <div>
+                  <h5>Rob</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Fantastic villa. Great central location in Canggu. Would go
+                back."
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Jorell">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">J</div>
+                <div>
+                  <h5>Jorell</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Crazy! It was absolutely perfect! Also the location is
+                perfect!!!"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Monirul">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">M</div>
+                <div>
+                  <h5>Monirul</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Had an amazing time. Easy to communicate. Great host"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Taylar">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">T</div>
+                <div>
+                  <h5>Taylar</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Was a beautiful stay and so close to the beach"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Nick">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">N</div>
+                <div>
+                  <h5>Nick</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Great villa. Highly recommend. Good location."
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Natasha">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">N</div>
+                <div>
+                  <h5>Natasha</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Very happy with our stay! Would stay again"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Dasha">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">D</div>
+                <div>
+                  <h5>Dasha</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">
+                "Great experience, the villa is very nice"
+              </p>
+            </div>
+            <div class="review-mini" data-reviewer="Sophie">
+              <div class="review-mini-header">
+                <div class="review-mini-avatar">S</div>
+                <div>
+                  <h5>Sophie</h5>
+                  <div class="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-mini-text">"I recommend this place!"</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-content reviews-cta">
+          <a
+            href="https://www.airbnb.com/rooms/1245570220521334980/reviews"
+            target="_blank"
+            class="cta-button"
+          >
+            <span data-translate="reviews.read_all"
+              >Read All Reviews on Airbnb</span
+            >
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="location">
+      <div class="container">
+        <h2 class="section-title" data-translate="location.title">
+          Perfect Canggu Location
+        </h2>
+
+        <div class="section-content">
+          <div>
+            <p class="text-content" data-translate="location.description">
+              Villa Lyla is strategically located in the tranquil Nelayan area
+              with friendly neighbors, yet perfectly positioned for exploring
+              everything Canggu has to offer.
+            </p>
+            <div class="location-highlights">
+              <div class="location-item">
+                <i class="fas fa-umbrella-beach"></i>
+                <div>
+                  <h4 data-translate="location.beaches.title">
+                    10 minutes walk to Canggu beaches
+                  </h4>
+                  <p data-translate="location.beaches.description">
+                    Easy walk to world-class surf spots and beach clubs
+                  </p>
+                </div>
+              </div>
+              <div class="location-item">
+                <i class="fas fa-utensils"></i>
+                <div>
+                  <h4 data-translate="location.restaurants.title">
+                    1 minute walk to restaurants
+                  </h4>
+                  <p data-translate="location.restaurants.description">
+                    Great local cafés and international dining just steps away
+                  </p>
+                </div>
+              </div>
+              <div class="location-item">
+                <i class="fas fa-shopping-cart"></i>
+                <div>
+                  <h4 data-translate="location.stores.title">
+                    Minutes from convenience stores
+                  </h4>
+                  <p data-translate="location.restaurants.description">
+                    Easy access to supermarkets and daily necessities
+                  </p>
+                </div>
+              </div>
+              <div class="location-item">
+                <i class="fas fa-car"></i>
+                <div>
+                  <h4 data-translate="location.parking.title">
+                    Free street parking
+                  </h4>
+                  <p data-translate="location.parking.description">
+                    Easy arrival with free street parking available
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="business-offering" class="biz-section">
+      <div class="biz-container">
+        <h2 class="biz-heading">Want This Website for Your Property?</h2>
+        <p class="biz-subheading">
+          Hi there! We specialize in creating stunning websites for exceptional
+          Airbnb properties, and we’re excited to share this demo we designed
+          just for you. If you’d like to make it yours, check out our packages
+          below. The site will be delivered exactly as shown here, with the
+          exception of removing this section and the demo watermark.
+        </p>
+
+        <div id="biz-discount-banner" class="biz-discount-banner-outer">
+          <div class="biz-discount-banner">
+            <span class="biz-discount-text"
+              >We are just starting and are offering <b>70% off</b> to our first
+              20 customers!</span
+            >
+          </div>
+        </div>
+        <div id="biz-calc-root" class="biz-calc-root">
+          <!-- Hands-On Package Card -->
+          <div class="biz-card">
+            <div class="biz-card-header">
+              <h3 class="biz-card-title">Hands-On Package</h3>
+            </div>
+            <div class="biz-card-desc">
+              Perfect for tech-savvy hosts who want control
+            </div>
+            <div class="biz-card-price-block">
+              <div class="biz-price-line">
+                <span class="biz-card-price-original">$129.00</span>
+              </div>
+              <div class="biz-price-line">
+                <span class="biz-card-price-discount">$38.90</span>
+                <span class="biz-price-smallprint"
+                  >Fixed price, no monthly fees</span
+                >
+              </div>
+            </div>
+            <ul class="biz-features-list">
+              <li>
+                <i class="fas fa-check biz-check"></i> Custom website design
+                tailored to your property
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i> Mobile optimization for
+                all devices
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i> Full source code
+                ownership
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i> Optimized performance and
+                SEO
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i> Technical guidance for
+                deployment and maintenance
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i> Total freedom to modify
+                and host anywhere
+              </li>
+            </ul>
+            <div class="biz-card-extras-label">Add-ons</div>
+            <div class="biz-card-extras-block">
+              <span class="biz-extra-label"
+                >Multi-language support
+                <span
+                  class="biz-info-icon"
+                  aria-label="More info about multi-language support"
+                  role="button"
+                >
+                  <i class="fas fa-info-circle"></i>
+                  <span class="biz-tooltip" role="tooltip">
+                    This service not only includes the translation of the
+                    website, but also custom SEO for each language. Meaning that
+                    people searching in their own language will have a higher
+                    chance of find your website. This is a great way to expand
+                    your reach and attract more guests from different countries.
+                  </span>
+                </span>
+              </span>
+              <div class="biz-multiselect" id="biz-multiselect-hands-on"></div>
+              <div class="biz-smallprint">
+                First translation $29, each additional +$19
+              </div>
+            </div>
+            <div id="biz-calc-details-hands-on" class="biz-receipt"></div>
+            <div class="biz-total-col" id="biz-total-col-hands-on">
+              <div class="biz-total-row">
+                <span class="biz-total-label">Total one-time payment</span>
+                <span id="biz-calc-total-hands-on" class="biz-total-amount"
+                  >$49.00</span
+                >
+              </div>
+              <span
+                id="biz-calc-monthly-hands-on"
+                class="biz-monthly-row"
+              ></span>
+            </div>
+            <a
+              id="biz-calc-order-hands-on"
+              target="_blank"
+              class="biz-order-btn"
+              >Get Hands-On</a
+            >
+            <div class="biz-smallprint">
+              Final payment for Indonesian listings will be made in Indonesian
+              Rupiah (Rp) at the current exchange rate.
+            </div>
+          </div>
+
+          <!-- Hands-Off Package Card -->
+          <div class="biz-card biz-card-featured">
+            <div class="biz-card-header">
+              <h3 class="biz-card-title">Hands-Off Package</h3>
+              <span class="biz-card-badge">Most Popular</span>
+            </div>
+            <div class="biz-card-desc">
+              Complete service – just sit back and relax
+            </div>
+            <div class="biz-card-price-block">
+              <div class="biz-price-line">
+                <span class="biz-card-price-original">$199.00</span>
+              </div>
+              <div class="biz-price-line">
+                <span class="biz-card-price-discount">$59.90</span>
+                <span class="biz-price-smallprint"
+                  >Fixed price, no monthly fees</span
+                >
+              </div>
+            </div>
+            <ul class="biz-features-list">
+              <li>
+                <i class="fas fa-check biz-check"></i> Everything in Hands-On
+                Package
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i
+                ><span id="suggested-domain"
+                  >Custom domain name registration</span
+                >
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i
+                ><span id="suggested-email">Professional email forwarding</span>
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i> Analytics – Track unique
+                views by country and more
+              </li>
+              <li>
+                <i class="fas fa-check biz-check"></i> 1 year up-time included
+              </li>
+              <li><i class="fas fa-check biz-check"></i> Launched for you</li>
+            </ul>
+            <div class="biz-card-extras-label">Add-ons</div>
+            <div class="biz-card-extras-block">
+              <span class="biz-extra-label"
+                >Multi-language support
+                <span
+                  class="biz-info-icon"
+                  aria-label="More info about multi-language support"
+                  role="button"
+                >
+                  <i class="fas fa-info-circle"></i>
+                  <span class="biz-tooltip" role="tooltip">
+                    This service not only includes the translation of the
+                    website, but also custom SEO for each language. Meaning that
+                    people searching in their own language will have a higher
+                    chance of find your website. This is a great way to expand
+                    your reach and attract more guests from different countries.
+                  </span>
+                </span>
+              </span>
+              <br />
+              <div class="biz-multiselect" id="biz-multiselect-hands-off"></div>
+              <div class="biz-smallprint">
+                First language $29, each additional +$19
+              </div>
+            </div>
+            <div class="biz-card-extras-note">
+              <label for="biz-years" class="biz-extra-label"
+                >Secure extra up-time
+                <span
+                  class="biz-info-icon"
+                  aria-label="More info about extra up-time"
+                  role="button"
+                >
+                  <i class="fas fa-info-circle"></i>
+                  <span class="biz-tooltip" role="tooltip">
+                    Domain names cannot be bought permanently—they are only
+                    leased on a yearly basis. This extra service pays upfront to
+                    secure your domain name and hosting to ensure your website
+                    stays online for the selected period. After the selected
+                    period ends you will lose ownership of your domain name
+                    unless extended beforehand by yourself. Note that your
+                    domain name could become more expensive to extend later. Our
+                    trusted service provider partner is
+                    <b>Cloudflare</b>.
+                  </span>
+                </span> </label
+              ><br />
+              <div class="biz-years-container">
+                <div class="biz-custom-select" id="biz-custom-select">
+                  <div class="biz-select-display">
+                    <span id="biz-select-text">1 year (included)</span>
+                    <i class="fas fa-chevron-down"></i>
+                  </div>
+                  <div class="biz-select-dropdown" id="biz-select-dropdown">
+                    <div class="biz-select-option" data-value="1">
+                      <span>1 year (included)</span>
+                    </div>
+                    <div class="biz-select-option" data-value="2">
+                      <span>2 years (+$39)</span>
+                    </div>
+                    <div class="biz-select-option" data-value="3">
+                      <span>3 years (+$78)</span>
+                    </div>
+                    <div class="biz-select-option" data-value="4">
+                      <span>4 years (+$117)</span>
+                    </div>
+                    <div class="biz-select-option" data-value="5">
+                      <span>5 years (+$156)</span>
+                    </div>
+                    <div
+                      class="biz-select-option biz-option-popular"
+                      data-value="6"
+                    >
+                      <span>6 years (+$195)</span>
+                      <span class="biz-option-badge">Most Selected</span>
+                    </div>
+                    <div class="biz-select-option" data-value="7">
+                      <span>7 years (+$234)</span>
+                    </div>
+                    <div class="biz-select-option" data-value="8">
+                      <span>8 years (+$273)</span>
+                    </div>
+                    <div class="biz-select-option" data-value="9">
+                      <span>9 years (+$312)</span>
+                    </div>
+                    <div class="biz-select-option" data-value="10">
+                      <span>10 years (+$351)</span>
+                    </div>
+                  </div>
+                </div>
+                <select
+                  id="biz-years"
+                  class="biz-years-select"
+                  style="display: none"
+                >
+                  <option value="1">1 year (included)</option>
+                  <option value="2">2 years (+$39)</option>
+                  <option value="3">3 years (+$78)</option>
+                  <option value="4">4 years (+$117)</option>
+                  <option value="5">5 years (+$156)</option>
+                  <option value="6">6 years (+$195)</option>
+                  <option value="7">7 years (+$234)</option>
+                  <option value="8">8 years (+$273)</option>
+                  <option value="9">9 years (+$312)</option>
+                  <option value="10">10 years (+$351)</option>
+                </select>
+              </div>
+              <div class="biz-smallprint">
+                Includes domain name, hosting, and email forwarding.
+              </div>
+            </div>
+            <div id="biz-calc-details-hands-off" class="biz-receipt"></div>
+            <div class="biz-total-col" id="biz-total-col-hands-off">
+              <div class="biz-total-row">
+                <span class="biz-total-label">Total one-time payment</span>
+                <span id="biz-calc-total-hands-off" class="biz-total-amount"
+                  >$89.00</span
+                >
+              </div>
+              <span
+                id="biz-calc-monthly-hands-off"
+                class="biz-price-smallprint"
+              ></span>
+            </div>
+            <a
+              id="biz-calc-order-hands-off"
+              target="_blank"
+              class="biz-order-btn"
+              >Get Hands-Off</a
+            >
+            <div class="biz-smallprint">
+              Final payment for Indonesian listings will be made in Indonesian
+              Rupiah (Rp) at the current exchange rate.
+            </div>
+          </div>
+        </div>
+
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+          .biz-section {
+            background: linear-gradient(135deg, #f8f9fa 60%, #e6f0e6 100%);
+            padding: 64px 0 64px 0;
+            line-height: 1.4;
+            overflow-x: hidden;
+            background: #eafff8;
+          }
+          .biz-section::before {
+            content: "DEMO SITE";
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            font-size: 1.2rem;
+            color: rgba(44, 85, 48, 0.25);
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 9999;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(44, 85, 48, 0.2);
+          }
+          .biz-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px;
+          }
+          .biz-heading {
+            font-family: "Playfair Display", serif;
+            font-size: 2.3rem;
+            text-align: center;
+            margin-bottom: 0.5em;
+            color: #2c5530;
+          }
+          .biz-subheading {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #444;
+            margin-bottom: 2.2em;
+          }
+          .biz-discount-banner-outer {
+            max-width: 700px;
+            margin: 0 auto 2.2em auto;
+          }
+          .biz-discount-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2c5530;
+            color: #fff;
+            font-size: 1.13rem;
+            font-weight: 600;
+            border-radius: 18px;
+            box-shadow: 0 4px 18px rgba(44, 85, 48, 0.1);
+            padding: 1.1em 1.6em;
+            margin-bottom: 2.2em;
+            text-align: center;
+            gap: 0.8em;
+          }
+          .biz-discount-banner b {
+            color: #ffeb3b;
+            font-weight: 800;
+            text-shadow: 0 2px 8px rgba(44, 85, 48, 0.1);
+          }
+          .biz-calc-root {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            gap: 1.5rem;
+          }
+          .biz-card {
+            flex: 1 1 340px;
+            min-width: 360px;
+            max-width: 400px;
+            margin: 0 1.2rem 1.5rem 1.2rem;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(44, 85, 48, 0.08);
+            padding: 2.2em 1.5em 1.5em 1.5em;
+            border: 3px solid #ffffff;
+            transition: border 0.2s, box-shadow 0.2s;
+            outline: none;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1.5em;
+          }
+          .biz-card-featured {
+            border: 3px solid #c4a47c;
+          }
+          .biz-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.7em;
+          }
+          .biz-card-title {
+            font-size: 1.3rem;
+            font-family: "Playfair Display", serif;
+            color: #2c5530;
+            margin: 0;
+          }
+          .biz-card-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c5530;
+          }
+
+          .biz-card-badge {
+            position: absolute;
+            top: -18px;
+            right: 18px;
+            background: #c4a47c;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 0.4em 1.2em;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(44, 85, 48, 0.1);
+          }
+          .biz-card-desc {
+            font-size: 0.98rem;
+            color: #666;
+            margin-bottom: 0.7em;
+          }
+          .biz-features-list {
+            margin-bottom: 1.1em;
+            padding-left: 0;
+            color: #2c5530;
+            font-size: 1.01rem;
+            list-style: none;
+          }
+          .biz-features-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.5em;
+          }
+          .biz-card-extras-label {
+            margin-bottom: 0.7em;
+            font-weight: 600;
+            color: #2c5530;
+          }
+          .biz-card-extras-block {
+            margin-bottom: 0.5em;
+          }
+          .biz-card-extras-note {
+            font-size: 0.92rem;
+            color: #888;
+            margin-top: 0.2em;
+            margin-bottom: 0.5em;
+          }
+          .biz-extra-label {
+            font-size: 0.8rem;
+            color: #444;
+          }
+          .biz-years-container {
+            position: relative;
+            width: 100%;
+            margin-top: 0.3em;
+          }
+          .biz-years-select {
+            width: 100%;
+            border-radius: 7px;
+            border: 1px solid #c4a47c;
+            padding: 0.3em;
+            font-size: 0.98em;
+            height: 38px;
+          }
+          .biz-custom-select {
+            position: relative;
+            width: 100%;
+          }
+          .biz-select-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            border-radius: 7px;
+            border: 1px solid #c4a47c;
+            padding: 0.3em 0.7em;
+            font-size: 0.98em;
+            height: 38px;
+            background: #fff;
+            cursor: pointer;
+            transition: border-color 0.2s ease;
+          }
+          .biz-select-display:hover {
+            border-color: #a08a5c;
+          }
+          .biz-select-display i {
+            color: #c4a47c;
+            font-size: 0.8em;
+            transition: transform 0.2s ease;
+          }
+          .biz-custom-select.open .biz-select-display i {
+            transform: rotate(180deg);
+          }
+          .biz-select-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid #c4a47c;
+            border-radius: 7px;
+            box-shadow: 0 4px 16px rgba(44, 85, 48, 0.1);
+            z-index: 100;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            margin-top: 2px;
+          }
+          .biz-custom-select.open .biz-select-dropdown {
+            display: block;
+          }
+          .biz-select-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6em 0.8em;
+            cursor: pointer;
+            font-size: 0.98em;
+            color: #2c5530;
+            transition: background 0.13s;
+            border-bottom: 1px solid #f0f0f0;
+          }
+          .biz-select-option:last-child {
+            border-bottom: none;
+          }
+          .biz-select-option:hover {
+            background: #e6f0e6;
+          }
+          .biz-select-option.selected {
+            background: #e6f0e6;
+            font-weight: 600;
+          }
+          .biz-option-popular {
+            background: linear-gradient(135deg, #fff5f5, #ffe8e8);
+            border-left: 3px solid #ff6b6b;
+          }
+          .biz-option-badge {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.15em 0.5em;
+            border-radius: 10px;
+            box-shadow: 0 1px 4px rgba(238, 90, 82, 0.3);
+            margin-left: 0.5em;
+          }
+          .biz-receipt {
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e6e6e6;
+            padding: 1em 1.1em;
+            font-size: 1.01rem;
+            color: #2c5530;
+            box-shadow: 0 2px 8px rgba(44, 85, 48, 0.04);
+            margin-top: 0.5em;
+            margin-bottom: 0.7em;
+          }
+          .biz-receipt-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px dashed #d2d2d2;
+            padding: 0.3em 0;
+            font-size: 1.01em;
+          }
+          .biz-receipt-line .biz-card-price-discount {
+            font-size: inherit;
+            font-weight: 800;
+          }
+          .biz-receipt-line:last-child {
+            border-bottom: none;
+          }
+          .biz-receipt-flag {
+            margin-right: 0.5em;
+            font-size: 1.15em;
+            vertical-align: -0.1em;
+          }
+          .biz-receipt-label {
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+          }
+          .biz-multiselect {
+            position: relative;
+            background: #fff;
+            border-radius: 7px;
+            box-shadow: 0 2px 8px rgba(44, 85, 48, 0.06);
+            margin-top: 0.2em;
+          }
+          .biz-multiselect .multi-select-display {
+            border: none;
+            border-radius: 7px;
+            padding: 0.4em 0.7em;
+            background: #fff;
+            min-height: 2.2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3em;
+            align-items: center;
+            font-size: 0.8rem;
+            box-shadow: none;
+          }
+          .biz-multiselect .multi-select-display:focus {
+            outline: 2px solid #c4a47c;
+            outline-offset: 2px;
+          }
+          .biz-multiselect .multi-select-dropdown {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 110%;
+            background: #fff;
+            border: 1px solid #c4a47c;
+            border-radius: 7px;
+            box-shadow: 0 4px 16px rgba(44, 85, 48, 0.1);
+            z-index: 10;
+            max-height: 180px;
+            overflow-y: auto;
+            min-width: 100%;
+          }
+          .biz-multiselect .multi-select-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6em 1em;
+            cursor: pointer;
+            font-size: 1em;
+            color: #2c5530;
+            transition: background 0.13s;
+            background: #fff;
+          }
+          .biz-multiselect .multi-select-option:hover,
+          .biz-multiselect .multi-select-option.selected {
+            background: #e6f0e6;
+          }
+          .biz-multiselect .multi-select-option-left {
+            display: flex;
+            align-items: center;
+          }
+          .biz-multiselect .multi-select-badge {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.15em 0.5em;
+            border-radius: 10px;
+            box-shadow: 0 1px 4px rgba(76, 175, 80, 0.3);
+            margin-left: 0.5em;
+          }
+          .biz-multiselect .multi-select-tag {
+            background: #f3e9d2;
+            color: #2c5530;
+            border-radius: 16px;
+            padding: 0.18em 0.9em 0.18em 0.7em;
+            margin-right: 0.3em;
+            margin-bottom: 0.2em;
+            display: flex;
+            align-items: center;
+            font-size: 0.98em;
+            box-shadow: 0 1px 4px rgba(44, 85, 48, 0.07);
+            border: 1px solid #e6e6e6;
+            font-weight: 500;
+          }
+          .biz-multiselect .multi-select-tag .remove-tag {
+            margin-left: 0.5em;
+            cursor: pointer;
+            font-weight: bold;
+            color: #b8956d;
+            font-size: 1.1em;
+          }
+          .biz-check {
+            color: #2c5530;
+            margin-right: 0.5em;
+            font-size: 1.1em;
+            vertical-align: -0.1em;
+            flex-shrink: 0;
+            margin-top: 0.2em;
+          }
+          .biz-order-btn {
+            display: block;
+            width: 100%;
+            background: #2c5530;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.98rem;
+            border-radius: 24px;
+            padding: 0.55em 0;
+            text-decoration: none;
+            box-shadow: 0 2px 12px rgba(44, 85, 48, 0.1);
+            transition: background 0.18s;
+            border: none;
+            margin-top: 1em;
+            margin-bottom: 0.2em;
+            text-align: center;
+            cursor: pointer;
+          }
+          .biz-order-btn:hover {
+            background: #3a5d47;
+          }
+          .biz-total-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #c4a47c;
+            margin-bottom: 0.5em;
+            width: 100%;
+          }
+          .biz-total-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+          }
+          .biz-total-label {
+            font-size: 0.8rem;
+            color: #888;
+            font-weight: 500;
+          }
+          .biz-total-amount {
+            font-size: 2.6rem;
+            color: #2c5530;
+            font-weight: 800;
+          }
+
+          .biz-smallprint {
+            font-size: 0.6rem;
+            color: #989898;
+            margin-top: 0.5em;
+            text-align: left;
+          }
+
+          .biz-info-icon {
+            cursor: pointer;
+            position: relative;
+          }
+          .biz-info-icon i {
+            vertical-align: middle;
+          }
+          .biz-tooltip {
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 120%;
+            /* transform: translateX(-50%); */
+            background: #f3f7f5;
+            color: #000000;
+            border: 1px solid #c4a47c;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(44, 85, 48, 0.1);
+            padding: 1em 1.2em;
+            font-size: 0.8em;
+            min-width: 260px;
+            max-width: 320px;
+            z-index: 100;
+            white-space: normal;
+            pointer-events: none;
+          }
+          .biz-info-icon:focus .biz-tooltip,
+          .biz-info-icon:hover .biz-tooltip {
+            display: block;
+            pointer-events: auto;
+          }
+          .biz-tooltip b {
+            color: #c4a47c;
+            font-weight: 600;
+          }
+          .biz-card-price-block {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin: 0.7em 0 1.1em 0;
+            border-bottom: 1px solid #e6e6e6;
+            padding-bottom: 1.1em;
+          }
+          .biz-price-line {
+            display: flex;
+            align-items: baseline;
+            gap: 0.2em;
+            width: 100%;
+          }
+          .biz-card-price-original {
+            text-decoration: line-through;
+            color: #888;
+            font-weight: 500;
+            margin-right: 0.4em;
+          }
+          .biz-card-price-discount {
+            color: #2c5530;
+            font-size: 2.8rem;
+            font-weight: 800;
+          }
+          .biz-price-smallprint {
+            font-size: 0.7rem;
+            color: #666;
+          }
+          .biz-total-col .biz-price-smallprint {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 400;
+          }
+
+          @media (max-width: 768px) {
+            .biz-tooltip {
+              min-width: 240px;
+              max-width: 90vw;
+              font-size: 0.8em;
+              left: -60px;
+              transform: none;
+            }
+            .biz-card-price-block {
+              flex-direction: column;
+              align-items: flex-start;
+            }
+            .biz-card-price-original {
+              font-size: 1.1rem;
+            }
+            .biz-card-price-discount,
+            .biz-total-amount {
+              font-size: 2.6rem;
+            }
+            .biz-container {
+              padding: 0 6px;
+            }
+            .biz-card {
+              padding: 2em 1em 1em 1em;
+              min-width: 280px;
+              margin: 0;
+              flex: auto;
+            }
+          }
+        </style>
+        <script>
+          (function () {
+            // State
+            let selectedPackage = "hands-on";
+            let langHandsOn = [];
+            let langHandsOff = [];
+            let years = 1;
+
+            // Function to get languages from the nav bar language dropdown
+            function getLanguagesFromNavDropdown() {
+              const languageDropdown =
+                document.getElementById("languageDropdown");
+              if (!languageDropdown) return [];
+
+              const languageOptions =
+                languageDropdown.querySelectorAll(".language-option");
+              const languages = [];
+
+              languageOptions.forEach((option) => {
+                const langCode = option.getAttribute("data-lang");
+                if (langCode) {
+                  languages.push(langCode);
+                }
+              });
+
+              // Exclude "en" from the returned languages
+              return languages.length > 0
+                ? languages.filter((lang) => lang !== "en")
+                : [];
+            }
+
+            // Initialize language arrays with languages from nav dropdown
+            function initializeLanguageArrays() {
+              const navLanguages = getLanguagesFromNavDropdown();
+              langHandsOn = [...navLanguages];
+              langHandsOff = [...navLanguages];
+            }
+            const langList = [
+              // English first
+              { code: "en", name: "English", flag: "🇬🇧" },
+
+              // Recommended languages (alphabetical by name, excluding English)
+              { code: "fr", name: "French", flag: "🇫🇷", recommended: true },
+              { code: "de", name: "German", flag: "🇩🇪", recommended: true },
+              { code: "es", name: "Spanish", flag: "🇪🇸", recommended: true },
+              { code: "ru", name: "Russian", flag: "🇷🇺", recommended: true },
+              {
+                code: "zh",
+                name: "Chinese (Simplified)",
+                flag: "🇨🇳",
+                recommended: true,
+              },
+              { code: "it", name: "Italian", flag: "🇮🇹", recommended: true },
+
+              // All other languages (alphabetical by name)
+              { code: "ar", name: "Arabic", flag: "🇸🇦" },
+              { code: "bn", name: "Bengali", flag: "🇧🇩" },
+              { code: "bg", name: "Bulgarian", flag: "🇧🇬" },
+              { code: "br", name: "Brazilian Portuguese", flag: "🇧🇷" },
+              { code: "cs", name: "Czech", flag: "🇨🇿" },
+              { code: "da", name: "Danish", flag: "🇩🇰" },
+              { code: "nl", name: "Dutch", flag: "🇳🇱" },
+              { code: "el", name: "Greek", flag: "🇬🇷" },
+              { code: "fa", name: "Persian", flag: "🇮🇷" },
+              { code: "fil", name: "Filipino", flag: "🇵🇭" },
+              { code: "fi", name: "Finnish", flag: "🇫🇮" },
+              { code: "hi", name: "Hindi", flag: "🇮🇳" },
+              { code: "hr", name: "Croatian", flag: "🇭🇷" },
+              { code: "hu", name: "Hungarian", flag: "🇭🇺" },
+              { code: "id", name: "Indonesian", flag: "🇮🇩" },
+              { code: "ja", name: "Japanese", flag: "🇯🇵" },
+              { code: "ko", name: "Korean", flag: "🇰🇷" },
+              { code: "ms", name: "Malay", flag: "🇲🇾" },
+              { code: "no", name: "Norwegian", flag: "🇳🇴" },
+              { code: "pl", name: "Polish", flag: "🇵🇱" },
+              { code: "pt", name: "Portuguese", flag: "🇵🇹" },
+              { code: "ro", name: "Romanian", flag: "🇷🇴" },
+              { code: "si", name: "Sinhala", flag: "🇱🇰" },
+              { code: "sl", name: "Slovenian", flag: "🇸🇮" },
+              { code: "sv", name: "Swedish", flag: "🇸🇪" },
+              { code: "th", name: "Thai", flag: "🇹🇭" },
+              { code: "tr", name: "Turkish", flag: "🇹🇷" },
+              { code: "uk", name: "Ukrainian", flag: "🇺🇦" },
+              { code: "ur", name: "Urdu", flag: "🇵🇰" },
+              { code: "vi", name: "Vietnamese", flag: "🇻🇳" },
+            ];
+            // Elements
+            const cardOn = document.getElementById("biz-card-hands-on");
+            const cardOff = document.getElementById("biz-card-hands-off");
+            const selYears = document.getElementById("biz-years");
+            // Multiselects
+            function createMultiSelect(containerId, selectedArr, onChange) {
+              const container = document.getElementById(containerId);
+              let open = false;
+              let selected = selectedArr;
+              // Create display
+              const display = document.createElement("div");
+              display.className = "multi-select-display";
+              container.appendChild(display);
+              // Dropdown
+              const dropdown = document.createElement("div");
+              dropdown.className = "multi-select-dropdown";
+              dropdown.style.display = "none";
+              container.appendChild(dropdown);
+              // Render
+              function render() {
+                // Display tags
+                display.innerHTML = "";
+                // Always show English as first, not removable
+                const enLang = langList.find((l) => l.code === "en");
+                if (enLang) {
+                  const tag = document.createElement("span");
+                  tag.className = "multi-select-tag";
+                  tag.innerHTML = `<span class='biz-receipt-flag'>${enLang.flag}</span>${enLang.name}`;
+                  display.appendChild(tag);
+                }
+                selected.forEach((code) => {
+                  if (code === "en") return; // skip, already shown
+                  const lang = langList.find((l) => l.code === code);
+                  const tag = document.createElement("span");
+                  tag.className = "multi-select-tag";
+                  tag.innerHTML = `<span class='biz-receipt-flag'>${lang.flag}</span>${lang.name}`;
+                  const remove = document.createElement("span");
+                  remove.className = "remove-tag";
+                  remove.textContent = "×";
+                  remove.onclick = (e) => {
+                    e.stopPropagation();
+                    selected = selected.filter((c) => c !== code);
+                    onChange(selected);
+                    render();
+                  };
+                  tag.appendChild(remove);
+                  display.appendChild(tag);
+                });
+                const placeholder = document.createElement("span");
+                placeholder.style.color = "#aaa";
+                placeholder.textContent = "Select languages...";
+                display.appendChild(placeholder);
+
+                // Dropdown options (exclude English)
+                dropdown.innerHTML = "";
+                langList.forEach((lang) => {
+                  if (lang.code === "en") return;
+                  const opt = document.createElement("div");
+                  opt.className =
+                    "multi-select-option" +
+                    (selected.includes(lang.code) ? " selected" : "");
+
+                  let optContent = `<div class="multi-select-option-left"><span class='biz-receipt-flag'>${lang.flag}</span>${lang.name}</div>`;
+                  if (lang.recommended) {
+                    optContent += `<span class="multi-select-badge">Recommended</span>`;
+                  }
+                  opt.innerHTML = optContent;
+
+                  opt.onclick = (e) => {
+                    e.stopPropagation();
+                    if (selected.includes(lang.code)) {
+                      selected = selected.filter((c) => c !== lang.code);
+                    } else {
+                      selected = [...selected, lang.code];
+                    }
+                    onChange(selected);
+                    render();
+                  };
+                  dropdown.appendChild(opt);
+                });
+              }
+              // Open/close logic
+              function openDropdown() {
+                open = true;
+                dropdown.style.display = "block";
+              }
+              function closeDropdown() {
+                open = false;
+                dropdown.style.display = "none";
+              }
+              display.onclick = (e) => {
+                e.stopPropagation();
+                open ? closeDropdown() : openDropdown();
+              };
+
+              // Close dropdown when clicking outside
+              document.addEventListener("click", (e) => {
+                if (!container.contains(e.target)) {
+                  closeDropdown();
+                }
+              });
+
+              // Prevent dropdown from closing when clicking inside it
+              dropdown.onclick = (e) => {
+                e.stopPropagation();
+              };
+              render();
+            }
+            // Initialize language arrays with languages from nav dropdown
+            initializeLanguageArrays();
+            // Create multiselects
+            createMultiSelect(
+              "biz-multiselect-hands-on",
+              langHandsOn,
+              (arr) => {
+                langHandsOn = arr;
+                updateCalc("hands-on");
+              }
+            );
+            createMultiSelect(
+              "biz-multiselect-hands-off",
+              langHandsOff,
+              (arr) => {
+                langHandsOff = arr;
+                updateCalc("hands-off");
+              }
+            );
+            // Card selection
+            function selectPackage(pkg) {
+              selectedPackage = pkg;
+              // No visual selection highlight
+            }
+
+            // Custom select functionality
+            const customSelect = document.getElementById("biz-custom-select");
+            const selectDisplay = document.getElementById("biz-select-text");
+            const selectDropdown = document.getElementById(
+              "biz-select-dropdown"
+            );
+            const selectOptions =
+              selectDropdown.querySelectorAll(".biz-select-option");
+
+            // Toggle dropdown
+            selectDisplay.parentElement.addEventListener("click", () => {
+              customSelect.classList.toggle("open");
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener("click", (e) => {
+              if (!customSelect.contains(e.target)) {
+                customSelect.classList.remove("open");
+              }
+            });
+
+            // Handle option selection
+            selectOptions.forEach((option) => {
+              option.addEventListener("click", () => {
+                const value = parseInt(option.dataset.value, 10);
+                const text = option.querySelector("span").textContent;
+
+                // Update display text
+                selectDisplay.textContent = text;
+
+                // Update hidden select
+                selYears.value = value;
+                years = value;
+
+                // Update selected state
+                selectOptions.forEach((opt) =>
+                  opt.classList.remove("selected")
+                );
+                option.classList.add("selected");
+
+                // Close dropdown
+                customSelect.classList.remove("open");
+
+                // Update calculations
+                updateCalc("hands-off");
+              });
+            });
+
+            // Initialize selected state
+            selectOptions[0].classList.add("selected");
+            // Calculation logic
+            function calcLangPrice(langs) {
+              if (!langs.length) return 0;
+              return 29 + (langs.length - 1) * 19;
+            }
+            function calcYearsPrice(yrs) {
+              return (yrs - 1) * 39;
+            }
+            function updateCalc(pkg) {
+              // Hands-On
+              if (!pkg || pkg === "hands-on") {
+                let total = 38.9 + calcLangPrice(langHandsOn);
+                let lines = [];
+                let langTotal = 0;
+                if (langHandsOn.length) {
+                  lines.push(
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-On package</span><span><span class='biz-card-price-original'>$129</span><span class='biz-card-price-discount'>$38.90</span></span></div>`
+                  );
+                  langHandsOn.forEach((code, idx) => {
+                    if (code === "en") return;
+                    const lang = langList.find((l) => l.code === code);
+                    const price = langHandsOn.indexOf(code) === 0 ? 29 : 19;
+                    langTotal += price;
+                    lines.push(
+                      `<div class='biz-receipt-line'><span class='biz-receipt-label'><span class='biz-receipt-flag'>${lang.flag}</span>${lang.name}</span><span>$${price}</span></div>`
+                    );
+                  });
+                }
+                const receipt = document.getElementById(
+                  "biz-calc-details-hands-on"
+                );
+                const totalCol = document.getElementById(
+                  "biz-total-col-hands-on"
+                );
+                if (lines.length) {
+                  receipt.style.display = "";
+                  receipt.innerHTML = lines.join("");
+                  if (totalCol) totalCol.style.display = "flex";
+                } else {
+                  receipt.style.display = "none";
+                  receipt.innerHTML = "";
+                  if (totalCol) totalCol.style.display = "none";
+                }
+                document.getElementById(
+                  "biz-calc-total-hands-on"
+                ).textContent = `$${total.toFixed(2)}`;
+              }
+              // Hands-Off
+              if (!pkg || pkg === "hands-off") {
+                let total =
+                  59.9 + calcLangPrice(langHandsOff) + calcYearsPrice(years);
+                let lines = [];
+                let langTotal = 0;
+                if (langHandsOff.length || years > 1) {
+                  lines.push(
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>Hands-Off package</span><span><span class="biz-card-price-original">$199</span><span class='biz-card-price-discount'>$59.90</span></span></div>`
+                  );
+                }
+                if (langHandsOff.length) {
+                  langHandsOff.forEach((code) => {
+                    if (code === "en") return;
+                    const lang = langList.find((l) => l.code === code);
+                    const price = langHandsOff.indexOf(code) === 0 ? 29 : 19;
+                    langTotal += price;
+                    lines.push(
+                      `<div class='biz-receipt-line'><span class='biz-receipt-label'><span class='biz-receipt-flag'>${lang.flag}</span>${lang.name}</span><span>$${price}</span></div>`
+                    );
+                  });
+                }
+                if (years > 1) {
+                  lines.push(
+                    `<div class='biz-receipt-line'><span class='biz-receipt-label'>${years} Year${
+                      years > 1 ? "s" : ""
+                    } Secured</span><span>$${calcYearsPrice(
+                      years
+                    )}</span></div>`
+                  );
+                }
+                const receipt = document.getElementById(
+                  "biz-calc-details-hands-off"
+                );
+                const totalCol = document.getElementById(
+                  "biz-total-col-hands-off"
+                );
+                if (lines.length) {
+                  receipt.style.display = "";
+                  receipt.innerHTML = lines.join("");
+                  if (totalCol) totalCol.style.display = "flex";
+                } else {
+                  receipt.style.display = "none";
+                  receipt.innerHTML = "";
+                  if (totalCol) totalCol.style.display = "none";
+                }
+                document.getElementById(
+                  "biz-calc-total-hands-off"
+                ).textContent = `$${total.toFixed(2)}`;
+                document.getElementById(
+                  "biz-calc-monthly-hands-off"
+                ).textContent =
+                  years > 1
+                    ? `Works out at only $${(total / (years * 12)).toFixed(
+                        2
+                      )}/month`
+                    : "";
+              }
+            }
+            // Initial state
+            updateCalc("hands-on");
+            updateCalc("hands-off");
+
+            // --- DYNAMIC GOOGLE FORM PREFILL FOR HANDS-OFF PACKAGE ---
+            function getSuggestedDomainAndEmail() {
+              // Get the folder name that contains the HTML file
+              // Get the domain from the canonical link tag
+              let domain = "property.com";
+              let email = "hello@property.com";
+              const canonical = document.querySelector('link[rel="canonical"]');
+              if (canonical) {
+                try {
+                  const url = new URL(canonical.getAttribute("href"));
+                  // Remove www. if present
+                  let host = url.hostname.replace(/^www\./, "");
+                  domain = host;
+                  email = "hello@" + host;
+                } catch (e) {
+                  // fallback to default
+                }
+              }
+              return { domain, email };
+            }
+
+            function buildHandsOffOrderLink() {
+              const baseUrl = "http://airliftstudios.com/order-hands-off";
+              const params = new URLSearchParams();
+
+              // Extract demo path from current URL
+              const demoPath =
+                window.location.pathname.split("/demo/")[1] || "";
+              params.append("demo_url", demoPath);
+
+              // Get suggested domain
+              const { domain } = getSuggestedDomainAndEmail();
+              params.append("domain", domain);
+
+              // Languages: always include English first, then others
+              let languages = ["en"];
+              if (langHandsOff && langHandsOff.length) {
+                langHandsOff.forEach((code) => {
+                  if (code !== "en") languages.push(code.toString());
+                });
+              }
+              if (languages.length > 0) {
+                const langString = languages.join(",");
+                params.append("languages", langString);
+              }
+
+              // Extract WhatsApp and Instagram from footer links if available
+              // Look for WhatsApp link in the footer
+              const waFooterLink = document.querySelector(
+                'footer a[href*="wa.me"]'
+              );
+              if (waFooterLink) {
+                const waUrl = waFooterLink.getAttribute("href");
+                // Extract just the phone number from the wa.me URL
+                const waMatch = waUrl.match(/wa\.me\/(\d+)/);
+                // Exclude the default placeholder number
+                if (waMatch && waMatch[1] && waMatch[1] !== "6281234567890") {
+                  params.append("wa", waMatch[1]);
+                }
+              }
+
+              // Look for Instagram link in the footer
+              const igFooterLink = document.querySelector(
+                'footer a[href*="instagram.com"]'
+              );
+              if (igFooterLink) {
+                const igUrl = igFooterLink.getAttribute("href");
+                // Extract just the username from the Instagram URL
+                const igMatch = igUrl.match(/instagram\.com\/([^/?#]+)/i);
+                if (
+                  igMatch &&
+                  igMatch[1] &&
+                  igMatch[1].toLowerCase() !== "example"
+                ) {
+                  params.append("ig", igMatch[1]);
+                }
+              }
+
+              // Add years parameter
+              params.append("years", years.toString());
+
+              return `${baseUrl}?${params.toString()}`;
+            }
+
+            // Update order button href on click
+            const orderBtnOff = document.getElementById(
+              "biz-calc-order-hands-off"
+            );
+            if (orderBtnOff) {
+              orderBtnOff.addEventListener("click", function (e) {
+                this.href = buildHandsOffOrderLink();
+              });
+            }
+
+            function buildHandsOnOrderLink() {
+              const baseUrl = "http://airliftstudios.com/order-hands-on";
+              const params = new URLSearchParams();
+
+              // Extract Airbnb link from the "Check Availability" button
+              const airbnbBtn = document.querySelector(
+                '.cta-button[href*="airbnb.com/rooms/"]'
+              );
+              // Only append the part after /demo/ of the current url
+              const demoPath =
+                window.location.pathname.split("/demo/")[1] || "";
+              if (demoPath) {
+                params.append("demo_url", demoPath);
+              }
+
+              // Extract WhatsApp and Instagram from footer links if available
+              let waUrl = "";
+              let igUrl = "";
+
+              // Look for WhatsApp link in the footer
+              const waFooterLink = document.querySelector(
+                'footer a[href*="wa.me"]'
+              );
+              if (waFooterLink) {
+                waUrl = waFooterLink.getAttribute("href");
+                // Extract just the phone number from the wa.me URL
+                const waMatch = waUrl.match(/wa\.me\/(\d+)/);
+                // Exclude the default placeholder number
+                if (waMatch && waMatch[1] && waMatch[1] !== "6281234567890") {
+                  params.append("wa", waMatch[1]);
+                }
+              }
+
+              // Look for Instagram link in the footer
+              const igFooterLink = document.querySelector(
+                'footer a[href*="instagram.com"]'
+              );
+              if (igFooterLink) {
+                igUrl = igFooterLink.getAttribute("href");
+                // Extract just the username from the Instagram URL
+                const igMatch = igUrl.match(/instagram\.com\/([^/?#]+)/i);
+                if (
+                  igMatch &&
+                  igMatch[1] &&
+                  igMatch[1].toLowerCase() !== "example"
+                ) {
+                  params.append("ig", igMatch[1]);
+                }
+              }
+
+              // Languages: always include English first, then others
+              let languages = ["en"];
+              if (langHandsOn && langHandsOn.length) {
+                langHandsOn.forEach((code) => {
+                  if (code !== "en") languages.push(code.toString());
+                });
+              }
+              if (languages.length > 0) {
+                const langString = languages.join(",");
+                params.append("languages", langString);
+              }
+
+              return `${baseUrl}?${params.toString()}&lang=as,ff,fa`;
+            }
+
+            // Update order button href on click
+            const orderBtnOn = document.getElementById(
+              "biz-calc-order-hands-on"
+            );
+            if (orderBtnOn) {
+              orderBtnOn.addEventListener("click", function (e) {
+                this.href = buildHandsOnOrderLink();
+              });
+            }
+
+            // Update suggested domain and email in the features list
+            function updateSuggestedDomainAndEmail() {
+              const { domain, email } = getSuggestedDomainAndEmail();
+              const domainSpan = document.getElementById("suggested-domain");
+              const emailSpan = document.getElementById("suggested-email");
+
+              if (domainSpan) {
+                domainSpan.innerHTML = `Custom domain name registration<br><span style="font-size: 0.9em; color: #666;">(example: ${domain})</span>`;
+              }
+              if (emailSpan) {
+                emailSpan.innerHTML = `Professional email forwarding<br><span style="font-size: 0.9em; color: #666;">(example: ${email})</span>`;
+              }
+            }
+
+            // Call this function when the page loads
+            document.addEventListener(
+              "DOMContentLoaded",
+              updateSuggestedDomainAndEmail
+            );
+          })();
+        </script>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-social">
+        <a
+          href="https://www.instagram.com/villa.lyla/"
+          target="_blank"
+          aria-label="Instagram"
+          ><i class="fab fa-instagram"></i>
+        </a>
+        <!-- WhatsApp link commented out as not provided -->
+        <!-- <a
+          href="https://wa.me/6281234567890"
+          target="_blank"
+          aria-label="WhatsApp"
+          ><i class="fab fa-whatsapp"></i>
+        </a> -->
+        <a href="mailto:hello@villalylabali.com" aria-label="Email"
+          ><i class="fas fa-envelope"></i>
+        </a>
+        <a
+          href="https://www.airbnb.com/rooms/1245570220521334980/map"
+          target="_blank"
+          aria-label="Airbnb location"
+          ><i class="fa fa-location-dot"></i>
+        </a>
+      </div>
+      <p>© 2025 Villa Lyla</p>
+      <p data-translate="footer.tagline">
+        Your tropical escape in the heart of Canggu.
+      </p>
+      <small class="footer-attribution"
+        >Website by
+        <a href="https://airliftstudios.com" target="_blank"
+          >airliftstudios.com
+        </a>
+      </small>
+    </footer>
+    <script src="js/script.js"></script>
+    <script src="js/lang.js"></script>
+    <script src="js/translations_fr.js"></script>
+    <script src="js/translations_zh.js"></script>
+  </body>
+</html>

@@ -1681,7 +1681,7 @@
             function getLanguagesFromNavDropdown() {
               const languageDropdown =
                 document.getElementById("languageDropdown");
-              if (!languageDropdown) return ["en"]; // fallback to English only
+              if (!languageDropdown) return [];
 
               const languageOptions =
                 languageDropdown.querySelectorAll(".language-option");
@@ -1694,7 +1694,10 @@
                 }
               });
 
-              return languages.length > 0 ? languages : ["en"];
+              // Exclude "en" from the returned languages
+              return languages.length > 0
+                ? languages.filter((lang) => lang !== "en")
+                : [];
             }
 
             // Initialize language arrays with languages from nav dropdown
