@@ -675,10 +675,26 @@ form.addEventListener("submit", (e) => {
   const igBtn = document.getElementById("send-instagram");
   const igDmLink = `https://ig.me/m/${igUser}?text=${orderText}`;
   igBtn.href = igDmLink;
-  igBtn.addEventListener("click", () => {
+  igBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const originalText = igBtn.textContent;
+
     try {
-      navigator.clipboard.writeText(orderText);
-    } catch {}
+      await navigator.clipboard.writeText(orderText);
+      igBtn.textContent = "Order copied";
+      igBtn.style.backgroundColor = "#0ea5e9";
+      igBtn.style.color = "white";
+
+      setTimeout(() => {
+        igBtn.textContent = originalText;
+        igBtn.style.backgroundColor = "";
+        igBtn.style.color = "";
+        window.open(igBtn.href, "_blank", "noopener");
+      }, 800);
+    } catch (error) {
+      // Fallback if clipboard fails
+      window.open(igBtn.href, "_blank", "noopener");
+    }
   });
   igBtn.title = "We'll copy your order so you can paste it in DM";
 
@@ -686,6 +702,27 @@ form.addEventListener("submit", (e) => {
   mailBtn.href = `mailto:order@airliftstudios.com?subject=${subject}&body=${encoded}`;
   mailBtn.target = "_blank";
   mailBtn.rel = "noopener";
+  mailBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const originalText = mailBtn.textContent;
+
+    try {
+      await navigator.clipboard.writeText(orderText);
+      mailBtn.textContent = "Order copied";
+      mailBtn.style.backgroundColor = "#0ea5e9";
+      mailBtn.style.color = "white";
+
+      setTimeout(() => {
+        mailBtn.textContent = originalText;
+        mailBtn.style.backgroundColor = "";
+        mailBtn.style.color = "";
+        window.open(mailBtn.href, "_blank", "noopener");
+      }, 800);
+    } catch (error) {
+      // Fallback if clipboard fails
+      window.open(mailBtn.href, "_blank", "noopener");
+    }
+  });
 
   const copyBtn = document.getElementById("copy-order");
   copyBtn.addEventListener("click", async () => {

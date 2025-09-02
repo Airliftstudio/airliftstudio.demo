@@ -52,6 +52,7 @@ function clearAllErrors() {
   setVal("domain", ["domain"]);
   setVal("whatsapp", ["wa"]);
   setVal("instagram", ["ig"]);
+  setVal("discountCode", ["discount", "code"]);
   const langs = new Set();
   if (params.has("languages")) {
     params
@@ -124,6 +125,7 @@ function buildOrderText(values) {
     values.instagram || values.whatsapp ? `Contact info to include:` : null,
     values.whatsapp ? `WhatsApp: ${values.whatsapp}` : null,
     values.instagram ? `Instagram: ${values.instagram}` : null,
+    values.discountCode ? `Discount code: ${values.discountCode}` : null,
   ]
     .filter(Boolean)
     .join("\n");
@@ -140,6 +142,7 @@ form.addEventListener("submit", (e) => {
     ).map((i) => i.value),
     whatsapp: document.getElementById("whatsapp").value.trim(),
     instagram: document.getElementById("instagram").value.trim(),
+    discountCode: document.getElementById("discountCode").value.trim(),
   };
 
   // Clear all previous errors
@@ -203,6 +206,11 @@ form.addEventListener("submit", (e) => {
           ? `<div><b>Instagram</b><br/>${values.instagram}</div>`
           : ""
       }
+      ${
+        values.discountCode
+          ? `<div><b>Discount code</b><br/>${values.discountCode}</div>`
+          : ""
+      }
          <span class="summary-action-buttons">
           <button id="copy-order" class="btn btn-primary" type="button">Copy order</button>
           <button id="edit-order" class="btn btn-outline" type="button">Edit order</button>
@@ -221,10 +229,26 @@ form.addEventListener("submit", (e) => {
   const igDmLink = `https://ig.me/m/${igUser}?text=${orderText}`;
   const igBtn = document.getElementById("send-instagram");
   igBtn.href = igDmLink;
-  igBtn.addEventListener("click", () => {
+  igBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const originalText = igBtn.textContent;
+
     try {
-      navigator.clipboard.writeText(orderText);
-    } catch {}
+      await navigator.clipboard.writeText(orderText);
+      igBtn.textContent = "Order copied";
+      igBtn.style.backgroundColor = "#0ea5e9";
+      igBtn.style.color = "white";
+
+      setTimeout(() => {
+        igBtn.textContent = originalText;
+        igBtn.style.backgroundColor = "";
+        igBtn.style.color = "";
+        window.open(igBtn.href, "_blank", "noopener");
+      }, 800);
+    } catch (error) {
+      // Fallback if clipboard fails
+      window.open(igBtn.href, "_blank", "noopener");
+    }
   });
   igBtn.title = "We'll copy your order so you can paste it in DM";
 
@@ -232,6 +256,27 @@ form.addEventListener("submit", (e) => {
   const mail = `mailto:demo@airliftstudios.com?subject=${subject}&body=${encoded}`;
   const mailBtn = document.getElementById("send-email");
   mailBtn.href = mail;
+  mailBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const originalText = mailBtn.textContent;
+
+    try {
+      await navigator.clipboard.writeText(orderText);
+      mailBtn.textContent = "Order copied";
+      mailBtn.style.backgroundColor = "#0ea5e9";
+      mailBtn.style.color = "white";
+
+      setTimeout(() => {
+        mailBtn.textContent = originalText;
+        mailBtn.style.backgroundColor = "";
+        mailBtn.style.color = "";
+        window.open(mailBtn.href, "_blank", "noopener");
+      }, 800);
+    } catch (error) {
+      // Fallback if clipboard fails
+      window.open(mailBtn.href, "_blank", "noopener");
+    }
+  });
   mailBtn.setAttribute("target", "_blank");
   mailBtn.setAttribute("rel", "noopener");
 
