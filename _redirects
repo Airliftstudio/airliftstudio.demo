@@ -1,6 +1,7 @@
 # _redirects for subdirectory language handling
 
 /order_demo /order-demo.html 200
+/website_recovery /website_files_recovery_tool.html 200
 
 # templates/v1 redirects
 /templates/v1/* /templates/v1/index.html 200

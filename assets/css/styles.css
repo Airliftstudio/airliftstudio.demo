@@ -1567,8 +1567,8 @@ footer .brand-logo {
 }
 
 .guide-tip {
-  background: linear-gradient(135deg, #fef3c7, #fde68a);
-  border: 1px solid #f59e0b;
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+  border: 1px solid var(--primary);
   border-radius: 12px;
   padding: 24px;
   margin: 32px 0;
@@ -1579,17 +1579,17 @@ footer .brand-logo {
   align-items: center;
   gap: 8px;
   margin-bottom: 12px;
-  color: #92400e;
+  color: var(--text-dark);
   font-size: 1.1rem;
 }
 
 .guide-tip i {
-  color: #f59e0b;
+  color: var(--primary);
 }
 
 .guide-tip p {
   margin: 0;
-  color: #78350f;
+  color: var(--text-dark);
   line-height: 1.5;
 }
 

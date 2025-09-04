@@ -37,16 +37,6 @@ function extractDefaultEnglishContent() {
   // Validate that we extracted content
   if (Object.keys(defaultEnglishContent).length === 0) {
     console.warn("No default English content extracted from HTML");
-  } else {
-    console.log("✅ Extracted default English content:", defaultEnglishContent);
-    console.log(
-      "📄 Meta content extracted:",
-      defaultEnglishContent.meta ? "Yes" : "No"
-    );
-    console.log(
-      "🏗️ Structured data extracted:",
-      defaultEnglishContent.structuredData ? "Yes" : "No"
-    );
   }
 }
 
@@ -214,8 +204,6 @@ function updateMetaTags(lang) {
 
 // Update structured data based on language
 function updateStructuredData(lang) {
-  console.log("🔄 Updating structured data for language:", lang);
-
   const langData = translations[lang];
   if (!langData) {
     console.warn("No translation data found for language:", lang);
@@ -228,20 +216,16 @@ function updateStructuredData(lang) {
     return;
   }
 
-  console.log("📄 Found structured data script element");
-
   try {
     // Parse the existing structured data
     const existingData = JSON.parse(scriptElement.textContent);
 
     // Get structured data from current language
     const structuredData = langData.structuredData || {};
-    console.log("🏗️ Structured data for language", lang + ":", structuredData);
 
     // Update fields if they exist in the translation
     if (structuredData.description) {
       existingData.description = structuredData.description;
-      console.log("✅ Updated description:", structuredData.description);
     }
 
     if (structuredData.keywords) {
@@ -261,7 +245,6 @@ function updateStructuredData(lang) {
 
     // Update the script content
     scriptElement.textContent = JSON.stringify(existingData, null, 2);
-    console.log("✅ Structured data updated successfully for language:", lang);
   } catch (error) {
     console.warn("❌ Error updating structured data:", error);
   }
@@ -274,11 +257,6 @@ function translatePage(lang) {
   if (!langData) {
     console.warn(`No translation data found for language: ${lang}`);
     return;
-  }
-
-  // If switching to English, use the extracted default content
-  if (lang === "en") {
-    console.log("Switching to English - using extracted default content");
   }
 
   // Update all elements with data-translate attribute
@@ -329,15 +307,12 @@ function translatePage(lang) {
 // Get language from URL path
 function getLanguageFromURL() {
   const path = window.location.pathname;
-  console.log("Current path:", path);
 
   // Look for language code at the end of the path
   const langMatch = path.match(
     new RegExp(`\/(${supportedLanguages.join("|")})\/?$`)
   );
-  console.log("Language match:", langMatch);
   const result = langMatch ? langMatch[1] : null;
-  console.log("Detected language:", result);
   return result;
 }
 
@@ -425,24 +400,16 @@ function initLang() {
   const urlLanguage = getLanguageFromURL();
   const savedLanguage = localStorage.getItem("preferredLanguage");
 
-  console.log("URL Language:", urlLanguage);
-  console.log("Saved Language:", savedLanguage);
-  console.log("Available translations:", Object.keys(translations));
-
   let languageToUse = "en"; // default
 
   if (urlLanguage && translations[urlLanguage]) {
     languageToUse = urlLanguage;
-    console.log("Using URL language:", languageToUse);
     // Don't update URL here as it's already correct
   } else if (savedLanguage && translations[savedLanguage]) {
     languageToUse = savedLanguage;
-    console.log("Using saved language:", languageToUse);
     // Update URL to reflect the saved language preference
 
     updateURLWithLanguage(savedLanguage);
-  } else {
-    console.log("Using default language:", languageToUse);
   }
 
   translatePage(languageToUse);

@@ -18,7 +18,7 @@
 
 ### 3. Domain Purchase
 
-- Purchase the domain for the requested number of years using fake billing adress as it is visible on invoice later.
+- Purchase the domain for the requested number of years using fake billing address as it is visible on invoice later.
 - Register under "John Doe" for privacy if customer has not shared their personal information.
 - Remove payment details after purchase
 

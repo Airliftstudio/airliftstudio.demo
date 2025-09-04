@@ -290,9 +290,16 @@
 .biz-info-icon[aria-expanded="true"] .biz-tooltip {
   display: block;
 }
+#emailFull {
+  font-weight: 700;
+  margin-top: 40px;
+}
 
 /* Responsive Design */
 @media (max-width: 680px) {
+  #emailFull {
+    margin-top: 0px;
+  }
   .contact-info-grid {
     grid-template-columns: 1fr;
   }

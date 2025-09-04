@@ -76,6 +76,42 @@
     <link rel="stylesheet" href="assets/css/fonts-local.css" />
     <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
+    <style>
+     
+      
+      .quick-link.disabled {
+        background: #f5f5f5;
+        color: #999;
+        cursor: not-allowed;
+      }
+      
+      .btn {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 13px;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+      }
+      
+      .btn-primary {
+        background: #2c5530;
+        color: white;
+      }
+      
+      .btn-secondary {
+        background: #6c757d;
+        color: white;
+      }
+      
+      .btn-small {
+        padding: 4px 8px;
+        font-size: 12px;
+      }
+    </style>
+    
   </head>
 
   <body>
@@ -102,8 +138,25 @@
       </div>
     </section>
 
-    <!-- Quick Navigation -->
+    <!-- Cloudflare Reset Button -->
     <section class="section">
+      <div class="container">
+        <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 15px; margin: 20px 0; text-align: center;">
+          <h3 style="margin-top: 0; color: #856404; font-size: 18px;">
+            <i class="fa-solid fa-cog"></i> Cloudflare Configuration
+          </h3>
+          <p style="margin: 10px 0; color: #856404; font-size: 14px;">
+            Reset your Cloudflare account details if you need to change them
+          </p>
+          <button onclick="resetCloudflareConfig()" 
+                  style="padding: 8px 16px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 500;">
+            <i class="fa-solid fa-trash"></i> Reset Configuration
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Navigation -->    <section class="section">
       <div class="container">
         <div class="guides-nav">
           <h2>Quick Navigation</h2>
@@ -215,13 +268,7 @@
                 <li>Click on your profile icon in the top-right corner</li>
                 <li>Select "Profile" from the dropdown menu</li>
                 <li>
-                  Alternatively, you can directly visit:
-                  <a
-                    href="https://dash.cloudflare.com/profile/authentication"
-                    target="_blank"
-                    rel="noopener"
-                    >https://dash.cloudflare.com/profile/authentication</a
-                  >
+                  <div id="profileAuthContainer"><strong>Quick Link:</strong> <a href="#" class="quick-link disabled" id="profileAuthLink" onclick="return false;">Profile Authentication Settings</a></div>
                 </li>
               </ol>
 
@@ -269,7 +316,7 @@
             <div class="guide-intro">
               <p>
                 If you have not shared your contact information with us in your
-                order, you’ll need to add it to your domain to secure ownership.
+                order, you'll need to add it to your domain to secure ownership.
               </p>
             </div>
 
@@ -277,7 +324,7 @@
               <h3>Step 1: Access Domain Settings</h3>
               <ol>
                 <li>
-                  Login to your Clourflare account at
+                  Login to your Cloudflare account at
                   <a
                     href="https://dash.cloudflare.com"
                     target="_blank"
@@ -285,10 +332,13 @@
                     >dash.cloudflare.com</a
                   >
                 </li>
-                <li>Select Domain registration in the left sidebar</li>
+                <li>Select "Domain registration" in the left sidebar</li>
                 <li>
                   Now you should see your domain name listed and an option to
                   "Manage" it. Click on it.
+                </li>
+                <li>
+                  <div id="domainRegContainer"><strong>Quick Link:</strong> <a href="#" class="quick-link disabled" id="domainRegLink" onclick="return false;">Domain Registration Dashboard</a></div>
                 </li>
               </ol>
 
@@ -324,66 +374,59 @@
             <div class="guide-steps">
               <h3>Step 1: Access Email Settings</h3>
               <ol>
-                <li>Log in to your Cloudflare dashboard</li>
-                <li>Select your domain</li>
+                <li>Login to your Cloudflare account at                   
+                  <a
+                  href="https://dash.cloudflare.com"
+                  target="_blank"
+                  rel="noopener"
+                  >dash.cloudflare.com</a
+                ></li>
+                <li>In your Account home page, select your domain</li>
                 <li>Click on "Email" in the left sidebar</li>
                 <li>Select "Email Routing"</li>
-              </ol>
-
-              <h3>Step 2: Set Up Email Routing</h3>
-              <ol>
-                <li>Click "Get Started" or "Configure Email Routing"</li>
-                <li>Choose "Custom Address" to set up forwarding</li>
-                <li>Click "Create Address"</li>
-              </ol>
-
-              <h3>Step 3: Configure Email Forwarding</h3>
-              <ol>
+                <li>Select the "Routing rules" tab</li>
                 <li>
-                  In the "From" field, enter the email address you want to
-                  create (e.g., hello@yourdomain.com)
+                  <div id="emailRoutingContainer"><strong>Quick Link:</strong> <a href="#" class="quick-link disabled" id="emailRoutingLink" onclick="return false;">Email Routing Dashboard</a></div>
                 </li>
-                <li>
-                  In the "To" field, enter your personal email address where you
-                  want to receive the emails
-                </li>
-                <li>Click "Create" to set up the forwarding rule</li>
+                <div>
+                  Here your will see a list of your Custom addresses. You can
+                  edit, delete or create new custom addresses.
+                </div>
               </ol>
 
-              <h3>Step 4: Verify Setup</h3>
+              <h3>Edit Custom Address</h3>
               <ol>
-                <li>Send a test email to your new domain email address</li>
+                <li>Click edit on the custom address you want to change</li>
+                <li>Change the custom address name or destination email</li>
                 <li>
-                  Check your personal email to confirm you received the
-                  forwarded email
+                  Click save. If you change the destination email, you may need
+                  to verify the new email address.
                 </li>
-                <li>If you don't receive it, check your spam folder</li>
               </ol>
 
-              <h3>Step 5: Additional Email Addresses (Optional)</h3>
+              <h3>Create New Custom Address</h3>
               <ol>
                 <li>
-                  You can create multiple email addresses for different
-                  purposes:
-                  <ul>
-                    <li>info@yourdomain.com</li>
-                    <li>bookings@yourdomain.com</li>
-                    <li>support@yourdomain.com</li>
-                  </ul>
+                  Click Create address next to the list of custom addresses
                 </li>
+                <li>Enter a new custom address. Example:</li>
+                <ul>
+                  <li>info@yourdomain.com</li>
+                  <li>bookings@yourdomain.com</li>
+                  <li>reservations@yourdomain.com</li>
+                  <li>help@yourdomain.com</li>
+                </ul>
+                <li>Enter a destination email address</li>
                 <li>
-                  Each can forward to the same or different email addresses
+                  Click save. The destination address may need to be verified.
                 </li>
               </ol>
 
-              <div class="guide-tip">
-                <h4><i class="fa-solid fa-clock"></i> Processing Time</h4>
-                <p>
-                  Email routing changes can take up to 24 hours to fully
-                  propagate. If emails aren't being forwarded immediately, wait
-                  a few hours and try again.
-                </p>
-              </div>
+              <h3>Delete Custom Address</h3>
+              <ol>
+                <li>Click edit on the custom address you want to delete</li>
+                <li>Click the delete button</li>
+              </ol>
             </div>
           </div>
         </div>
@@ -394,72 +437,68 @@
           <div class="guide-content">
             <div class="guide-intro">
               <p>
-                Learn how to update photos and images on your website to keep
-                your content fresh and engaging.
+                Learn how to update photos and images on your website.
               </p>
             </div>
 
             <div class="guide-steps">
               <h3>Step 1: Access Your Website Files</h3>
               <ol>
-                <li>Log in to your Cloudflare dashboard</li>
-                <li>Go to "Pages" in the left sidebar</li>
-                <li>Select your website project</li>
-                <li>Click on "Settings" tab</li>
-                <li>Scroll down to "Builds & deployments"</li>
-                <li>Click "Connect to Git" if not already connected</li>
+                <li>Locate your website files folder that you recieved during hand over.</li>
+                <li>If you have lost your website files folder, you can use our <a href="website_asset_downloader.html">Website Files Recovery Tool</a> to download your website files again.</li>
               </ol>
-
-              <h3>Step 2: Prepare Your New Images</h3>
+              <div class="guide-tip">
+                <h4><i class="fa-solid fa-language"></i> Backup your website files</h4>
+                <p>
+                  Make a copy of your website files and only make changes in that folder. So that you always have a backup of your website files.
+                </p>
+              </div>
+              <h3>Step 2: Make your changes</h3>
               <ol>
                 <li>
-                  Make sure your new images are in the correct format (JPG, PNG,
-                  WebP)
+                  In the <strong>images</strong> folder you will find all the images for your website. 
+                  You can simply replace the images with the new images you want to use, make sure to use the same filename.
                 </li>
+                <li><strong>Image Size Guide:</strong> The filename indicates the recommended format and size. For example:</li>
+                <ul>
+                  <li><code>img-landscape-1-960w.jpg</code> = Landscape format, minimum 960px width</li>
+                  <li><code>img-portrait-1-720w.jpg</code> = Portrait format, minimum 720px width</li>
+                  <li><code>img-hero-2560w.jpg</code> = Hero image, minimum 2560px width</li>
+                  <li><code>img-normal-1-720w.jpg</code> = Square/normal format, minimum 720px width</li>
+                </ul>
                 <li>
-                  Optimize images for web (recommended size: under 500KB each)
-                </li>
-                <li>Use descriptive filenames (e.g., "hero-image-new.jpg")</li>
-                <li>
-                  Note the exact dimensions of the images you want to replace
+                  Preview your changes by opening the <strong>index.html</strong> file in your browser.
+                  You can also simply drag and drop the  <strong>index.html</strong> file into your browser window.
                 </li>
               </ol>
-
-              <h3>Step 3: Upload New Images</h3>
+              <div class="guide-tip">
+                <h4><i class="fa-solid fa-chart-bar"></i> Image tips</h4>
+                <p>
+                  If you are not happy with how the image is cropped you can edit your image before replacing the previous image.
+                </p>
+              </div>
+              <h3>Step 3: Publish your changes</h3>
               <ol>
-                <li>In your Git repository, navigate to the "images" folder</li>
-                <li>Upload your new images to this folder</li>
+                <li>Login to your Cloudflare account at                   
+                  <a
+                  href="https://dash.cloudflare.com"
+                  target="_blank"
+                  rel="noopener"
+                  >dash.cloudflare.com</a
+                ></li>
                 <li>
-                  Make sure to use the same filename as the image you want to
-                  replace, or update the HTML to reference the new filename
+                  In your Account home page, Click "Compute (Workers)" in the left menu, then select
+                  "Workers & Pages".
+                </br>              
+                <strong>Alternative:</strong> You can also click the search
+                box at the top of the page labeled "Go to..." and search for
+                "pages". Select "Compute (Workers) | Workers & Pages" from the
+                results.
                 </li>
-              </ol>
-
-              <h3>Step 4: Update Image References (if needed)</h3>
-              <ol>
-                <li>Open the "index.html" file in your repository</li>
+                <li>Click on your domain name</li>
                 <li>
-                  Find the image you want to replace by looking for &lt;img&gt;
-                  tags
+                  <div id="pagesContainer"><strong>Quick Link:</strong> <a href="#" class="quick-link disabled" id="pagesLink" onclick="return false;">Cloudflare Pages Dashboard</a></div>
                 </li>
-                <li>
-                  Update the "src" attribute to point to your new image file
-                </li>
-                <li>
-                  Example: Change <code>src="images/old-hero.jpg"</code> to
-                  <code>src="images/new-hero.jpg"</code>
-                </li>
-              </ol>
-
-              <h3>Step 5: Commit and Deploy Changes</h3>
-              <ol>
-                <li>Commit your changes to Git with a descriptive message</li>
-                <li>Push the changes to your repository</li>
-                <li>
-                  Cloudflare Pages will automatically build and deploy your
-                  updated website
-                </li>
-                <li>Wait a few minutes for the changes to go live</li>
               </ol>
 
               <div class="guide-tip">
@@ -492,6 +531,9 @@
                 <li>Go to "Pages" and select your website project</li>
                 <li>Click on "Settings" → "Builds & deployments"</li>
                 <li>Connect to your Git repository if not already connected</li>
+                <li>
+                  <div id="pagesTextContainer"><strong>Quick Link:</strong> <a href="#" class="quick-link disabled" id="pagesTextLink" onclick="return false;">Cloudflare Pages Dashboard</a></div>
+                </li>
               </ol>
 
               <h3>Step 2: Edit Single Language Website</h3>
@@ -590,6 +632,9 @@
                 <li>Select your domain</li>
                 <li>Click on "Analytics" in the left sidebar</li>
                 <li>You'll see various analytics options available</li>
+                <li>
+                  <div id="analyticsContainer"><strong>Quick Link:</strong> <a href="#" class="quick-link disabled" id="analyticsLink" onclick="return false;">Cloudflare Analytics Dashboard</a></div>
+                </li>
               </ol>
 
               <h3>Step 2: View Web Analytics</h3>
@@ -820,5 +865,9 @@
     </footer>
 
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/cloudflare-config.js"></script>
+    
   </body>
 </html>
+
+

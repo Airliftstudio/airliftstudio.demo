@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Asset Downloader - Smart ZIP Version</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      .download-section {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        border: 1px solid #e9ecef;
+      }
+      .input-group {
+        margin: 15px 0;
+      }
+      input[type="text"] {
+        padding: 10px;
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+      button {
+        padding: 10px 20px;
+        background: #2c5530;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 10px;
+        font-size: 16px;
+      }
+      button:hover {
+        background: #3a5d47;
+      }
+      button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+      #downloadStatus {
+        margin-top: 15px;
+        font-size: 14px;
+        padding: 10px;
+        border-radius: 4px;
+      }
+      .status-info {
+        background: #d1ecf1;
+        color: #0c5460;
+      }
+      .status-success {
+        background: #d4edda;
+        color: #155724;
+      }
+      .status-warning {
+        background: #fff3cd;
+        color: #856404;
+      }
+      .status-error {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      .file-list {
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 15px;
+        margin: 15px 0;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+      .file-item {
+        padding: 5px 0;
+        border-bottom: 1px solid #eee;
+        font-family: monospace;
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .file-item:last-child {
+        border-bottom: none;
+      }
+      .file-status {
+        font-size: 12px;
+        padding: 2px 6px;
+        border-radius: 3px;
+      }
+      .status-pending {
+        background: #e9ecef;
+        color: #6c757d;
+      }
+      .status-downloading {
+        background: #cce5ff;
+        color: #004085;
+      }
+      .status-success {
+        background: #d4edda;
+        color: #155724;
+      }
+      .status-failed {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 20px;
+        background: #e9ecef;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 10px 0;
+      }
+      .progress-fill {
+        height: 100%;
+        background: #2c5530;
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+
+      .zip-info {
+        background: #e8f5e8;
+        border: 1px solid #4caf50;
+        border-radius: 6px;
+        padding: 15px;
+        margin: 15px 0;
+      }
+      .zip-info h4 {
+        margin: 0 0 10px 0;
+        color: #2e7d32;
+      }
+
+      .smart-info {
+        background: #e3f2fd;
+        border: 1px solid #2196f3;
+        border-radius: 6px;
+        padding: 15px;
+        margin: 15px 0;
+      }
+      .smart-info h4 {
+        margin: 0 0 10px 0;
+        color: #1976d2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Website Files Recovery Tool</h1>
+    <p>This tool can download all the file assets from your website.</p>
+
+    <div class="download-section">
+      <div class="input-group">
+        <input type="text" id="domainInput" placeholder="yourdomain.com" />
+        <button onclick="smartDownload()" id="downloadBtn">
+          Download Files
+        </button>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressBar"></div>
+      </div>
+
+      <div id="downloadStatus" class="status-info" style="display: none"></div>
+
+      <div id="fileList" class="file-list" style="display: none">
+        <h4>Files Discovered:</h4>
+        <div id="fileItems"></div>
+      </div>
+    </div>
+
+    <script>
+      async function smartDownload() {
+        const domain = document.getElementById("domainInput").value.trim();
+        const statusDiv = document.getElementById("downloadStatus");
+        const downloadBtn = document.getElementById("downloadBtn");
+        const progressBar = document.getElementById("progressBar");
+        const fileList = document.getElementById("fileList");
+        const fileItems = document.getElementById("fileItems");
+
+        if (!domain) {
+          showStatus("Please enter your domain name", "error");
+          return;
+        }
+
+        // Clean domain (remove protocol, www, trailing slash)
+        const cleanDomain = domain
+          .replace(/^https?:\/\//, "")
+          .replace(/^www\./, "")
+          .replace(/\/$/, "");
+        const baseUrl = `https://${cleanDomain}`;
+
+        downloadBtn.disabled = true;
+        downloadBtn.textContent = "Analyzing...";
+
+        let discoveredFiles = new Set();
+
+        showStatus("Downloading and analyzing index.html...", "info");
+
+        try {
+          // Download and analyze index.html
+          const htmlResponse = await fetch(`${baseUrl}/index.html`);
+          if (!htmlResponse.ok) {
+            throw new Error(
+              `Failed to fetch index.html: ${htmlResponse.status}`
+            );
+          }
+
+          const htmlText = await htmlResponse.text();
+          discoveredFiles.add("index.html");
+
+          // Extract file references from HTML
+          const htmlFiles = extractFileReferencesFromHTML(htmlText);
+          htmlFiles.forEach((file) => discoveredFiles.add(file));
+
+          showStatus(`Found ${htmlFiles.length} files in HTML`, "info");
+
+          // Also try to get common config files
+          const configFiles = ["_headers", "_redirects"];
+          for (const configFile of configFiles) {
+            try {
+              const response = await fetch(`${baseUrl}/${configFile}`, {
+                method: "HEAD",
+              });
+              if (response.ok) {
+                discoveredFiles.add(configFile);
+              }
+            } catch (error) {
+              // Config file doesn't exist, that's fine
+            }
+          }
+        } catch (error) {
+          showStatus(`Error analyzing HTML: ${error.message}`, "error");
+          downloadBtn.disabled = false;
+          downloadBtn.textContent = "Download";
+          return;
+        }
+
+        console.log(discoveredFiles);
+
+        // Convert Set to Array and filter out unwanted files
+        const filesToCheck = Array.from(discoveredFiles).filter((file) => {
+          if (file.startsWith("data:image/svg+xml,")) return false;
+          if (file.startsWith("/cdn-cgi/")) return false;
+          return true;
+        });
+
+        showStatus(
+          `Found ${filesToCheck.length} files (filtered). Checking which ones exist...`,
+          "info"
+        );
+
+        // Show file list
+        fileList.style.display = "block";
+        fileItems.innerHTML = filesToCheck
+          .map(
+            (file) =>
+              `<div class="file-item" id="file-${file.replace(
+                /[^a-zA-Z0-9]/g,
+                "_"
+              )}">
+                <span>${file}</span>
+                <span class="file-status status-pending" id="status-${file.replace(
+                  /[^a-zA-Z0-9]/g,
+                  "_"
+                )}">Checking...</span>
+            </div>`
+          )
+          .join("");
+
+        // Create ZIP instance
+        const zip = new JSZip();
+        let downloaded = 0;
+        let failed = 0;
+
+        // Check each file and add to ZIP if it exists
+        for (let i = 0; i < filesToCheck.length; i++) {
+          const file = filesToCheck[i];
+          const progress = ((i + 1) / filesToCheck.length) * 100;
+          progressBar.style.width = `${progress}%`;
+
+          const statusElement = document.getElementById(
+            `status-${file.replace(/[^a-zA-Z0-9]/g, "_")}`
+          );
+
+          try {
+            const url = `${baseUrl}/${file}`;
+            const response = await fetch(url);
+
+            if (response.ok) {
+              const blob = await response.blob();
+              zip.file(file, blob);
+              downloaded++;
+
+              if (statusElement) {
+                statusElement.textContent = "Added to ZIP";
+                statusElement.className = "file-status status-success";
+              }
+            } else {
+              failed++;
+              if (statusElement) {
+                statusElement.textContent = "Not Found";
+                statusElement.className = "file-status status-failed";
+              }
+            }
+          } catch (error) {
+            failed++;
+            if (statusElement) {
+              statusElement.textContent = "Error";
+              statusElement.className = "file-status status-failed";
+            }
+          }
+
+          showStatus(
+            `Checked: ${i + 1}/${
+              filesToCheck.length
+            }, Found: ${downloaded}, Not found: ${failed}`,
+            "info"
+          );
+
+          // Small delay
+          await new Promise((resolve) => setTimeout(resolve, 50));
+        }
+
+        if (downloaded === 0) {
+          showStatus(
+            "⚠️ No files were found. Please check your domain name and try again.",
+            "warning"
+          );
+          downloadBtn.disabled = false;
+          downloadBtn.textContent = "Download";
+          return;
+        }
+
+        // Generate and download ZIP
+        showStatus(`Creating ZIP file with ${downloaded} files...`, "info");
+        progressBar.style.width = "100%";
+
+        try {
+          const zipBlob = await zip.generateAsync({ type: "blob" });
+
+          const downloadUrl = window.URL.createObjectURL(zipBlob);
+          const link = document.createElement("a");
+          link.href = downloadUrl;
+          link.download = `${cleanDomain}-backup.zip`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(downloadUrl);
+
+          showStatus(
+            `✅ Successfully created ZIP with ${downloaded} files! (${failed} files were not found)`,
+            "success"
+          );
+        } catch (error) {
+          showStatus("❌ Error creating ZIP file. Please try again.", "error");
+          console.error("ZIP creation error:", error);
+        }
+
+        downloadBtn.disabled = false;
+        downloadBtn.textContent = "Download";
+      }
+
+      function extractFileReferencesFromHTML(htmlText) {
+        const files = new Set();
+
+        // Extract from <link> tags (CSS files)
+        const linkMatches = htmlText.match(
+          /<link[^>]+href\s*=\s*["']([^"']+)["'][^>]*>/g
+        );
+        if (linkMatches) {
+          linkMatches.forEach((match) => {
+            const href = match.match(/href\s*=\s*["']([^"']+)["']/)[1];
+            if (
+              href &&
+              !href.startsWith("http") &&
+              !href.startsWith("//") &&
+              !href.startsWith("#")
+            ) {
+              files.add(href);
+            }
+          });
+        }
+
+        // Extract from <script> tags (JavaScript files)
+        const scriptMatches = htmlText.match(
+          /<script[^>]+src\s*=\s*["']([^"']+)["'][^>]*>/g
+        );
+        if (scriptMatches) {
+          scriptMatches.forEach((match) => {
+            const src = match.match(/src\s*=\s*["']([^"']+)["']/)[1];
+            if (src && !src.startsWith("http") && !src.startsWith("//")) {
+              files.add(src);
+            }
+          });
+        }
+
+        // Extract from <img> tags (images)
+        const imgMatches = htmlText.match(
+          /<img[^>]+src\s*=\s*["']([^"']+)["'][^>]*>/g
+        );
+        if (imgMatches) {
+          imgMatches.forEach((match) => {
+            const src = match.match(/src\s*=\s*["']([^"']+)["']/)[1];
+            if (
+              src &&
+              !src.startsWith("http") &&
+              !src.startsWith("//") &&
+              !src.startsWith("data:")
+            ) {
+              files.add(src);
+            }
+          });
+        }
+
+        // Extract from CSS url() functions in <style> tags
+        const styleMatches = htmlText.match(/<style[^>]*>([\s\S]*?)<\/style>/g);
+        if (styleMatches) {
+          styleMatches.forEach((styleBlock) => {
+            const cssContent = styleBlock.match(
+              /<style[^>]*>([\s\S]*?)<\/style>/
+            )[1];
+            const urlMatches = cssContent.match(
+              /url\s*\(\s*["']?([^"')]+)["']?\s*\)/g
+            );
+            if (urlMatches) {
+              urlMatches.forEach((match) => {
+                const url = match.match(
+                  /url\s*\(\s*["']?([^"')]+)["']?\s*\)/
+                )[1];
+                if (
+                  url &&
+                  !url.startsWith("http") &&
+                  !url.startsWith("//") &&
+                  !url.startsWith("data:")
+                ) {
+                  files.add(url);
+                }
+              });
+            }
+          });
+        }
+
+        return Array.from(files);
+      }
+
+      function showStatus(message, type) {
+        const statusDiv = document.getElementById("downloadStatus");
+        statusDiv.textContent = message;
+        statusDiv.className = `status-${type}`;
+        statusDiv.style.display = "block";
+      }
+
+      // Allow Enter key to trigger download
+      document
+        .getElementById("domainInput")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            smartDownload();
+          }
+        });
+    </script>
+  </body>
+</html>

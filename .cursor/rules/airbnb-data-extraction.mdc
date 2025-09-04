@@ -23,7 +23,6 @@ Airbnb-id/
 ├── images/             # Folder to store images
 ├── css/             	# Folder containing style files
 ├── js/             	# Folder containing javascript files
-├── webfonts/           # Folder containing fonts
 ├── listing.json	# Containing all the extracted data from the Airbnb listing
 ```
 
