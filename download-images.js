@@ -473,6 +473,9 @@ function updateAltTextInHtml(projectPath, selectedImages, requiredFilenames) {
       }
     });
 
+    // Track alt text usage to ensure uniqueness
+    const altTextUsage = {};
+
     // Find and update all img tags
     const imgTagRegex = /<img[^>]*src="([^"]*)"[^>]*>/gi;
     htmlContent = htmlContent.replace(imgTagRegex, (match, src) => {
@@ -482,16 +485,26 @@ function updateAltTextInHtml(projectPath, selectedImages, requiredFilenames) {
       // Check if this filename matches one of our selected images
       if (filenameToImage[filename]) {
         const selectedImage = filenameToImage[filename];
-        let newAltText = selectedImage.alt || selectedImage.category || "Image";
+        let baseAltText =
+          selectedImage.alt || selectedImage.category || "Image";
 
         // Special handling for hero image
         if (filename.includes("img-hero")) {
           if (
-            newAltText.startsWith("Listing image") ||
-            newAltText.startsWith("Additional photos image")
+            baseAltText.startsWith("Listing image") ||
+            baseAltText.startsWith("Additional photos image")
           ) {
-            newAltText = "hero image";
+            baseAltText = "hero image";
           }
+        }
+
+        // Ensure unique alt text by adding index if needed
+        let newAltText = baseAltText;
+        if (altTextUsage[baseAltText]) {
+          altTextUsage[baseAltText]++;
+          newAltText = `${baseAltText} ${altTextUsage[baseAltText]}`;
+        } else {
+          altTextUsage[baseAltText] = 1;
         }
 
         // Update the alt attribute

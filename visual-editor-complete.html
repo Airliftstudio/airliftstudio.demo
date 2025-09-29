@@ -7,6 +7,7 @@
 
     <!-- Include JSZip for ZIP file handling -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="visual-editor.js"></script>
 
     <!-- Font Awesome CDN for icon picker -->
     <link
@@ -878,6 +879,510 @@
         color: #007aff;
         font-weight: 500;
       }
+
+      /* Footer Editor Dialog Styles */
+      .footer-dialog-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .footer-dialog-overlay.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .footer-dialog {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        width: 90vw;
+        max-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+      }
+
+      .footer-dialog-overlay.show .footer-dialog {
+        transform: scale(1);
+      }
+
+      .footer-dialog-header {
+        padding: 24px;
+        border-bottom: 1px solid #e5e5e7;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .footer-dialog-header h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #1d1d1f;
+      }
+
+      .footer-dialog-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: #6e6e73;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+        transition: background-color 0.2s ease;
+      }
+
+      .footer-dialog-close:hover {
+        background-color: #f5f5f7;
+      }
+
+      .footer-edit-container {
+        padding: 24px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .footer-link-info {
+        margin-bottom: 24px;
+        text-align: center;
+      }
+
+      .current-link-preview {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 16px;
+        background: #f8f9fa;
+        border-radius: 12px;
+        border: 2px solid #e5e5e7;
+      }
+
+      .link-icon {
+        font-size: 24px;
+        color: #007aff;
+      }
+
+      .link-label {
+        font-size: 16px;
+        font-weight: 500;
+        color: #1d1d1f;
+      }
+
+      .footer-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .form-group label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #1d1d1f;
+      }
+
+      .footer-input {
+        padding: 12px 16px;
+        border: 2px solid #e5e5e7;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.2s ease;
+      }
+
+      .footer-input:focus {
+        border-color: #007aff;
+      }
+
+      .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #1d1d1f;
+      }
+
+      .checkbox-label input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+
+      .footer-dialog-footer {
+        padding: 16px 24px;
+        border-top: 1px solid #e5e5e7;
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+      }
+
+      .footer-dialog-btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      .footer-dialog-btn.cancel {
+        background: #f5f5f7;
+        color: #1d1d1f;
+      }
+
+      .footer-dialog-btn.cancel:hover {
+        background: #e5e5e7;
+      }
+
+      .footer-dialog-btn.apply {
+        background: #007aff;
+        color: white;
+      }
+
+      .footer-dialog-btn.apply:hover {
+        background: #0056cc;
+      }
+
+      .footer-dialog-btn.apply:disabled {
+        background: #c7c7cc;
+        cursor: not-allowed;
+      }
+
+      /* Footer Links List Styles */
+      .footer-links-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-height: 400px;
+        overflow-y: auto;
+        padding: 8px;
+      }
+
+      .footer-link-item {
+        background: #f8f9fa;
+        border: 2px solid #e5e5e7;
+        border-radius: 12px;
+        padding: 20px;
+        transition: all 0.2s ease;
+      }
+
+      .footer-link-item:hover {
+        border-color: #007aff;
+        background: #f0f4ff;
+      }
+
+      .footer-link-item.hidden {
+        background: #f5f5f7;
+        border-color: #d2d2d7;
+        opacity: 0.7;
+      }
+
+      .footer-link-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      .footer-link-preview {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .footer-link-icon {
+        font-size: 24px;
+        color: #007aff;
+        width: 32px;
+        text-align: center;
+      }
+
+      .footer-link-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1d1d1f;
+      }
+
+      .footer-link-visibility {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .visibility-toggle {
+        position: relative;
+        width: 48px;
+        height: 24px;
+        background: #d2d2d7;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+
+      .visibility-toggle.active {
+        background: #34c759;
+      }
+
+      .visibility-toggle::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 20px;
+        height: 20px;
+        background: white;
+        border-radius: 50%;
+        transition: transform 0.2s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .visibility-toggle.active::after {
+        transform: translateX(24px);
+      }
+
+      .visibility-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #6e6e73;
+      }
+
+      .visibility-toggle.active + .visibility-label {
+        color: #34c759;
+      }
+
+      .footer-link-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .footer-field-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .footer-field-label {
+        font-size: 13px;
+        font-weight: 500;
+        color: #6e6e73;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .footer-field-input {
+        padding: 10px 12px;
+        border: 1px solid #d2d2d7;
+        border-radius: 6px;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s ease;
+        background: white;
+      }
+
+      .footer-field-input:focus {
+        border-color: #007aff;
+      }
+
+      .footer-field-input:disabled {
+        background: #f5f5f7;
+        color: #8e8e93;
+        cursor: not-allowed;
+      }
+
+      /* Badge visibility toggle styles */
+      .hero-badges .badge {
+        position: relative;
+        transition: all 0.2s ease;
+      }
+
+      .hero-badges .badge:hover .badge-visibility-toggle {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .badge-visibility-toggle {
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        width: 24px;
+        height: 24px;
+        background: #007aff;
+        border: 2px solid white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s ease;
+        z-index: 1000;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .badge-visibility-toggle::before {
+        content: "Toggle visibility";
+        position: absolute;
+        bottom: 100%;
+        right: 50%;
+        transform: translateX(50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s ease;
+        pointer-events: none;
+        z-index: 1001;
+      }
+
+      .badge-visibility-toggle:hover::before {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .badge-visibility-toggle:hover {
+        background: #0056cc;
+        transform: scale(1.1);
+      }
+
+      .badge-visibility-toggle i {
+        color: white;
+        font-size: 12px;
+      }
+
+      .badge-visibility-toggle.visible i::before {
+        content: "\f06e"; /* fa-eye */
+      }
+
+      .badge-visibility-toggle.hidden i::before {
+        content: "\f070"; /* fa-eye-slash */
+      }
+
+      /* Hidden badge styles */
+      .hero-badges .badge.badge-hidden {
+        opacity: 0.3;
+        pointer-events: none;
+        border: 2px dashed #ff6b6b;
+        background: rgba(255, 107, 107, 0.1);
+      }
+
+      .hero-badges .badge.badge-hidden::after {
+        content: "HIDDEN";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        z-index: 5;
+      }
+
+      /* Amenity editing styles */
+      .amenity-item {
+        position: relative;
+        transition: all 0.2s ease;
+      }
+
+      .amenity-delete-btn {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        width: 20px;
+        height: 20px;
+        background: #ff3b30;
+        border: 2px solid white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s ease;
+        z-index: 1000;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        font-size: 10px;
+        color: white;
+        font-weight: bold;
+      }
+
+      .amenity-item:hover .amenity-delete-btn {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .amenity-delete-btn:hover {
+        background: #d70015;
+        transform: scale(1.1);
+      }
+
+      .amenity-delete-btn::before {
+        content: "×";
+        font-size: 14px;
+        line-height: 1;
+      }
+
+      .amenity-add-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 16px;
+        background: #f8f9fa;
+        border: 2px dashed #007aff;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: #007aff;
+        font-weight: 500;
+        min-height: 60px;
+      }
+
+      .amenity-add-btn:hover {
+        background: #e6f3ff;
+        border-color: #0056cc;
+        color: #0056cc;
+        transform: scale(1.02);
+      }
+
+      .amenity-add-btn i {
+        font-size: 20px;
+      }
     </style>
   </head>
   <body>
@@ -1049,9 +1554,6 @@
         <div class="image-upload-container">
           <div class="current-image-preview" id="currentImagePreview">
             <img id="currentImageImg" src="" alt="Current image" />
-            <div class="current-image-info" id="currentImageInfo">
-              Current image
-            </div>
           </div>
 
           <div class="image-upload-area" id="imageUploadArea">
@@ -1092,2618 +1594,27 @@
       </div>
     </div>
 
-    <script>
-      class VisualWebsiteEditor {
-        constructor() {
-          this.projectFiles = new Map();
-          this.projectName = "";
-          this.editMode = false;
-          this.modifiedFiles = new Map();
-          this.originalContent = "";
-          this.resourceUrls = new Map();
-          this.undoStack = [];
-          this.maxUndoSteps = 50;
-          this.currentEditingIcon = null;
-          this.selectedIcon = null;
-          this.currentPageIcons = new Set();
-          this.currentEditingImage = null;
-          this.selectedImageFile = null;
-
-          // Hardcoded list of useful Airbnb icons
-          this.airbnbIcons = [
-            // Accommodation & Property
-            { class: "fas fa-home", name: "home house property" },
-            { class: "fas fa-building", name: "building apartment condo" },
-            { class: "fas fa-key", name: "key access checkin" },
-            { class: "fas fa-door-open", name: "door entrance private" },
-            { class: "fas fa-lock", name: "lock secure safety" },
-            { class: "fas fa-vault", name: "safe security valuables" },
-
-            // Pool & Water
-            {
-              class: "fas fa-swimming-pool",
-              name: "pool swimming water private",
-            },
-            { class: "fas fa-hot-tub", name: "hottub jacuzzi spa" },
-            { class: "fas fa-shower", name: "shower bathroom outdoor" },
-            { class: "fas fa-bath", name: "bath bathtub bathroom" },
-            { class: "fas fa-water", name: "water swimming pool" },
-
-            // Kitchen & Dining
-            { class: "fas fa-utensils", name: "kitchen dining utensils food" },
-            { class: "fas fa-coffee", name: "coffee breakfast kitchen" },
-            { class: "fas fa-wine-glass", name: "wine glass drinks dining" },
-            { class: "fas fa-blender", name: "blender kitchen appliance" },
-            { class: "fas fa-fire-burner", name: "stove cooking kitchen" },
-
-            // Comfort & Climate
-            { class: "fas fa-snowflake", name: "ac air conditioning cool" },
-            { class: "fas fa-temperature-low", name: "cold cooling climate" },
-            { class: "fas fa-fan", name: "fan cooling air" },
-            { class: "fas fa-fire", name: "fireplace heating warm" },
-
-            // Technology & Work
-            { class: "fas fa-wifi", name: "wifi internet connection" },
-            { class: "fas fa-laptop", name: "laptop work computer desk" },
-            { class: "fas fa-tv", name: "tv television entertainment" },
-            { class: "fas fa-desktop", name: "computer desktop work" },
-            { class: "fas fa-mobile-alt", name: "phone mobile device" },
-
-            // Location & Transport
-            { class: "fas fa-map-marker-alt", name: "location marker address" },
-            { class: "fas fa-car", name: "car parking transport" },
-            { class: "fas fa-motorcycle", name: "scooter motorcycle bike" },
-            { class: "fas fa-bicycle", name: "bicycle bike transport" },
-            { class: "fas fa-plane", name: "airport flight travel" },
-            { class: "fas fa-taxi", name: "taxi transport uber" },
-
-            // Beach & Outdoor
-            { class: "fas fa-umbrella-beach", name: "beach umbrella ocean" },
-            { class: "fas fa-sun", name: "sun sunny weather lounger" },
-            { class: "fas fa-tree", name: "garden nature outdoor" },
-            { class: "fas fa-seedling", name: "garden plants nature" },
-            { class: "fas fa-leaf", name: "nature eco green" },
-
-            // Activities & Recreation
-            { class: "fas fa-dumbbell", name: "gym fitness exercise" },
-            { class: "fas fa-running", name: "running fitness sport" },
-            { class: "fas fa-bicycle", name: "cycling sport activity" },
-            { class: "fas fa-swimmer", name: "swimming pool sport" },
-            { class: "fas fa-volleyball-ball", name: "volleyball beach sport" },
-
-            // Services & Amenities
-            { class: "fas fa-concierge-bell", name: "service concierge help" },
-            { class: "fas fa-broom", name: "cleaning housekeeping" },
-            { class: "fas fa-tshirt", name: "laundry washing clothes" },
-            { class: "fas fa-baby", name: "baby family kids" },
-            { class: "fas fa-dog", name: "pet dog animal friendly" },
-            { class: "fas fa-cat", name: "pet cat animal friendly" },
-
-            // Safety & Security
-            { class: "fas fa-shield-alt", name: "safety security protection" },
-            { class: "fas fa-user-shield", name: "superhost verified trusted" },
-            { class: "fas fa-first-aid", name: "first aid safety medical" },
-            {
-              class: "fas fa-fire-extinguisher",
-              name: "fire safety emergency",
-            },
-
-            // Communication & Social
-            { class: "fas fa-envelope", name: "email contact message" },
-            { class: "fas fa-phone", name: "phone contact call" },
-            { class: "fas fa-comment", name: "message chat communication" },
-            { class: "fab fa-whatsapp", name: "whatsapp message contact" },
-            { class: "fab fa-instagram", name: "instagram social media" },
-            { class: "fab fa-facebook", name: "facebook social media" },
-            { class: "fab fa-airbnb", name: "airbnb platform booking" },
-
-            // Experience & Quality
-            { class: "fas fa-star", name: "star rating review quality" },
-            { class: "fas fa-heart", name: "heart favorite love guest" },
-            { class: "fas fa-thumbs-up", name: "like recommend positive" },
-            { class: "fas fa-award", name: "award quality excellence" },
-            { class: "fas fa-medal", name: "medal achievement superhost" },
-
-            // Time & Booking
-            {
-              class: "fas fa-calendar-check",
-              name: "calendar booking available",
-            },
-            { class: "fas fa-clock", name: "time schedule checkin" },
-            { class: "fas fa-calendar-alt", name: "calendar dates booking" },
-
-            // Entertainment & Relaxation
-            { class: "fas fa-book", name: "books reading relax" },
-            { class: "fas fa-music", name: "music entertainment sound" },
-            { class: "fas fa-gamepad", name: "games entertainment fun" },
-            { class: "fas fa-couch", name: "sofa living room comfort" },
-
-            // Additional Useful Icons
-            { class: "fas fa-utensils", name: "restaurant dining nearby" },
-            {
-              class: "fas fa-shopping-cart",
-              name: "shopping groceries nearby",
-            },
-            { class: "fas fa-hospital", name: "hospital medical nearby" },
-            {
-              class: "fas fa-graduation-cap",
-              name: "education university nearby",
-            },
-            { class: "fas fa-camera", name: "photography instagram worthy" },
-            { class: "fas fa-suitcase", name: "luggage travel vacation" },
-
-            // Weather & Seasonal
-            { class: "fas fa-cloud-sun", name: "weather partly cloudy" },
-            { class: "fas fa-rainbow", name: "rainbow tropical weather" },
-            { class: "fas fa-wind", name: "wind breeze weather" },
-
-            // Brand Icons
-            { class: "fab fa-google", name: "google maps location" },
-            { class: "fab fa-uber", name: "uber transport taxi" },
-            { class: "fab fa-spotify", name: "spotify music entertainment" },
-            { class: "fab fa-netflix", name: "netflix entertainment tv" },
-
-            // Location Specific
-            { class: "fas fa-mountain", name: "mountain nature hiking" },
-            { class: "fas fa-water", name: "ocean sea water beach" },
-            { class: "fas fa-city", name: "city urban downtown" },
-            { class: "fas fa-map", name: "map navigation location" },
-
-            // Miscellaneous
-            { class: "fas fa-gift", name: "gift surprise welcome" },
-            { class: "fas fa-magic", name: "special unique experience" },
-            { class: "fas fa-infinity", name: "unlimited endless luxury" },
-            { class: "fas fa-globe", name: "international global world" },
-            { class: "fas fa-compass", name: "compass navigation direction" },
-            { class: "fas fa-location-dot", name: "location pin marker" },
-          ];
-
-          this.initializeElements();
-          this.setupEventListeners();
-          this.setupDragAndDrop();
-          this.setupKeyboardShortcuts();
-          this.setupPageUnloadWarning();
-          this.setupIconDialog();
-          this.setupImageDialog();
-        }
-
-        initializeElements() {
-          this.uploadArea = document.getElementById("uploadArea");
-          this.zipInput = document.getElementById("zipInput");
-          this.folderInput = document.getElementById("folderInput");
-          this.zipBtn = document.getElementById("zipBtn");
-          this.folderBtn = document.getElementById("folderBtn");
-          this.loadDemoBtn = document.getElementById("loadDemoBtn");
-          this.projectInfo = document.getElementById("projectInfo");
-          this.projectNameEl = document.getElementById("projectName");
-          this.projectFilesEl = document.getElementById("projectFiles");
-          this.fileList = document.getElementById("fileList");
-          this.changesCounter = document.getElementById("changesCounter");
-          this.unsavedWarning = document.getElementById("unsavedWarning");
-          this.downloadBtn = document.getElementById("downloadBtn");
-          this.refreshBtn = document.getElementById("refreshBtn");
-          this.undoBtn = document.getElementById("undoBtn");
-          this.resetBtn = document.getElementById("resetBtn");
-          this.previewUrl = document.getElementById("previewUrl");
-          this.editModeToggle = document.getElementById("editModeToggle");
-          this.previewFrame = document.getElementById("previewFrame");
-          this.loadingOverlay = document.getElementById("loadingOverlay");
-          this.loadingText = document.getElementById("loadingText");
-          this.statusMessage = document.getElementById("statusMessage");
-
-          // Icon dialog elements
-          this.iconDialogOverlay = document.getElementById("iconDialogOverlay");
-          this.iconDialogClose = document.getElementById("iconDialogClose");
-          this.iconSearch = document.getElementById("iconSearch");
-          this.currentIconsSection = document.getElementById(
-            "currentIconsSection"
-          );
-          this.currentIconsGrid = document.getElementById("currentIconsGrid");
-          this.recommendedIconsGrid = document.getElementById(
-            "recommendedIconsGrid"
-          );
-          this.noIconsMessage = document.getElementById("noIconsMessage");
-          this.iconDialogCancel = document.getElementById("iconDialogCancel");
-          this.iconDialogApply = document.getElementById("iconDialogApply");
-
-          // Image dialog elements
-          this.imageDialogOverlay =
-            document.getElementById("imageDialogOverlay");
-          this.imageDialogClose = document.getElementById("imageDialogClose");
-          this.currentImagePreview = document.getElementById(
-            "currentImagePreview"
-          );
-          this.currentImageImg = document.getElementById("currentImageImg");
-          this.currentImageInfo = document.getElementById("currentImageInfo");
-          this.imageUploadArea = document.getElementById("imageUploadArea");
-          this.imageUploadBtn = document.getElementById("imageUploadBtn");
-          this.imageFileInput = document.getElementById("imageFileInput");
-          this.newImagePreview = document.getElementById("newImagePreview");
-          this.newImageImg = document.getElementById("newImageImg");
-          this.newImageInfo = document.getElementById("newImageInfo");
-          this.imageDialogCancel = document.getElementById("imageDialogCancel");
-          this.imageDialogApply = document.getElementById("imageDialogApply");
-        }
-
-        setupEventListeners() {
-          this.uploadArea.addEventListener("click", () => {
-            this.zipBtn.click();
-          });
-
-          this.zipBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            this.zipInput.click();
-          });
-
-          this.folderBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            this.folderInput.click();
-          });
-
-          this.zipInput.addEventListener("change", (e) => {
-            this.handleFiles(e.target.files, "zip");
-          });
-
-          this.folderInput.addEventListener("change", (e) => {
-            this.handleFiles(e.target.files, "folder");
-          });
-
-          this.loadDemoBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            this.loadDemoProject();
-          });
-
-          this.editModeToggle.addEventListener("click", () => {
-            this.toggleEditMode();
-          });
-
-          this.downloadBtn.addEventListener("click", () => {
-            this.downloadProject();
-          });
-
-          this.refreshBtn.addEventListener("click", () => {
-            this.refreshPreview();
-          });
-
-          this.undoBtn.addEventListener("click", () => {
-            this.undoLastChange();
-          });
-
-          this.resetBtn.addEventListener("click", () => {
-            this.resetChanges();
-          });
-
-          // Listen for messages from the preview iframe
-          window.addEventListener("message", (e) => {
-            this.handleIframeMessage(e);
-          });
-        }
-
-        setupKeyboardShortcuts() {
-          document.addEventListener("keydown", (e) => {
-            // Ctrl+Z or Cmd+Z for undo
-            if ((e.ctrlKey || e.metaKey) && e.key === "z" && !e.shiftKey) {
-              e.preventDefault();
-              this.undoLastChange();
-            }
-          });
-        }
-
-        setupPageUnloadWarning() {
-          window.addEventListener("beforeunload", (e) => {
-            // Only show warning if there are unsaved changes
-            if (this.modifiedFiles.size > 0) {
-              const message =
-                "You have unsaved changes that will be lost. Make sure to download your project before leaving!";
-              e.preventDefault();
-              e.returnValue = message; // For Chrome
-              return message; // For other browsers
-            }
-          });
-
-          // Also warn on F5 specifically (some browsers handle this differently)
-          document.addEventListener("keydown", (e) => {
-            if (
-              e.key === "F5" ||
-              (e.ctrlKey && e.key === "r") ||
-              (e.metaKey && e.key === "r")
-            ) {
-              if (this.modifiedFiles.size > 0) {
-                const shouldRefresh = confirm(
-                  "⚠️ You have unsaved changes!\n\n" +
-                    "Refreshing will lose all your text edits. " +
-                    "Please download your project first to save your changes.\n\n" +
-                    "Do you really want to refresh and lose your changes?"
-                );
-
-                if (!shouldRefresh) {
-                  e.preventDefault();
-                  this.showStatus(
-                    "💡 Remember to download your project to save changes!",
-                    "info"
-                  );
-                }
-              }
-            }
-          });
-        }
-
-        setupDragAndDrop() {
-          ["dragenter", "dragover", "dragleave", "drop"].forEach(
-            (eventName) => {
-              this.uploadArea.addEventListener(eventName, this.preventDefaults);
-            }
-          );
-
-          ["dragenter", "dragover"].forEach((eventName) => {
-            this.uploadArea.addEventListener(eventName, () => {
-              this.uploadArea.classList.add("dragover");
-            });
-          });
-
-          ["dragleave", "drop"].forEach((eventName) => {
-            this.uploadArea.addEventListener(eventName, () => {
-              this.uploadArea.classList.remove("dragover");
-            });
-          });
-
-          this.uploadArea.addEventListener("drop", (e) => {
-            const files = e.dataTransfer.files;
-            const type = files[0]?.name.endsWith(".zip") ? "zip" : "folder";
-            this.handleFiles(files, type);
-          });
-        }
-
-        preventDefaults(e) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-
-        async handleFiles(files, type) {
-          this.showLoading("Processing files...");
-
-          try {
-            if (files.length === 0) {
-              throw new Error("No files selected");
-            }
-
-            if (type === "zip") {
-              await this.handleZipFile(files[0]);
-            } else {
-              await this.handleDirectoryUpload(files);
-            }
-
-            await this.processProject();
-            this.showStatus("Project loaded successfully!", "success");
-          } catch (error) {
-            console.error("Error handling files:", error);
-            this.showStatus(`Error: ${error.message}`, "error");
-          } finally {
-            this.hideLoading();
-          }
-        }
-
-        async handleZipFile(zipFile) {
-          this.showLoading("Extracting ZIP file...");
-
-          const zip = new JSZip();
-          const content = await zip.loadAsync(zipFile);
-
-          this.projectFiles.clear();
-          this.modifiedFiles.clear();
-          this.undoStack = [];
-          this.projectName = zipFile.name.replace(".zip", "");
-
-          for (const [path, file] of Object.entries(content.files)) {
-            if (!file.dir) {
-              let fileContent;
-              if (this.isTextFile(path)) {
-                fileContent = await file.async("text");
-              } else {
-                fileContent = await file.async("uint8array");
-              }
-
-              this.projectFiles.set(path, {
-                content: fileContent,
-                type: this.getFileType(path),
-                size: file._data ? file._data.uncompressedSize : 0,
-              });
-            }
-          }
-        }
-
-        async handleDirectoryUpload(files) {
-          this.projectFiles.clear();
-          this.modifiedFiles.clear();
-          this.undoStack = [];
-
-          if (files.length > 0) {
-            const firstPath = files[0].webkitRelativePath;
-            this.projectName = firstPath.split("/")[0];
-          }
-
-          for (const file of files) {
-            const relativePath = file.webkitRelativePath.substring(
-              this.projectName.length + 1
-            );
-            if (relativePath) {
-              const content = await this.readFileContent(file);
-              this.projectFiles.set(relativePath, {
-                content: content,
-                type: this.getFileType(file.name),
-                size: file.size,
-                originalFile: file,
-              });
-            }
-          }
-        }
-
-        async loadDemoProject() {
-          this.showLoading("Loading demo project...");
-
-          try {
-            // Load the villa-zori demo project
-            const baseUrl = window.location.origin;
-            const response = await fetch(
-              `${baseUrl}/demo/villa-zori/index.html`
-            );
-            if (!response.ok) {
-              throw new Error(
-                `Failed to load demo project (${response.status})`
-              );
-            }
-
-            const htmlContent = await response.text();
-
-            this.projectFiles.clear();
-            this.modifiedFiles.clear();
-            this.undoStack = [];
-            this.projectName = "villa-zori-demo";
-
-            this.projectFiles.set("index.html", {
-              content: htmlContent,
-              type: "text/html",
-              size: htmlContent.length,
-            });
-
-            // Load all the assets from the demo project
-            const assets = [
-              "css/styles.css",
-              "css/lang.css",
-              "js/script.js",
-              "js/lang.js",
-            ];
-
-            for (const asset of assets) {
-              try {
-                const assetResponse = await fetch(
-                  `${baseUrl}/demo/villa-zori/${asset}`
-                );
-                if (assetResponse.ok) {
-                  const content = await assetResponse.text();
-                  this.projectFiles.set(asset, {
-                    content: content,
-                    type: this.getFileType(asset),
-                    size: content.length,
-                  });
-                }
-              } catch (e) {
-                console.log(`Asset not found: ${asset}`);
-              }
-            }
-
-            // Load some sample images
-            const images = [
-              "images/img-hero-landscape-2560w.jpg",
-              "images/img-landscape-1-960w.jpg",
-              "images/img-landscape-2-960w.jpg",
-            ];
-
-            for (const image of images) {
-              try {
-                const imageResponse = await fetch(
-                  `${baseUrl}/demo/villa-zori/${image}`
-                );
-                if (imageResponse.ok) {
-                  const arrayBuffer = await imageResponse.arrayBuffer();
-                  this.projectFiles.set(image, {
-                    content: new Uint8Array(arrayBuffer),
-                    type: this.getFileType(image),
-                    size: arrayBuffer.byteLength,
-                  });
-                }
-              } catch (e) {
-                console.log(`Image not found: ${image}`);
-              }
-            }
-
-            await this.processProject();
-            this.showStatus("Demo project loaded successfully!", "success");
-          } catch (error) {
-            console.error("Error loading demo:", error);
-            this.showStatus(`Error loading demo: ${error.message}`, "error");
-          } finally {
-            this.hideLoading();
-          }
-        }
-
-        readFileContent(file) {
-          return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-
-            if (this.isTextFile(file.name)) {
-              reader.onload = (e) => resolve(e.target.result);
-              reader.onerror = () =>
-                reject(new Error(`Failed to read ${file.name}`));
-              reader.readAsText(file);
-            } else {
-              reader.onload = (e) => {
-                const arrayBuffer = e.target.result;
-                const uint8Array = new Uint8Array(arrayBuffer);
-                resolve(uint8Array);
-              };
-              reader.onerror = () =>
-                reject(new Error(`Failed to read ${file.name}`));
-              reader.readAsArrayBuffer(file);
-            }
-          });
-        }
-
-        isTextFile(filename) {
-          const textExtensions = [
-            ".html",
-            ".css",
-            ".js",
-            ".json",
-            ".txt",
-            ".md",
-            ".xml",
-            ".svg",
-          ];
-          return textExtensions.some((ext) =>
-            filename.toLowerCase().endsWith(ext)
-          );
-        }
-
-        getFileType(filename) {
-          const ext = filename.toLowerCase().split(".").pop();
-          const typeMap = {
-            html: "text/html",
-            css: "text/css",
-            js: "application/javascript",
-            json: "application/json",
-            jpg: "image/jpeg",
-            jpeg: "image/jpeg",
-            png: "image/png",
-            gif: "image/gif",
-            svg: "image/svg+xml",
-            txt: "text/plain",
-            md: "text/markdown",
-            woff: "font/woff",
-            woff2: "font/woff2",
-            ttf: "font/ttf",
-          };
-          return typeMap[ext] || "application/octet-stream";
-        }
-
-        async processProject() {
-          const htmlFiles = Array.from(this.projectFiles.keys()).filter(
-            (path) =>
-              path.endsWith(".html") &&
-              (path === "index.html" || path.includes("index"))
-          );
-
-          if (htmlFiles.length === 0) {
-            throw new Error("No HTML files found in the project");
-          }
-
-          const mainHtml = htmlFiles[0];
-          this.originalContent = this.projectFiles.get(mainHtml).content;
-
-          this.updateUI();
-          await this.loadPreview();
-        }
-
-        updateUI() {
-          this.projectNameEl.textContent = this.projectName;
-          this.projectFilesEl.innerHTML = `${this.projectFiles.size} files loaded`;
-          this.updateChangesCounter();
-          this.updateFileList();
-          this.updateUndoButton();
-
-          this.projectInfo.classList.add("active");
-          this.downloadBtn.disabled = false;
-          this.refreshBtn.disabled = false;
-          this.editModeToggle.disabled = false;
-
-          // Reset button should be disabled initially (no changes yet)
-          this.resetBtn.disabled = true;
-        }
-
-        updateFileList() {
-          this.fileList.innerHTML = "";
-
-          const sortedFiles = Array.from(this.projectFiles.keys()).sort();
-          sortedFiles.forEach((path) => {
-            const fileItem = document.createElement("div");
-            fileItem.className = "file-item";
-
-            if (this.modifiedFiles.has(path)) {
-              fileItem.classList.add("modified");
-            }
-
-            const icon = this.getFileIcon(path);
-            fileItem.innerHTML = `
-                        <span class="file-icon">${icon}</span>
-                        <span>${path}</span>
-                    `;
-
-            this.fileList.appendChild(fileItem);
-          });
-        }
-
-        getFileIcon(path) {
-          if (path.endsWith(".html")) return "🌐";
-          if (path.endsWith(".css")) return "🎨";
-          if (path.endsWith(".js")) return "⚡";
-          if (path.endsWith(".json")) return "📄";
-          if (path.match(/\.(jpg|jpeg|png|gif|svg)$/i)) return "🖼️";
-          if (path.match(/\.(woff|woff2|ttf)$/i)) return "🔤";
-          return "📄";
-        }
-
-        updateUndoButton() {
-          this.undoBtn.disabled = this.undoStack.length === 0;
-          this.undoBtn.textContent = "↶ Revert Last Change";
-        }
-
-        updateChangesCounter() {
-          const changeCount = this.modifiedFiles.size;
-          if (changeCount > 0) {
-            this.changesCounter.textContent = changeCount;
-            this.changesCounter.style.display = "inline";
-
-            // Show unsaved changes warning
-            this.unsavedWarning.classList.add("show");
-          } else {
-            this.changesCounter.style.display = "none";
-            this.downloadBtn.innerHTML = "📦 Download Project";
-
-            // Hide unsaved changes warning
-            this.unsavedWarning.classList.remove("show");
-          }
-
-          // Enable/disable reset button based on changes
-          this.resetBtn.disabled = changeCount === 0;
-
-          this.updateFileList();
-        }
-
-        async loadPreview() {
-          try {
-            this.showLoading("Loading preview...");
-
-            // Clean up old URLs
-            this.resourceUrls.forEach((url) => URL.revokeObjectURL(url));
-            this.resourceUrls.clear();
-
-            const htmlContent = this.getModifiedHtmlContent();
-            const blob = new Blob([htmlContent], { type: "text/html" });
-            const url = URL.createObjectURL(blob);
-
-            this.previewUrl.value = `Preview: ${this.projectName}`;
-            this.previewFrame.src = url;
-
-            await new Promise((resolve) => {
-              this.previewFrame.onload = resolve;
-            });
-
-            // Small delay to ensure iframe is fully loaded
-            setTimeout(() => {
-              this.injectEditingCapabilities();
-              this.hideLoading();
-            }, 500);
-          } catch (error) {
-            console.error("Error loading preview:", error);
-            this.showStatus("Failed to load preview", "error");
-            this.hideLoading();
-          }
-        }
-
-        refreshPreview() {
-          if (!this.projectFiles.size) {
-            this.showStatus("No project loaded to refresh", "error");
-            return;
-          }
-
-          // If edit mode is active, temporarily disable it during refresh
-          const wasEditMode = this.editMode;
-          if (wasEditMode) {
-            this.toggleEditMode(false);
-          }
-
-          // Reload the preview to show animations and reset dynamic states
-          this.loadPreview()
-            .then(() => {
-              this.showStatus("🔄 Preview refreshed", "success");
-
-              // Re-enable edit mode if it was active
-              if (wasEditMode) {
-                setTimeout(() => {
-                  this.toggleEditMode(true);
-                }, 500); // Small delay to let the page load
-              }
-            })
-            .catch((error) => {
-              console.error("Error refreshing preview:", error);
-              this.showStatus("Failed to refresh preview", "error");
-            });
-        }
-
-        async downloadProject() {
-          try {
-            this.showLoading("Preparing download...");
-
-            const zip = new JSZip();
-
-            // Add all files to zip
-            this.projectFiles.forEach((fileData, path) => {
-              let content = fileData.content;
-
-              // Use modified content if available
-              if (this.modifiedFiles.has(path)) {
-                content = this.modifiedFiles.get(path);
-              }
-
-              zip.file(path, content);
-            });
-
-            const blob = await zip.generateAsync({ type: "blob" });
-
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = `${this.projectName}-edited.zip`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-
-            URL.revokeObjectURL(url);
-
-            this.showStatus("📦 Project downloaded successfully!", "success");
-          } catch (error) {
-            console.error("Error downloading project:", error);
-            this.showStatus(`❌ Download failed: ${error.message}`, "error");
-          } finally {
-            this.hideLoading();
-          }
-        }
-
-        getModifiedHtmlContent() {
-          const mainHtmlPath = Array.from(this.projectFiles.keys()).find(
-            (path) =>
-              path.endsWith(".html") &&
-              (path === "index.html" || path.includes("index"))
-          );
-
-          let htmlContent =
-            this.modifiedFiles.get(mainHtmlPath) ||
-            this.projectFiles.get(mainHtmlPath).content;
-          return this.replaceResourcePaths(htmlContent);
-        }
-
-        replaceResourcePaths(htmlContent) {
-          this.projectFiles.forEach((fileData, path) => {
-            if (
-              path.endsWith(".css") ||
-              path.endsWith(".js") ||
-              path.match(/\.(jpg|jpeg|png|gif|svg|woff|woff2|ttf)$/i)
-            ) {
-              let content = fileData.content;
-              let blob;
-
-              if (typeof content === "string") {
-                blob = new Blob([content], { type: fileData.type });
-              } else {
-                blob = new Blob([content], { type: fileData.type });
-              }
-
-              const url = URL.createObjectURL(blob);
-              this.resourceUrls.set(path, url);
-
-              // Escape special regex characters in path
-              const escapedPath = path.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-
-              // Replace paths in HTML - handle various path formats
-              const patterns = [
-                new RegExp(`src=["']${escapedPath}["']`, "g"),
-                new RegExp(`href=["']${escapedPath}["']`, "g"),
-                new RegExp(`src=["']\\.\/${escapedPath}["']`, "g"),
-                new RegExp(`href=["']\\.\/${escapedPath}["']`, "g"),
-                // Handle paths without quotes (rare but possible)
-                new RegExp(`src=${escapedPath}(?=\\s|>)`, "g"),
-                new RegExp(`href=${escapedPath}(?=\\s|>)`, "g"),
-              ];
-
-              patterns.forEach((pattern) => {
-                if (path.endsWith(".css")) {
-                  htmlContent = htmlContent.replace(pattern, `href="${url}"`);
-                } else if (path.endsWith(".js")) {
-                  htmlContent = htmlContent.replace(pattern, `src="${url}"`);
-                } else {
-                  htmlContent = htmlContent.replace(pattern, (match) => {
-                    if (match.includes("src=")) return `src="${url}"`;
-                    if (match.includes("href=")) return `href="${url}"`;
-                    return match;
-                  });
-                }
-              });
-            }
-          });
-
-          return htmlContent;
-        }
-
-        injectEditingCapabilities() {
-          if (!this.previewFrame.contentDocument) return;
-
-          const doc = this.previewFrame.contentDocument;
-
-          // Remove any existing editing scripts/styles
-          const existingStyle = doc.getElementById("visual-editor-styles");
-          const existingScript = doc.getElementById("visual-editor-script");
-          if (existingStyle) existingStyle.remove();
-          if (existingScript) existingScript.remove();
-
-          // Inject editing styles
-          const editingStyles = doc.createElement("style");
-          editingStyles.id = "visual-editor-styles";
-          editingStyles.textContent = `
-                    .editable-element {
-                        position: relative;
-                        cursor: text !important;
-                        transition: all 0.2s ease;
-                        border-radius: 4px;
-                    }
-                    
-                    /* Icon editing styles */
-                    .editable-icon {
-                        position: relative;
-                        cursor: pointer !important;
-                        transition: all 0.2s ease;
-                        border-radius: 4px;
-                        display: inline-block;
-                        padding: 4px;
-                    }
-                    
-                    .editable-icon:hover {
-                        outline: 2px dashed #ff9500 !important;
-                        outline-offset: 2px;
-                        background-color: rgba(255, 149, 0, 0.08) !important;
-                        box-shadow: 0 0 0 4px rgba(255, 149, 0, 0.1) !important;
-                        transform: scale(1.1);
-                    }
-                    
-                    .editable-icon.editing {
-                        outline: 2px solid #ff9500 !important;
-                        outline-offset: 2px;
-                        background-color: rgba(255, 149, 0, 0.15) !important;
-                        box-shadow: 0 0 0 4px rgba(255, 149, 0, 0.2) !important;
-                    }
-                    
-                    /* Preserve circular shape for review avatars and mini avatars */
-                    .editable-element.review-avatar,
-                    .review-avatar.editable-element,
-                    .review-avatar .editable-element,
-                    .editable-element.review-mini-avatar,
-                    .review-mini-avatar.editable-element,
-                    .review-mini-avatar .editable-element {
-                        border-radius: 50% !important;
-                    }
-                    
-                    /* Preserve button border-radius for CTA buttons */
-                    .editable-element.cta-button,
-                    .cta-button.editable-element,
-                    .cta-button .editable-element {
-                        border-radius: 8px !important;
-                    }
-                    
-                    /* Also preserve during hover and editing states */
-                    .editable-element.review-avatar:hover,
-                    .review-avatar.editable-element:hover,
-                    .editable-element.review-avatar.editing,
-                    .review-avatar.editable-element.editing,
-                    .editable-element.review-mini-avatar:hover,
-                    .review-mini-avatar.editable-element:hover,
-                    .editable-element.review-mini-avatar.editing,
-                    .review-mini-avatar.editable-element.editing,
-                    .editable-element.cta-button:hover,
-                    .cta-button.editable-element:hover,
-                    .cta-button .editable-element:hover,
-                    .editable-element.cta-button.editing,
-                    .cta-button.editable-element.editing,
-                    .cta-button .editable-element.editing {
-                        border-radius: 50% !important;
-                    }
-                    
-                    /* But buttons should keep their button radius */
-                    .editable-element.cta-button:hover,
-                    .cta-button.editable-element:hover,
-                    .cta-button .editable-element:hover,
-                    .editable-element.cta-button.editing,
-                    .cta-button.editable-element.editing,
-                    .cta-button .editable-element.editing {
-                        border-radius: 8px !important;
-                    }
-                    
-                    .editable-element:hover {
-                        outline: 2px dashed #007aff !important;
-                        outline-offset: 1px;
-                        background-color: rgba(0, 122, 255, 0.08) !important;
-                        box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1) !important;
-                    }
-                    
-                    .editable-element.editing {
-                        outline: 2px solid #007aff !important;
-                        outline-offset: 1px;
-                        background-color: rgba(0, 122, 255, 0.12) !important;
-                        box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.15) !important;
-                    }
-                    
-                    /* Hide outline on elements that contain icons */
-                    .editable-element:has(i[class*="fa"]):hover,
-                    .editable-element:has(.fa):hover,
-                    .editable-element:has([class*="fa-"]):hover,
-                    .editable-element:has(.star):hover {
-                        outline: none !important;
-                        background-color: transparent !important;
-                        box-shadow: none !important;
-                    }
-                    
-                    /* Visual indicator for links in edit mode */
-                    body.edit-mode-active a:not([href]) {
-                        cursor: text !important;
-                        text-decoration: none !important;
-                    }
-                    
-                    body.edit-mode-active a.editable-element:hover {
-                        text-decoration: none !important;
-                    }
-                    
-                    .edit-tooltip {
-                        position: absolute;
-                        top: -35px;
-                        left: 0;
-                        background: #007aff;
-                        color: white;
-                        padding: 6px 10px;
-                        border-radius: 6px;
-                        font-size: 12px;
-                        font-weight: 500;
-                        white-space: nowrap;
-                        z-index: 10000;
-                        pointer-events: none;
-                        box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
-                        text-transform: none;
-                    }
-                    
-                    .edit-tooltip::after {
-                        content: '';
-                        position: absolute;
-                        top: 100%;
-                        left: 12px;
-                        border: 6px solid transparent;
-                        border-top-color: #007aff;
-                    }
-
-                    .icon-tooltip {
-                        position: absolute;
-                        top: -35px;
-                        left: 0;
-                        background: #007aff;
-                        color: white;
-                        padding: 6px 10px;
-                        border-radius: 6px;
-                        font-size: 12px;
-                        font-weight: 500;
-                        white-space: nowrap;
-                        z-index: 10000;
-                        pointer-events: none;
-                        box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
-                        text-transform: none;
-                    }
-                    
-                    .icon-tooltip::after {
-                        content: '';
-                        position: absolute;
-                        top: 100%;
-                        left: 12px;
-                        border: 6px solid transparent;
-                        border-top-color: #007aff;
-                    }
-
-                    /* Image editing styles */
-                    .editable-image {
-                        cursor: pointer !important;
-                        transition: all 0.2s ease;
-                    }
-                    
-                    .editable-image:hover {
-                        outline: 2px dashed #34c759 !important;
-                        outline-offset: -10px;
-                        box-shadow: 0 0 0 4px rgba(52, 199, 89, 0.1) !important;
-                    }
-                    
-                    .editable-image.editing {
-                        outline: 2px solid #34c759 !important;
-                        outline-offset: -10px;
-                        box-shadow: 0 0 0 4px rgba(52, 199, 89, 0.15) !important;
-                    }
-
-                    .image-tooltip {
-                        position: absolute;
-                        bottom: -35px;
-                        left: 50%;
-                        transform: translateX(-50%);
-                        background: rgba(52, 199, 89, 0.9);
-                        backdrop-filter: blur(4px);
-                        color: white;
-                        padding: 6px 10px;
-                        border-radius: 6px;
-                        font-size: 12px;
-                        font-weight: 500;
-                        white-space: nowrap;
-                        z-index: 10000;
-                        pointer-events: none;
-                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-                        text-transform: none;
-                        opacity: 0.9;
-                    }
-                    
-                    .image-tooltip::after {
-                        content: '';
-                        position: absolute;
-                        bottom: 100%;
-                        left: 50%;
-                        transform: translateX(-50%);
-                        border: 6px solid transparent;
-                        border-bottom-color: rgba(52, 199, 89, 0.9);
-                    }
-                    
-                    /* Tooltip arrow when shown above image */
-                    .image-tooltip[style*="--arrow-direction: top"]::after {
-                        bottom: auto;
-                        top: 100%;
-                        border-bottom-color: transparent;
-                        border-top-color: rgba(52, 199, 89, 0.9);
-                    }
-                `;
-          doc.head.appendChild(editingStyles);
-
-          // Inject editing script
-          const editingScript = doc.createElement("script");
-          editingScript.id = "visual-editor-script";
-          editingScript.textContent = `
-                    (function() {
-                        let editMode = false;
-                        let currentlyEditing = null;
-                        
-                        window.addEventListener('message', function(e) {
-                            if (e.data.type === 'toggleEditMode') {
-                                editMode = e.data.enabled;
-                                toggleEditMode(editMode);
-                            }
-                        });
-                        
-                        function toggleEditMode(enabled) {
-                            // Add/remove edit mode class from body
-                            if (enabled) {
-                                document.body.classList.add('edit-mode-active');
-                                // Remove href from all links to prevent navigation
-                                document.querySelectorAll('a[href]').forEach(link => {
-                                    link.setAttribute('data-original-href', link.getAttribute('href'));
-                                    link.removeAttribute('href');
-                                });
-                            } else {
-                                document.body.classList.remove('edit-mode-active');
-                                // Restore href to all links
-                                document.querySelectorAll('a[data-original-href]').forEach(link => {
-                                    link.setAttribute('href', link.getAttribute('data-original-href'));
-                                    link.removeAttribute('data-original-href');
-                                });
-                            }
-                            
-                            const editableElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, div, span:not(.fa):not([class*="fa-"]):not(.star), a, li');
-                            const iconElements = document.querySelectorAll('i[class*="fa"]');
-                            const imageElements = document.querySelectorAll('img');
-                            
-                            // Handle text elements
-                            editableElements.forEach(el => {
-                                if (enabled) {
-                                    if (isValidTextElement(el) && !isInNavigation(el) && !hasIconChildren(el)) {
-                                        el.classList.add('editable-element');
-                                        el.addEventListener('click', handleElementClick);
-                                        el.addEventListener('mouseenter', showTooltip);
-                                        el.addEventListener('mouseleave', hideTooltip);
-                                    }
-                                } else {
-                                    el.classList.remove('editable-element');
-                                    el.removeEventListener('click', handleElementClick);
-                                    el.removeEventListener('mouseenter', showTooltip);
-                                    el.removeEventListener('mouseleave', hideTooltip);
-                                    hideTooltip({ target: el });
-                                }
-                            });
-
-                            // Handle icon elements
-                            iconElements.forEach(icon => {
-                                if (enabled) {
-                                    if (isValidIcon(icon)) {
-                                        icon.classList.add('editable-icon');
-                                        icon.addEventListener('click', handleIconClick);
-                                        icon.addEventListener('mouseenter', showIconTooltip);
-                                        icon.addEventListener('mouseleave', hideIconTooltip);
-                                    }
-                                } else {
-                                    icon.classList.remove('editable-icon');
-                                    icon.removeEventListener('click', handleIconClick);
-                                    icon.removeEventListener('mouseenter', showIconTooltip);
-                                    icon.removeEventListener('mouseleave', hideIconTooltip);
-                                    hideIconTooltip({ target: icon });
-                                }
-                            });
-
-                            // Handle image elements
-                            imageElements.forEach(image => {
-                                if (enabled) {
-                                    if (isValidImage(image)) {
-                                        image.classList.add('editable-image');
-                                        image.addEventListener('click', handleImageClick);
-                                        image.addEventListener('mouseenter', showImageTooltip);
-                                        image.addEventListener('mouseleave', hideImageTooltip);
-                                    }
-                                } else {
-                                    image.classList.remove('editable-image');
-                                    image.removeEventListener('click', handleImageClick);
-                                    image.removeEventListener('mouseenter', showImageTooltip);
-                                    image.removeEventListener('mouseleave', hideImageTooltip);
-                                    hideImageTooltip({ target: image });
-                                }
-                            });
-
-                            // Re-check images after a delay to catch lazy-loaded images
-                            if (enabled) {
-                                setTimeout(() => {
-                                    const newImageElements = document.querySelectorAll('img');
-                                    newImageElements.forEach(image => {
-                                        if (!image.classList.contains('editable-image') && isValidImage(image)) {
-                                            image.classList.add('editable-image');
-                                            image.addEventListener('click', handleImageClick);
-                                            image.addEventListener('mouseenter', showImageTooltip);
-                                            image.addEventListener('mouseleave', hideImageTooltip);
-                                        }
-                                    });
-                                }, 2000);
-                            }
-                        }
-
-                        function isValidIcon(icon) {
-                            // Allow most FontAwesome icons except those in navigation or language switcher
-                            if (icon.closest('.language-switcher, .language-dropdown')) {
-                                return false;
-                            }
-                            
-                            // Allow icons in features, amenities, location highlights, and footer
-                            if (icon.closest('.feature-card, .amenity-item, .location-item, .footer-social')) {
-                                return true;
-                            }
-                            
-                            // Allow badge icons
-                            if (icon.closest('.badge')) {
-                                return true;
-                            }
-                            
-                            // Block navigation chevrons and other UI elements
-                            if (icon.classList.contains('fa-chevron-down') || 
-                                icon.classList.contains('fa-chevron-up') ||
-                                icon.classList.contains('fa-chevron-left') ||
-                                icon.classList.contains('fa-chevron-right')) {
-                                return false;
-                            }
-                            
-                            return true;
-                        }
-
-                        function handleIconClick(e) {
-                            if (!editMode) return;
-                            
-                            e.stopPropagation();
-                            e.preventDefault();
-                            
-                            // Send message to parent window to open icon dialog
-                            window.parent.postMessage({
-                                type: 'openIconDialog',
-                                iconElement: getElementPath(e.target),
-                                currentClass: e.target.className
-                            }, '*');
-                        }
-
-                        function showIconTooltip(e) {
-                            if (!editMode || currentlyEditing) return;
-                            
-                            const tooltip = document.createElement('div');
-                            tooltip.className = 'icon-tooltip';
-                            tooltip.textContent = '🎨 Click to change icon';
-                            
-                            // Append to parent element instead of the <i> tag to avoid FontAwesome CSS inheritance
-                            const parentElement = e.target.parentElement;
-                            if (parentElement) {
-                                parentElement.appendChild(tooltip);
-                                
-                                // Position the tooltip relative to the icon
-                                const iconRect = e.target.getBoundingClientRect();
-                                const parentRect = parentElement.getBoundingClientRect();
-                                
-                                tooltip.style.left = (iconRect.left - parentRect.left) + 'px';
-                            } else {
-                                // Fallback to appending to the icon itself
-                                e.target.appendChild(tooltip);
-                            }
-                        }
-                        
-                        function hideIconTooltip(e) {
-                            // Look for tooltip in both the target and its parent
-                            let tooltip = e.target.querySelector('.icon-tooltip');
-                            if (!tooltip && e.target.parentElement) {
-                                tooltip = e.target.parentElement.querySelector('.icon-tooltip');
-                            }
-                            if (tooltip) {
-                                tooltip.remove();
-                            }
-                        }
-
-                        function isValidImage(image) {
-                            // Skip images in navigation or UI elements first
-                            if (image.closest('.language-switcher, .language-dropdown, nav, .nav, .navigation, .menu, header nav, .navbar')) {
-                                return false;
-                            }
-
-                            // Always allow these specific image types regardless of current size (they might be lazy loading)
-                            if (image.closest('.hero, .gallery, .gallery-grid, .gallery-item, .about, .about-image, .image-content, .feature, .location')) {
-                                return true;
-                            }
-
-                            // Allow hero background images
-                            if (image.classList.contains('hero-bg-image')) {
-                                return true;
-                            }
-
-                            // For other images, check dimensions if available
-                            const hasValidDimensions = image.offsetWidth >= 40 && image.offsetHeight >= 40;
-                            const hasValidNaturalDimensions = image.naturalWidth >= 40 && image.naturalHeight >= 40;
-                            
-                            // If image has valid dimensions (either current or natural), allow it if it's large enough
-                            if (hasValidDimensions || hasValidNaturalDimensions) {
-                                // Skip very small avatar images, but allow larger ones
-                                if (image.closest('.review-avatar, .review-mini-avatar')) {
-                                    const currentSize = Math.max(image.offsetWidth, image.offsetHeight);
-                                    const naturalSize = Math.max(image.naturalWidth, image.naturalHeight);
-                                    return currentSize >= 60 || naturalSize >= 60;
-                                }
-                                
-                                // Allow reasonably large images
-                                const currentLarge = image.offsetWidth >= 100 || image.offsetHeight >= 100;
-                                const naturalLarge = image.naturalWidth >= 100 || image.naturalHeight >= 100;
-                                return currentLarge || naturalLarge;
-                            }
-
-                            // Default to false for images without valid dimensions
-                            return false;
-                        }
-
-                        function handleImageClick(e) {
-                            if (!editMode) return;
-                            
-                            e.stopPropagation();
-                            e.preventDefault();
-                            
-                            // Send message to parent window to open image dialog
-                            window.parent.postMessage({
-                                type: 'openImageDialog',
-                                imageElement: getElementPath(e.target),
-                                currentSrc: e.target.src
-                            }, '*');
-                        }
-
-                        function showImageTooltip(e) {
-                            if (!editMode || currentlyEditing) return;
-                            
-                            const tooltip = document.createElement('div');
-                            tooltip.className = 'image-tooltip';
-                            tooltip.textContent = '🖼️ Click to change image';
-                            
-                            // Store original position value and only set relative if needed
-                            const originalPosition = window.getComputedStyle(e.target).position;
-                            e.target.dataset.originalPosition = originalPosition;
-                            
-                            // Only set position relative if it's not already positioned
-                            if (originalPosition === 'static') {
-                                e.target.style.position = 'relative';
-                            }
-                            
-                            e.target.appendChild(tooltip);
-                            
-                            // Adjust tooltip position if image is near bottom of viewport
-                            const imageRect = e.target.getBoundingClientRect();
-                            const viewportHeight = window.innerHeight;
-                            
-                            if (imageRect.bottom > viewportHeight - 50) {
-                                // If image is near bottom of screen, show tooltip above
-                                tooltip.style.bottom = 'auto';
-                                tooltip.style.top = '-35px';
-                                
-                                // Update arrow direction
-                                tooltip.style.setProperty('--arrow-direction', 'top');
-                            }
-                        }
-                        
-                        function hideImageTooltip(e) {
-                            const tooltip = e.target.querySelector('.image-tooltip');
-                            if (tooltip) {
-                                tooltip.remove();
-                            }
-                            
-                            // Restore original position if we changed it
-                            const originalPosition = e.target.dataset.originalPosition;
-                            if (originalPosition && originalPosition === 'static') {
-                                e.target.style.position = '';
-                            }
-                            
-                            // Clean up the stored data
-                            delete e.target.dataset.originalPosition;
-                        }
-                        
-                        function isValidTextElement(el) {
-                            const text = el.textContent.trim();
-                            
-                            // Must have text content
-                            if (!text || text.length === 0 || text.length > 900) {
-                                return false;
-                            }
-                            
-                            // Allow specific important elements regardless of other rules - CHECK FIRST
-                            if (el.classList.contains('hero-subtitle')) {
-                                return true;
-                            }
-                            
-                            if (el.closest('.logo, .brand, .review-avatar, .review-mini-avatar') || 
-                                el.closest('.hero-subtitle') ||
-                                (el.closest('.badge') && el.tagName === 'SPAN')) {
-                                return true;
-                            }
-                            
-                            // Exclude elements with media content (but allow SVG text)
-                            if (el.querySelector('img, video, iframe')) {
-                                return false;
-                            }
-                            
-                            // Allow single character elements (like review avatars)
-                            if (text.length === 1) {
-                                return true;
-                            }
-                            
-                            // For div elements, be more restrictive unless they're special
-                            if (el.tagName === 'DIV') {
-                                // Always allow hero-subtitle divs
-                                if (el.classList.contains('hero-subtitle')) {
-                                    return true;
-                                }
-                                
-                                // Only allow divs that are clearly text containers, not layout containers
-                                const childElements = el.children.length;
-                                if (childElements === 0) {
-                                    // Pure text div - allow it
-                                    return true;
-                                }
-                                // Has children - likely a container, don't allow unless it's special (handled above)
-                                return false;
-                            }
-                            
-                            // Exclude elements that are primarily containers for other elements
-                            const childElements = el.children.length;
-                            const textLength = text.length;
-                            
-                            // More lenient container detection - allow elements with few children
-                            if (childElements > 3 && textLength / childElements < 5) {
-                                return false;
-                            }
-                            
-                            // Exclude elements with only icon/symbol content (but allow single letters/initials)
-                            if (text.length > 1 && text.match(/^[\s\u2600-\u26FF\u2700-\u27BF\uE000-\uF8FF\uFE00-\uFEFF]*$/)) {
-                                return false;
-                            }
-                            
-                            return true;
-                        }
-                        
-                        function hasIconChildren(el) {
-                            // Allow hero subtitle FIRST - most important
-                            if (el.classList.contains('hero-subtitle')) {
-                                return false;
-                            }
-                            
-                            // Allow badge text elements even if they're in badge containers
-                            if (el.closest('.badge') && el.tagName === 'SPAN' && !el.querySelector('i, .fa')) {
-                                return false;
-                            }
-                            
-                            // Allow logo/brand text
-                            if (el.closest('.logo, .brand')) {
-                                return false;
-                            }
-                            
-                            // Allow elements close to hero subtitle
-                            if (el.closest('.hero-subtitle')) {
-                                return false;
-                            }
-                            
-                            // Allow button text spans
-                            if (el.tagName === 'SPAN' && el.closest('.cta-button, .btn, .button')) {
-                                return false;
-                            }
-                            
-                            // Allow review avatar text (single letters)
-                            if ((el.closest('.review-avatar') || el.closest('.review-mini-avatar')) && el.textContent.trim().length <= 2) {
-                                return false;
-                            }
-                            
-                            // Check for Font Awesome icons (but not in the allowed elements above)
-                            if (el.querySelector('i[class*="fa"], .fa, [class*="fa-"]')) {
-                                return true;
-                            }
-                            
-                            // Check for star elements (rating systems) but allow review content
-                            if (el.querySelector('.star, .stars, [class*="star"]') && !el.closest('.review-content, .review-text')) {
-                                return true;
-                            }
-                            
-                            // Check for icon patterns but be more specific
-                            if (el.querySelector('[class*="icon"]:not(.review-avatar):not(.review-mini-avatar), .emoji') && !el.closest('.logo, .brand')) {
-                                return true;
-                            }
-                            
-                            // Check if element contains mostly symbols/emojis (but allow single character avatars)
-                            const textContent = el.textContent.trim();
-                            if (textContent.length > 1) {
-                                const symbolMatch = textContent.match(/[\u2600-\u26FF\u2700-\u27BF\uE000-\uF8FF\uFE00-\uFEFF]/g);
-                                if (symbolMatch && symbolMatch.length > textContent.replace(/\s/g, '').length * 0.3) {
-                                    return true;
-                                }
-                            }
-                            
-                            return false;
-                        }
-                        
-                        function isInNavigation(el) {
-                            // Allow logo/brand text in navigation
-                            if (el.closest('.logo, .brand')) {
-                                return false;
-                            }
-                            
-                            // Allow hero subtitle
-                            if (el.classList.contains('hero-subtitle') || el.closest('.hero-subtitle')) {
-                                return false;
-                            }
-                            
-                            // Allow navigation links but exclude complex navigation containers
-                            if (el.tagName === 'A' && el.closest('nav, .nav, .navigation, .menu, header nav, .navbar')) {
-                                return false;
-                            }
-                            
-                            // Block CTA button containers but allow their inner span text
-                            if (el.classList.contains('cta-button') || el.classList.contains('btn') || el.classList.contains('button')) {
-                                return true; // Block the button container itself
-                            }
-                            
-                            // Allow text inside CTA buttons (spans within buttons)
-                            if (el.tagName === 'SPAN' && el.closest('.cta-button, .btn, .button')) {
-                                return false; // Allow the span inside the button
-                            }
-                            
-                            // Check for language switcher and similar UI elements that should NOT be edited
-                            if (el.closest('.language-switcher, .language-dropdown, .dropdown, .modal, .popup')) {
-                                return true;
-                            }
-                            
-                            // Check for form elements that shouldn't be edited
-                            if (el.closest('button, input, select, textarea')) {
-                                return true;
-                            }
-                            
-                            // Allow badge text but not the badge containers
-                            if (el.closest('.badge') && el.tagName === 'SPAN' && !el.querySelector('i, .fa')) {
-                                return false;
-                            }
-                            
-                            // Exclude star rating interactive elements but allow review text
-                            if (el.closest('.stars, .star-rating') && !el.closest('.review-content, .review-text')) {
-                                return true;
-                            }
-                            
-                            // Exclude only the footer attribution from editing (airliftstudios.com credit)
-                            if (el.closest('.footer-attribution, .attribution, .credit, .powered-by')) {
-                                return true;
-                            }
-                            
-                            return false;
-                        }
-                        
-                        function showTooltip(e) {
-                            if (!editMode || currentlyEditing) return;
-                            
-                            const tooltip = document.createElement('div');
-                            tooltip.className = 'edit-tooltip';
-                            tooltip.textContent = '✏️ Click to edit';
-                            e.target.appendChild(tooltip);
-                        }
-                        
-                        function hideTooltip(e) {
-                            const tooltip = e.target.querySelector('.edit-tooltip');
-                            if (tooltip) {
-                                tooltip.remove();
-                            }
-                        }
-                        
-                        function handleElementClick(e) {
-                            if (!editMode) return;
-                            
-                            // Stop event propagation but no need to prevent default since links have no href
-                            e.stopPropagation();
-                            
-                            // Find the most specific editable element
-                            const targetElement = findBestEditableElement(e.target);
-                            if (!targetElement) return;
-                            
-                            if (currentlyEditing && currentlyEditing !== targetElement) {
-                                finishEditing();
-                            }
-                            
-                            startEditing(targetElement);
-                        }
-                        
-                        function findBestEditableElement(clickedElement) {
-                            // If the clicked element is directly editable, use it
-                            if (clickedElement.classList.contains('editable-element')) {
-                                return clickedElement;
-                            }
-                            
-                            // Look for the closest editable element (walking up the DOM)
-                            let current = clickedElement;
-                            while (current && current !== document.body) {
-                                if (current.classList.contains('editable-element')) {
-                                    return current;
-                                }
-                                current = current.parentElement;
-                            }
-                            
-                            return null;
-                        }
-                        
-                        function startEditing(element) {
-                            currentlyEditing = element;
-                            element.classList.add('editing');
-                            hideTooltip({ target: element });
-                            
-                            const originalText = element.textContent;
-                            element.contentEditable = true;
-                            element.focus();
-                            
-                            // Select all text
-                            const range = document.createRange();
-                            range.selectNodeContents(element);
-                            const selection = window.getSelection();
-                            selection.removeAllRanges();
-                            selection.addRange(range);
-                            
-                            function finishEdit() {
-                                const newText = element.textContent;
-                                element.contentEditable = false;
-                                element.classList.remove('editing');
-                                currentlyEditing = null;
-                                
-                                if (newText !== originalText) {
-                                    window.parent.postMessage({
-                                        type: 'textChanged',
-                                        element: getElementPath(element),
-                                        oldText: originalText,
-                                        newText: newText,
-                                        elementId: element.id || null,
-                                        elementClasses: element.className || null
-                                    }, '*');
-                                }
-                            }
-                            
-                            element.addEventListener('blur', finishEdit, { once: true });
-                            element.addEventListener('keydown', function(e) {
-                                if (e.key === 'Enter' && !e.shiftKey) {
-                                    e.preventDefault();
-                                    element.blur();
-                                }
-                                if (e.key === 'Escape') {
-                                    element.textContent = originalText;
-                                    element.blur();
-                                }
-                            });
-                        }
-                        
-                        function getElementPath(element) {
-                            const path = [];
-                            let current = element;
-                            
-                            while (current && current !== document.body) {
-                                let selector = current.tagName.toLowerCase();
-                                
-                                if (current.id) {
-                                    selector += '#' + current.id;
-                                } else if (current.className) {
-                                    const validClasses = current.className.split(' ').filter(c => c && !c.includes('editable'));
-                                    if (validClasses.length > 0) {
-                                        selector += '.' + validClasses.join('.');
-                                    }
-                                }
-                                
-                                path.unshift(selector);
-                                current = current.parentElement;
-                            }
-                            
-                            return path.join(' > ');
-                        }
-                        
-                        function finishEditing() {
-                            if (currentlyEditing) {
-                                currentlyEditing.blur();
-                            }
-                        }
-                    })();
-                `;
-          doc.head.appendChild(editingScript);
-        }
-
-        setupIconDialog() {
-          // Close dialog handlers
-          this.iconDialogClose.addEventListener("click", () =>
-            this.closeIconDialog()
-          );
-          this.iconDialogCancel.addEventListener("click", () =>
-            this.closeIconDialog()
-          );
-          this.iconDialogOverlay.addEventListener("click", (e) => {
-            if (e.target === this.iconDialogOverlay) {
-              this.closeIconDialog();
-            }
-          });
-
-          // Apply selection
-          this.iconDialogApply.addEventListener("click", () =>
-            this.applyIconSelection()
-          );
-
-          // Search functionality
-          this.iconSearch.addEventListener("input", (e) =>
-            this.filterIcons(e.target.value)
-          );
-
-          // ESC key to close
-          document.addEventListener("keydown", (e) => {
-            if (
-              e.key === "Escape" &&
-              this.iconDialogOverlay.classList.contains("show")
-            ) {
-              this.closeIconDialog();
-            }
-          });
-
-          // Populate recommended icons grid
-          this.populateRecommendedIcons();
-        }
-
-        populateRecommendedIcons() {
-          this.recommendedIconsGrid.innerHTML = "";
-
-          this.airbnbIcons.forEach((iconData) => {
-            const iconOption = document.createElement("div");
-            iconOption.className = "icon-option";
-            iconOption.dataset.iconClass = iconData.class;
-            iconOption.dataset.searchTerms = iconData.name;
-            iconOption.innerHTML = `<i class="${iconData.class}"></i>`;
-            iconOption.title = iconData.class;
-
-            iconOption.addEventListener("click", () =>
-              this.selectIcon(iconOption, iconData.class)
-            );
-
-            this.recommendedIconsGrid.appendChild(iconOption);
-          });
-        }
-
-        extractCurrentPageIcons() {
-          this.currentPageIcons.clear();
-
-          if (!this.previewFrame.contentDocument) return;
-
-          const iconElements =
-            this.previewFrame.contentDocument.querySelectorAll(
-              'i[class*="fa"]'
-            );
-          iconElements.forEach((icon) => {
-            const iconClass = icon.className;
-            if (iconClass && iconClass.includes("fa")) {
-              this.currentPageIcons.add(iconClass);
-            }
-          });
-
-          this.populateCurrentPageIcons();
-        }
-
-        populateCurrentPageIcons() {
-          this.currentIconsGrid.innerHTML = "";
-
-          if (this.currentPageIcons.size === 0) {
-            this.currentIconsSection.style.display = "none";
-            return;
-          }
-
-          this.currentIconsSection.style.display = "block";
-
-          Array.from(this.currentPageIcons).forEach((iconClass) => {
-            const iconOption = document.createElement("div");
-            iconOption.className = "icon-option";
-            iconOption.dataset.iconClass = iconClass;
-            iconOption.dataset.searchTerms = iconClass
-              .replace(/fa[sb]?\s+fa-/g, "")
-              .replace(/-/g, " ");
-            iconOption.innerHTML = `<i class="${iconClass}"></i>`;
-            iconOption.title = iconClass;
-
-            iconOption.addEventListener("click", () =>
-              this.selectIcon(iconOption, iconClass)
-            );
-
-            this.currentIconsGrid.appendChild(iconOption);
-          });
-        }
-
-        selectIcon(iconElement, iconClass) {
-          // Remove previous selection
-          document.querySelectorAll(".icon-option.selected").forEach((el) => {
-            el.classList.remove("selected");
-          });
-
-          // Select new icon
-          iconElement.classList.add("selected");
-          this.selectedIcon = iconClass;
-          this.iconDialogApply.disabled = false;
-        }
-
-        filterIcons(searchTerm) {
-          const term = searchTerm.toLowerCase().trim();
-          const allIconOptions = document.querySelectorAll(".icon-option");
-          let visibleCount = 0;
-
-          allIconOptions.forEach((iconOption) => {
-            const searchTerms = iconOption.dataset.searchTerms || "";
-            const iconClass = iconOption.dataset.iconClass || "";
-
-            const matches =
-              !term ||
-              searchTerms.toLowerCase().includes(term) ||
-              iconClass.toLowerCase().includes(term);
-
-            iconOption.style.display = matches ? "flex" : "none";
-            if (matches) visibleCount++;
-          });
-
-          // Show/hide sections based on visibility
-          const currentSectionVisible =
-            this.currentIconsGrid.querySelectorAll(
-              '.icon-option[style*="flex"], .icon-option:not([style*="none"])'
-            ).length > 0;
-          const recommendedSectionVisible =
-            this.recommendedIconsGrid.querySelectorAll(
-              '.icon-option[style*="flex"], .icon-option:not([style*="none"])'
-            ).length > 0;
-
-          this.currentIconsSection.style.display =
-            currentSectionVisible && this.currentPageIcons.size > 0
-              ? "block"
-              : "none";
-          this.noIconsMessage.style.display =
-            visibleCount === 0 ? "block" : "none";
-        }
-
-        openIconDialog(iconElement) {
-          this.currentEditingIcon = iconElement;
-          this.selectedIcon = null;
-
-          // Extract current page icons
-          this.extractCurrentPageIcons();
-
-          // Clear search
-          this.iconSearch.value = "";
-          this.filterIcons("");
-
-          // Reset selection
-          document.querySelectorAll(".icon-option.selected").forEach((el) => {
-            el.classList.remove("selected");
-          });
-          this.iconDialogApply.disabled = true;
-
-          // Highlight current icon if it exists in the grid
-          const currentIconClass = iconElement.className;
-          const currentIconOption = document.querySelector(
-            `[data-icon-class="${currentIconClass}"]`
-          );
-          if (currentIconOption) {
-            this.selectIcon(currentIconOption, currentIconClass);
-          }
-
-          // Show dialog
-          this.iconDialogOverlay.classList.add("show");
-          this.iconSearch.focus();
-        }
-
-        closeIconDialog() {
-          this.iconDialogOverlay.classList.remove("show");
-          this.currentEditingIcon = null;
-          this.selectedIcon = null;
-        }
-
-        applyIconSelection() {
-          if (!this.selectedIcon || !this.currentEditingIcon) return;
-
-          const oldIconClass = this.currentEditingIcon.className;
-          const newIconClass = this.selectedIcon;
-
-          // Save to undo stack
-          this.saveToUndoStack({
-            type: "iconChange",
-            element: this.getElementPath(this.currentEditingIcon),
-            oldIconClass: oldIconClass,
-            newIconClass: newIconClass,
-            timestamp: Date.now(),
-          });
-
-          // Update the icon in the iframe
-          this.currentEditingIcon.className = newIconClass;
-
-          // Update the HTML content
-          this.updateIconInHTML(oldIconClass, newIconClass);
-
-          this.closeIconDialog();
-          this.showStatus(
-            `🎨 Icon updated: ${oldIconClass} → ${newIconClass}`,
-            "success"
-          );
-        }
-
-        setupImageDialog() {
-          // Close dialog handlers
-          this.imageDialogClose.addEventListener("click", () =>
-            this.closeImageDialog()
-          );
-          this.imageDialogCancel.addEventListener("click", () =>
-            this.closeImageDialog()
-          );
-          this.imageDialogOverlay.addEventListener("click", (e) => {
-            if (e.target === this.imageDialogOverlay) {
-              this.closeImageDialog();
-            }
-          });
-
-          // Upload button and area click
-          this.imageUploadBtn.addEventListener("click", () =>
-            this.imageFileInput.click()
-          );
-          this.imageUploadArea.addEventListener("click", () =>
-            this.imageFileInput.click()
-          );
-
-          // File input change
-          this.imageFileInput.addEventListener("change", (e) =>
-            this.handleImageFileSelect(e)
-          );
-
-          // Apply selection
-          this.imageDialogApply.addEventListener("click", () =>
-            this.applyImageSelection()
-          );
-
-          // Drag and drop
-          this.setupImageDragAndDrop();
-
-          // ESC key to close
-          document.addEventListener("keydown", (e) => {
-            if (
-              e.key === "Escape" &&
-              this.imageDialogOverlay.classList.contains("show")
-            ) {
-              this.closeImageDialog();
-            }
-          });
-        }
-
-        setupImageDragAndDrop() {
-          ["dragenter", "dragover", "dragleave", "drop"].forEach(
-            (eventName) => {
-              this.imageUploadArea.addEventListener(
-                eventName,
-                this.preventDefaults
-              );
-            }
-          );
-
-          ["dragenter", "dragover"].forEach((eventName) => {
-            this.imageUploadArea.addEventListener(eventName, () => {
-              this.imageUploadArea.classList.add("dragover");
-            });
-          });
-
-          ["dragleave", "drop"].forEach((eventName) => {
-            this.imageUploadArea.addEventListener(eventName, () => {
-              this.imageUploadArea.classList.remove("dragover");
-            });
-          });
-
-          this.imageUploadArea.addEventListener("drop", (e) => {
-            const files = e.dataTransfer.files;
-            if (files.length > 0 && files[0].type.startsWith("image/")) {
-              this.handleImageFile(files[0]);
-            }
-          });
-        }
-
-        openImageDialog(imageElement) {
-          this.currentEditingImage = imageElement;
-          this.selectedImageFile = null;
-
-          // Show current image
-          this.currentImageImg.src = imageElement.src;
-          this.currentImageInfo.textContent = `Current: ${this.getImageFilename(
-            imageElement.src
-          )}`;
-
-          // Reset new image preview
-          this.newImagePreview.style.display = "none";
-          this.imageDialogApply.disabled = true;
-
-          // Show dialog
-          this.imageDialogOverlay.classList.add("show");
-        }
-
-        closeImageDialog() {
-          this.imageDialogOverlay.classList.remove("show");
-          this.currentEditingImage = null;
-          this.selectedImageFile = null;
-          this.newImagePreview.style.display = "none";
-          this.imageFileInput.value = "";
-        }
-
-        handleImageFileSelect(e) {
-          const file = e.target.files[0];
-          if (file && file.type.startsWith("image/")) {
-            this.handleImageFile(file);
-          }
-        }
-
-        handleImageFile(file) {
-          this.selectedImageFile = file;
-
-          // Show preview
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            this.newImageImg.src = e.target.result;
-            this.newImageInfo.textContent = `New: ${
-              file.name
-            } (${this.formatFileSize(file.size)})`;
-            this.newImagePreview.style.display = "block";
-            this.imageDialogApply.disabled = false;
-          };
-          reader.readAsDataURL(file);
-        }
-
-        async applyImageSelection() {
-          if (!this.selectedImageFile || !this.currentEditingImage) return;
-
-          try {
-            // Generate a unique filename to avoid conflicts
-            const timestamp = Date.now();
-            const extension = this.selectedImageFile.name.split(".").pop();
-            const newFilename = `image-${timestamp}.${extension}`;
-            const imagePath = `images/${newFilename}`;
-
-            // Read the file as array buffer for storage
-            const arrayBuffer = await this.readFileAsArrayBuffer(
-              this.selectedImageFile
-            );
-            const uint8Array = new Uint8Array(arrayBuffer);
-
-            // Add the new image to project files
-            this.projectFiles.set(imagePath, {
-              content: uint8Array,
-              type: this.selectedImageFile.type,
-              size: this.selectedImageFile.size,
-            });
-
-            // Save to undo stack
-            this.saveToUndoStack({
-              type: "imageChange",
-              element: this.getElementPath(this.currentEditingImage),
-              oldSrc: this.currentEditingImage.src,
-              newSrc: imagePath,
-              newImageData: {
-                path: imagePath,
-                content: uint8Array,
-                type: this.selectedImageFile.type,
-                size: this.selectedImageFile.size,
-              },
-              timestamp: Date.now(),
-            });
-
-            // Update the image in the iframe
-            this.currentEditingImage.src = imagePath;
-
-            // Update the HTML content
-            this.updateImageInHTML(
-              this.currentEditingImage.getAttribute("src") ||
-                this.currentEditingImage.src,
-              imagePath
-            );
-
-            this.closeImageDialog();
-            this.showStatus(
-              `🖼️ Image updated: ${this.selectedImageFile.name}`,
-              "success"
-            );
-          } catch (error) {
-            console.error("Error applying image selection:", error);
-            this.showStatus("Failed to update image", "error");
-          }
-        }
-
-        readFileAsArrayBuffer(file) {
-          return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = (e) => resolve(e.target.result);
-            reader.onerror = () =>
-              reject(new Error(`Failed to read ${file.name}`));
-            reader.readAsArrayBuffer(file);
-          });
-        }
-
-        updateImageInHTML(oldSrc, newSrc) {
-          const mainHtmlPath = Array.from(this.projectFiles.keys()).find(
-            (path) =>
-              path.endsWith(".html") &&
-              (path === "index.html" || path.includes("index"))
-          );
-
-          let currentContent =
-            this.modifiedFiles.get(mainHtmlPath) ||
-            this.projectFiles.get(mainHtmlPath).content;
-
-          // Handle both absolute and relative paths
-          const oldSrcEscaped = oldSrc.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-          const patterns = [
-            new RegExp(`src="${oldSrcEscaped}"`, "g"),
-            new RegExp(`src='${oldSrcEscaped}'`, "g"),
-          ];
-
-          let updatedContent = currentContent;
-          let wasReplaced = false;
-
-          for (const pattern of patterns) {
-            const beforeReplace = updatedContent;
-            updatedContent = updatedContent.replace(pattern, `src="${newSrc}"`);
-            if (updatedContent !== beforeReplace) {
-              wasReplaced = true;
-              break;
-            }
-          }
-
-          if (wasReplaced) {
-            this.modifiedFiles.set(mainHtmlPath, updatedContent);
-            this.updateChangesCounter();
-            this.updateUndoButton();
-          }
-        }
-
-        getImageFilename(src) {
-          return src.split("/").pop() || "image";
-        }
-
-        formatFileSize(bytes) {
-          if (bytes === 0) return "0 Bytes";
-          const k = 1024;
-          const sizes = ["Bytes", "KB", "MB", "GB"];
-          const i = Math.floor(Math.log(bytes) / Math.log(k));
-          return (
-            parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
-          );
-        }
-
-        saveToUndoStack(action) {
-          this.undoStack.push(action);
-
-          // Keep only the last maxUndoSteps actions
-          if (this.undoStack.length > this.maxUndoSteps) {
-            this.undoStack.shift();
-          }
-        }
-
-        updateIconInHTML(oldIconClass, newIconClass) {
-          const mainHtmlPath = Array.from(this.projectFiles.keys()).find(
-            (path) =>
-              path.endsWith(".html") &&
-              (path === "index.html" || path.includes("index"))
-          );
-
-          let currentContent =
-            this.modifiedFiles.get(mainHtmlPath) ||
-            this.projectFiles.get(mainHtmlPath).content;
-
-          // Handle both exact matches and classes with additional classes
-          const escapedOldClass = oldIconClass.replace(
-            /[.*+?^${}()|[\]\\]/g,
-            "\\$&"
-          );
-
-          // Try multiple patterns to match different class attribute formats
-          const patterns = [
-            // Exact match: class="fas fa-swimming-pool"
-            new RegExp(`class="${escapedOldClass}"`, "g"),
-            // With additional classes: class="fas fa-swimming-pool editable-icon"
-            new RegExp(`class="${escapedOldClass}([^"]*)"`, "g"),
-            // With classes before: class="some-class fas fa-swimming-pool"
-            new RegExp(
-              `class="([^"]*\\s+)?${escapedOldClass}(\\s+[^"]*)?"`,
-              "g"
-            ),
-          ];
-
-          let updatedContent = currentContent;
-          let wasReplaced = false;
-
-          // Try each pattern until we find a match
-          for (const pattern of patterns) {
-            const beforeReplace = updatedContent;
-            if (pattern.source.includes('([^"]*\\s+)?')) {
-              // Complex pattern with capture groups
-              updatedContent = updatedContent.replace(
-                pattern,
-                (match, prefix, suffix) => {
-                  wasReplaced = true;
-                  const prefixPart = prefix || "";
-                  const suffixPart = suffix || "";
-                  return `class="${prefixPart}${newIconClass}${suffixPart}"`;
-                }
-              );
-            } else if (pattern.source.includes('([^"]*)')) {
-              // Pattern with suffix capture group
-              updatedContent = updatedContent.replace(
-                pattern,
-                (match, suffix) => {
-                  wasReplaced = true;
-                  return `class="${newIconClass}${suffix}"`;
-                }
-              );
-            } else {
-              // Simple exact match
-              updatedContent = updatedContent.replace(
-                pattern,
-                `class="${newIconClass}"`
-              );
-              wasReplaced = updatedContent !== beforeReplace;
-            }
-
-            if (wasReplaced) {
-              break;
-            }
-          }
-
-          if (!wasReplaced) {
-            // Fallback: replace any occurrence of the old icon classes
-            const oldClasses = oldIconClass.split(" ");
-            const newClasses = newIconClass.split(" ");
-
-            updatedContent = currentContent;
-            oldClasses.forEach((oldClass, index) => {
-              if (newClasses[index]) {
-                const escapedClass = oldClass.replace(
-                  /[.*+?^${}()|[\]\\]/g,
-                  "\\$&"
-                );
-                const classRegex = new RegExp(escapedClass, "g");
-                updatedContent = updatedContent.replace(
-                  classRegex,
-                  newClasses[index]
-                );
-              }
-            });
-          }
-
-          this.modifiedFiles.set(mainHtmlPath, updatedContent);
-          this.updateChangesCounter();
-          this.updateUndoButton();
-        }
-
-        getElementPath(element) {
-          const path = [];
-          let current = element;
-
-          while (current && current !== document.body) {
-            let selector = current.tagName.toLowerCase();
-
-            if (current.id) {
-              selector += "#" + current.id;
-            } else if (current.className) {
-              selector +=
-                "." +
-                current.className
-                  .split(" ")
-                  .filter((c) => c && !c.includes("editable"))
-                  .join(".");
-            }
-
-            path.unshift(selector);
-            current = current.parentElement;
-          }
-
-          return path.join(" > ");
-        }
-
-        toggleEditMode() {
-          this.editMode = !this.editMode;
-
-          if (this.editMode) {
-            this.editModeToggle.textContent = "🚫 Disable Edit Mode";
-            this.editModeToggle.classList.add("active");
-          } else {
-            this.editModeToggle.textContent = "✏️ Enable Edit Mode";
-            this.editModeToggle.classList.remove("active");
-          }
-
-          if (this.previewFrame.contentWindow) {
-            this.previewFrame.contentWindow.postMessage(
-              {
-                type: "toggleEditMode",
-                enabled: this.editMode,
-              },
-              "*"
-            );
-          }
-        }
-
-        handleIframeMessage(e) {
-          if (e.data.type === "textChanged") {
-            this.handleTextChange(e.data);
-          } else if (e.data.type === "openIconDialog") {
-            this.handleOpenIconDialog(e.data);
-          } else if (e.data.type === "openImageDialog") {
-            this.handleOpenImageDialog(e.data);
-          }
-        }
-
-        handleOpenImageDialog(data) {
-          // Find the image element in the iframe
-          const iframeDoc = this.previewFrame.contentDocument;
-          if (!iframeDoc) return;
-
-          const imageElement = this.findElementByPath(
-            iframeDoc,
-            data.imageElement
-          );
-          if (!imageElement) return;
-
-          this.openImageDialog(imageElement);
-        }
-
-        handleTextChange(data) {
-          const mainHtmlPath = Array.from(this.projectFiles.keys()).find(
-            (path) =>
-              path.endsWith(".html") &&
-              (path === "index.html" || path.includes("index"))
-          );
-
-          let currentContent =
-            this.modifiedFiles.get(mainHtmlPath) ||
-            this.projectFiles.get(mainHtmlPath).content;
-
-          // Save to undo stack before making changes
-          this.saveToUndoStack({
-            type: "textChange",
-            filePath: mainHtmlPath,
-            oldText: data.oldText,
-            newText: data.newText,
-            element: data.element,
-            previousContent: currentContent,
-            timestamp: Date.now(),
-          });
-
-          // Escape special regex characters in the old text
-          const escapedOldText = data.oldText.replace(
-            /[.*+?^${}()|[\]\\]/g,
-            "\\$&"
-          );
-          const regex = new RegExp(escapedOldText, "g");
-          const updatedContent = currentContent.replace(regex, data.newText);
-
-          this.modifiedFiles.set(mainHtmlPath, updatedContent);
-          this.updateChangesCounter();
-          this.updateUndoButton();
-
-          this.showStatus(
-            `✏️ Updated: "${data.oldText}" → "${data.newText}"`,
-            "success"
-          );
-        }
-
-        handleOpenIconDialog(data) {
-          // Find the icon element in the iframe
-          const iframeDoc = this.previewFrame.contentDocument;
-          if (!iframeDoc) return;
-
-          const iconElement = this.findElementByPath(
-            iframeDoc,
-            data.iconElement
-          );
-          if (!iconElement) return;
-
-          this.openIconDialog(iconElement);
-        }
-
-        findElementByPath(doc, elementPath, searchText = "") {
-          try {
-            // Try to find the element using the stored path
-            const element = doc.querySelector(elementPath);
-            if (element) return element;
-
-            // If direct selector fails, try to find by text content match for text elements
-            // For icons, try to find by class name
-            if (elementPath.includes("i.fa")) {
-              const iconElements = doc.querySelectorAll('i[class*="fa"]');
-              for (const el of iconElements) {
-                if (elementPath.includes(el.className.split(" ").join("."))) {
-                  return el;
-                }
-              }
-            }
-
-            // Fallback for text elements
-            if (searchText) {
-              const allElements = doc.querySelectorAll(
-                "h1, h2, h3, h4, h5, h6, p, span, a, li"
-              );
-              for (const el of allElements) {
-                if (el.textContent.includes(searchText)) {
-                  return el;
-                }
-              }
-            }
-
-            return null;
-          } catch (error) {
-            console.log("Element path resolution failed:", error);
-            return null;
-          }
-        }
-
-        resetChanges() {
-          if (this.modifiedFiles.size === 0 && this.undoStack.length === 0) {
-            this.showStatus("No changes to reset", "info");
-            return;
-          }
-
-          if (this.editMode) {
-            this.toggleEditMode();
-          }
-
-          const changeCount = this.modifiedFiles.size;
-          const undoCount = this.undoStack.length;
-
-          if (
-            confirm(
-              `Are you sure you want to reset all ${changeCount} changes and clear ${undoCount} undo steps?`
-            )
-          ) {
-            this.modifiedFiles.clear();
-            this.undoStack = [];
-            this.updateChangesCounter();
-            this.updateUndoButton();
-            this.loadPreview();
-            this.showStatus("🔄 All changes have been reset", "success");
-          }
-        }
-
-        showLoading(text = "Processing...") {
-          this.loadingText.textContent = text;
-          this.loadingOverlay.classList.remove("hidden");
-        }
-
-        hideLoading() {
-          this.loadingOverlay.classList.add("hidden");
-        }
-
-        showStatus(message, type = "info") {
-          this.statusMessage.textContent = message;
-          this.statusMessage.className = `status-message show ${type}`;
-
-          setTimeout(() => {
-            this.statusMessage.classList.remove("show");
-          }, 5000);
-        }
-
-        undoLastChange() {
-          if (this.undoStack.length === 0) {
-            this.showStatus("No changes to undo", "info");
-            return;
-          }
-
-          const lastAction = this.undoStack.pop();
-
-          if (lastAction.type === "textChange") {
-            // Restore the previous content in memory
-            this.modifiedFiles.set(
-              lastAction.filePath,
-              lastAction.previousContent
-            );
-
-            // Try to update the iframe content directly without reload
-            if (this.updateIframeContentDirectly(lastAction)) {
-              // Direct update successful - no reload needed!
-              this.updateChangesCounter();
-              this.updateUndoButton();
-
-              this.showStatus(
-                `↶ Undid instantly: "${lastAction.newText}" → "${lastAction.oldText}"`,
-                "success"
-              );
-            } else {
-              // Fallback to full reload if direct update fails
-              this.updateChangesCounter();
-              this.updateUndoButton();
-              this.loadPreview();
-
-              this.showStatus(
-                `↶ Undid: "${lastAction.newText}" → "${lastAction.oldText}"`,
-                "success"
-              );
-            }
-          } else if (lastAction.type === "iconChange") {
-            // Handle icon change undo
-            this.undoIconChange(lastAction);
-          } else if (lastAction.type === "imageChange") {
-            // Handle image change undo
-            this.undoImageChange(lastAction);
-          }
-        }
-
-        undoIconChange(action) {
-          const iframeDoc = this.previewFrame.contentDocument;
-          if (!iframeDoc) {
-            this.loadPreview();
-            return;
-          }
-
-          const iconElement = this.findElementByPath(iframeDoc, action.element);
-          if (iconElement) {
-            iconElement.className = action.oldIconClass;
-            this.updateIconInHTML(action.newIconClass, action.oldIconClass);
-            this.updateChangesCounter();
-            this.updateUndoButton();
-            this.showStatus(
-              `↶ Icon reverted: ${action.newIconClass} → ${action.oldIconClass}`,
-              "success"
-            );
-          } else {
-            // Fallback to full reload
-            this.updateIconInHTML(action.newIconClass, action.oldIconClass);
-            this.updateChangesCounter();
-            this.updateUndoButton();
-            this.loadPreview();
-            this.showStatus(
-              `↶ Icon reverted: ${action.newIconClass} → ${action.oldIconClass}`,
-              "success"
-            );
-          }
-        }
-
-        undoImageChange(action) {
-          // Remove the new image from project files
-          if (action.newImageData) {
-            this.projectFiles.delete(action.newImageData.path);
-          }
-
-          const iframeDoc = this.previewFrame.contentDocument;
-          if (!iframeDoc) {
-            this.loadPreview();
-            return;
-          }
-
-          const imageElement = this.findElementByPath(
-            iframeDoc,
-            action.element
-          );
-          if (imageElement) {
-            imageElement.src = action.oldSrc;
-            this.updateImageInHTML(action.newSrc, action.oldSrc);
-            this.updateChangesCounter();
-            this.updateUndoButton();
-            this.showStatus(`↶ Image reverted to original`, "success");
-          } else {
-            // Fallback to full reload
-            this.updateImageInHTML(action.newSrc, action.oldSrc);
-            this.updateChangesCounter();
-            this.updateUndoButton();
-            this.loadPreview();
-            this.showStatus(`↶ Image reverted to original`, "success");
-          }
-        }
-
-        updateIframeContentDirectly(lastAction) {
-          try {
-            const iframeDoc = this.previewFrame.contentDocument;
-            if (!iframeDoc) return false;
-
-            // Find the element that was changed using the stored element path
-            const element = this.findElementByPath(
-              iframeDoc,
-              lastAction.element,
-              lastAction.newText
-            );
-            if (!element) return false;
-
-            // Restore the original text content
-            element.textContent = lastAction.oldText;
-
-            return true;
-          } catch (error) {
-            console.log("Direct iframe update failed:", error);
-            return false;
-          }
-        }
-
-        findElementByPath(doc, elementPath, newText = "") {
-          try {
-            // Try to find the element using the stored path
-            const element = doc.querySelector(elementPath);
-            if (element) return element;
-
-            // If direct selector fails, try to find by text content match
-            // This is a fallback for when the DOM structure might have changed
-            if (newText) {
-              const allElements = doc.querySelectorAll(
-                "h1, h2, h3, h4, h5, h6, p, span, a, li"
-              );
-              for (const el of allElements) {
-                // Look for elements that might contain the text we're trying to restore
-                if (el.textContent.includes(newText)) {
-                  return el;
-                }
-              }
-            }
-
-            return null;
-          } catch (error) {
-            console.log("Element path resolution failed:", error);
-            return null;
-          }
-        }
-      }
-
-      // Initialize the editor when the page loads
-      document.addEventListener("DOMContentLoaded", () => {
-        new VisualWebsiteEditor();
-      });
-    </script>
+    <!-- Footer Editor Dialog -->
+    <div class="footer-dialog-overlay" id="footerDialogOverlay">
+      <div class="footer-dialog">
+        <div class="footer-dialog-header">
+          <h2>Edit Footer Links</h2>
+          <button class="footer-dialog-close" id="footerDialogClose">×</button>
+        </div>
+        <div class="footer-edit-container">
+          <div class="footer-links-list" id="footerLinksList">
+            <!-- Footer links will be dynamically populated here -->
+          </div>
+        </div>
+        <div class="footer-dialog-footer">
+          <button class="footer-dialog-btn cancel" id="footerDialogCancel">
+            Cancel
+          </button>
+          <button class="footer-dialog-btn apply" id="footerDialogApply">
+            Apply All Changes
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

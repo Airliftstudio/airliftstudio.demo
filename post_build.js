@@ -1091,7 +1091,7 @@ function main() {
   }
 
   // Validate and fix Font Awesome icons first
-  validateAndFixIcons(targetFile);
+  // validateAndFixIcons(targetFile);
 
   console.log(`📖 Extracting credits content from ${bizSectionPath}...`);
   const creditsContent = extractCreditsContent(bizSectionPath);
