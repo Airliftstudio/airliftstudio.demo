@@ -13,6 +13,8 @@ class VisualWebsiteEditor {
     this.currentPageIcons = new Set();
     this.currentEditingImage = null;
     this.selectedImageFile = null;
+    this.availableLanguages = new Map(); // Map of language codes to translation file paths
+    this.translationKeys = new Map(); // Map of data-translate keys to their current values
 
     // Hardcoded list of useful Airbnb icons
     this.airbnbIcons = [
@@ -171,6 +173,7 @@ class VisualWebsiteEditor {
     this.setupIconDialog();
     this.setupImageDialog();
     this.setupFooterDialog();
+    this.setupMultilangDialog();
   }
 
   initializeElements() {
@@ -229,6 +232,16 @@ class VisualWebsiteEditor {
     this.footerLinksList = document.getElementById("footerLinksList");
     this.footerDialogCancel = document.getElementById("footerDialogCancel");
     this.footerDialogApply = document.getElementById("footerDialogApply");
+
+    // Multi-language dialog elements
+    this.multilangDialogOverlay = document.getElementById(
+      "multilangDialogOverlay"
+    );
+    this.multilangDialogClose = document.getElementById("multilangDialogClose");
+    this.multilangDialogCancel = document.getElementById(
+      "multilangDialogCancel"
+    );
+    this.multilangDialogApply = document.getElementById("multilangDialogApply");
   }
 
   setupEventListeners() {
@@ -472,6 +485,16 @@ class VisualWebsiteEditor {
         "css/lang.css",
         "js/script.js",
         "js/lang.js",
+        "js/translations_de.js",
+        "js/translations_es.js",
+        "js/translations_fr.js",
+        "js/translations_hi.js",
+        "js/translations_id.js",
+        "js/translations_it.js",
+        "js/translations_ja.js",
+        "js/translations_ko.js",
+        "js/translations_ru.js",
+        "js/translations_zh.js",
       ];
 
       for (const asset of assets) {
@@ -595,8 +618,45 @@ class VisualWebsiteEditor {
 
     const mainHtml = htmlFiles[0];
     this.originalContent = this.projectFiles.get(mainHtml).content;
+
+    // Detect available languages and translation files
+    this.detectAvailableLanguages();
+
     this.updateUI();
     await this.loadPreview();
+  }
+
+  detectAvailableLanguages() {
+    this.availableLanguages.clear();
+    this.translationKeys.clear();
+
+    // Look for translation files in js folder
+    const translationFilePattern = /^js\/translations_([a-z]{2})\.js$/;
+
+    this.projectFiles.forEach((fileData, path) => {
+      const match = path.match(translationFilePattern);
+      if (match) {
+        const langCode = match[1];
+        this.availableLanguages.set(langCode, path);
+        console.log(
+          `Found translation file for language: ${langCode} at ${path}`
+        );
+      }
+    });
+
+    // Always include English as the default language
+    this.availableLanguages.set("en", "index.html");
+
+    console.log("🔍 Detecting available languages...");
+    console.log("📁 Project files:", Array.from(this.projectFiles.keys()));
+    console.log(
+      "🌍 Available languages:",
+      Array.from(this.availableLanguages.keys())
+    );
+    console.log(
+      "📋 Language mapping:",
+      Object.fromEntries(this.availableLanguages)
+    );
   }
 
   updateUI() {
@@ -922,7 +982,10 @@ class VisualWebsiteEditor {
         path.endsWith(".js") ||
         path.match(/\.(jpg|jpeg|png|gif|svg|woff|woff2|ttf)$/i)
       ) {
-        let content = fileData.content;
+        // Check if this file has been modified, use modified content if available
+        let content = this.modifiedFiles.has(path)
+          ? this.modifiedFiles.get(path)
+          : fileData.content;
         let blob;
 
         if (typeof content === "string") {
@@ -1753,6 +1816,21 @@ class VisualWebsiteEditor {
                       element.classList.add('editing');
                       hideTooltip({ target: element });
                       
+                      // Check if element has data-translate attribute
+                      const translateKey = element.getAttribute('data-translate');
+                      if (translateKey) {
+                          // Show multi-language dialog instead of inline editing
+                          window.parent.postMessage({
+                              type: 'openMultilangDialog',
+                              element: getElementPath(element),
+                              translateKey: translateKey,
+                              currentText: element.textContent,
+                              elementId: element.id || null,
+                              elementClasses: element.className || null
+                          }, '*');
+                          return;
+                      }
+                      
                       const originalText = element.textContent;
                       element.contentEditable = true;
                       element.focus();
@@ -2193,6 +2271,36 @@ class VisualWebsiteEditor {
         this.footerDialogOverlay.classList.contains("show")
       ) {
         this.closeFooterDialog();
+      }
+    });
+  }
+
+  setupMultilangDialog() {
+    // Close dialog handlers
+    this.multilangDialogClose.addEventListener("click", () =>
+      this.closeMultilangDialog()
+    );
+    this.multilangDialogCancel.addEventListener("click", () =>
+      this.closeMultilangDialog()
+    );
+    this.multilangDialogOverlay.addEventListener("click", (e) => {
+      if (e.target === this.multilangDialogOverlay) {
+        this.closeMultilangDialog();
+      }
+    });
+
+    // Apply button
+    this.multilangDialogApply.addEventListener("click", async () => {
+      await this.applyMultilangChanges();
+    });
+
+    // ESC key to close
+    document.addEventListener("keydown", (e) => {
+      if (
+        e.key === "Escape" &&
+        this.multilangDialogOverlay.classList.contains("show")
+      ) {
+        this.closeMultilangDialog();
       }
     });
   }
@@ -2786,6 +2894,493 @@ class VisualWebsiteEditor {
     );
 
     this.modifiedFiles.set(mainHtmlPath, newContent);
+  }
+
+  openMultilangDialog(data) {
+    // Store the current editing data
+    this.currentMultilangData = data;
+
+    // Get current translations for all languages
+    this.loadCurrentTranslations(data.translateKey);
+
+    // Show the dialog
+    this.multilangDialogOverlay.classList.add("show");
+  }
+
+  loadCurrentTranslations(translateKey) {
+    console.log("🔄 Loading current translations for key:", translateKey);
+    console.log(
+      "🌍 Available languages:",
+      Array.from(this.availableLanguages.keys())
+    );
+
+    const multilangInputs = document.getElementById("multilangInputs");
+    multilangInputs.innerHTML = "";
+
+    // Language flags mapping
+    const languageFlags = {
+      en: "🇺🇸",
+      fr: "🇫🇷",
+      de: "🇩🇪",
+      es: "🇪🇸",
+      ru: "🇷🇺",
+      zh: "🇨🇳",
+      it: "🇮🇹",
+      hi: "🇮🇳",
+      id: "🇮🇩",
+      ja: "🇯🇵",
+      ko: "🇰🇷",
+    };
+
+    // Language names mapping
+    const languageNames = {
+      en: "English",
+      fr: "Français",
+      de: "Deutsch",
+      es: "Español",
+      ru: "Русский",
+      zh: "中文",
+      it: "Italiano",
+      hi: "हिन्दी",
+      id: "Bahasa Indonesia",
+      ja: "日本語",
+      ko: "한국어",
+    };
+
+    // Get current language from the preview iframe
+    let currentPreviewLang = "en";
+    try {
+      const iframeDoc = this.previewFrame.contentDocument;
+      if (iframeDoc?.documentElement) {
+        // Get language from the HTML lang attribute
+        const htmlLang = iframeDoc.documentElement.getAttribute("lang");
+        if (htmlLang && this.availableLanguages.has(htmlLang)) {
+          currentPreviewLang = htmlLang;
+          console.log("📍 Current preview language:", currentPreviewLang);
+        }
+      }
+    } catch (e) {
+      console.log("Could not get current preview language:", e);
+    }
+
+    // Convert Map to array and sort it
+    // Order: 1. Current preview language, 2. English, 3. Rest alphabetically
+    const languagesArray = Array.from(this.availableLanguages.entries());
+    languagesArray.sort(([langCodeA], [langCodeB]) => {
+      // Current preview language goes first
+      if (langCodeA === currentPreviewLang) return -1;
+      if (langCodeB === currentPreviewLang) return 1;
+
+      // English goes second (unless it's the current preview language)
+      if (langCodeA === "en") return -1;
+      if (langCodeB === "en") return 1;
+
+      // Rest alphabetically
+      return langCodeA.localeCompare(langCodeB);
+    });
+
+    // Create input for each available language in sorted order
+    languagesArray.forEach(([langCode, filePath]) => {
+      const inputGroup = document.createElement("div");
+      inputGroup.className = "multilang-input-group";
+
+      const isEnglish = langCode === "en";
+      const isCurrentPreview = langCode === currentPreviewLang;
+
+      const label = document.createElement("label");
+      label.className = "multilang-input-label";
+      const currentBadge =
+        isCurrentPreview && !isEnglish
+          ? '<span class="current-badge">Currently Viewing</span>'
+          : "";
+      label.innerHTML = `
+        <span class="flag">${languageFlags[langCode] || "🌐"}</span>
+        <span>${languageNames[langCode] || langCode.toUpperCase()}</span>
+        <span class="lang-code">${langCode}</span>
+        ${currentBadge}
+      `;
+
+      const input = document.createElement("textarea");
+      input.className = `multilang-input ${isEnglish ? "english" : ""} ${
+        isCurrentPreview && !isEnglish ? "current-preview" : ""
+      }`.trim();
+      input.setAttribute("data-lang", langCode);
+      input.setAttribute("data-file-path", filePath);
+
+      // Get current text for this language
+      let currentText = "";
+      if (langCode === "en") {
+        // For English, get the actual English text from the HTML file
+        currentText = this.getEnglishTextFromHTML(translateKey);
+      } else {
+        // For other languages, try to get from translation files
+        currentText = this.getTranslationFromFile(filePath, translateKey);
+      }
+
+      input.value = currentText;
+
+      inputGroup.appendChild(label);
+      inputGroup.appendChild(input);
+      multilangInputs.appendChild(inputGroup);
+    });
+  }
+
+  getEnglishTextFromHTML(translateKey) {
+    try {
+      const mainHtmlPath = Array.from(this.projectFiles.keys()).find(
+        (path) =>
+          path.endsWith(".html") &&
+          (path === "index.html" || path.includes("index"))
+      );
+
+      if (!mainHtmlPath) return "";
+
+      // Check if this file has been modified, use modified content if available
+      const content = this.modifiedFiles.has(mainHtmlPath)
+        ? this.modifiedFiles.get(mainHtmlPath)
+        : this.projectFiles.get(mainHtmlPath).content;
+
+      if (!content) return "";
+
+      // Find the element with the data-translate attribute and extract its text
+      const escapedKey = translateKey.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const regex = new RegExp(
+        `data-translate=["']${escapedKey}["'][^>]*>([^<]*)<`,
+        "i"
+      );
+
+      const match = content.match(regex);
+      if (match && match[1]) {
+        return match[1].trim();
+      }
+
+      return "";
+    } catch (error) {
+      console.warn(
+        `Error reading English text from HTML for key ${translateKey}:`,
+        error
+      );
+      return "";
+    }
+  }
+
+  getTranslationFromFile(filePath, translateKey) {
+    try {
+      const fileData = this.projectFiles.get(filePath);
+      if (!fileData) return "";
+
+      // Check if this file has been modified, use modified content if available
+      const content = this.modifiedFiles.has(filePath)
+        ? this.modifiedFiles.get(filePath)
+        : fileData.content;
+
+      if (!content) return "";
+
+      // Extract the translation object from the file
+      const match = content.match(
+        /window\.translations_[a-z]{2}\s*=\s*({[\s\S]*?});/
+      );
+      if (!match) return "";
+
+      const translationObj = eval("(" + match[1] + ")");
+
+      // Navigate to the specific key
+      const keys = translateKey.split(".");
+      let value = translationObj;
+
+      for (const key of keys) {
+        if (value && typeof value === "object" && key in value) {
+          value = value[key];
+        } else {
+          return "";
+        }
+      }
+
+      return typeof value === "string" ? value : "";
+    } catch (error) {
+      console.warn(`Error reading translation from ${filePath}:`, error);
+      return "";
+    }
+  }
+
+  closeMultilangDialog() {
+    this.multilangDialogOverlay.classList.remove("show");
+    this.currentMultilangData = null;
+  }
+
+  async applyMultilangChanges() {
+    if (!this.currentMultilangData) return;
+
+    // Disable the apply button and show loading state
+    this.multilangDialogApply.disabled = true;
+    this.multilangDialogApply.textContent = "Applying...";
+
+    try {
+      // Save current scroll position before making any changes
+      let savedScrollPosition = { x: 0, y: 0 };
+      try {
+        const iframeDoc = this.previewFrame.contentDocument;
+        if (iframeDoc && iframeDoc.documentElement) {
+          savedScrollPosition = {
+            x:
+              iframeDoc.documentElement.scrollLeft ||
+              iframeDoc.body?.scrollLeft ||
+              0,
+            y:
+              iframeDoc.documentElement.scrollTop ||
+              iframeDoc.body?.scrollTop ||
+              0,
+          };
+        }
+      } catch (e) {
+        console.log("Could not save scroll position:", e);
+      }
+
+      // Collect all the translation changes
+      const translationChanges = [];
+      const inputs = document.querySelectorAll(".multilang-input");
+
+      inputs.forEach((input) => {
+        const langCode = input.getAttribute("data-lang");
+        const filePath = input.getAttribute("data-file-path");
+        const newText = input.value.trim();
+
+        // Get the old text for undo functionality
+        let oldText = "";
+        if (langCode === "en") {
+          // Get the actual English text from the HTML file
+          oldText = this.getEnglishTextFromHTML(
+            this.currentMultilangData.translateKey
+          );
+        } else {
+          oldText = this.getTranslationFromFile(
+            filePath,
+            this.currentMultilangData.translateKey
+          );
+        }
+
+        translationChanges.push({
+          langCode,
+          filePath,
+          newText,
+          oldText,
+          translateKey: this.currentMultilangData.translateKey,
+        });
+      });
+
+      // Save to undo stack before making changes
+      this.saveToUndoStack({
+        type: "multilangChange",
+        translateKey: this.currentMultilangData.translateKey,
+        element: this.currentMultilangData.element,
+        changes: translationChanges,
+        timestamp: Date.now(),
+      });
+
+      // Apply changes to each language file
+      for (const change of translationChanges) {
+        if (change.langCode === "en") {
+          // Update the HTML file for English
+          this.updateEnglishTextInHTML(change.newText);
+        } else {
+          // Update the translation file for other languages
+          this.updateTranslationFile(
+            change.filePath,
+            change.translateKey,
+            change.newText
+          );
+        }
+      }
+
+      // Update the changes counter
+      this.updateChangesCounter();
+      this.updateUndoButton();
+
+      // Store current edit mode state
+      const wasEditMode = this.editMode;
+
+      // Reload the preview to show the changes immediately
+      await this.loadPreview(savedScrollPosition);
+
+      // Restore edit mode if it was active
+      if (wasEditMode) {
+        setTimeout(() => {
+          this.restoreEditMode();
+        }, 600);
+      }
+
+      // Update the global translation objects in the iframe
+      this.updateIframeTranslationObjects(translationChanges);
+
+      this.showStatus(
+        `🌍 Text updated in ${translationChanges.length} languages`,
+        "success"
+      );
+      this.closeMultilangDialog();
+    } catch (error) {
+      console.error("Error applying multi-language changes:", error);
+      this.showStatus("Failed to update translations", "error");
+    } finally {
+      // Restore the apply button state
+      this.multilangDialogApply.disabled = false;
+      this.multilangDialogApply.textContent = "Apply All Changes";
+    }
+  }
+
+  updateEnglishTextInHTML(newText) {
+    const mainHtmlPath = Array.from(this.projectFiles.keys()).find(
+      (path) =>
+        path.endsWith(".html") &&
+        (path === "index.html" || path.includes("index"))
+    );
+
+    if (!mainHtmlPath) return;
+
+    let currentContent =
+      this.modifiedFiles.get(mainHtmlPath) ||
+      this.projectFiles.get(mainHtmlPath).content;
+
+    // Find the element with the data-translate attribute and update its text
+    const translateKey = this.currentMultilangData.translateKey;
+    const escapedKey = translateKey.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const regex = new RegExp(
+      `data-translate=["']${escapedKey}["'][^>]*>([^<]*)<`,
+      "i"
+    );
+
+    const match = currentContent.match(regex);
+    if (match) {
+      const updatedContent = currentContent.replace(regex, (match, oldText) => {
+        return match.replace(oldText, newText);
+      });
+      this.modifiedFiles.set(mainHtmlPath, updatedContent);
+    }
+  }
+
+  updateTranslationFile(filePath, translateKey, newText) {
+    try {
+      const fileData = this.projectFiles.get(filePath);
+      if (!fileData) return;
+
+      // Check if this file has been modified, use modified content if available
+      let content = this.modifiedFiles.has(filePath)
+        ? this.modifiedFiles.get(filePath)
+        : fileData.content;
+
+      if (!content) return;
+
+      // Parse the translation object
+      const match = content.match(
+        /window\.translations_[a-z]{2}\s*=\s*({[\s\S]*?});/
+      );
+      if (!match) return;
+
+      const translationObj = eval("(" + match[1] + ")");
+
+      // Navigate to the specific key and update it
+      const keys = translateKey.split(".");
+      let current = translationObj;
+
+      for (let i = 0; i < keys.length - 1; i++) {
+        if (!current[keys[i]]) {
+          current[keys[i]] = {};
+        }
+        current = current[keys[i]];
+      }
+
+      // Update the final key
+      current[keys[keys.length - 1]] = newText;
+
+      // Convert back to string and update the file
+      const updatedContent = content.replace(
+        /window\.translations_[a-z]{2}\s*=\s*{[\s\S]*?};/,
+        `window.translations_${
+          filePath.match(/translations_([a-z]{2})\.js/)[1]
+        } = ${JSON.stringify(translationObj, null, 2)};`
+      );
+
+      this.modifiedFiles.set(filePath, updatedContent);
+    } catch (error) {
+      console.warn(`Error updating translation file ${filePath}:`, error);
+    }
+  }
+
+  updateIframeTranslationObjects(translationChanges) {
+    try {
+      const iframeDoc = this.previewFrame.contentDocument;
+      if (!iframeDoc || !iframeDoc.defaultView) {
+        console.warn("Iframe document not available");
+        return;
+      }
+
+      const iframeWindow = iframeDoc.defaultView;
+
+      // Update each translation object in the iframe's global scope
+      translationChanges.forEach((change) => {
+        if (change.langCode === "en") {
+          // For English, we need to update the defaultEnglishContent and translations.en
+          if (iframeWindow.defaultEnglishContent) {
+            this.updateNestedObject(
+              iframeWindow.defaultEnglishContent,
+              change.translateKey,
+              change.newText
+            );
+          }
+          if (iframeWindow.translations && iframeWindow.translations.en) {
+            this.updateNestedObject(
+              iframeWindow.translations.en,
+              change.translateKey,
+              change.newText
+            );
+          }
+        } else {
+          // For other languages, update the global translation objects
+          const globalVarName = `translations_${change.langCode}`;
+          if (iframeWindow[globalVarName]) {
+            this.updateNestedObject(
+              iframeWindow[globalVarName],
+              change.translateKey,
+              change.newText
+            );
+          }
+
+          // Also update the translations object if it exists
+          if (
+            iframeWindow.translations &&
+            iframeWindow.translations[change.langCode]
+          ) {
+            this.updateNestedObject(
+              iframeWindow.translations[change.langCode],
+              change.translateKey,
+              change.newText
+            );
+          }
+        }
+      });
+
+      // Force a re-translation if the language system is available
+      if (iframeWindow.translatePage && iframeWindow.currentLanguage) {
+        iframeWindow.translatePage(iframeWindow.currentLanguage);
+      }
+
+      console.log("✅ Updated iframe translation objects");
+    } catch (error) {
+      console.warn("Error updating iframe translation objects:", error);
+    }
+  }
+
+  updateNestedObject(obj, keyPath, value) {
+    const keys = keyPath.split(".");
+    let current = obj;
+
+    for (let i = 0; i < keys.length - 1; i++) {
+      if (!current[keys[i]]) {
+        current[keys[i]] = {};
+      }
+      current = current[keys[i]];
+    }
+
+    current[keys[keys.length - 1]] = value;
   }
 
   async addNewAmenity() {
@@ -4033,6 +4628,8 @@ class VisualWebsiteEditor {
       this.addNewAmenity();
     } else if (e.data.type === "deleteAmenity") {
       this.handleDeleteAmenity(e.data);
+    } else if (e.data.type === "openMultilangDialog") {
+      this.handleOpenMultilangDialog(e.data);
     }
   }
 
@@ -4060,6 +4657,10 @@ class VisualWebsiteEditor {
     if (!imageElement) return;
 
     this.openImageDialog(imageElement);
+  }
+
+  handleOpenMultilangDialog(data) {
+    this.openMultilangDialog(data);
   }
 
   handleTextChange(data) {
@@ -4239,6 +4840,9 @@ class VisualWebsiteEditor {
     } else if (lastAction.type === "amenity_delete") {
       // Handle amenity delete undo
       this.undoAmenityDelete(lastAction);
+    } else if (lastAction.type === "multilangChange") {
+      // Handle multi-language change undo
+      this.undoMultilangChange(lastAction);
     }
   }
 
@@ -4542,6 +5146,131 @@ class VisualWebsiteEditor {
     } catch (error) {
       console.error("Error undoing amenity delete:", error);
       this.showStatus("Failed to undo amenity deletion", "error");
+    }
+  }
+
+  async undoMultilangChange(action) {
+    try {
+      // Revert each translation change
+      for (const change of action.changes) {
+        if (change.langCode === "en") {
+          // Revert English text in HTML
+          this.revertEnglishTextInHTML(change.oldText);
+        } else {
+          // Revert translation file
+          this.revertTranslationFile(
+            change.filePath,
+            action.translateKey,
+            change.oldText
+          );
+        }
+      }
+
+      // Update counters and buttons
+      this.updateChangesCounter();
+      this.updateUndoButton();
+
+      // Store current edit mode state
+      const wasEditMode = this.editMode;
+
+      // Reload the preview to show the changes immediately
+      await this.loadPreview();
+
+      // Restore edit mode if it was active
+      if (wasEditMode) {
+        setTimeout(() => {
+          this.restoreEditMode();
+        }, 600);
+      }
+
+      // Update the global translation objects in the iframe (revert changes)
+      this.updateIframeTranslationObjects(action.changes);
+
+      this.showStatus(
+        `↶ Undid multi-language changes for: ${action.translateKey}`,
+        "success"
+      );
+    } catch (error) {
+      console.error("Error undoing multi-language change:", error);
+      this.showStatus("Failed to undo multi-language changes", "error");
+    }
+  }
+
+  revertEnglishTextInHTML(oldText) {
+    const mainHtmlPath = Array.from(this.projectFiles.keys()).find(
+      (path) =>
+        path.endsWith(".html") &&
+        (path === "index.html" || path.includes("index"))
+    );
+
+    if (!mainHtmlPath) return;
+
+    let currentContent =
+      this.modifiedFiles.get(mainHtmlPath) ||
+      this.projectFiles.get(mainHtmlPath).content;
+
+    // Find and revert the element with the data-translate attribute
+    const translateKey = this.currentMultilangData?.translateKey;
+    if (!translateKey) return;
+
+    const escapedKey = translateKey.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const regex = new RegExp(
+      `data-translate=["']${escapedKey}["'][^>]*>([^<]*)<`,
+      "i"
+    );
+
+    const match = currentContent.match(regex);
+    if (match) {
+      const updatedContent = currentContent.replace(
+        regex,
+        (match, currentText) => {
+          return match.replace(currentText, oldText);
+        }
+      );
+      this.modifiedFiles.set(mainHtmlPath, updatedContent);
+    }
+  }
+
+  revertTranslationFile(filePath, translateKey, oldText) {
+    try {
+      const fileData = this.projectFiles.get(filePath);
+      if (!fileData || !fileData.content) return;
+
+      let content = fileData.content;
+
+      // Parse the translation object
+      const match = content.match(
+        /window\.translations_[a-z]{2}\s*=\s*({[\s\S]*?});/
+      );
+      if (!match) return;
+
+      const translationObj = eval("(" + match[1] + ")");
+
+      // Navigate to the specific key and revert it
+      const keys = translateKey.split(".");
+      let current = translationObj;
+
+      for (let i = 0; i < keys.length - 1; i++) {
+        if (!current[keys[i]]) {
+          current[keys[i]] = {};
+        }
+        current = current[keys[i]];
+      }
+
+      // Revert the final key
+      current[keys[keys.length - 1]] = oldText;
+
+      // Convert back to string and update the file
+      const updatedContent = content.replace(
+        /window\.translations_[a-z]{2}\s*=\s*{[\s\S]*?};/,
+        `window.translations_${
+          filePath.match(/translations_([a-z]{2})\.js/)[1]
+        } = ${JSON.stringify(translationObj, null, 2)};`
+      );
+
+      this.modifiedFiles.set(filePath, updatedContent);
+    } catch (error) {
+      console.warn(`Error reverting translation file ${filePath}:`, error);
     }
   }
 

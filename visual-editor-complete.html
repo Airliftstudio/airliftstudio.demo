@@ -1383,6 +1383,212 @@
       .amenity-add-btn i {
         font-size: 20px;
       }
+
+      /* Multi-Language Text Editor Dialog Styles */
+      .multilang-dialog-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .multilang-dialog-overlay.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .multilang-dialog {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        max-width: 600px;
+        width: 90vw;
+        max-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+      }
+
+      .multilang-dialog-overlay.show .multilang-dialog {
+        transform: scale(1);
+      }
+
+      .multilang-dialog-header {
+        padding: 24px;
+        border-bottom: 1px solid #e5e5e7;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .multilang-dialog-header h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #1d1d1f;
+      }
+
+      .multilang-dialog-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: #6e6e73;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+        transition: background-color 0.2s ease;
+      }
+
+      .multilang-dialog-close:hover {
+        background-color: #f5f5f7;
+      }
+
+      .multilang-edit-container {
+        padding: 24px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+      }
+
+      .multilang-info {
+        margin-bottom: 24px;
+        padding: 16px;
+        background: #f8f9ff;
+        border-radius: 8px;
+        border-left: 4px solid #007aff;
+      }
+
+      .multilang-info p {
+        margin: 0;
+        font-size: 14px;
+        color: #1d1d1f;
+        line-height: 1.5;
+      }
+
+      .multilang-inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .multilang-input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .multilang-input-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #1d1d1f;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .multilang-input-label .flag {
+        font-size: 16px;
+      }
+
+      .multilang-input-label .lang-code {
+        background: #007aff;
+        color: white;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .multilang-input-label .current-badge {
+        background: #ff9500;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-left: 8px;
+        letter-spacing: 0.5px;
+      }
+
+      .multilang-input {
+        padding: 12px 16px;
+        border: 2px solid #e5e5e7;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.2s ease;
+        resize: vertical;
+        min-height: 60px;
+      }
+
+      .multilang-input:focus {
+        border-color: #007aff;
+      }
+
+      .multilang-input.english {
+        background: #f8f9ff;
+        border-color: #007aff;
+      }
+
+      .multilang-input.current-preview {
+        background: #fff8e6;
+        border-color: #ff9500;
+      }
+
+      .multilang-dialog-footer {
+        padding: 16px 24px;
+        border-top: 1px solid #e5e5e7;
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+      }
+
+      .multilang-dialog-btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      .multilang-dialog-btn.cancel {
+        background: #f5f5f7;
+        color: #1d1d1f;
+      }
+
+      .multilang-dialog-btn.cancel:hover {
+        background: #e5e5e7;
+      }
+
+      .multilang-dialog-btn.apply {
+        background: #007aff;
+        color: white;
+      }
+
+      .multilang-dialog-btn.apply:hover {
+        background: #0056cc;
+      }
+
+      .multilang-dialog-btn.apply:disabled {
+        background: #c7c7cc;
+        cursor: not-allowed;
+      }
     </style>
   </head>
   <body>
@@ -1611,6 +1817,40 @@
             Cancel
           </button>
           <button class="footer-dialog-btn apply" id="footerDialogApply">
+            Apply All Changes
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Multi-Language Text Editor Dialog -->
+    <div class="multilang-dialog-overlay" id="multilangDialogOverlay">
+      <div class="multilang-dialog">
+        <div class="multilang-dialog-header">
+          <h2>Edit Text in All Languages</h2>
+          <button class="multilang-dialog-close" id="multilangDialogClose">
+            ×
+          </button>
+        </div>
+        <div class="multilang-edit-container">
+          <div class="multilang-info">
+            <p>
+              This text appears in multiple languages. Edit the text for each
+              language below:
+            </p>
+          </div>
+          <div class="multilang-inputs" id="multilangInputs">
+            <!-- Language inputs will be dynamically populated here -->
+          </div>
+        </div>
+        <div class="multilang-dialog-footer">
+          <button
+            class="multilang-dialog-btn cancel"
+            id="multilangDialogCancel"
+          >
+            Cancel
+          </button>
+          <button class="multilang-dialog-btn apply" id="multilangDialogApply">
             Apply All Changes
           </button>
         </div>
