@@ -12,6 +12,7 @@ class VisualWebsiteEditor {
     this.selectedIcon = null;
     this.currentPageIcons = new Set();
     this.currentEditingImage = null;
+    this.currentEditingImageIndex = null; // Track which occurrence of duplicate images we're editing
     this.selectedImageFile = null;
     this.availableLanguages = new Map(); // Map of language codes to translation file paths
     this.translationKeys = new Map(); // Map of data-translate keys to their current values
@@ -1976,6 +1977,35 @@ class VisualWebsiteEditor {
                           removeAmenityEditing();
                       }
                   };
+                  
+                  // Function to make a specific amenity item editable
+                  function makeAmenityEditable(amenityItem) {
+                      if (!editMode || !amenityItem) return;
+                      
+                      // Find icon and text in this amenity
+                      const icon = amenityItem.querySelector('i[class*="fa"]');
+                      const text = amenityItem.querySelector('span');
+                      
+                      // Make icon editable
+                      if (icon && isValidIcon(icon)) {
+                          icon.classList.add('editable-icon');
+                          icon.addEventListener('click', handleIconClick);
+                          icon.addEventListener('mouseenter', showIconTooltip);
+                          icon.addEventListener('mouseleave', hideIconTooltip);
+                      }
+                      
+                      // Make text editable
+                      if (text && isValidTextElement(text)) {
+                          text.classList.add('editable-element');
+                          text.addEventListener('click', handleElementClick);
+                          text.addEventListener('mouseenter', showTooltip);
+                          text.addEventListener('mouseleave', hideTooltip);
+                      }
+                  }
+                  
+                  // Expose functions to window so they can be called from parent
+                  window.setupAmenityEditing = setupAmenityEditing;
+                  window.makeAmenityEditable = makeAmenityEditable;
               })();
           `;
     doc.head.appendChild(editingScript);
@@ -2344,6 +2374,11 @@ class VisualWebsiteEditor {
       imageElement.src
     );
 
+    // Calculate and store the DOM index of this image among all images with the same src
+    // This is crucial for replacing the correct occurrence when there are duplicates
+    this.currentEditingImageIndex = this.calculateImageIndex(imageElement);
+    console.log("Image index among duplicates:", this.currentEditingImageIndex);
+
     // Show current image
     this.currentImageImg.src = imageElement.src;
 
@@ -2360,6 +2395,7 @@ class VisualWebsiteEditor {
     this.currentEditingImage = null;
     this.selectedImageFile = null;
     this.currentEditingImageOriginalPath = null;
+    this.currentEditingImageIndex = null;
     this.newImagePreview.style.display = "none";
     this.imageFileInput.value = "";
   }
@@ -3383,7 +3419,206 @@ class VisualWebsiteEditor {
     current[keys[keys.length - 1]] = value;
   }
 
-  async addNewAmenity() {
+  addNewAmenityDirect() {
+    const amenityName = "new amenity";
+    const amenityIcon = "fas fa-edit";
+
+    try {
+      const iframeDoc = this.previewFrame.contentDocument;
+      if (!iframeDoc) {
+        this.showStatus("Could not access preview", "error");
+        return;
+      }
+
+      // Find the amenities grid
+      const amenitiesGrid = iframeDoc.querySelector(".amenities-grid");
+      if (!amenitiesGrid) {
+        this.showStatus("Could not find amenities grid", "error");
+        return;
+      }
+
+      // Generate a unique translation key based on existing amenities
+      const translationKey = this.generateAmenityTranslationKey(iframeDoc);
+
+      // Create the new amenity element
+      const newAmenityItem = document.createElement("div");
+      newAmenityItem.className = "amenity-item";
+      newAmenityItem.innerHTML = `
+        <i class="${amenityIcon}"></i>
+        <span data-translate="${translationKey}">${amenityName}</span>
+      `;
+
+      // Find the "Add Amenity" button and insert before it
+      const addButton = amenitiesGrid.querySelector(".amenity-add-btn");
+      if (addButton) {
+        amenitiesGrid.insertBefore(newAmenityItem, addButton);
+      } else {
+        // If no add button, just append
+        amenitiesGrid.appendChild(newAmenityItem);
+      }
+
+      // Update the HTML in the background
+      this.updateAmenityInHTML(amenityName, amenityIcon, translationKey);
+
+      // Add translation key to all translation files
+      this.addAmenityTranslation(translationKey, amenityName);
+
+      // Save to undo stack
+      this.saveToUndoStack({
+        type: "amenity_add",
+        element: "amenities-grid",
+        amenityText: amenityName,
+        amenityIcon: amenityIcon,
+        translationKey: translationKey,
+        timestamp: Date.now(),
+      });
+
+      this.updateChangesCounter();
+      this.updateUndoButton();
+
+      // Re-trigger edit mode setup for the new amenity
+      // This will add delete button and make it editable
+      if (this.editMode) {
+        setTimeout(() => {
+          const win = iframeDoc.defaultView;
+          if (win) {
+            // Add delete button to all amenities
+            if (win.setupAmenityEditing) {
+              win.setupAmenityEditing();
+            }
+            // Make the new amenity's icon and text editable
+            if (win.makeAmenityEditable) {
+              win.makeAmenityEditable(newAmenityItem);
+            }
+          }
+        }, 50);
+      }
+
+      this.showStatus(`✨ Added new amenity: ${amenityName}`, "success");
+    } catch (error) {
+      console.error("Error adding amenity:", error);
+      this.showStatus("Failed to add amenity", "error");
+    }
+  }
+
+  generateAmenityTranslationKey(iframeDoc) {
+    // Find all existing amenity translation keys
+    const existingKeys = new Set();
+    const amenitySpans = iframeDoc.querySelectorAll(
+      '.amenity-item span[data-translate^="amenities."]'
+    );
+    amenitySpans.forEach((span) => {
+      const key = span.getAttribute("data-translate");
+      if (key) {
+        existingKeys.add(key);
+      }
+    });
+
+    // Generate a unique key
+    let counter = 1;
+    let key = `amenities.new_amenity`;
+    while (existingKeys.has(key) || existingKeys.has(`${key}_${counter}`)) {
+      counter++;
+    }
+
+    return counter === 1 ? key : `${key}_${counter}`;
+  }
+
+  addAmenityTranslation(translationKey, amenityName) {
+    // Find all translation files
+    const translationFiles = Array.from(this.projectFiles.keys()).filter(
+      (path) => path.includes("/js/translations_") && path.endsWith(".js")
+    );
+
+    if (translationFiles.length === 0) {
+      console.log("No translation files found - website is not multilingual");
+      return;
+    }
+
+    console.log(
+      `Adding translation key "${translationKey}" to ${translationFiles.length} files`
+    );
+
+    translationFiles.forEach((filePath) => {
+      let content =
+        this.modifiedFiles.get(filePath) ||
+        this.projectFiles.get(filePath).content;
+
+      // Find the amenities object and add the new key
+      // Look for the amenities object pattern
+      const amenitiesPattern = /(amenities:\s*\{[^}]*)(}\s*,)/;
+      const match = content.match(amenitiesPattern);
+
+      if (match) {
+        // Extract the key part from the full translation key (e.g., "new_amenity" from "amenities.new_amenity")
+        const keyPart = translationKey.replace("amenities.", "");
+
+        // Add the new key before the closing brace
+        const updatedContent = content.replace(
+          amenitiesPattern,
+          `$1    ${keyPart}: "${amenityName}",\n  $2`
+        );
+
+        this.modifiedFiles.set(filePath, updatedContent);
+        console.log(`Updated ${filePath}`);
+      } else {
+        console.warn(`Could not find amenities object in ${filePath}`);
+      }
+    });
+  }
+
+  updateAmenityInHTML(amenityName, amenityIcon, translationKey) {
+    // Find the main HTML file
+    const mainHtmlPath = Array.from(this.projectFiles.keys()).find(
+      (path) =>
+        path.endsWith(".html") &&
+        (path === "index.html" || path.includes("index"))
+    );
+
+    if (!mainHtmlPath) {
+      console.error("Could not find main HTML file");
+      return;
+    }
+
+    let currentContent =
+      this.modifiedFiles.get(mainHtmlPath) ||
+      this.projectFiles.get(mainHtmlPath).content;
+
+    // Find all amenity items and add after the last one
+    const amenityItemPattern =
+      /<div[^>]*class="[^"]*amenity-item[^"]*"[^>]*>[\s\S]*?<\/div>/gi;
+    const amenityMatches = [...currentContent.matchAll(amenityItemPattern)];
+
+    if (amenityMatches.length === 0) {
+      console.error("Could not find any amenity items");
+      return;
+    }
+
+    // Get the last amenity item
+    const lastAmenityMatch = amenityMatches[amenityMatches.length - 1];
+    const lastAmenityHtml = lastAmenityMatch[0];
+    const lastAmenityIndex = lastAmenityMatch.index;
+
+    // Create new amenity item HTML with data-translate attribute
+    const newAmenityItem = `            <div class="amenity-item">
+              <i class="${amenityIcon}"></i>
+              <span data-translate="${translationKey}">${amenityName}</span>
+            </div>`;
+
+    // Insert after the last amenity
+    const newContent =
+      currentContent.substring(0, lastAmenityIndex + lastAmenityHtml.length) +
+      newAmenityItem +
+      currentContent.substring(lastAmenityIndex + lastAmenityHtml.length);
+
+    // Store the change
+    this.modifiedFiles.set(mainHtmlPath, newContent);
+  }
+
+  async addNewAmenity(
+    amenityName = "new amenity",
+    amenityIcon = "fas fa-edit"
+  ) {
     try {
       // Save current scroll position before making any changes
       let savedScrollPosition = { x: 0, y: 0 };
@@ -3437,10 +3672,10 @@ class VisualWebsiteEditor {
       const lastAmenityHtml = lastAmenityMatch[0];
       const lastAmenityIndex = lastAmenityMatch.index;
 
-      // Create new default amenity item HTML
+      // Create new amenity item HTML with provided values
       const newAmenityItem = `            <div class="amenity-item">
-              <i class="fas fa-edit"></i>
-              <span>new amenity</span>
+              <i class="${amenityIcon}"></i>
+              <span>${amenityName}</span>
             </div>`;
 
       // Insert the new amenity after the last amenity item
@@ -3456,8 +3691,8 @@ class VisualWebsiteEditor {
       this.undoStack.push({
         type: "amenity_add",
         element: "amenities-grid",
-        amenityText: "new amenity",
-        amenityIcon: "fas fa-edit",
+        amenityText: amenityName,
+        amenityIcon: amenityIcon,
         timestamp: Date.now(),
       });
 
@@ -3478,7 +3713,7 @@ class VisualWebsiteEditor {
         }, 600);
       }
 
-      this.showStatus(`✨ Added new amenity: new amenity`, "success");
+      this.showStatus(`✨ Added new amenity: ${amenityName}`, "success");
     } catch (error) {
       console.error("Error adding amenity:", error);
       this.showStatus("Failed to add amenity", "error");
@@ -3636,6 +3871,31 @@ class VisualWebsiteEditor {
     return this.extractImagePath(src);
   }
 
+  calculateImageIndex(imageElement) {
+    // Calculate which occurrence (0-based index) this image is among all images with the same src
+    const imageSrc = imageElement.src;
+    const iframeDoc = this.previewFrame.contentDocument;
+    if (!iframeDoc) return 0;
+
+    // Get the original path to match against
+    const originalPath = this.findOriginalImagePath(imageElement);
+
+    // Find all images in the document that have the same src (blob URL) or original path
+    const allImages = Array.from(iframeDoc.querySelectorAll("img"));
+    const matchingImages = allImages.filter((img) => {
+      const imgPath = this.findOriginalImagePath(img);
+      return img.src === imageSrc || imgPath === originalPath;
+    });
+
+    // Find the index of the current image element in the matching images array
+    const index = matchingImages.indexOf(imageElement);
+    console.log(
+      `Found ${matchingImages.length} images with same src, current image is at index ${index}`
+    );
+
+    return index >= 0 ? index : 0;
+  }
+
   extractImagePath(src) {
     // Extract the relative path from various src formats
     // Handle blob URLs, data URLs, and relative paths
@@ -3703,6 +3963,7 @@ class VisualWebsiteEditor {
     console.log("Image element:", imageElement);
     console.log("Old src:", oldSrc);
     console.log("New src:", newSrc);
+    console.log("Using stored image index:", this.currentEditingImageIndex);
 
     const mainHtmlPath = Array.from(this.projectFiles.keys()).find(
       (path) =>
@@ -3714,8 +3975,23 @@ class VisualWebsiteEditor {
       this.modifiedFiles.get(mainHtmlPath) ||
       this.projectFiles.get(mainHtmlPath).content;
 
-    // Try a completely different approach - use the image's unique attributes and surrounding content
-    const wasReplaced = this.replaceImageByUniqueSignature(
+    // Use the stored index to replace only the specific occurrence
+    const wasReplaced = this.replaceImageByIndex(
+      currentContent,
+      oldSrc,
+      newSrc,
+      this.currentEditingImageIndex || 0,
+      mainHtmlPath
+    );
+
+    if (wasReplaced) {
+      console.log("Successfully replaced image using index-based method");
+      return;
+    }
+
+    // Fallback to the signature-based method if index-based fails
+    console.log("Falling back to signature-based method");
+    const wasReplaced2 = this.replaceImageByUniqueSignature(
       currentContent,
       imageElement,
       oldSrc,
@@ -3723,15 +3999,15 @@ class VisualWebsiteEditor {
       mainHtmlPath
     );
 
-    if (wasReplaced) {
+    if (wasReplaced2) {
       console.log("Successfully replaced image using unique signature");
       return;
     }
 
-    // Fallback to the original method
+    // Final fallback to the element path method
     console.log("Falling back to element path method");
     const elementPath = this.getElementPath(imageElement);
-    const wasReplaced2 = this.replaceSpecificImageInHTML(
+    const wasReplaced3 = this.replaceSpecificImageInHTML(
       currentContent,
       elementPath,
       oldSrc,
@@ -3739,11 +4015,62 @@ class VisualWebsiteEditor {
       mainHtmlPath
     );
 
-    if (wasReplaced2) {
+    if (wasReplaced3) {
       console.log("Specific image reference updated in HTML");
     } else {
       console.log("Could not find specific image reference in HTML");
     }
+  }
+
+  replaceImageByIndex(htmlContent, oldSrc, newSrc, targetIndex, mainHtmlPath) {
+    console.log("=== replaceImageByIndex ===");
+    console.log("Old src:", oldSrc);
+    console.log("New src:", newSrc);
+    console.log("Target index:", targetIndex);
+
+    // Escape the old src for use in regex
+    const oldSrcEscaped = oldSrc.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+    // Create a regex to find all <img> tags with this src
+    // This regex captures the entire img tag
+    const imagePattern = new RegExp(
+      `<img([^>]*?)src=["']?${oldSrcEscaped}["']?([^>]*?)>`,
+      "gi"
+    );
+
+    let currentIndex = 0;
+    let wasReplaced = false;
+
+    // Replace only the occurrence at targetIndex
+    const updatedContent = htmlContent.replace(
+      imagePattern,
+      (match, before, after) => {
+        const thisIndex = currentIndex;
+        currentIndex++; // Always increment, regardless of whether we replace
+
+        if (thisIndex === targetIndex) {
+          console.log(`Replacing occurrence ${thisIndex} of ${oldSrc}`);
+          wasReplaced = true;
+          // Preserve all other attributes, only change the src
+          return `<img${before}src="${newSrc}"${after}>`;
+        }
+
+        return match; // Keep other occurrences unchanged
+      }
+    );
+
+    if (wasReplaced) {
+      this.modifiedFiles.set(mainHtmlPath, updatedContent);
+      this.updateChangesCounter();
+      this.updateUndoButton();
+      console.log(`Successfully replaced image at index ${targetIndex}`);
+      return true;
+    }
+
+    console.log(
+      `Could not find image at index ${targetIndex}, found ${currentIndex} total occurrences`
+    );
+    return false;
   }
 
   replaceImageByUniqueSignature(
@@ -4625,7 +4952,7 @@ class VisualWebsiteEditor {
     } else if (e.data.type === "openFooterDialog") {
       this.handleOpenFooterDialog(e.data);
     } else if (e.data.type === "openAmenityDialog") {
-      this.addNewAmenity();
+      this.addNewAmenityDirect();
     } else if (e.data.type === "deleteAmenity") {
       this.handleDeleteAmenity(e.data);
     } else if (e.data.type === "openMultilangDialog") {
