@@ -1267,6 +1267,54 @@ class VisualWebsiteEditor {
                   border-bottom-color: transparent;
                   border-top-color: rgba(52, 199, 89, 0.9);
               }
+
+              /* Translation validation warning styles */
+              .translation-missing {
+                  border-bottom: 2px solid #ff3b30 !important;
+                  background-color: rgba(255, 59, 48, 0.05) !important;
+                  position: relative;
+              }
+
+              .translation-missing-tooltip {
+                  position: absolute;
+                  bottom: 100%;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  background: #ff3b30;
+                  color: white;
+                  padding: 6px 10px;
+                  border-radius: 4px;
+                  font-size: 11px;
+                  font-weight: 500;
+                  white-space: nowrap;
+                  z-index: 9999;
+                  pointer-events: none;
+                  opacity: 1;
+                  transition: opacity 0.2s ease;
+                  margin-bottom: 6px;
+              }
+
+              .translation-missing-tooltip::after {
+                  content: '';
+                  position: absolute;
+                  top: 100%;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  border: 5px solid transparent;
+                  border-top-color: #ff3b30;
+              }
+
+              /* Hide tooltip on hover so it doesn't interfere with edit tooltip */
+              .translation-missing:hover .translation-missing-tooltip {
+                  opacity: 0;
+              }
+
+              /* Make sure edit tooltips appear above translation warnings */
+              .edit-tooltip,
+              .icon-tooltip,
+              .image-tooltip {
+                  z-index: 10000 !important;
+              }
           `;
     doc.head.appendChild(editingStyles);
 
@@ -2006,6 +2054,86 @@ class VisualWebsiteEditor {
                   // Expose functions to window so they can be called from parent
                   window.setupAmenityEditing = setupAmenityEditing;
                   window.makeAmenityEditable = makeAmenityEditable;
+                  
+                  // Translation validation functionality
+                  function validateTranslations(translationData) {
+                      // translationData = { lang1: {translations}, lang2: {translations}, ... }
+                      if (!translationData || Object.keys(translationData).length === 0) {
+                          console.log('No translation data provided - skipping validation');
+                          return;
+                      }
+                      
+                      const languages = Object.keys(translationData);
+                      console.log('Validating translations for languages:', languages);
+                      
+                      // Find all elements with data-translate attribute
+                      const translatedElements = document.querySelectorAll('[data-translate]');
+                      let missingCount = 0;
+                      
+                      translatedElements.forEach(element => {
+                          const key = element.getAttribute('data-translate');
+                          if (!key) return;
+                          
+                          // Check if this key exists in all languages
+                          const missingLanguages = [];
+                          
+                          languages.forEach(lang => {
+                              const translations = translationData[lang];
+                              
+                              // Try to get the translation for this language
+                              const keys = key.split('.');
+                              let value = translations;
+                              
+                              for (const k of keys) {
+                                  if (value && typeof value === 'object' && k in value) {
+                                      value = value[k];
+                                  } else {
+                                      value = undefined;
+                                      break;
+                                  }
+                              }
+                              
+                              // Check if translation is missing or empty
+                              if (value === undefined || value === null || value === '') {
+                                  missingLanguages.push(lang.toUpperCase());
+                              }
+                          });
+                          
+                          // Remove existing warning if present
+                          const existingTooltip = element.querySelector('.translation-missing-tooltip');
+                          if (existingTooltip) {
+                              existingTooltip.remove();
+                          }
+                          element.classList.remove('translation-missing');
+                          
+                          // Add warning if translations are missing
+                          if (missingLanguages.length > 0) {
+                              missingCount++;
+                              element.classList.add('translation-missing');
+                              
+                              // Create tooltip
+                              const tooltip = document.createElement('div');
+                              tooltip.className = 'translation-missing-tooltip';
+                              tooltip.textContent = '⚠️ Missing translation';
+                              element.appendChild(tooltip);
+                              
+                              console.warn('Missing translations for key "' + key + '" in languages:', missingLanguages);
+                          }
+                      });
+                      
+                      if (missingCount > 0) {
+                          console.warn('Translation validation: Found ' + missingCount + ' elements with missing translations');
+                          parent.postMessage({
+                              type: 'translationValidationResult',
+                              missingCount: missingCount
+                          }, '*');
+                      } else {
+                          console.log('Translation validation: All translations are complete!');
+                      }
+                  }
+                  
+                  // Expose validation function to window
+                  window.validateTranslations = validateTranslations;
               })();
           `;
     doc.head.appendChild(editingScript);
@@ -3147,6 +3275,21 @@ class VisualWebsiteEditor {
   async applyMultilangChanges() {
     if (!this.currentMultilangData) return;
 
+    // Validate English text is not empty
+    const englishInput = document.querySelector(
+      '.multilang-input[data-lang="en"]'
+    );
+    if (englishInput && englishInput.value.trim() === "") {
+      // Add a visual shake animation to the English input
+      englishInput.classList.add("error-shake");
+      englishInput.focus();
+      setTimeout(() => {
+        englishInput.classList.remove("error-shake");
+      }, 500);
+      alert("❌ English text cannot be empty");
+      return;
+    }
+
     // Disable the apply button and show loading state
     this.multilangDialogApply.disabled = true;
     this.multilangDialogApply.textContent = "Applying...";
@@ -3492,6 +3635,11 @@ class VisualWebsiteEditor {
             }
           }
         }, 50);
+
+        // Re-run translation validation after adding amenity
+        setTimeout(() => {
+          this.runTranslationValidation();
+        }, 200);
       }
 
       this.showStatus(`✨ Added new amenity: ${amenityName}`, "success");
@@ -4825,6 +4973,115 @@ class VisualWebsiteEditor {
 
     // Handle badge visibility toggles
     // this.updateBadgeVisibilityToggles();
+
+    // Run translation validation after restoring edit mode
+    setTimeout(() => {
+      this.runTranslationValidation();
+    }, 600);
+  }
+
+  async runTranslationValidation() {
+    const iframeDoc = this.previewFrame.contentDocument;
+    if (!iframeDoc || !this.editMode) {
+      console.log(
+        "Skipping translation validation - no iframe or edit mode disabled"
+      );
+      return;
+    }
+
+    // Find all translation files in the project (flexible path matching)
+    const translationFiles = Array.from(this.projectFiles.keys()).filter(
+      (path) => {
+        // Match translations_XX.js anywhere in the path
+        return /translations_\w{2,5}\.js$/.test(path);
+      }
+    );
+
+    if (translationFiles.length === 0) {
+      console.log("No translation files found - site is not multilingual");
+      return;
+    }
+
+    console.log("🔍 Running translation validation...");
+    console.log(
+      "Loading translations from",
+      translationFiles.length,
+      "files:",
+      translationFiles
+    );
+
+    // Load and parse all translation files
+    const translationData = {};
+
+    for (const filePath of translationFiles) {
+      // Extract language code from filename
+      const match = filePath.match(/translations_(\w+)\.js$/);
+      if (!match) continue;
+
+      const lang = match[1];
+      const content =
+        this.modifiedFiles.get(filePath) ||
+        this.projectFiles.get(filePath).content;
+
+      // Parse the JavaScript file to extract the translations object
+      try {
+        // Try different patterns for translations object
+        // Pattern 1: window.translations_XX = {...}; (greedy match to end)
+        let translationsMatch = content.match(
+          /window\.translations_\w+\s*=\s*(\{[\s\S]*\});?\s*$/
+        );
+
+        // Pattern 2: const translations = {...};
+        if (!translationsMatch) {
+          translationsMatch = content.match(
+            /const\s+translations\s*=\s*(\{[\s\S]*\});?\s*$/
+          );
+        }
+
+        if (translationsMatch) {
+          // Use eval to parse the object (safe in this context as it's our own code)
+          let objString = translationsMatch[1];
+          // Remove trailing semicolon if present
+          objString = objString.replace(/;?\s*$/, "");
+          const translationsObj = eval("(" + objString + ")");
+          translationData[lang] = translationsObj;
+          console.log(
+            `✓ Loaded translations for ${lang}:`,
+            Object.keys(translationsObj).slice(0, 5)
+          );
+        } else {
+          console.warn(
+            `✗ Could not parse translations for ${lang} - no matching pattern found`
+          );
+          console.log("First 200 chars:", content.substring(0, 200));
+        }
+      } catch (error) {
+        console.error(`✗ Error parsing translations for ${lang}:`, error);
+        console.log("Content length:", content.length);
+      }
+    }
+
+    console.log(
+      "Parsed translations for languages:",
+      Object.keys(translationData)
+    );
+
+    // Send translation data to iframe for validation
+    if (Object.keys(translationData).length > 0) {
+      if (!iframeDoc.defaultView) {
+        console.error("No iframe window available");
+        return;
+      }
+      if (!iframeDoc.defaultView.validateTranslations) {
+        console.error("validateTranslations function not available in iframe");
+        return;
+      }
+
+      console.log("Sending translation data to iframe for validation...");
+      iframeDoc.defaultView.validateTranslations(translationData);
+    } else {
+      console.warn("No translation data loaded");
+    }
   }
 
   updateFooterLinkOverlays() {
@@ -4957,6 +5214,19 @@ class VisualWebsiteEditor {
       this.handleDeleteAmenity(e.data);
     } else if (e.data.type === "openMultilangDialog") {
       this.handleOpenMultilangDialog(e.data);
+    } else if (e.data.type === "translationValidationResult") {
+      this.handleTranslationValidationResult(e.data);
+    }
+  }
+
+  handleTranslationValidationResult(data) {
+    if (data.missingCount > 0) {
+      this.showStatus(
+        `⚠️ Translation validation: ${data.missingCount} element${
+          data.missingCount > 1 ? "s" : ""
+        } missing translations. Hover over red underlined elements to see details.`,
+        "error"
+      );
     }
   }
 
