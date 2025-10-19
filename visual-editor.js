@@ -179,11 +179,10 @@ class VisualWebsiteEditor {
 
   initializeElements() {
     this.uploadArea = document.getElementById("uploadArea");
-    this.zipInput = document.getElementById("zipInput");
     this.folderInput = document.getElementById("folderInput");
-    this.zipBtn = document.getElementById("zipBtn");
-    this.folderBtn = document.getElementById("folderBtn");
-    this.loadDemoBtn = document.getElementById("loadDemoBtn");
+    this.uploadBtn = document.getElementById("uploadBtn");
+    this.websiteInput = document.getElementById("websiteInput");
+    this.websiteBtn = document.getElementById("websiteBtn");
     this.projectInfo = document.getElementById("projectInfo");
     this.projectNameEl = document.getElementById("projectName");
     this.projectFilesEl = document.getElementById("projectFiles");
@@ -191,10 +190,10 @@ class VisualWebsiteEditor {
     this.changesCounter = document.getElementById("changesCounter");
     this.unsavedWarning = document.getElementById("unsavedWarning");
     this.downloadBtn = document.getElementById("downloadBtn");
+    this.loadNewBtn = document.getElementById("loadNewBtn");
     this.refreshBtn = document.getElementById("refreshBtn");
     this.undoBtn = document.getElementById("undoBtn");
     this.resetBtn = document.getElementById("resetBtn");
-    this.previewUrl = document.getElementById("previewUrl");
     this.editModeToggle = document.getElementById("editModeToggle");
     this.previewFrame = document.getElementById("previewFrame");
     this.loadingOverlay = document.getElementById("loadingOverlay");
@@ -247,30 +246,28 @@ class VisualWebsiteEditor {
 
   setupEventListeners() {
     this.uploadArea.addEventListener("click", () => {
-      this.zipBtn.click();
+      this.uploadBtn.click();
     });
 
-    this.zipBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      this.zipInput.click();
-    });
-
-    this.folderBtn.addEventListener("click", (e) => {
+    this.uploadBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       this.folderInput.click();
     });
 
-    this.zipInput.addEventListener("change", (e) => {
-      this.handleFiles(e.target.files, "zip");
+    this.websiteBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.downloadFromWebsite();
+    });
+
+    this.websiteInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        this.downloadFromWebsite();
+      }
     });
 
     this.folderInput.addEventListener("change", (e) => {
       this.handleFiles(e.target.files, "folder");
-    });
-
-    this.loadDemoBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      this.loadDemoProject();
     });
 
     this.editModeToggle.addEventListener("click", () => {
@@ -279,6 +276,10 @@ class VisualWebsiteEditor {
 
     this.downloadBtn.addEventListener("click", () => {
       this.downloadProject();
+    });
+
+    this.loadNewBtn.addEventListener("click", () => {
+      this.showUploadSection();
     });
 
     this.refreshBtn.addEventListener("click", () => {
@@ -365,16 +366,142 @@ class VisualWebsiteEditor {
       });
     });
 
-    this.uploadArea.addEventListener("drop", (e) => {
-      const files = e.dataTransfer.files;
-      const type = files[0]?.name.endsWith(".zip") ? "zip" : "folder";
-      this.handleFiles(files, type);
+    this.uploadArea.addEventListener("drop", async (e) => {
+      const items = e.dataTransfer.items;
+
+      // Check if we're dropping a folder
+      if (items && items.length > 0) {
+        const firstItem = items[0].webkitGetAsEntry();
+
+        if (firstItem && firstItem.isDirectory) {
+          // Handle folder drop
+          await this.handleFolderDrop(firstItem);
+        } else {
+          // Handle file drop (ZIP)
+          const files = e.dataTransfer.files;
+          this.handleFilesAuto(files);
+        }
+      } else {
+        const files = e.dataTransfer.files;
+        this.handleFilesAuto(files);
+      }
     });
   }
 
   preventDefaults(e) {
     e.preventDefault();
     e.stopPropagation();
+  }
+
+  async handleFilesAuto(files) {
+    if (files.length === 0) {
+      this.showStatus("No files selected", "error");
+      return;
+    }
+
+    // Auto-detect if it's a ZIP file or a directory
+    let type = "folder";
+
+    // If it's a single file ending with .zip, treat as ZIP
+    if (files.length === 1 && files[0].name.endsWith(".zip")) {
+      type = "zip";
+    }
+    // If files have webkitRelativePath, it's a directory
+    else if (files[0].webkitRelativePath) {
+      type = "folder";
+    }
+    // If it's a single file but not a ZIP, it might be a dropped ZIP
+    else if (files.length === 1) {
+      type = "zip";
+    }
+
+    await this.handleFiles(files, type);
+  }
+
+  async handleFolderDrop(folderEntry) {
+    this.showLoading("Processing folder...");
+
+    try {
+      this.projectFiles.clear();
+      this.modifiedFiles.clear();
+      this.undoStack = [];
+      this.projectName = folderEntry.name;
+
+      // Read all files from the dropped folder
+      const files = await this.readFolderEntries(folderEntry, "");
+
+      if (files.length === 0) {
+        throw new Error("No files found in the folder");
+      }
+
+      // Store files in projectFiles
+      for (const fileData of files) {
+        this.projectFiles.set(fileData.path, {
+          content: fileData.content,
+          type: this.getFileType(fileData.name),
+          size: fileData.size,
+        });
+      }
+
+      await this.processProject();
+      this.showStatus("Project loaded successfully!", "success");
+    } catch (error) {
+      console.error("Error handling folder drop:", error);
+      this.showStatus(`Error: ${error.message}`, "error");
+    } finally {
+      this.hideLoading();
+    }
+  }
+
+  async readFolderEntries(directoryEntry, path) {
+    const files = [];
+    const reader = directoryEntry.createReader();
+
+    const readEntries = () => {
+      return new Promise((resolve, reject) => {
+        reader.readEntries(
+          (entries) => resolve(entries),
+          (error) => reject(error)
+        );
+      });
+    };
+
+    let entries = await readEntries();
+
+    // Keep reading until we get all entries (readEntries may return in batches)
+    while (entries.length > 0) {
+      for (const entry of entries) {
+        if (entry.isFile) {
+          const file = await this.getFileFromEntry(entry);
+          const relativePath = path ? `${path}/${entry.name}` : entry.name;
+          const content = await this.readFileContent(file);
+
+          files.push({
+            path: relativePath,
+            name: entry.name,
+            content: content,
+            size: file.size,
+          });
+        } else if (entry.isDirectory) {
+          // Recursively read subdirectories
+          const subPath = path ? `${path}/${entry.name}` : entry.name;
+          const subFiles = await this.readFolderEntries(entry, subPath);
+          files.push(...subFiles);
+        }
+      }
+      entries = await readEntries();
+    }
+
+    return files;
+  }
+
+  getFileFromEntry(fileEntry) {
+    return new Promise((resolve, reject) => {
+      fileEntry.file(
+        (file) => resolve(file),
+        (error) => reject(error)
+      );
+    });
   }
 
   async handleFiles(files, type) {
@@ -456,101 +583,6 @@ class VisualWebsiteEditor {
     }
   }
 
-  async loadDemoProject() {
-    this.showLoading("Loading demo project...");
-
-    try {
-      // Load the villa-zori demo project
-      const baseUrl = window.location.origin;
-      const response = await fetch(`${baseUrl}/demo/villa-zori/index.html`);
-      if (!response.ok) {
-        throw new Error(`Failed to load demo project (${response.status})`);
-      }
-
-      const htmlContent = await response.text();
-
-      this.projectFiles.clear();
-      this.modifiedFiles.clear();
-      this.undoStack = [];
-      this.projectName = "villa-zori-demo";
-
-      this.projectFiles.set("index.html", {
-        content: htmlContent,
-        type: "text/html",
-        size: htmlContent.length,
-      });
-
-      // Load all the assets from the demo project
-      const assets = [
-        "css/styles.css",
-        "css/lang.css",
-        "js/script.js",
-        "js/lang.js",
-        "js/translations_de.js",
-        "js/translations_es.js",
-        "js/translations_fr.js",
-        "js/translations_hi.js",
-        "js/translations_id.js",
-        "js/translations_it.js",
-        "js/translations_ja.js",
-        "js/translations_ko.js",
-        "js/translations_ru.js",
-        "js/translations_zh.js",
-      ];
-
-      for (const asset of assets) {
-        try {
-          const assetResponse = await fetch(
-            `${baseUrl}/demo/villa-zori/${asset}`
-          );
-          if (assetResponse.ok) {
-            const content = await assetResponse.text();
-            this.projectFiles.set(asset, {
-              content: content,
-              type: this.getFileType(asset),
-              size: content.length,
-            });
-          }
-        } catch (e) {
-          console.log(`Asset not found: ${asset}`);
-        }
-      }
-
-      // Load some sample images
-      const images = [
-        "images/img-hero-landscape-2560w.jpg",
-        "images/img-landscape-1-960w.jpg",
-        "images/img-landscape-2-960w.jpg",
-      ];
-
-      for (const image of images) {
-        try {
-          const imageResponse = await fetch(
-            `${baseUrl}/demo/villa-zori/${image}`
-          );
-          if (imageResponse.ok) {
-            const arrayBuffer = await imageResponse.arrayBuffer();
-            this.projectFiles.set(image, {
-              content: new Uint8Array(arrayBuffer),
-              type: this.getFileType(image),
-              size: arrayBuffer.byteLength,
-            });
-          }
-        } catch (e) {
-          console.log(`Image not found: ${image}`);
-        }
-      }
-
-      await this.processProject();
-      this.showStatus("Demo project loaded successfully!", "success");
-    } catch (error) {
-      console.error("Error loading demo:", error);
-      this.showStatus(`Error loading demo: ${error.message}`, "error");
-    } finally {
-      this.hideLoading();
-    }
-  }
-
   readFileContent(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -569,6 +601,208 @@ class VisualWebsiteEditor {
         reader.readAsArrayBuffer(file);
       }
     });
+  }
+
+  async downloadFromWebsite() {
+    const domain = this.websiteInput.value.trim();
+
+    if (!domain) {
+      this.showStatus("Please enter a website URL", "error");
+      return;
+    }
+
+    this.showLoading("Downloading website files...");
+
+    try {
+      // Clean domain (remove protocol, www, trailing slash)
+      const cleanDomain = domain
+        .replace(/^https?:\/\//, "")
+        .replace(/^www\./, "")
+        .replace(/\/$/, "");
+      const baseUrl = `https://${cleanDomain}`;
+
+      let discoveredFiles = new Set();
+
+      // Download and analyze index.html
+      const htmlResponse = await fetch(`${baseUrl}/index.html`);
+      if (!htmlResponse.ok) {
+        throw new Error(`Failed to fetch index.html: ${htmlResponse.status}`);
+      }
+
+      const htmlText = await htmlResponse.text();
+      discoveredFiles.add("index.html");
+
+      // Extract file references from HTML
+      const htmlFiles = this.extractFileReferencesFromHTML(htmlText);
+      htmlFiles.forEach((file) => discoveredFiles.add(file));
+
+      // Also try to get common config files
+      const configFiles = ["_headers", "_redirects"];
+      for (const configFile of configFiles) {
+        try {
+          const response = await fetch(`${baseUrl}/${configFile}`, {
+            method: "HEAD",
+          });
+          if (response.ok) {
+            discoveredFiles.add(configFile);
+          }
+        } catch (error) {
+          // Config file doesn't exist, that's fine
+        }
+      }
+
+      // Convert Set to Array and filter out unwanted files
+      const filesToCheck = Array.from(discoveredFiles).filter((file) => {
+        if (file.startsWith("data:image/svg+xml,")) return false;
+        if (file.startsWith("/cdn-cgi/")) return false;
+        return true;
+      });
+
+      // Clear existing project files
+      this.projectFiles.clear();
+      this.modifiedFiles.clear();
+      this.undoStack = [];
+      this.projectName = cleanDomain;
+
+      let downloaded = 0;
+      let failed = 0;
+
+      // Download each file
+      for (let i = 0; i < filesToCheck.length; i++) {
+        const file = filesToCheck[i];
+
+        try {
+          const url = `${baseUrl}/${file}`;
+          const response = await fetch(url);
+
+          if (response.ok) {
+            const blob = await response.blob();
+            let content;
+
+            if (this.isTextFile(file)) {
+              content = await blob.text();
+            } else {
+              const arrayBuffer = await blob.arrayBuffer();
+              content = new Uint8Array(arrayBuffer);
+            }
+
+            this.projectFiles.set(file, {
+              content: content,
+              type: this.getFileType(file),
+              size: blob.size,
+            });
+            downloaded++;
+          } else {
+            failed++;
+          }
+        } catch (error) {
+          failed++;
+        }
+
+        // Update loading text with progress
+        this.loadingText.textContent = `Downloading files... (${i + 1}/${
+          filesToCheck.length
+        })`;
+      }
+
+      if (downloaded === 0) {
+        throw new Error(
+          "No files were found. Please check your domain name and try again."
+        );
+      }
+
+      await this.processProject();
+      this.showStatus(
+        `Website downloaded successfully! (${downloaded} files, ${failed} not found)`,
+        "success"
+      );
+    } catch (error) {
+      console.error("Error downloading website:", error);
+      this.showStatus(`Error: ${error.message}`, "error");
+    } finally {
+      this.hideLoading();
+    }
+  }
+
+  extractFileReferencesFromHTML(htmlText) {
+    const files = new Set();
+
+    // Extract from <link> tags (CSS files)
+    const linkMatches = htmlText.match(
+      /<link[^>]+href\s*=\s*["']([^"']+)["'][^>]*>/g
+    );
+    if (linkMatches) {
+      linkMatches.forEach((match) => {
+        const href = match.match(/href\s*=\s*["']([^"']+)["']/)[1];
+        if (
+          href &&
+          !href.startsWith("http") &&
+          !href.startsWith("//") &&
+          !href.startsWith("#")
+        ) {
+          files.add(href);
+        }
+      });
+    }
+
+    // Extract from <script> tags (JavaScript files)
+    const scriptMatches = htmlText.match(
+      /<script[^>]+src\s*=\s*["']([^"']+)["'][^>]*>/g
+    );
+    if (scriptMatches) {
+      scriptMatches.forEach((match) => {
+        const src = match.match(/src\s*=\s*["']([^"']+)["']/)[1];
+        if (src && !src.startsWith("http") && !src.startsWith("//")) {
+          files.add(src);
+        }
+      });
+    }
+
+    // Extract from <img> tags (images)
+    const imgMatches = htmlText.match(
+      /<img[^>]+src\s*=\s*["']([^"']+)["'][^>]*>/g
+    );
+    if (imgMatches) {
+      imgMatches.forEach((match) => {
+        const src = match.match(/src\s*=\s*["']([^"']+)["']/)[1];
+        if (
+          src &&
+          !src.startsWith("http") &&
+          !src.startsWith("//") &&
+          !src.startsWith("data:")
+        ) {
+          files.add(src);
+        }
+      });
+    }
+
+    // Extract from CSS url() functions in <style> tags
+    const styleMatches = htmlText.match(/<style[^>]*>([\s\S]*?)<\/style>/g);
+    if (styleMatches) {
+      styleMatches.forEach((styleBlock) => {
+        const cssContent = styleBlock.match(
+          /<style[^>]*>([\s\S]*?)<\/style>/
+        )[1];
+        const urlMatches = cssContent.match(
+          /url\s*\(\s*["']?([^"')]+)["']?\s*\)/g
+        );
+        if (urlMatches) {
+          urlMatches.forEach((match) => {
+            const url = match.match(/url\s*\(\s*["']?([^"')]+)["']?\s*\)/)[1];
+            if (
+              url &&
+              !url.startsWith("http") &&
+              !url.startsWith("//") &&
+              !url.startsWith("data:")
+            ) {
+              files.add(url);
+            }
+          });
+        }
+      });
+    }
+
+    return Array.from(files);
   }
 
   isTextFile(filename) {
@@ -672,6 +906,9 @@ class VisualWebsiteEditor {
     this.refreshBtn.disabled = false;
     this.editModeToggle.disabled = false;
 
+    // Hide upload section and show load new button
+    this.hideUploadSection();
+
     // Reset button should be disabled initially (no changes yet)
     this.resetBtn.disabled = true;
   }
@@ -770,7 +1007,6 @@ class VisualWebsiteEditor {
       const blob = new Blob([htmlContent], { type: "text/html" });
       const url = URL.createObjectURL(blob);
 
-      this.previewUrl.value = `Preview: ${this.projectName}`;
       this.previewFrame.src = url;
 
       await new Promise((resolve) => {
@@ -5373,10 +5609,12 @@ class VisualWebsiteEditor {
 
   showLoading(text = "Processing...") {
     this.loadingText.textContent = text;
+    this.loadingOverlay.classList.add("loading");
     this.loadingOverlay.classList.remove("hidden");
   }
 
   hideLoading() {
+    this.loadingOverlay.classList.remove("loading");
     this.loadingOverlay.classList.add("hidden");
   }
 
@@ -5791,6 +6029,31 @@ class VisualWebsiteEditor {
       console.error("Error undoing multi-language change:", error);
       this.showStatus("Failed to undo multi-language changes", "error");
     }
+  }
+
+  hideUploadSection() {
+    // Hide the upload section
+    const uploadSection = document.querySelector(".upload-section");
+    if (uploadSection) {
+      uploadSection.style.display = "none";
+    }
+
+    // Show the load new button
+    this.loadNewBtn.style.display = "block";
+  }
+
+  showUploadSection() {
+    // Show the upload section
+    const uploadSection = document.querySelector(".upload-section");
+    if (uploadSection) {
+      uploadSection.style.display = "block";
+    }
+
+    // Hide the load new button
+    this.loadNewBtn.style.display = "none";
+
+    // Clear the website input
+    this.websiteInput.value = "";
   }
 
   revertEnglishTextInHTML(oldText) {
