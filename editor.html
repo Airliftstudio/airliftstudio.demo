@@ -7,6 +7,7 @@
 
     <!-- Include JSZip for ZIP file handling -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="assets/js/generated-airbnb-icons.js"></script>
     <script src="visual-editor.js"></script>
 
     <!-- Font Awesome CDN for icon picker -->
@@ -31,6 +32,32 @@
         background: #f5f5f7;
         height: 100vh;
         overflow: hidden;
+      }
+
+      .footer-info {
+        padding: 1em;
+      }
+
+      .brand-logo {
+        width: 46px;
+        height: 48px;
+        object-fit: contain;
+        height: 100px;
+        width: auto;
+      }
+
+      .small {
+        font-size: 0.95rem;
+        color: #6b7280;
+      }
+      .contact-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: #6b7280;
+        font-weight: 600;
+        margin-top: 10px;
       }
 
       .editor-container {
@@ -292,6 +319,36 @@
         cursor: not-allowed;
       }
 
+      /* Next step hint and attention pulse */
+      .next-step-hint {
+        display: none;
+        margin: 8px 0 6px;
+        color: #1d1d1f;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .next-step-hint.show {
+        display: block;
+      }
+
+      .download-btn.attention {
+        animation: pulse 1.2s ease-in-out infinite;
+        box-shadow: 0 0 0 0 rgba(0, 122, 255, 0.6);
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(0, 122, 255, 0.6);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(0, 122, 255, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(0, 122, 255, 0);
+        }
+      }
+
       .load-new-btn {
         width: 100%;
         padding: 12px 20px;
@@ -414,6 +471,23 @@
 
       .edit-mode-toggle.active:hover {
         background: #d70015;
+      }
+
+      .edit-mode-toggle.needs-attention {
+        animation: pulse-green 1.5s ease-in-out infinite;
+        box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.6);
+      }
+
+      @keyframes pulse-green {
+        0% {
+          box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.8);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(52, 199, 89, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(52, 199, 89, 0);
+        }
       }
 
       .preview-frame {
@@ -589,28 +663,6 @@
       .status-message.show {
         display: block;
       }
-
-      .unsaved-warning {
-        background: #ff9500;
-        color: white;
-        padding: 10px 15px;
-        margin: 10px 0;
-        border-radius: 6px;
-        font-size: 13px;
-        font-weight: 500;
-        display: none;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .unsaved-warning.show {
-        display: flex;
-      }
-
-      .unsaved-warning .warning-icon {
-        font-size: 16px;
-      }
-
       .changes-counter {
         background: #007aff;
         color: white;
@@ -1746,6 +1798,152 @@
         background: #c7c7cc;
         cursor: not-allowed;
       }
+
+      /* Publish Dialog Styles */
+      .publish-dialog-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      .publish-dialog-overlay.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .publish-dialog {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        max-width: 500px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+      }
+
+      .publish-dialog-overlay.show .publish-dialog {
+        transform: scale(1);
+      }
+
+      .publish-dialog-header {
+        padding: 24px 24px 16px;
+        border-bottom: 1px solid #e5e5e7;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .publish-dialog-header h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #1d1d1f;
+      }
+
+      .publish-dialog-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: #8e8e93;
+        cursor: pointer;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background-color 0.2s ease;
+      }
+
+      .publish-dialog-close:hover {
+        background: #f5f5f7;
+        color: #1d1d1f;
+      }
+
+      .publish-dialog-content {
+        padding: 24px;
+      }
+
+      .publish-info {
+        margin-bottom: 24px;
+      }
+
+      .publish-info p {
+        margin: 0;
+        color: #1d1d1f;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      .publish-guide {
+        text-align: center;
+        margin-top: 24px;
+      }
+
+      .publish-guide-btn {
+        display: inline-block;
+        background: #007aff;
+        color: white;
+        padding: 16px 32px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 16px;
+        transition: background 0.2s ease;
+        margin-bottom: 16px;
+      }
+
+      .publish-guide-btn:hover {
+        background: #0056cc;
+        text-decoration: none;
+      }
+
+      .publish-fallback {
+        margin: 0;
+        color: #666;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .publish-fallback strong {
+        color: #1d1d1f;
+        word-break: break-all;
+      }
+
+      .publish-dialog-footer {
+        padding: 16px 24px 24px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .publish-dialog-btn {
+        background: #007aff;
+        color: white;
+        border: none;
+        padding: 12px 32px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      .publish-dialog-btn:hover {
+        background: #0056cc;
+      }
     </style>
   </head>
   <body>
@@ -1753,7 +1951,9 @@
       <div class="sidebar">
         <div class="sidebar-header">
           <h1>Visual Website Editor</h1>
-          <p>Upload, edit, and download your website projects</p>
+          <div class="sidebar-brand">
+            <span class="small">by Airlift Studios</span>
+          </div>
         </div>
 
         <div class="upload-section">
@@ -1813,16 +2013,12 @@
 
           <div class="file-list" id="fileList"></div>
 
-          <div class="unsaved-warning" id="unsavedWarning">
-            <span class="warning-icon">⚠️</span>
-            <span
-              >You have unsaved changes! Download your project to save
-              them.</span
-            >
+          <div class="next-step-hint" id="nextStepHint">
+            When you are happy with the changes, click the button below to
+            download your project
           </div>
-
           <button class="download-btn" id="downloadBtn" disabled>
-            📦 Download Project
+            ✅ Download Project
           </button>
 
           <button class="load-new-btn" id="loadNewBtn" style="display: none">
@@ -1831,6 +2027,25 @@
         </div>
 
         <div class="status-message" id="statusMessage"></div>
+        <div class="footer-info">
+          <div>
+            <img
+              src="assets/images/logo.png"
+              alt="Airlift Studios logo"
+              class="brand-logo"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <p class="small">Airliftstudios.com</p>
+          </div>
+          <a
+            class="contact-link"
+            href="https://www.instagram.com/airlift.studios"
+          >
+            <i class="fab fa-instagram"></i> airlift.studios
+          </a>
+        </div>
       </div>
 
       <div class="preview-container">
@@ -1839,10 +2054,10 @@
             🔄 Refresh Preview
           </button>
           <button class="undo-btn-header" id="undoBtn" disabled>
-            ↶ Revert Last Change
+            ⬅️ Revert Last Change
           </button>
           <button class="reset-btn-header" id="resetBtn">
-            🔄 Reset All Changes
+            ⏮️ Reset All Changes
           </button>
           <button class="edit-mode-toggle" id="editModeToggle" disabled>
             ✏️ Enable Edit Mode
@@ -1873,7 +2088,7 @@
                   <li>All text content</li>
                   <li>Icons (choose from 2000+ options)</li>
                   <li>Amenities</li>
-                  <li>Images (upload and replace)</li>
+                  <li>Images</li>
                   <li>Footer contact information</li>
                 </ul>
               </div>
@@ -1882,17 +2097,21 @@
                 <p class="beyond-title">
                   🚀 <strong>Need more advanced changes?</strong>
                 </p>
-                <ul>
-                  <li>✏️ Manually edit the code files</li>
-                  <li>🤖 Use AI tools (ChatGPT etc.)</li>
-                  <li>👨‍💻 Hire a developer</li>
-                </ul>
+                <p>
+                  Visit our
+                  <a
+                    href="https://airliftstudios.com/guides"
+                    target="_blank"
+                    rel="noopener"
+                    >Guides</a
+                  >
+                  for more tutorials and help.
+                </p>
               </div>
 
               <p class="get-started">
-                📁 <strong>Get started:</strong> Upload your project as a ZIP
-                file, select a folder, or enter your website URL to download
-                files automatically.
+                📁 <strong>Get started:</strong> Use the left menu to upload
+                your project or enter your website to start editing.
               </p>
             </div>
           </div>
@@ -2030,12 +2249,6 @@
           </button>
         </div>
         <div class="multilang-edit-container">
-          <div class="multilang-info">
-            <p>
-              This text appears in multiple languages. Edit the text for each
-              language below:
-            </p>
-          </div>
           <div class="multilang-inputs" id="multilangInputs">
             <!-- Language inputs will be dynamically populated here -->
           </div>
@@ -2049,6 +2262,45 @@
           </button>
           <button class="multilang-dialog-btn apply" id="multilangDialogApply">
             Apply All Changes
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Publish Guide Dialog -->
+    <div class="publish-dialog-overlay" id="publishDialogOverlay">
+      <div class="publish-dialog">
+        <div class="publish-dialog-header">
+          <h2>🎉 Project Downloaded Successfully!</h2>
+          <button class="publish-dialog-close" id="publishDialogClose">
+            ×
+          </button>
+        </div>
+        <div class="publish-dialog-content">
+          <div class="publish-info">
+            <p>
+              Your edited project has been downloaded to your computer. Ready to
+              publish your changes?
+            </p>
+          </div>
+          <div class="publish-guide">
+            <a
+              href="https://airliftstudios.com/guides#publish-changes"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="publish-guide-btn"
+            >
+              📖 View Publishing Guide
+            </a>
+            <p class="publish-fallback">
+              If the button doesn't work, visit:
+              <strong>https://airliftstudios.com/guides#publish-changes</strong>
+            </p>
+          </div>
+        </div>
+        <div class="publish-dialog-footer">
+          <button class="publish-dialog-btn" id="publishDialogOk">
+            Got it!
           </button>
         </div>
       </div>

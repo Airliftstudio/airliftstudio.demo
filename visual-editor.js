@@ -17,154 +17,7 @@ class VisualWebsiteEditor {
     this.availableLanguages = new Map(); // Map of language codes to translation file paths
     this.translationKeys = new Map(); // Map of data-translate keys to their current values
 
-    // Hardcoded list of useful Airbnb icons
-    this.airbnbIcons = [
-      // Accommodation & Property
-      { class: "fas fa-home", name: "home house property" },
-      { class: "fas fa-building", name: "building apartment condo" },
-      { class: "fas fa-key", name: "key access checkin" },
-      { class: "fas fa-door-open", name: "door entrance private" },
-      { class: "fas fa-lock", name: "lock secure safety" },
-      { class: "fas fa-vault", name: "safe security valuables" },
-
-      // Pool & Water
-      {
-        class: "fas fa-swimming-pool",
-        name: "pool swimming water private",
-      },
-      { class: "fas fa-hot-tub", name: "hottub jacuzzi spa" },
-      { class: "fas fa-shower", name: "shower bathroom outdoor" },
-      { class: "fas fa-bath", name: "bath bathtub bathroom" },
-      { class: "fas fa-water", name: "water swimming pool" },
-
-      // Kitchen & Dining
-      { class: "fas fa-utensils", name: "kitchen dining utensils food" },
-      { class: "fas fa-coffee", name: "coffee breakfast kitchen" },
-      { class: "fas fa-wine-glass", name: "wine glass drinks dining" },
-      { class: "fas fa-blender", name: "blender kitchen appliance" },
-      { class: "fas fa-fire-burner", name: "stove cooking kitchen" },
-
-      // Comfort & Climate
-      { class: "fas fa-snowflake", name: "ac air conditioning cool" },
-      { class: "fas fa-temperature-low", name: "cold cooling climate" },
-      { class: "fas fa-fan", name: "fan cooling air" },
-      { class: "fas fa-fire", name: "fireplace heating warm" },
-
-      // Technology & Work
-      { class: "fas fa-wifi", name: "wifi internet connection" },
-      { class: "fas fa-laptop", name: "laptop work computer desk" },
-      { class: "fas fa-tv", name: "tv television entertainment" },
-      { class: "fas fa-desktop", name: "computer desktop work" },
-      { class: "fas fa-mobile-alt", name: "phone mobile device" },
-
-      // Location & Transport
-      { class: "fas fa-map-marker-alt", name: "location marker address" },
-      { class: "fas fa-car", name: "car parking transport" },
-      { class: "fas fa-motorcycle", name: "scooter motorcycle bike" },
-      { class: "fas fa-bicycle", name: "bicycle bike transport" },
-      { class: "fas fa-plane", name: "airport flight travel" },
-      { class: "fas fa-taxi", name: "taxi transport uber" },
-
-      // Beach & Outdoor
-      { class: "fas fa-umbrella-beach", name: "beach umbrella ocean" },
-      { class: "fas fa-sun", name: "sun sunny weather lounger" },
-      { class: "fas fa-tree", name: "garden nature outdoor" },
-      { class: "fas fa-seedling", name: "garden plants nature" },
-      { class: "fas fa-leaf", name: "nature eco green" },
-
-      // Activities & Recreation
-      { class: "fas fa-dumbbell", name: "gym fitness exercise" },
-      { class: "fas fa-running", name: "running fitness sport" },
-      { class: "fas fa-bicycle", name: "cycling sport activity" },
-      { class: "fas fa-swimmer", name: "swimming pool sport" },
-      { class: "fas fa-volleyball-ball", name: "volleyball beach sport" },
-
-      // Services & Amenities
-      { class: "fas fa-concierge-bell", name: "service concierge help" },
-      { class: "fas fa-broom", name: "cleaning housekeeping" },
-      { class: "fas fa-tshirt", name: "laundry washing clothes" },
-      { class: "fas fa-baby", name: "baby family kids" },
-      { class: "fas fa-dog", name: "pet dog animal friendly" },
-      { class: "fas fa-cat", name: "pet cat animal friendly" },
-
-      // Safety & Security
-      { class: "fas fa-shield-alt", name: "safety security protection" },
-      { class: "fas fa-user-shield", name: "superhost verified trusted" },
-      { class: "fas fa-first-aid", name: "first aid safety medical" },
-      {
-        class: "fas fa-fire-extinguisher",
-        name: "fire safety emergency",
-      },
-
-      // Communication & Social
-      { class: "fas fa-envelope", name: "email contact message" },
-      { class: "fas fa-phone", name: "phone contact call" },
-      { class: "fas fa-comment", name: "message chat communication" },
-      { class: "fab fa-whatsapp", name: "whatsapp message contact" },
-      { class: "fab fa-instagram", name: "instagram social media" },
-      { class: "fab fa-facebook", name: "facebook social media" },
-      { class: "fab fa-airbnb", name: "airbnb platform booking" },
-
-      // Experience & Quality
-      { class: "fas fa-star", name: "star rating review quality" },
-      { class: "fas fa-heart", name: "heart favorite love guest" },
-      { class: "fas fa-thumbs-up", name: "like recommend positive" },
-      { class: "fas fa-award", name: "award quality excellence" },
-      { class: "fas fa-medal", name: "medal achievement superhost" },
-
-      // Time & Booking
-      {
-        class: "fas fa-calendar-check",
-        name: "calendar booking available",
-      },
-      { class: "fas fa-clock", name: "time schedule checkin" },
-      { class: "fas fa-calendar-alt", name: "calendar dates booking" },
-
-      // Entertainment & Relaxation
-      { class: "fas fa-book", name: "books reading relax" },
-      { class: "fas fa-music", name: "music entertainment sound" },
-      { class: "fas fa-gamepad", name: "games entertainment fun" },
-      { class: "fas fa-couch", name: "sofa living room comfort" },
-
-      // Additional Useful Icons
-      { class: "fas fa-utensils", name: "restaurant dining nearby" },
-      {
-        class: "fas fa-shopping-cart",
-        name: "shopping groceries nearby",
-      },
-      { class: "fas fa-hospital", name: "hospital medical nearby" },
-      {
-        class: "fas fa-graduation-cap",
-        name: "education university nearby",
-      },
-      { class: "fas fa-camera", name: "photography instagram worthy" },
-      { class: "fas fa-suitcase", name: "luggage travel vacation" },
-
-      // Weather & Seasonal
-      { class: "fas fa-cloud-sun", name: "weather partly cloudy" },
-      { class: "fas fa-rainbow", name: "rainbow tropical weather" },
-      { class: "fas fa-wind", name: "wind breeze weather" },
-
-      // Brand Icons
-      { class: "fab fa-google", name: "google maps location" },
-      { class: "fab fa-uber", name: "uber transport taxi" },
-      { class: "fab fa-spotify", name: "spotify music entertainment" },
-      { class: "fab fa-netflix", name: "netflix entertainment tv" },
-
-      // Location Specific
-      { class: "fas fa-mountain", name: "mountain nature hiking" },
-      { class: "fas fa-water", name: "ocean sea water beach" },
-      { class: "fas fa-city", name: "city urban downtown" },
-      { class: "fas fa-map", name: "map navigation location" },
-
-      // Miscellaneous
-      { class: "fas fa-gift", name: "gift surprise welcome" },
-      { class: "fas fa-magic", name: "special unique experience" },
-      { class: "fas fa-infinity", name: "unlimited endless luxury" },
-      { class: "fas fa-globe", name: "international global world" },
-      { class: "fas fa-compass", name: "compass navigation direction" },
-      { class: "fas fa-location-dot", name: "location pin marker" },
-    ];
+    this.airbnbIcons = window.generatedAirbnbIcons;
 
     this.initializeElements();
     this.setupEventListeners();
@@ -175,6 +28,7 @@ class VisualWebsiteEditor {
     this.setupImageDialog();
     this.setupFooterDialog();
     this.setupMultilangDialog();
+    this.setupPublishDialog();
   }
 
   initializeElements() {
@@ -187,8 +41,8 @@ class VisualWebsiteEditor {
     this.projectNameEl = document.getElementById("projectName");
     this.projectFilesEl = document.getElementById("projectFiles");
     this.fileList = document.getElementById("fileList");
+    this.nextStepHint = document.getElementById("nextStepHint");
     this.changesCounter = document.getElementById("changesCounter");
-    this.unsavedWarning = document.getElementById("unsavedWarning");
     this.downloadBtn = document.getElementById("downloadBtn");
     this.loadNewBtn = document.getElementById("loadNewBtn");
     this.refreshBtn = document.getElementById("refreshBtn");
@@ -242,6 +96,11 @@ class VisualWebsiteEditor {
       "multilangDialogCancel"
     );
     this.multilangDialogApply = document.getElementById("multilangDialogApply");
+
+    // Publish dialog elements
+    this.publishDialogOverlay = document.getElementById("publishDialogOverlay");
+    this.publishDialogClose = document.getElementById("publishDialogClose");
+    this.publishDialogOk = document.getElementById("publishDialogOk");
   }
 
   setupEventListeners() {
@@ -911,6 +770,9 @@ class VisualWebsiteEditor {
 
     // Reset button should be disabled initially (no changes yet)
     this.resetBtn.disabled = true;
+
+    // Show edit mode hint for first-time users
+    this.editModeToggle.classList.add("needs-attention");
   }
 
   updateFileList() {
@@ -947,7 +809,7 @@ class VisualWebsiteEditor {
 
   updateUndoButton() {
     this.undoBtn.disabled = this.undoStack.length === 0;
-    this.undoBtn.textContent = "↶ Revert Last Change";
+    this.undoBtn.textContent = "⬅️ Revert Last Change";
   }
 
   updateChangesCounter() {
@@ -956,14 +818,16 @@ class VisualWebsiteEditor {
       this.changesCounter.textContent = changeCount;
       this.changesCounter.style.display = "inline";
 
-      // Show unsaved changes warning
-      this.unsavedWarning.classList.add("show");
+      // Highlight next step and draw attention to download
+      if (this.nextStepHint) this.nextStepHint.classList.add("show");
+      this.downloadBtn.classList.add("attention");
     } else {
       this.changesCounter.style.display = "none";
       this.downloadBtn.innerHTML = "📦 Download Project";
 
-      // Hide unsaved changes warning
-      this.unsavedWarning.classList.remove("show");
+      // Remove attention styles when no changes
+      if (this.nextStepHint) this.nextStepHint.classList.remove("show");
+      this.downloadBtn.classList.remove("attention");
     }
 
     // Enable/disable reset button based on changes
@@ -1112,6 +976,15 @@ class VisualWebsiteEditor {
       URL.revokeObjectURL(url);
 
       this.showStatus("📦 Project downloaded successfully!", "success");
+
+      // Clear attention styles after successful download
+      if (this.nextStepHint) this.nextStepHint.classList.remove("show");
+      this.downloadBtn.classList.remove("attention");
+
+      // Show publish guide dialog after successful download
+      setTimeout(() => {
+        this.showPublishDialog();
+      }, 1000);
     } catch (error) {
       console.error("Error downloading project:", error);
       this.showStatus(`❌ Download failed: ${error.message}`, "error");
@@ -2422,7 +2295,7 @@ class VisualWebsiteEditor {
       iconOption.dataset.iconClass = iconData.class;
       iconOption.dataset.searchTerms = iconData.name;
       iconOption.innerHTML = `<i class="${iconData.class}"></i>`;
-      iconOption.title = iconData.class;
+      iconOption.title = iconData.name;
 
       iconOption.addEventListener("click", () =>
         this.selectIcon(iconOption, iconData.class)
@@ -2695,6 +2568,33 @@ class VisualWebsiteEditor {
         this.multilangDialogOverlay.classList.contains("show")
       ) {
         this.closeMultilangDialog();
+      }
+    });
+  }
+
+  setupPublishDialog() {
+    // Close dialog handlers
+    this.publishDialogClose.addEventListener("click", () =>
+      this.closePublishDialog()
+    );
+    this.publishDialogOk.addEventListener("click", () =>
+      this.closePublishDialog()
+    );
+
+    // Close dialog when clicking overlay
+    this.publishDialogOverlay.addEventListener("click", (e) => {
+      if (e.target === this.publishDialogOverlay) {
+        this.closePublishDialog();
+      }
+    });
+
+    // Close dialog with Escape key
+    document.addEventListener("keydown", (e) => {
+      if (
+        e.key === "Escape" &&
+        this.publishDialogOverlay.classList.contains("show")
+      ) {
+        this.closePublishDialog();
       }
     });
   }
@@ -3506,6 +3406,14 @@ class VisualWebsiteEditor {
   closeMultilangDialog() {
     this.multilangDialogOverlay.classList.remove("show");
     this.currentMultilangData = null;
+  }
+
+  showPublishDialog() {
+    this.publishDialogOverlay.classList.add("show");
+  }
+
+  closePublishDialog() {
+    this.publishDialogOverlay.classList.remove("show");
   }
 
   async applyMultilangChanges() {
@@ -5169,6 +5077,8 @@ class VisualWebsiteEditor {
     if (this.editMode) {
       this.editModeToggle.textContent = "🚫 Disable Edit Mode";
       this.editModeToggle.classList.add("active");
+
+      this.editModeToggle.classList.remove("needs-attention");
     } else {
       this.editModeToggle.textContent = "✏️ Enable Edit Mode";
       this.editModeToggle.classList.remove("active");
@@ -5193,6 +5103,8 @@ class VisualWebsiteEditor {
     this.editMode = true;
     this.editModeToggle.textContent = "🚫 Disable Edit Mode";
     this.editModeToggle.classList.add("active");
+
+    this.editModeToggle.classList.remove("needs-attention");
 
     if (this.previewFrame.contentWindow) {
       this.previewFrame.contentWindow.postMessage(

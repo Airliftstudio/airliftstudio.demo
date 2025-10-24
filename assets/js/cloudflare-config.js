@@ -205,7 +205,11 @@ function showInlineConfigForm(containerId) {
       </div>
     </div>
     <small style="display: block; margin-top: 8px; color: #666; font-size: 12px;">
-      Find your Cloudflare ID in your dashboard URL: dash.cloudflare.com/[YOUR_ID]/
+        When you’re logged in to your Cloudflare dashboard, look at your browser’s address bar.
+        The URL will look something like this:
+        https://dash.cloudflare.com/abcd1234efgh5678/
+        The part after dash.cloudflare.com/ (in this case, abcd1234efgh5678) is your Cloudflare ID.
+        Copy that code and paste it here.
     </small>
   `;
 
@@ -228,6 +232,7 @@ function updateAllQuickLinks() {
     pagesLink: "https://dash.cloudflare.com/pages",
     pagesTextLink: "https://dash.cloudflare.com/pages",
     analyticsLink: `${baseUrl}/analytics`,
+    deploymentLink: `https://dash.cloudflare.com/${cloudflareConfig.id}/pages/view/${cloudflareConfig.domain}/deployments/new`,
   };
 
   Object.keys(links).forEach((id) => {
@@ -266,6 +271,7 @@ function resetCloudflareConfig() {
       "domainRegLink",
       "emailRoutingLink",
       "pagesLink",
+      "deploymentLink",
       "pagesTextLink",
       "analyticsLink",
     ];

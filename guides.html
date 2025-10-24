@@ -138,23 +138,6 @@
       </div>
     </section>
 
-    <!-- Cloudflare Reset Button -->
-    <section class="section">
-      <div class="container">
-        <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 15px; margin: 20px 0; text-align: center;">
-          <h3 style="margin-top: 0; color: #856404; font-size: 18px;">
-            <i class="fa-solid fa-cog"></i> Cloudflare Configuration
-          </h3>
-          <p style="margin: 10px 0; color: #856404; font-size: 14px;">
-            Reset your Cloudflare account details if you need to change them
-          </p>
-          <button onclick="resetCloudflareConfig()" 
-                  style="padding: 8px 16px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 500;">
-            <i class="fa-solid fa-trash"></i> Reset Configuration
-          </button>
-        </div>
-      </div>
-    </section>
 
     <!-- Quick Navigation -->    <section class="section">
       <div class="container">
@@ -198,6 +181,13 @@
               </div>
               <h3>Change Text</h3>
               <p>Update text content and multiple languages</p>
+            </a>
+            <a href="#publish-changes" class="guide-card">
+              <div class="guide-icon">
+                <i class="fa-solid fa-upload"></i>
+              </div>
+              <h3>Publish Changes</h3>
+              <p>Upload and deploy your website updates</p>
             </a>
             <a href="#analytics" class="guide-card">
               <div class="guide-icon">
@@ -436,8 +426,18 @@
           <h2>How to Change Images on Your Website</h2>
           <div class="guide-content">
             <div class="guide-intro">
-              <p>
-                Learn how to update photos and images on your website.
+                <h4 style="margin-top: 0; font-size: 22px;">
+                  <i class="fa-solid fa-paintbrush"></i> Easy Visual Editor
+                </h4>
+                <p style="margin: 10px 0; font-size: 16px;">
+                  Use our simple visual editor to change images with just a few clicks!
+                </p>
+                <a href="https://airliftstudios.com/editor" target="_blank" rel="noopener" 
+                   style="display: inline-block; padding: 12px 24px; background: #1660ff; color: white; text-decoration: none; border-radius: 6px; font-weight: 500; font-size: 16px; margin-top: 10px;">
+                  <i class="fa-solid fa-external-link-alt"></i> Open Visual Editor
+                </a>
+              <p style="margin: 20px 0 10px 0; color: #666; font-size: 14px;">
+                <strong>Alternative:</strong> If you prefer to replace images manually, follow the steps below:
               </p>
             </div>
 
@@ -445,15 +445,15 @@
               <h3>Step 1: Access Your Website Files</h3>
               <ol>
                 <li>Locate your website files folder that you recieved during hand over.</li>
-                <li>If you have lost your website files folder, you can use our <a href="website_asset_downloader.html">Website Files Recovery Tool</a> to download your website files again.</li>
+                <li>If you have lost your website files, you can use our <a href="website_asset_downloader.html">Website Files Recovery Tool</a> to download your website files again.</li>
               </ol>
               <div class="guide-tip">
-                <h4><i class="fa-solid fa-language"></i> Backup your website files</h4>
+                <h4><i class="fa-solid fa-chart-bar"></i> Backup Your Website Files</h4>
                 <p>
-                  Make a copy of your website files and only make changes in that folder. So that you always have a backup of your website files.
+                  Before making any changes make sure you have a backup of your website files somewhere safe.
                 </p>
               </div>
-              <h3>Step 2: Make your changes</h3>
+              <h3>Step 2: Make Your Changes</h3>
               <ol>
                 <li>
                   In the <strong>images</strong> folder you will find all the images for your website. 
@@ -471,13 +471,101 @@
                   You can also simply drag and drop the  <strong>index.html</strong> file into your browser window.
                 </li>
               </ol>
+              <h3>Step 3: Publish Your Changes</h3>
+              Jump to <a href="#publish-changes">How to Publish Your Changes</a>
               <div class="guide-tip">
                 <h4><i class="fa-solid fa-chart-bar"></i> Image tips</h4>
                 <p>
                   If you are not happy with how the image is cropped you can edit your image before replacing the previous image.
                 </p>
               </div>
-              <h3>Step 3: Publish your changes</h3>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Change Text -->
+        <div id="change-text" class="guide-section">
+          <h2>How to Change Text on Your Website</h2>
+          <div class="guide-content">
+            <div class="guide-intro">
+              <h4 style="margin-top: 0; font-size: 22px;">
+                <i class="fa-solid fa-paintbrush"></i> Easy Visual Editor
+              </h4>
+              <p style="margin: 10px 0; font-size: 16px;">
+                Use our visual editor to change texts and translations with ease!
+              </p>
+              <a href="https://airliftstudios.com/editor" target="_blank" rel="noopener" 
+                 style="display: inline-block; padding: 12px 24px; background: #1660ff; color: white; text-decoration: none; border-radius: 6px; font-weight: 500; font-size: 16px; margin-top: 10px;">
+                <i class="fa-solid fa-external-link-alt"></i> Open Visual Editor
+              </a>
+            <p style="margin: 20px 0 10px 0; color: #666; font-size: 14px;">
+              <strong>Alternative:</strong> If you prefer to replace texts manually, follow the steps below:
+            </p>
+          </div>
+
+            <div class="guide-steps">
+              <h3>Step 1: Access Your Website Files</h3>
+              <ol>
+                <li>Locate your website files folder that you recieved during hand over.</li>
+                <li>If you have lost your website files folder, you can use our <a href="website_asset_downloader.html">Website Files Recovery Tool</a> to download your website files again.</li>
+              </ol>
+
+              <h3>Step 2: Make Your Changes</h3>
+              <ol>
+                <li>Open the "index.html" file in a text editor of your choice.</li>
+                <li>
+                  Search to find the text that your want to change and make the change you want. Be careful not to change anything else than the text you want to change.
+                </li>            
+              </ol>
+
+              <h3>Step 3: (If Applicable) Edit translations</h3>
+              <ol>
+                <li>
+                  If your website supports multiple languages, look for
+                  translation files in the "js" folder next to index.html. You will see one file for each language your website supports.
+                </li>
+                <li>Open the appropriate language file in a text editor of your choice.</li>
+                <li>
+                  Here you can search and replace the text you want to change. We recommend to go to your website and switch to the language you want to change and copy the text your want to change. Then search and replace the text with your new translation in the translation file.
+                </li>
+              </ol>
+              <div class="guide-tip">
+                <h4><i class="fa-solid fa-language"></i> Improtant Note</h4>
+                <p>
+                  When updating website with multiple languages, make sure to update
+                  all language files to keep your website consistent across all
+                  supported languages.
+                </p>
+              </div>
+
+              <h3>Step 4: Save and Preview</h3>
+              <ol>
+                <li>Save your changes</li>
+                <li>
+                  Preview your changes by opening the <strong>index.html</strong> file in your browser.
+                  You can also simply drag and drop the  <strong>index.html</strong> file into a browser window.
+                </li>   
+              </ol>
+
+              <h3>Step 5: Publish Your Changes</h3>
+              Jump to <a href="#publish-changes">How to Publish Your Changes</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Publish Changes -->
+        <div id="publish-changes" class="guide-section">
+          <h2>How to Publish Your Changes</h2>
+          <div class="guide-content">
+            <div class="guide-intro">
+              <p>
+                After making changes to your website files, you need to publish them to make them live on your website.
+              </p>
+            </div>
+
+            <div class="guide-steps">
+              <h3>Step 1: Access Cloudflare Pages</h3>
               <ol>
                 <li>Login to your Cloudflare account at                   
                   <a
@@ -486,6 +574,15 @@
                   rel="noopener"
                   >dash.cloudflare.com</a
                 ></li>
+                <div style="border: 1px solid #e9ecef; border-radius: 6px; padding: 15px; margin: 15px 0;">
+                  <h4 style="margin-top: 0; color: #2c5530; font-size: 16px;">
+                    <i class="fa-solid fa-bolt"></i> Quick Shortcut
+                  </h4>
+                  <p style="margin: 5px 0 10px 0; color: #666; font-size: 14px;">
+                    Skip steps 2-4 and go directly where your need to be:
+                  </p>
+                  <div id="pagesContainer"><strong>Quick Link:</strong> <a href="#" class="quick-link disabled" id="deploymentLink" onclick="return false;">Cloudflare Pages Dashboard</a></div>
+                </div>
                 <li>
                   In your Account home page, Click "Compute (Workers)" in the left menu, then select
                   "Workers & Pages".
@@ -496,118 +593,20 @@
                 results.
                 </li>
                 <li>Click on your domain name</li>
-                <li>
-                  <div id="pagesContainer"><strong>Quick Link:</strong> <a href="#" class="quick-link disabled" id="pagesLink" onclick="return false;">Cloudflare Pages Dashboard</a></div>
-                </li>
+                <li>Click on the "Create deployment" button located in the top right corner of the page.</li>
               </ol>
 
+              <h3>Step 2: Upload Your Files</h3>
+              <ol>
+                <li>Follow the instructions on the page to upload your project folder and deploy. Make sure to upload the entire folder including your changes.</li>
+                <li>When deployment is complete your should be able to see your changes live on your website shortly.</li>
+
+              </ol>
               <div class="guide-tip">
-                <h4><i class="fa-solid fa-image"></i> Image Optimization</h4>
+                <h4><i class="fa-solid fa-clock"></i> Revert to Previous Version</h4>
                 <p>
-                  Use tools like TinyPNG or Squoosh to compress your images
-                  before uploading. This will make your website load faster and
-                  provide a better user experience.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Change Text -->
-        <div id="change-text" class="guide-section">
-          <h2>How to Change Text on Your Website</h2>
-          <div class="guide-content">
-            <div class="guide-intro">
-              <p>
-                Update text content on your website, including managing multiple
-                languages if your site supports them.
-              </p>
-            </div>
-
-            <div class="guide-steps">
-              <h3>Step 1: Access Your Website Files</h3>
-              <ol>
-                <li>Log in to your Cloudflare dashboard</li>
-                <li>Go to "Pages" and select your website project</li>
-                <li>Click on "Settings" → "Builds & deployments"</li>
-                <li>Connect to your Git repository if not already connected</li>
-                <li>
-                  <div id="pagesTextContainer"><strong>Quick Link:</strong> <a href="#" class="quick-link disabled" id="pagesTextLink" onclick="return false;">Cloudflare Pages Dashboard</a></div>
-                </li>
-              </ol>
-
-              <h3>Step 2: Edit Single Language Website</h3>
-              <ol>
-                <li>Open the "index.html" file in your repository</li>
-                <li>
-                  Find the text you want to change by searching for specific
-                  words
-                </li>
-                <li>Edit the text between the HTML tags</li>
-                <li>
-                  Example: Change <code>&lt;h1&gt;Old Title&lt;/h1&gt;</code> to
-                  <code>&lt;h1&gt;New Title&lt;/h1&gt;</code>
-                </li>
-                <li>Be careful not to change HTML tags or attributes</li>
-              </ol>
-
-              <h3>Step 3: Edit Multi-Language Website</h3>
-              <ol>
-                <li>
-                  If your website supports multiple languages, look for
-                  translation files in the "js" folder
-                </li>
-                <li>
-                  You'll see files like "translations_en.js",
-                  "translations_fr.js", etc.
-                </li>
-                <li>Open the appropriate language file</li>
-                <li>
-                  Find the text you want to change by looking for the key (e.g.,
-                  "hero.title")
-                </li>
-                <li>Update the value in quotes after the colon</li>
-                <li>
-                  Example: Change <code>"hero.title": "Old Title"</code> to
-                  <code>"hero.title": "New Title"</code>
-                </li>
-              </ol>
-
-              <h3>Step 4: Common Text Areas to Update</h3>
-              <ul>
-                <li>
-                  <strong>Hero Section:</strong> Main headline and subtitle
-                </li>
-                <li>
-                  <strong>About Section:</strong> Property description and
-                  features
-                </li>
-                <li><strong>Reviews:</strong> Guest testimonials</li>
-                <li>
-                  <strong>Location:</strong> Area description and highlights
-                </li>
-                <li>
-                  <strong>Contact:</strong> Contact information and
-                  call-to-action text
-                </li>
-              </ul>
-
-              <h3>Step 5: Commit and Deploy</h3>
-              <ol>
-                <li>Save your changes</li>
-                <li>Commit the changes with a descriptive message</li>
-                <li>Push to your repository</li>
-                <li>
-                  Wait for Cloudflare Pages to automatically deploy the updates
-                </li>
-              </ol>
-
-              <div class="guide-tip">
-                <h4><i class="fa-solid fa-language"></i> Multi-Language Tip</h4>
-                <p>
-                  When updating text in multiple languages, make sure to update
-                  all language files to keep your website consistent across all
-                  supported languages.
+                  If you are not happy with the result or changed your mind later you can either upload a new edited version of your project folder the same way or you can revert to a previous version of your website.
+                  To revert to a previous version you simple go back to step 4 above and instead of creating a new deployment you find the previous deployment in the list of "All deployments" and click on the <i class="fa-solid fa-ellipsis" style="color: #666;"></i> all the way to the right and select "Rollback to this deployment".
                 </p>
               </div>
             </div>
