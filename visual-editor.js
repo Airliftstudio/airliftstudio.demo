@@ -823,7 +823,7 @@ class VisualWebsiteEditor {
       this.downloadBtn.classList.add("attention");
     } else {
       this.changesCounter.style.display = "none";
-      this.downloadBtn.innerHTML = "📦 Download Project";
+      this.downloadBtn.innerHTML = "✅ Download Project";
 
       // Remove attention styles when no changes
       if (this.nextStepHint) this.nextStepHint.classList.remove("show");
