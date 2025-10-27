@@ -16,6 +16,8 @@ class VisualWebsiteEditor {
     this.selectedImageFile = null;
     this.availableLanguages = new Map(); // Map of language codes to translation file paths
     this.translationKeys = new Map(); // Map of data-translate keys to their current values
+    this.downloadedHtmlText = null; // Store HTML text from website download
+    this.downloadedBaseUrl = null; // Store base URL from website download
 
     this.airbnbIcons = window.generatedAirbnbIcons;
 
@@ -371,6 +373,10 @@ class VisualWebsiteEditor {
         throw new Error("No files selected");
       }
 
+      // Clear stored HTML text and base URL when loading a new project
+      this.downloadedHtmlText = null;
+      this.downloadedBaseUrl = null;
+
       if (type === "zip") {
         await this.handleZipFile(files[0]);
       } else {
@@ -478,44 +484,36 @@ class VisualWebsiteEditor {
         .replace(/^https?:\/\//, "")
         .replace(/^www\./, "")
         .replace(/\/$/, "");
-      const baseUrl = `https://${cleanDomain}`;
 
-      let discoveredFiles = new Set();
+      // Use the shared WebsiteRecovery class
+      const websiteRecovery = new WebsiteRecovery();
 
-      // Download and analyze index.html
-      const htmlResponse = await fetch(`${baseUrl}/index.html`);
-      if (!htmlResponse.ok) {
-        throw new Error(`Failed to fetch index.html: ${htmlResponse.status}`);
-      }
+      // Store base URL for later config file generation
+      this.downloadedBaseUrl = `https://${cleanDomain}`;
 
-      const htmlText = await htmlResponse.text();
-      discoveredFiles.add("index.html");
-
-      // Extract file references from HTML
-      const htmlFiles = this.extractFileReferencesFromHTML(htmlText);
-      htmlFiles.forEach((file) => discoveredFiles.add(file));
-
-      // Also try to get common config files
-      const configFiles = ["_headers", "_redirects"];
-      for (const configFile of configFiles) {
-        try {
-          const response = await fetch(`${baseUrl}/${configFile}`, {
-            method: "HEAD",
-          });
-          if (response.ok) {
-            discoveredFiles.add(configFile);
-          }
-        } catch (error) {
-          // Config file doesn't exist, that's fine
+      // Download website files as a Map (not as ZIP)
+      const projectFiles = await websiteRecovery.downloadWebsiteFiles(
+        domain,
+        (progress, file, current, total) => {
+          // Update loading text with progress
+          this.loadingText.textContent = `Downloading files... (${current}/${total})`;
+        },
+        (message, type) => {
+          // Optional: could show status updates if needed
         }
+      );
+
+      // Store HTML text for later config file generation
+      if (projectFiles.has("index.html")) {
+        const htmlBlob = projectFiles.get("index.html");
+        this.downloadedHtmlText = await htmlBlob.text();
       }
 
-      // Convert Set to Array and filter out unwanted files
-      const filesToCheck = Array.from(discoveredFiles).filter((file) => {
-        if (file.startsWith("data:image/svg+xml,")) return false;
-        if (file.startsWith("/cdn-cgi/")) return false;
-        return true;
-      });
+      if (projectFiles.size === 0) {
+        throw new Error(
+          "No files were found. Please check your domain name and try again."
+        );
+      }
 
       // Clear existing project files
       this.projectFiles.clear();
@@ -526,48 +524,27 @@ class VisualWebsiteEditor {
       let downloaded = 0;
       let failed = 0;
 
-      // Download each file
-      for (let i = 0; i < filesToCheck.length; i++) {
-        const file = filesToCheck[i];
-
+      // Process downloaded files and convert to editor format
+      for (const [filePath, blob] of projectFiles) {
         try {
-          const url = `${baseUrl}/${file}`;
-          const response = await fetch(url);
+          let content;
 
-          if (response.ok) {
-            const blob = await response.blob();
-            let content;
-
-            if (this.isTextFile(file)) {
-              content = await blob.text();
-            } else {
-              const arrayBuffer = await blob.arrayBuffer();
-              content = new Uint8Array(arrayBuffer);
-            }
-
-            this.projectFiles.set(file, {
-              content: content,
-              type: this.getFileType(file),
-              size: blob.size,
-            });
-            downloaded++;
+          if (this.isTextFile(filePath)) {
+            content = await blob.text();
           } else {
-            failed++;
+            const arrayBuffer = await blob.arrayBuffer();
+            content = new Uint8Array(arrayBuffer);
           }
+
+          this.projectFiles.set(filePath, {
+            content: content,
+            type: this.getFileType(filePath),
+            size: blob.size,
+          });
+          downloaded++;
         } catch (error) {
           failed++;
         }
-
-        // Update loading text with progress
-        this.loadingText.textContent = `Downloading files... (${i + 1}/${
-          filesToCheck.length
-        })`;
-      }
-
-      if (downloaded === 0) {
-        throw new Error(
-          "No files were found. Please check your domain name and try again."
-        );
       }
 
       await this.processProject();
@@ -581,87 +558,6 @@ class VisualWebsiteEditor {
     } finally {
       this.hideLoading();
     }
-  }
-
-  extractFileReferencesFromHTML(htmlText) {
-    const files = new Set();
-
-    // Extract from <link> tags (CSS files)
-    const linkMatches = htmlText.match(
-      /<link[^>]+href\s*=\s*["']([^"']+)["'][^>]*>/g
-    );
-    if (linkMatches) {
-      linkMatches.forEach((match) => {
-        const href = match.match(/href\s*=\s*["']([^"']+)["']/)[1];
-        if (
-          href &&
-          !href.startsWith("http") &&
-          !href.startsWith("//") &&
-          !href.startsWith("#")
-        ) {
-          files.add(href);
-        }
-      });
-    }
-
-    // Extract from <script> tags (JavaScript files)
-    const scriptMatches = htmlText.match(
-      /<script[^>]+src\s*=\s*["']([^"']+)["'][^>]*>/g
-    );
-    if (scriptMatches) {
-      scriptMatches.forEach((match) => {
-        const src = match.match(/src\s*=\s*["']([^"']+)["']/)[1];
-        if (src && !src.startsWith("http") && !src.startsWith("//")) {
-          files.add(src);
-        }
-      });
-    }
-
-    // Extract from <img> tags (images)
-    const imgMatches = htmlText.match(
-      /<img[^>]+src\s*=\s*["']([^"']+)["'][^>]*>/g
-    );
-    if (imgMatches) {
-      imgMatches.forEach((match) => {
-        const src = match.match(/src\s*=\s*["']([^"']+)["']/)[1];
-        if (
-          src &&
-          !src.startsWith("http") &&
-          !src.startsWith("//") &&
-          !src.startsWith("data:")
-        ) {
-          files.add(src);
-        }
-      });
-    }
-
-    // Extract from CSS url() functions in <style> tags
-    const styleMatches = htmlText.match(/<style[^>]*>([\s\S]*?)<\/style>/g);
-    if (styleMatches) {
-      styleMatches.forEach((styleBlock) => {
-        const cssContent = styleBlock.match(
-          /<style[^>]*>([\s\S]*?)<\/style>/
-        )[1];
-        const urlMatches = cssContent.match(
-          /url\s*\(\s*["']?([^"')]+)["']?\s*\)/g
-        );
-        if (urlMatches) {
-          urlMatches.forEach((match) => {
-            const url = match.match(/url\s*\(\s*["']?([^"')]+)["']?\s*\)/)[1];
-            if (
-              url &&
-              !url.startsWith("http") &&
-              !url.startsWith("//") &&
-              !url.startsWith("data:")
-            ) {
-              files.add(url);
-            }
-          });
-        }
-      });
-    }
-
-    return Array.from(files);
   }
 
   isTextFile(filename) {
@@ -962,6 +858,16 @@ class VisualWebsiteEditor {
 
         zip.file(path, content);
       });
+
+      // Generate config files if this project was downloaded from a website
+      if (this.downloadedHtmlText && this.downloadedBaseUrl) {
+        const websiteRecovery = new WebsiteRecovery();
+        await websiteRecovery.generateConfigFiles(
+          this.downloadedHtmlText,
+          zip,
+          this.downloadedBaseUrl
+        );
+      }
 
       const blob = await zip.generateAsync({ type: "blob" });
 

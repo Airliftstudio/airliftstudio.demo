@@ -1,4 +1,6 @@
 /*
   X-Robots-Tag: index, follow
 
-Link: </css/styles.css>; rel=preload; as=style, </js/script.js>; rel=preload; as=script, </js/lang.js>; rel=preload; as=script, </js/translations_en.js>; rel=preload; as=script
+  Link: </css/styles.css>; rel=preload; as=style
+  Link: </js/script.js>; rel=preload; as=script
+  Link: </js/lang.js>; rel=preload; as=script
