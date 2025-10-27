@@ -102,7 +102,6 @@ class VisualWebsiteEditor {
     // Publish dialog elements
     this.publishDialogOverlay = document.getElementById("publishDialogOverlay");
     this.publishDialogClose = document.getElementById("publishDialogClose");
-    this.publishDialogOk = document.getElementById("publishDialogOk");
   }
 
   setupEventListeners() {
@@ -404,8 +403,33 @@ class VisualWebsiteEditor {
     this.undoStack = [];
     this.projectName = zipFile.name.replace(".zip", "");
 
+    // Find the index.html file to determine the correct root folder
+    const allPaths = Object.keys(content.files);
+    let rootFolderName = null;
+
+    // Look for index.html file to determine the correct root folder
+    for (const path of allPaths) {
+      if (path.endsWith("index.html") && !content.files[path].dir) {
+        const pathParts = path.split("/");
+        if (pathParts.length > 1) {
+          rootFolderName = pathParts[0];
+          break;
+        }
+      }
+    }
+
+    // If we found index.html in a folder, we should strip that folder
+    const shouldStripRootFolder = rootFolderName !== null;
+
     for (const [path, file] of Object.entries(content.files)) {
       if (!file.dir) {
+        // Skip files that are not in the main project folder
+        if (shouldStripRootFolder && rootFolderName) {
+          if (!path.startsWith(rootFolderName + "/")) {
+            continue; // Skip files outside the main project folder
+          }
+        }
+
         let fileContent;
         if (this.isTextFile(path)) {
           fileContent = await file.async("text");
@@ -413,9 +437,19 @@ class VisualWebsiteEditor {
           fileContent = await file.async("uint8array");
         }
 
-        this.projectFiles.set(path, {
+        // Determine the final path to use
+        let finalPath = path;
+        if (shouldStripRootFolder && rootFolderName) {
+          // Remove the root folder name from the path
+          const pathWithoutRoot = path.substring(rootFolderName.length + 1);
+          if (pathWithoutRoot) {
+            finalPath = pathWithoutRoot;
+          }
+        }
+
+        this.projectFiles.set(finalPath, {
           content: fileContent,
-          type: this.getFileType(path),
+          type: this.getFileType(finalPath),
           size: file._data ? file._data.uncompressedSize : 0,
         });
       }
@@ -2481,9 +2515,6 @@ class VisualWebsiteEditor {
   setupPublishDialog() {
     // Close dialog handlers
     this.publishDialogClose.addEventListener("click", () =>
-      this.closePublishDialog()
-    );
-    this.publishDialogOk.addEventListener("click", () =>
       this.closePublishDialog()
     );
 
