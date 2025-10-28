@@ -112,7 +112,7 @@ async function scrape() {
   }
 
   console.log("Launching browser...");
-  const runWithoutOpeningBrowser = true;
+  const runWithoutOpeningBrowser = false;
 
   const browser = await chromium.launch({ headless: runWithoutOpeningBrowser });
   const page = await browser.newPage();
@@ -354,18 +354,53 @@ async function scrape() {
   );
   console.log("Extracting image URLs...");
 
-  let prevImgCount = 0;
-  let attempts = 0;
-  // Scroll to the bottom of the page to trigger lazy loading of all images
-  while (attempts < 20) {
-    const imgHandles = await page.$$("img");
-    if (imgHandles.length === 0) break;
-    if (imgHandles.length === prevImgCount) break; // No new images loaded
-    prevImgCount = imgHandles.length;
-    const lastImgHandle = imgHandles[imgHandles.length - 1];
-    await lastImgHandle.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(100);
+  await page.waitForTimeout(100);
+
+  // First, scroll through each section individually to trigger lazy loading
+  const sections = await page.$$('div[data-testid="photo-viewer-section"]');
+  console.log(`Found ${sections.length} sections to scroll through`);
+
+  for (let i = 0; i < sections.length; i++) {
+    console.log(`Scrolling to section ${i}...`);
+    try {
+      await sections[i].scrollIntoViewIfNeeded({ timeout: 5000 });
+      await page.waitForTimeout(100);
+
+      // Check how many images are loaded in this section
+      const sectionImages = await sections[i].$$("img");
+      console.log(`Section ${i} now has ${sectionImages.length} images`);
+
+      // If this section has images, scroll through them
+      if (sectionImages.length > 0) {
+        for (let j = 0; j < sectionImages.length; j++) {
+          try {
+            await sectionImages[j].scrollIntoViewIfNeeded({ timeout: 2000 });
+            await page.waitForTimeout(100);
+          } catch (error) {
+            console.log(`Failed to scroll to image ${j} in section ${i}`);
+          }
+        }
+      }
+    } catch (error) {
+      console.log(`Failed to scroll to section ${i}, trying alternative...`);
+      // Alternative: scroll by viewport height
+      await page.evaluate((scrollAmount) => {
+        window.scrollBy(0, scrollAmount);
+      }, window.innerHeight);
+      await page.waitForTimeout(500);
+    }
   }
+
+  // Final check: scroll to bottom and back to top to ensure all images are loaded
+  console.log("Final scroll to bottom...");
+  await page.evaluate(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+  });
+  await page.waitForTimeout(100);
+
+  // Count final images
+  const finalImgHandles = await page.$$("img");
+  console.log(`Final image count: ${finalImgHandles.length}`);
 
   // Extract images from the gallery, including category if present
   const images = await page.evaluate(() => {
@@ -399,6 +434,7 @@ async function scrape() {
       document.querySelectorAll('div[data-testid="photo-viewer-section"]')
     );
     let allImages = [];
+
     if (sections.length > 0) {
       // Gallery with categories
       // First, collect all images from all sections
